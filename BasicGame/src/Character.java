@@ -9,4 +9,15 @@ public class Character {
 		this.yPosition = yPos;
 		
 	}
+	
+	
+	public int getXPosition()
+	{
+		return this.xPosition;
+	}
+	
+	public int getYPosition()
+	{
+		return this.yPosition;
+	}
 }

@@ -14,16 +14,16 @@ public class Map {
 	}
 
 	public Map() {
-		this.map = new String[][] { { " X", " X", " X", " X", " X", " X", " X", " X", " X", " X" },
-				{ " X", " H", "  ", "  ", " I", "  ", " X", "  ", " G", " X" },
-				{ " X", " X", " X", "  ", " X", " X", " X", "  ", "  ", " X" },
-				{ " X", "  ", " I", "  ", " I", " X", " X", "  ", "  ", " X" },
-				{ " X", " X", " X", "  ", " X", " X", " X", "  ", "  ", " X" },
-				{ " I", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", " X" },
-				{ " I", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", " X" },
-				{ " X", " X", " X", "  ", " X", " X", " X", " X", "  ", " X" },
-				{ " X", "  ", " I", "  ", " I", "  ", " X", " K", "  ", " X" },
-				{ " X", " X", " X", " X", " X", " X", " X", " X", " X", " X" } };
+		this.map = new String[][] { { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
+				{ "X", "H", " ", " ", "I", " ", "X", " ", "G", "X" },
+				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
+				{ "X", " ", "I", " ", "I", "X", "X", " ", " ", "X" },
+				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
+				{ "I", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+				{ "I", " ", " ", " ", " ", " ", " ", " ", " ", "X" },
+				{ "X", "X", "X", " ", "X", "X", "X", "X", " ", "X" },
+				{ "X", " ", "I", " ", "I", " ", "X", "K", " ", "X" },
+				{ "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" } };
 
 		this.legend = new String[][] { { "X - Wall" }, { "I - Door" }, { "H - Hero" }, { "G - Guard" }, { "k - lever" },
 				{ "empty cell - free space" } };
@@ -44,7 +44,7 @@ public class Map {
 	public void printMap() {
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[i].length; j++) {
-				System.out.print(this.map[i][j]);
+				System.out.print(" " + this.map[i][j]);
 			}
 			System.out.println();
 		}
@@ -68,15 +68,29 @@ public class Map {
 
 			for (int j = 0; j < this.legend[i].length; j++) {
 
-				System.out.print(this.legend[i][j]);
+				System.out.print(" " + this.legend[i][j]);
 			}
 
 			System.out.println();
 		}
 	}
 
-	public boolean checkMove() {
-
+	public boolean moveCharacter() {
+		String move = this.myInterface.getMove();
+		
+		switch(move) {
+		case "u":
+			
+			break;
+		case "d":
+			break;
+		case "l":
+			break;
+		case "r":
+			break;
+		}
+		
+		
 		return false;
 	}
 
