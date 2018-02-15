@@ -1,9 +1,12 @@
 
 public class Map {
+	static final String wall = "X";
+	static final String door = "I";
+
 	private String[][] map;
 	private String[][] legend;
 	private Interface myInterface;
-	private Hero hero;
+	private Character hero;
 
 	class Legend {
 		public String wall;
@@ -30,6 +33,14 @@ public class Map {
 		this.myInterface = new Interface();
 		int[] pos = this.findCharacter();
 		hero = new Hero(pos[0], pos[1]);
+	}
+
+	public void playGame() {
+		do {
+			printMap();
+			printLegend();
+			moveCharacter();
+		} while (true);
 	}
 
 	public String[][] getMap() {
@@ -77,20 +88,37 @@ public class Map {
 
 	public boolean moveCharacter() {
 		String move = this.myInterface.getMove();
-		
-		switch(move) {
+		System.out.println("posiçao x atual" + hero.getXPosition());
+		System.out.println("posiçao y atual" + hero.getYPosition());
+
+		switch (move) {
 		case "u":
-			
+			if (!(map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(wall)
+					|| (map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(door)))) {
+				hero.setxPosition(hero.getXPosition() - 1);
+			}
 			break;
 		case "d":
+			if (!(map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(wall)
+					|| (map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(door)))) {
+				hero.setxPosition(hero.getXPosition() + 1);
+			}
 			break;
 		case "l":
+			if (!(map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(wall)
+					|| (map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(door)))) {
+				hero.setyPosition(hero.getYPosition() - 1);
+			}
 			break;
 		case "r":
+
+			if (!(map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(wall)
+					|| (map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(door)))) {
+				hero.setyPosition(hero.getYPosition() + 1);
+			}
 			break;
 		}
-		
-		
+
 		return false;
 	}
 
@@ -98,7 +126,7 @@ public class Map {
 		int[] pos = { -1, -1 };
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[0].length; j++) {
-				if (map[i][j].equals(" H")) {
+				if (map[i][j].equals("H")) {
 					pos[0] = i;
 					pos[1] = j;
 					return pos;

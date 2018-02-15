@@ -2,22 +2,27 @@
 public class Character {
 	private int xPosition;
 	private int yPosition;
-	
-	public Character(int xPos, int yPos){
-		
+
+	public Character(int xPos, int yPos) {
+
 		this.xPosition = xPos;
 		this.yPosition = yPos;
-		
+
 	}
-	
-	
-	public int getXPosition()
-	{
+
+	public int getXPosition() {
 		return this.xPosition;
 	}
-	
-	public int getYPosition()
-	{
+
+	public int getYPosition() {
 		return this.yPosition;
+	}
+
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
+
+	public void setyPosition(int yPosition) {
+		this.yPosition = yPosition;
 	}
 }
