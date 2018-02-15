@@ -9,4 +9,9 @@ public class Hero extends Character {
 		
 	}
 	
+	public void setKey(boolean myBool)
+	{
+		this.gotKey = myBool;
+	}
+	
 }

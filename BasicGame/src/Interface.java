@@ -9,14 +9,16 @@ public class Interface {
 	static final Scanner keyboard = new Scanner(System.in);
 
 	public String getMove() {
-		String move = "";
+				String move = "";
+		
 		boolean flag = false;
 		while (!flag) {
+			System.out.println("Introduza o movimento: ");
 			move = keyboard.nextLine();
 			if (!(move == "u" || move == "d" || move == "l" || move == "r")) {
 				flag = true;
 			} else {
-				System.out.println("Introduziu opçao invalida");
+				System.out.println("Introduziu opï¿½ao invalida");
 			}
 		}
 		return move;

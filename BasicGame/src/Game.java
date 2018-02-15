@@ -1,5 +1,5 @@
 
-public class Map {
+public class Game {
 	static final String wall = "X";
 	static final String door = "I";
 
@@ -16,7 +16,7 @@ public class Map {
 		public String freeSpace;
 	}
 
-	public Map() {
+	public Game() {
 		this.map = new String[][] { { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" },
 				{ "X", "H", " ", " ", "I", " ", "X", " ", "G", "X" },
 				{ "X", "X", "X", " ", "X", "X", "X", " ", " ", "X" },
@@ -86,42 +86,64 @@ public class Map {
 		}
 	}
 
-	public boolean moveCharacter() {
+	public void moveCharacter() {
 		String move = this.myInterface.getMove();
-		System.out.println("posiçao x atual" + hero.getXPosition());
-		System.out.println("posiçao y atual" + hero.getYPosition());
-
+		
+		try {
 		switch (move) {
 		case "u":
 			if (!(map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(wall)
 					|| (map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(door)))) {
+					
+				map[this.hero.getXPosition() ][hero.getYPosition()] = " ";
 				hero.setxPosition(hero.getXPosition() - 1);
+				checkLever();
+				map[this.hero.getXPosition() ][hero.getYPosition()] = "H";
+				
 			}
 			break;
 		case "d":
 			if (!(map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(wall)
 					|| (map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(door)))) {
+				
+				map[this.hero.getXPosition() ][hero.getYPosition()] = " ";
 				hero.setxPosition(hero.getXPosition() + 1);
+				checkLever();
+				map[this.hero.getXPosition() ][hero.getYPosition()] = "H";
+				
 			}
 			break;
 		case "l":
 			if (!(map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(wall)
 					|| (map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(door)))) {
+				
+				map[this.hero.getXPosition() ][hero.getYPosition()] = " ";
 				hero.setyPosition(hero.getYPosition() - 1);
+				checkLever();
+				map[this.hero.getXPosition() ][hero.getYPosition()] = "H";
 			}
 			break;
 		case "r":
 
 			if (!(map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(wall)
 					|| (map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(door)))) {
+				
+				map[this.hero.getXPosition() ][hero.getYPosition()] = " ";
 				hero.setyPosition(hero.getYPosition() + 1);
+				checkLever();
+				map[this.hero.getXPosition() ][hero.getYPosition()] = "H";
 			}
 			break;
 		}
+		}catch (IndexOutOfBoundsException e) {
+		    System.err.println("IndexOutOfBoundsException "+e.getMessage());
+		}
+		
+			
 
-		return false;
 	}
-
+	
+	
 	public int[] findCharacter() {
 		int[] pos = { -1, -1 };
 		for (int i = 0; i < this.map.length; i++) {
@@ -135,5 +157,18 @@ public class Map {
 		}
 		return pos;
 	}
-
+	
+	public void checkLever() {
+		
+		if(map[this.hero.getXPosition()][hero.getYPosition()].equals("K")) {
+			for (int i = 0; i < this.map.length; i++) {
+				for (int j = 0; j < this.map[i].length; j++) {
+					if (map[i][j].equals("I")) {
+						map[i][j] = "S";
+					}
+				}
+			}
+		}
+				
+	}
 }
