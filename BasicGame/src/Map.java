@@ -2,6 +2,7 @@
 public class Map {
 	private String[][] map;
 	private String[][] legend;
+	private Interface myInterface;
 	
 	class Legend{
 		public String wall;
@@ -31,6 +32,7 @@ public class Map {
 			{"k - lever"},
 			{"empty cell - free space"}};		
 				
+		this.myInterface = new Interface();	
 			
 		
 	}
@@ -83,6 +85,16 @@ public class Map {
 			
 			System.out.println();
 		}
+	}
+	
+	public boolean checkMove() {
+		
+		
+		return false;
+	}
+	
+	public int[] findCharacter() {
+		
 	}
 	
 }
