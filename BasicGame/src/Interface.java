@@ -3,14 +3,13 @@ import java.util.Scanner;
 public class Interface {
 
 	public Interface() {
-
 	}
 
 	static final Scanner keyboard = new Scanner(System.in);
 
 	public String getMove() {
-				String move = "";
-		
+		String move = "";
+
 		boolean flag = false;
 		while (!flag) {
 			System.out.println("Introduza o movimento: ");

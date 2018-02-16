@@ -12,13 +12,13 @@ public class Game {
 	private Interface myInterface;
 	private Character hero;
 
-	class Legend {
-		public String WALL_CHAR;
-		public String DOOR_CHAR;
-		public String guard;
-		public String lever;
-		public String freeSpace;
-	}
+	// class Legend {
+	// public String WALL_CHAR;
+	// public String DOOR_CHAR;
+	// public String guard;
+	// public String lever;
+	// public String freeSpace;
+	// }
 
 	public Game() {
 		this.map = new String[][] {
@@ -46,8 +46,11 @@ public class Game {
 		this.legend = new String[][] { { "X - WALL_CHAR" }, { "I - DOOR_CHAR" }, { "H - Hero" }, { "G - Guard" },
 				{ "k - lever" }, { "empty cell - free space" } };
 		this.myInterface = new Interface();
-		int[] pos = this.findCharacter();
-		hero = new Hero(pos[0], pos[1]);
+		// int[] pos = this.findCharacter();
+		// System.out.println("POSIÇAO X" + pos[0]);
+		// System.out.println("POSIÇAO Y" + pos[1]);
+		// hero = new Hero(pos[0],pos[1]);
+		hero = new Hero(1, 1);
 	}
 
 	public void playGame() {
@@ -78,13 +81,13 @@ public class Game {
 		return true;
 	}
 
-	public String[][] getMap() {
-		return this.map;
-	}
-
-	public String[][] getLegend() {
-		return this.legend;
-	}
+	// public String[][] getMap() {
+	// return this.map;
+	// }
+	//
+	// public String[][] getLegend() {
+	// return this.legend;
+	// }
 
 	public void printMap() {
 		System.out.println("\n");
@@ -154,19 +157,19 @@ public class Game {
 
 	}
 
-	public int[] findCharacter() {
-		int[] pos = { -1, -1 };
-		for (int i = 0; i < this.map.length; i++) {
-			for (int j = 0; j < this.map[0].length; j++) {
-				if (map[i][j].equals(HERO_CHAR)) {
-					pos[0] = i;
-					pos[1] = j;
-					return pos;
-				}
-			}
-		}
-		return pos;
-	}
+	// public int[] findCharacter() {
+	// int[] pos = { -1, -1 };
+	// for (int i = 0; i < this.map.length; i++) {
+	// for (int j = 0; j < this.map[0].length; j++) {
+	// if (map[i][j].equals(HERO_CHAR)) {
+	// pos[0] = i;
+	// pos[1] = j;
+	// return pos;
+	// }
+	// }
+	// }
+	// return pos;
+	// }
 
 	public void checkLever() {
 		if (map[this.hero.getXPosition()][hero.getYPosition()].equals(LEVER_CHAR)) {
