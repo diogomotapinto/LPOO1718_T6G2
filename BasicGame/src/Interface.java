@@ -5,7 +5,7 @@ public class Interface {
 	public Interface() {
 	}
 
-	static final Scanner keyboard = new Scanner(System.in);
+	private static final Scanner keyboard = new Scanner(System.in);
 
 	public String getMove() {
 		String move = "";
@@ -14,7 +14,7 @@ public class Interface {
 		while (!flag) {
 			System.out.println("Introduza o movimento: ");
 			move = keyboard.nextLine();
-			if (!(move == "u" || move == "d" || move == "l" || move == "r")) {
+			if (!(move == "w" || move == "s" || move == "a" || move == "d")) {
 				flag = true;
 			} else {
 				System.out.println("Introduziu op�ao invalida");

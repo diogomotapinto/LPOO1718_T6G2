@@ -4,7 +4,6 @@ public class Character {
 	private int yPosition;
 
 	public Character(int xPos, int yPos) {
-
 		this.xPosition = xPos;
 		this.yPosition = yPos;
 
