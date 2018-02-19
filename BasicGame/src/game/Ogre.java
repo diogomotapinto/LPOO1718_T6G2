@@ -61,10 +61,12 @@ public class Ogre extends Character {
 		int xPos = random.nextInt((1 - -1) + 1) + -1;
 		int yPos = random.nextInt((1 - -1) + 1) + -1;
 		
-		if(xPos != 0 || yPos != 0) {
-		this.clubXPos = xPos + this.xPosition;
-		this.clubYPos =  yPos + this.yPosition;
+		if(!(xPos == 0 || yPos == 0)) {
+			this.clubXPos = xPos + this.xPosition;
+			this.clubYPos =  yPos + this.yPosition;
 		}
+		
+			
 		
 	}
 	

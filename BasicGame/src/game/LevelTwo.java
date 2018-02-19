@@ -80,11 +80,7 @@ public class LevelTwo extends Game {
 		
 		map[ogre.getClubXPos()][ogre.getClubYPos()] = BLANK_SPACE;
 		ogre.moveOgresClub();
-		if(ogre.getClubXPos() != ogre.getXPosition() &&
-				ogre.getClubYPos() != ogre.getYPosition() &&
-				ogre.getClubXPos() != 0 &&
-				ogre.getClubYPos() != 0 
-				) {
+		if(ogre.getClubXPos() != 0 && ogre.getClubYPos() != 0 && ogre.getClubXPos() != 8 && ogre.getClubYPos() != 8) {
 			map[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
 		}else
 		{

@@ -11,17 +11,19 @@ public class Game {
 	protected static final String HERO_CHAR = "H";
 	protected static final String LEVER_CHAR = "k";
 	protected static final String BLANK_SPACE = " ";
+	protected boolean gameState;
 
 	protected String[][] map;
 	private String legend;
 	private Interface myInterface;
 	protected Hero hero;
-	private boolean gameState = true;
+	
 
 	public Game(String[][] map, String legend, int heroXPosition, int heroYPosition) {
 		this.map = map;
 		this.legend = legend;
 		this.myInterface = new Interface();
+		gameState = true;
 		hero = new Hero(heroXPosition, heroYPosition);
 	}
 
@@ -93,13 +95,5 @@ public class Game {
 		}
 	}
 	
-	public void setState(boolean state)
-	{
-		gameState = state;
-	}
-	
-	public boolean getState()
-	{
-		return gameState;
-	}
+
 }

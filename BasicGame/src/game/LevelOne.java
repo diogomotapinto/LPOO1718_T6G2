@@ -64,7 +64,7 @@ public class LevelOne extends Game {
 				
 				printMap();
 				System.out.print("\nPerdeu jogo");
-				setState(false);
+				super.gameState = false;
 				return true;
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
