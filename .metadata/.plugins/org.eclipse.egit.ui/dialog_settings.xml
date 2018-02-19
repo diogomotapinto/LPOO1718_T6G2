@@ -7,4 +7,19 @@
 		<item value="435" key="DIALOG_X_ORIGIN"/>
 		<item value="206" key="DIALOG_Y_ORIGIN"/>
 	</section>
+	<section name="GitCommitMessageComponent">
+		<list key="/Users/diogomotapinto/git/LPOO1718_T6G2/.git">
+			<item value="false"/>
+			<item value="diogomotapinto &lt;diogomotapinto@gmail.com&gt;"/>
+			<item value="Character Added"/>
+			<item value="diogomotapinto &lt;diogomotapinto@gmail.com&gt;"/>
+			<item value="9a7e43daf15754a8ffa2913a62bb0314e6a9185a"/>
+			<item value="0"/>
+		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item value="200,200" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="false" key="sortItemState"/>
+		<item value="200,200" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+	</section>
 </section>

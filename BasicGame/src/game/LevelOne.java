@@ -44,7 +44,9 @@ public class LevelOne extends Game {
 			moveGuard();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
-		nextLevel();
+		
+			nextLevel();
+		
 	}
 
 	private boolean checkAdvanceLevel() {
@@ -59,8 +61,10 @@ public class LevelOne extends Game {
 					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == GUARD_CHAR
 					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == GUARD_CHAR
 					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == GUARD_CHAR) {
-				System.out.print("\nPerdeu jogo");
+				
 				printMap();
+				System.out.print("\nPerdeu jogo");
+				setState(false);
 				return true;
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {

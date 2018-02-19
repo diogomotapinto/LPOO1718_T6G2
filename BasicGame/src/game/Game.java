@@ -16,6 +16,7 @@ public class Game {
 	private String legend;
 	private Interface myInterface;
 	protected Hero hero;
+	private boolean gameState = true;
 
 	public Game(String[][] map, String legend, int heroXPosition, int heroYPosition) {
 		this.map = map;
@@ -90,5 +91,15 @@ public class Game {
 				}
 			}
 		}
+	}
+	
+	public void setState(boolean state)
+	{
+		gameState = state;
+	}
+	
+	public boolean getState()
+	{
+		return gameState;
 	}
 }
