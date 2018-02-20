@@ -40,7 +40,6 @@ public class LevelTwo extends Game {
 			map[this.hero.getXPosition()][this.hero.getYPosition()] = HERO_CHAR;
 			moveOgre();
 			moveHero();
-			//moveClub();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
 	}
@@ -99,8 +98,12 @@ public class LevelTwo extends Game {
 				mapClone[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
 			}
 		
+			moveClub(mapClone);
+			
+			
+			
+			
 		levelTwoMap(mapClone);
-		
 	}
 	
 	protected void levelTwoMap(String[][]  mapClone) {
@@ -114,23 +117,30 @@ public class LevelTwo extends Game {
 	}
 	
 	
-	private void moveClub() {
+	private void moveClub(String[][] mapClone) {
 		
 
-		System.out.println(ogre.getClubXPos());
-		System.out.println(ogre.getClubYPos());
+		mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = BLANK_SPACE;
 		
-		map[ogre.getClubXPos()][ogre.getClubYPos()] = BLANK_SPACE;
-		ogre.moveOgresClub();
-		if(ogre.getClubXPos() != 0 && ogre.getClubYPos() != 0 && ogre.getClubXPos() != 8 && ogre.getClubYPos() != 8) {
-			map[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
-		}else
-		{
-			map[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
-		}
+		this.ogre.moveOgresClub();
+				
+		if(map[ogre.getClubXPos()][ogre.getClubYPos()] == BLANK_SPACE && distanceOgreToClub() != 1 ) {
 			
+			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
+			
+		}else {
+			do {
+			this.ogre.moveOgresClub();
+			}while(map[ogre.getClubXPos()][ogre.getClubYPos()] != BLANK_SPACE || distanceOgreToClub() != 1 );
+			
+			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
+		}
+	
 		
 	}
 	
-
+	private int distanceOgreToClub()
+	{
+		return (int) Math.sqrt(Math.pow(this.ogre.getXPosition()-this.ogre.getClubXPos(),2.0) + Math.pow(this.ogre.getXPosition()-this.ogre.getClubXPos(), 2.0));
+	}
 }
