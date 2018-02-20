@@ -93,7 +93,7 @@ public class LevelTwo extends Game {
 				do {
 				this.ogre.moveToNextPosition(map[ogre.getXPosition() - 1][ogre.getYPosition()],
 						map[ogre.getXPosition()][ogre.getYPosition() + 1]);
-				}while(map[ogre.getXPosition()][ogre.getYPosition()] != BLANK_SPACE);
+				}while(map[ogre.getXPosition()][ogre.getYPosition()] != BLANK_SPACE );
 				
 				mapClone[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
 			}
@@ -124,15 +124,15 @@ public class LevelTwo extends Game {
 		
 		this.ogre.moveOgresClub();
 				
-		if(map[ogre.getClubXPos()][ogre.getClubYPos()] == BLANK_SPACE && distanceOgreToClub() != 1 ) {
+		if(map[ogre.getClubXPos()][ogre.getClubYPos()] == BLANK_SPACE && distanceOgreToClub() == 1 ) {
 			
 			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
-			
+			System.out.println("primeira" + distanceOgreToClub()+ "");
 		}else {
 			do {
 			this.ogre.moveOgresClub();
-			}while(map[ogre.getClubXPos()][ogre.getClubYPos()] != BLANK_SPACE || distanceOgreToClub() != 1 );
-			
+			}while(map[ogre.getClubXPos()][ogre.getClubYPos()] != BLANK_SPACE && distanceOgreToClub() <= 1 );
+			System.out.println("Segunda cond" + distanceOgreToClub()+ "");
 			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
 		}
 	
