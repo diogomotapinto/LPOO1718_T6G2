@@ -18,6 +18,7 @@ public class Ogre extends Character {
 	public Ogre(int xPos, int yPos) {
 		super(xPos, yPos);
 		random = new Random();
+		
 		clubXPos = 1;
 		clubYPos = 5;
 		

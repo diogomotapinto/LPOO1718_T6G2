@@ -40,6 +40,10 @@ public class Game {
 	protected void printLegend() {
 		System.out.println(legend);
 	}
+	
+	protected String[][] sendMap(){
+		return this.map.clone();
+	}
 
 	protected void moveHero() {
 		String move = this.myInterface.getMove();
