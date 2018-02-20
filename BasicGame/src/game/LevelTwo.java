@@ -55,7 +55,12 @@ public class LevelTwo extends Game {
 			if (map[this.hero.getXPosition() - 1][hero.getYPosition()] == OGRE_CHAR
 					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == OGRE_CHAR
 					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == OGRE_CHAR
-					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == OGRE_CHAR) {
+					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == OGRE_CHAR 
+					|| map[this.hero.getXPosition() - 1][hero.getYPosition()] == CLUB_CHAR
+					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == CLUB_CHAR
+					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == CLUB_CHAR
+					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == CLUB_CHAR
+					) {
 				
 				printMap();
 				System.out.print("\nPerdeu jogo");
