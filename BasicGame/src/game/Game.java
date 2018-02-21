@@ -6,18 +6,18 @@ public class Game {
 	private static final String MOVE_RIGHT_CHAR = "d";
 	private static final String MOVE_LEFT_CHAR = "a";
 
+	private final String legend;
+	private final Interface myInterface;
+
 	protected static final String WALL_CHAR = "X";
 	protected static final String DOOR_CHAR = "I";
 	protected static final String HERO_CHAR = "H";
 	protected static final String LEVER_CHAR = "k";
 	protected static final String BLANK_SPACE = " ";
-	protected boolean gameState;
 
-	protected String[][] map;
-	private String legend;
-	private Interface myInterface;
-	protected Hero hero;
-	
+	protected final Hero hero;
+	protected final String[][] map;
+	protected boolean gameState;
 
 	public Game(String[][] map, String legend, int heroXPosition, int heroYPosition) {
 		this.map = map;
@@ -27,7 +27,7 @@ public class Game {
 		hero = new Hero(heroXPosition, heroYPosition);
 	}
 
-	protected void printMap() {
+	protected final void printMap() {
 		System.out.println();
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[i].length; j++) {
@@ -37,15 +37,15 @@ public class Game {
 		}
 	}
 
-	protected void printLegend() {
+	protected final void printLegend() {
 		System.out.println(legend);
 	}
-	
-	protected String[][] sendMap(){
+
+	protected final String[][] sendMap() {
 		return this.map.clone();
 	}
 
-	protected void moveHero() {
+	protected final void moveHero() {
 		String move = this.myInterface.getMove();
 
 		try {
@@ -87,7 +87,7 @@ public class Game {
 		}
 	}
 
-	protected void checkLever() {
+	protected final void checkLever() {
 		if (map[this.hero.getXPosition()][hero.getYPosition()].equals(LEVER_CHAR)) {
 			for (int i = 0; i < this.map.length; i++) {
 				for (int j = 0; j < this.map[i].length; j++) {
@@ -98,6 +98,5 @@ public class Game {
 			}
 		}
 	}
-	
 
 }

@@ -1,4 +1,5 @@
 package game;
+
 import java.util.Scanner;
 
 public class Interface {
@@ -8,7 +9,7 @@ public class Interface {
 
 	private static final Scanner keyboard = new Scanner(System.in);
 
-	public String getMove() {
+	public final String getMove() {
 		String move = "";
 
 		boolean flag = false;

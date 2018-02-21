@@ -32,7 +32,7 @@ public class LevelOne extends Game {
 		guard = new Guard(1, 8);
 	}
 
-	public void playLevelOne() {
+	public final void playLevelOne() {
 		System.out.println("Nivel 1!!!");
 		boolean advanceLevel = false;
 		do {
@@ -49,7 +49,7 @@ public class LevelOne extends Game {
 		
 	}
 
-	private boolean checkAdvanceLevel() {
+	private final boolean checkAdvanceLevel() {
 		// para terminar basta chegar a um dos cantos
 		if (this.hero.getXPosition() == 0 || this.hero.getYPosition() == 0) {
 			System.out.println("\nProximo Nivel!!!\n");
@@ -74,13 +74,13 @@ public class LevelOne extends Game {
 		return false;
 	}
 
-	private void moveGuard() {
+	private final void moveGuard() {
 		map[guard.getXPosition()][guard.getYPosition()] = BLANK_SPACE;
 		this.guard.moveToNextPosition();
 		map[guard.getXPosition()][guard.getYPosition()] = GUARD_CHAR;
 	}
 
-	private void nextLevel() {
+	private final void nextLevel() {
 		LevelTwo levelTwo = new LevelTwo();
 		levelTwo.playLevelTwo();
 	}

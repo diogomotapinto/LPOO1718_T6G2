@@ -12,7 +12,7 @@ public class Guard extends Character {
 		index = 0;
 	}
 
-	public void moveToNextPosition() {
+	public final void moveToNextPosition() {
 		index++;
 		if (index == route.length) {
 			index = 0;

@@ -9,19 +9,19 @@ public class Character {
 		this.yPosition = yPos;
 	}
 
-	public int getXPosition() {
+	public final int getXPosition() {
 		return this.xPosition;
 	}
 
-	public int getYPosition() {
+	public final int getYPosition() {
 		return this.yPosition;
 	}
 
-	public void setxPosition(int xPosition) {
+	public final void setxPosition(int xPosition) {
 		this.xPosition = xPosition;
 	}
 
-	public void setyPosition(int yPosition) {
+	public final void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
 }
