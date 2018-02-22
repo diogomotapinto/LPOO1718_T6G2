@@ -13,15 +13,15 @@ public class Interface {
 		String move = "";
 
 		boolean flag = false;
-		while (!flag) {
+		do {
 			System.out.println("Introduza o movimento: ");
 			move = keyboard.nextLine();
-			if (!(move == "w" || move == "s" || move == "a" || move == "d")) {
+			if ((move.equals("w") || move.equals("s") || move.equals("a") || move.equals("d"))) {
 				flag = true;
 			} else {
 				System.out.println("Introduziu op�ao invalida");
 			}
-		}
+		} while (!flag);
 		return move;
 	}
 
