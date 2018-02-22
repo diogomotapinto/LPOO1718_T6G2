@@ -1,4 +1,4 @@
-package game;
+package dkeep.cli;
 
 import java.util.Scanner;
 

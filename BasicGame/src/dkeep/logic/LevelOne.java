@@ -1,4 +1,4 @@
-package game;
+package dkeep.logic;
 
 public class LevelOne extends Game {
 
@@ -44,9 +44,8 @@ public class LevelOne extends Game {
 			moveGuard();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
-		
-			nextLevel();
-		
+
+		nextLevel();
 	}
 
 	private final boolean checkAdvanceLevel() {
@@ -61,7 +60,7 @@ public class LevelOne extends Game {
 					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == GUARD_CHAR
 					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == GUARD_CHAR
 					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == GUARD_CHAR) {
-				
+
 				printMap();
 				System.out.print("\nPerdeu jogo");
 				super.gameState = false;

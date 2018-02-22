@@ -1,4 +1,4 @@
-package game;
+package dkeep.logic;
 
 //import java.util.Random;
 
@@ -39,13 +39,12 @@ public class LevelTwo extends Game {
 		System.out.println("Nivel 2!!!");
 		boolean advanceLevel = false;
 		do {
-
-			// printMap();
+			printMap();
 			printLegend();
+			moveHero();
 			checkLever();
 			map[this.hero.getXPosition()][this.hero.getYPosition()] = HERO_CHAR;
 			moveOgre();
-			moveHero();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
 	}
@@ -90,28 +89,20 @@ public class LevelTwo extends Game {
 	// }
 
 	private final void moveOgre() {
-		String[][] mapClone = sendMap();
 
-		mapClone[ogre.getXPosition()][ogre.getYPosition()] = BLANK_SPACE;
+		map[ogre.getXPosition()][ogre.getYPosition()] = BLANK_SPACE;
 
-		this.ogre.moveToNextPosition(map[ogre.getXPosition() - 1][ogre.getYPosition()],
-				map[ogre.getXPosition()][ogre.getYPosition() + 1]);
-		if (map[ogre.getXPosition()][ogre.getYPosition()] == BLANK_SPACE) {
+		int position[];
+		do {
+			position = this.ogre.getAdjacentPosition();
+		} while (map[position[0]][position[1]] != BLANK_SPACE);
 
-			mapClone[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
-
-		} else {
-			do {
-				this.ogre.moveToNextPosition(map[ogre.getXPosition() - 1][ogre.getYPosition()],
-						map[ogre.getXPosition()][ogre.getYPosition() + 1]);
-			} while (map[ogre.getXPosition()][ogre.getYPosition()] != BLANK_SPACE);
-
-			mapClone[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
-		}
-
-		moveClub(mapClone);
-
-		levelTwoMap(mapClone);
+		ogre.setxPosition(position[0]);
+		ogre.setyPosition(position[1]);
+		map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
+		moveClub(map);
+		// super.printMap();
+		// levelTwoMap(map);
 	}
 
 	private final void levelTwoMap(String[][] mapClone) {

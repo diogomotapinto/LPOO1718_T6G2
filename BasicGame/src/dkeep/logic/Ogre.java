@@ -1,4 +1,4 @@
-package game;
+package dkeep.logic;
 
 import java.util.Random;
 
@@ -24,38 +24,29 @@ public class Ogre extends Character {
 	}
 
 	// passar position up and right
-	//so funciona se a lever estiver direita ou acima do ogre
-	public final void moveToNextPosition(String positionUp, String positionRight) {
+	// so funciona se a lever estiver direita ou acima do ogre
+	public final int[] getAdjacentPosition() {
+		int[] position = { this.xPosition, this.yPosition };
 		int result = random.nextInt((upperBound - lowerBound) + 1) + lowerBound;
 
 		switch (result) {
 		case MOVE_UP:
-			if (this.xPosition != 1 && positionUp != "k") {
-				this.xPosition--;
-			}
+			position[0]--;
 			break;
-
 		case MOVE_DOWN:
-			if (this.xPosition != 7) {
-				this.xPosition++;
-			}
+			position[0]++;
 			break;
-
 		case MOVE_RIGHT:
-			if (this.yPosition != 7 && positionRight != "k") {
-				this.yPosition++;
-			}
+			position[1]++;
 			break;
-
 		case MOVE_LEFT:
-			if (this.yPosition != 1) {
-				this.yPosition--;
-			}
+			position[1]--;
 			break;
-
 		default:
 			break;
 		}
+		return position;
+
 	}
 
 	public final void moveOgresClub() {

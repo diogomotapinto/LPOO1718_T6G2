@@ -1,4 +1,4 @@
-package game;
+package dkeep.logic;
 
 public class Character {
 	protected int xPosition;

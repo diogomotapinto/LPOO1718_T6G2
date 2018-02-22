@@ -1,4 +1,6 @@
-package game;
+package dkeep.logic;
+
+import dkeep.cli.Interface;
 
 public class Game {
 	private static final String MOVE_UP_CHAR = "w";
