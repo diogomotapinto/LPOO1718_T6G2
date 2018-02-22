@@ -38,6 +38,7 @@ public class LevelTwo extends Game {
 	public final void playLevelTwo() {
 		System.out.println("Nivel 2!!!");
 		boolean advanceLevel = false;
+			map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
 		do {
 			printMap();
 			printLegend();
@@ -94,7 +95,7 @@ public class LevelTwo extends Game {
 
 		int position[];
 		do {
-			position = this.ogre.getAdjacentPosition();
+			position = Utilities.getAdjacentPosition(ogre.getXPosition(),ogre.getYPosition());
 		} while (map[position[0]][position[1]] != BLANK_SPACE);
 
 		ogre.setxPosition(position[0]);
@@ -119,15 +120,12 @@ public class LevelTwo extends Game {
 
 		mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = BLANK_SPACE;
 
-		this.ogre.moveOgresClub();
-
 		if (map[ogre.getClubXPos()][ogre.getClubYPos()] == BLANK_SPACE && distanceOgreToClub() == 1) {
 
 			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
 			System.out.println("primeira" + distanceOgreToClub() + "");
 		} else {
 			do {
-				this.ogre.moveOgresClub();
 			} while (map[ogre.getClubXPos()][ogre.getClubYPos()] != BLANK_SPACE && distanceOgreToClub() <= 1);
 			System.out.println("Segunda cond" + distanceOgreToClub() + "");
 			mapClone[ogre.getClubXPos()][ogre.getClubYPos()] = ogre.getClub();
