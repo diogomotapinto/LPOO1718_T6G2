@@ -7,7 +7,6 @@ public class LevelTwo extends Game {
 	private static final String OGRE_CHAR = "O";
 	private static final String CLUB_CHAR = "*";
 	private final Ogre ogre;
-	private final Club club;
 	// private Random random;
 	// private int jogada;
 
@@ -33,15 +32,15 @@ public class LevelTwo extends Game {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR } },
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space", 7, 1);
 		ogre = new Ogre(1, 4);
-		club = new Club(1,5);
 		// jogada = 0;
 	}
 
 	public final void playLevelTwo() {
 		System.out.println("Nivel 2!!!");
 		boolean advanceLevel = false;
-			map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
-			map[club.getXPosition()][club.getYPosition()] = CLUB_CHAR;
+		moveClub();
+		map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
+
 		do {
 			printMap();
 			printLegend();
@@ -81,61 +80,36 @@ public class LevelTwo extends Game {
 		return false;
 	}
 
-	// private void moveOgre() {
-	//
-	//
-	// map[ogre.getXPosition()][ogre.getYPosition()] = BLANK_SPACE;
-	// this.ogre.moveToNextPosition(map[ogre.getXPosition() -
-	// 1][ogre.getYPosition()],
-	// map[ogre.getXPosition()][ogre.getYPosition() + 1]);
-	// map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
-	//
-	// }
-
 	private final void moveOgre() {
 
 		map[ogre.getXPosition()][ogre.getYPosition()] = BLANK_SPACE;
 
 		int position[];
 		do {
-			position = Utilities.getAdjacentPosition(ogre.getXPosition(),ogre.getYPosition());
+			position = Utilities.getAdjacentPosition(ogre.getXPosition(), ogre.getYPosition());
 		} while (map[position[0]][position[1]] != BLANK_SPACE);
 
 		ogre.setxPosition(position[0]);
 		ogre.setyPosition(position[1]);
 		map[ogre.getXPosition()][ogre.getYPosition()] = OGRE_CHAR;
-		moveClub(map);
-		// super.printMap();
-		// levelTwoMap(map);
+		moveClub();
 	}
 
-	private final void levelTwoMap(String[][] mapClone) {
-		System.out.println();
-		for (int i = 0; i < mapClone.length; i++) {
-			for (int j = 0; j < mapClone[i].length; j++) {
-				System.out.print(BLANK_SPACE + mapClone[i][j]);
-			}
-			System.out.println();
-		}
-	}
-
-	private final void moveClub(String[][] mapClone) {
-
-		map[club.getXPosition()][club.getYPosition()] = BLANK_SPACE;
+	private final void moveClub() {
+		map[ogre.getMyClub().getXPosition()][ogre.getMyClub().getYPosition()] = BLANK_SPACE;
 
 		int position[];
 		do {
-			position = Utilities.getAdjacentPosition(club.getXPosition(),club.getYPosition());
+			position = Utilities.getAdjacentPosition(ogre.getXPosition(), ogre.getYPosition());
 		} while (map[position[0]][position[1]] != BLANK_SPACE);
 
-		club.setxPosition(position[0]);
-		club.setyPosition(position[1]);
-		map[club.getXPosition()][club.getYPosition()] = CLUB_CHAR;
+		Club tempClub = ogre.getMyClub();
+		tempClub.setxPosition(position[0]);
+		tempClub.setyPosition(position[1]);
+		ogre.setMyClub(tempClub);
+
+		map[ogre.getMyClub().getXPosition()][ogre.getMyClub().getYPosition()] = CLUB_CHAR;
 
 	}
 
-	private final int distanceOgreToClub() {
-		return (int) Math.sqrt(Math.pow(this.ogre.getXPosition() - this.ogre.getClubXPos(), 2.0)
-				+ Math.pow(this.ogre.getXPosition() - this.ogre.getClubXPos(), 2.0));
-	}
 }

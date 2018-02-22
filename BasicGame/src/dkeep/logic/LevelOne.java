@@ -3,7 +3,7 @@ package dkeep.logic;
 public class LevelOne extends Game {
 
 	private static final String GUARD_CHAR = "G";
-	private Guard guard;
+	private Suspicious guard;
 
 	public LevelOne() {
 		// passes map and legend as argument
@@ -29,7 +29,7 @@ public class LevelOne extends Game {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
 				"\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space", 1, 1);
-		guard = new Guard(1, 8);
+		guard = new Suspicious(1, 8);
 	}
 
 	public final void playLevelOne() {

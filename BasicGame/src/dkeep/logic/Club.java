@@ -1,23 +1,17 @@
 package dkeep.logic;
 
-
 public class Club {
 	protected int xPosition;
 	protected int yPosition;
-	
-	
-	
-	public Club() {
-		
 
+	public Club() {
 	}
-	
-	
+
 	public Club(int xPos, int yPos) {
 		this.xPosition = xPos;
 		this.yPosition = yPos;
 	}
-	
+
 	public final int getXPosition() {
 		return this.xPosition;
 	}
@@ -33,8 +27,5 @@ public class Club {
 	public final void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
-	
-	
-	
-	
+
 }

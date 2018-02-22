@@ -11,9 +11,9 @@ public class Utilities {
 	private static final byte MOVE_LEFT = 4;
 
 	private Utilities() {
-		
+
 	}
-	
+
 	public static final int[] getAdjacentPosition(int xPosition, int yPosition) {
 		int[] position = { xPosition, yPosition };
 		Random random = new Random();
@@ -38,7 +38,13 @@ public class Utilities {
 		return position;
 
 	}
-	
-	
-	
+
+	public static final boolean generateRandom() {
+		Random random = new Random();
+		int lower_Bound = 0;
+		int upper_Bound = 1;
+
+		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound == 1 ? true : false;
+	}
+
 }
