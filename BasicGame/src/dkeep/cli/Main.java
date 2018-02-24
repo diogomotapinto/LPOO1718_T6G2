@@ -1,13 +1,13 @@
 package dkeep.cli;
 
-import dkeep.logic.LevelOne;
+import dkeep.logic.LevelTwo;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		LevelOne levelOne = new LevelOne();
-		levelOne.playLevelOne();
+		LevelTwo levelOne = new LevelTwo();
+		levelOne.playLevelTwo();
 	}
 
 }

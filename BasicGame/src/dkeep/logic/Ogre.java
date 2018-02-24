@@ -23,5 +23,10 @@ public class Ogre extends Character {
 	public void setMyClub(Club myClub) {
 		this.myClub = myClub;
 	}
+	
+	public void setClubPosition()
+	{
+		
+	}
 
 }
