@@ -6,6 +6,7 @@ public class LevelTwo extends Game {
 
 	private static final String OGRE_CHAR = "O";
 	private static final String CLUB_CHAR = "*";
+	private static final String HCLUB_CHAR = "º";
 	private Ogre ogre;
 	private ArrayList<Ogre> ogreList;
 	private int ogresNumber;
@@ -61,15 +62,19 @@ public class LevelTwo extends Game {
 		for(int i = 0; i < ogresNumber; i++){
 			map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition()] = OGRE_CHAR;	
 		}
+			moveClub(hero);
+			map[hero.getXPosition()][hero.getYPosition()] = HERO_CHAR;	
 		do {
 			printMap();
 			printLegend();
 			moveHero();
+			moveClub(hero);
 			checkLever();
 			map[this.hero.getXPosition()][this.hero.getYPosition()] = hero.getHeroChar();
 			for(int i = 0; i < ogresNumber; i++){
 				moveOgre(ogreList.get(i));		
 			}
+			checkifStunned();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
 	}
@@ -103,6 +108,17 @@ public class LevelTwo extends Game {
 	}
 
 	private final void moveOgre(Ogre myOgre) {
+		
+		if(myOgre.getStunned()) {
+			if(myOgre.getStunCounter() >0) {
+			myOgre.stunCounter();
+			map[myOgre.getXPosition()][myOgre.getYPosition()] = "8";
+				return;
+			}
+			else {
+				myOgre.setStunned(false);
+			}	
+		}
 
 		map[myOgre.getXPosition()][myOgre.getYPosition()] = BLANK_SPACE;
 
@@ -138,7 +154,10 @@ public class LevelTwo extends Game {
 			map[1][7] = "$";
 		}else
 		{
+			if(character instanceof Ogre ) {
 			map[character.getMyClub().getXPosition()][character.getMyClub().getYPosition()] = CLUB_CHAR;
+			}else
+				map[character.getMyClub().getXPosition()][character.getMyClub().getYPosition()] = HCLUB_CHAR;
 			
 			if(!this.lever.isActivated()) {
 				map[1][7] = LEVER_CHAR;
@@ -146,6 +165,20 @@ public class LevelTwo extends Game {
 			
 		}
 
+	}
+	
+	public void checkifStunned()
+	{
+		
+		for(int i = 0; i < ogreList.size(); i++)
+		{
+			if( map[ogreList.get(i).getXPosition() - 1][ogreList.get(i).getYPosition()] == HCLUB_CHAR
+					|| map[ogreList.get(i).getXPosition() + 1][ogreList.get(i).getYPosition()] == HCLUB_CHAR
+					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() - 1] == HCLUB_CHAR
+					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() + 1] == HCLUB_CHAR) {
+				ogreList.get(i).setStunned(true);
+			}
+		}
 	}
 
 }
