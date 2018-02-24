@@ -17,6 +17,7 @@ public class Game {
 	protected static final String LEVER_CHAR = "k";
 	protected static final String BLANK_SPACE = " ";
 
+	protected Lever lever;
 	protected final Hero hero;
 	protected final String[][] map;
 	protected boolean gameState;
@@ -26,6 +27,8 @@ public class Game {
 		this.legend = legend;
 		this.myInterface = new Interface();
 		gameState = true;
+		this.lever = new Lever();
+		
 		hero = new Hero(heroXPosition, heroYPosition);
 	}
 
@@ -91,6 +94,8 @@ public class Game {
 
 	protected final void checkLever() {
 		if (map[this.hero.getXPosition()][hero.getYPosition()].equals(LEVER_CHAR)) {
+			lever.activateLever();
+			hero.setHeroChar("A");
 			for (int i = 0; i < this.map.length; i++) {
 				for (int j = 0; j < this.map[i].length; j++) {
 					if (map[i][j].equals(DOOR_CHAR)) {
@@ -100,5 +105,6 @@ public class Game {
 			}
 		}
 	}
+	
 
 }

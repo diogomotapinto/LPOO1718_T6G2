@@ -3,7 +3,7 @@ package dkeep.logic;
 public class Character {
 	protected int xPosition;
 	protected int yPosition;
-
+	
 	
 	
 	public Character(int xPos, int yPos) {

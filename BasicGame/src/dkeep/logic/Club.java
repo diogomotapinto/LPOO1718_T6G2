@@ -1,8 +1,8 @@
 package dkeep.logic;
 
 public class Club {
-	protected int xPosition;
-	protected int yPosition;
+	private int xPosition;
+	private int yPosition;
 
 	public Club() {
 	}

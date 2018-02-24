@@ -46,5 +46,13 @@ public class Utilities {
 
 		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound == 1 ? true : false;
 	}
+	
+	public static final int generateRandomNumber(int lowerBound, int upperBound) {
+		Random random = new Random();
+		int lower_Bound = lowerBound;
+		int upper_Bound = upperBound;
+
+		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound;
+	}
 
 }
