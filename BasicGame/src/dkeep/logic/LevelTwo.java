@@ -9,6 +9,7 @@ public class LevelTwo extends Game {
 	private Ogre ogre;
 	private ArrayList<Ogre> ogreList;
 	private int ogresNumber;
+	
 	// private Random random;
 	// private int jogada;
 
@@ -116,28 +117,28 @@ public class LevelTwo extends Game {
 		moveClub(myOgre);
 	}
 
-	private final void moveClub(Ogre myOgre) {
-		map[myOgre.getMyClub().getXPosition()][myOgre.getMyClub().getYPosition()] = BLANK_SPACE;
+	private final void moveClub(Character character) {
+		map[character.getMyClub().getXPosition()][character.getMyClub().getYPosition()] = BLANK_SPACE;
 
 		int position[];
 		do {
-			position = Utilities.getAdjacentPosition(myOgre.getXPosition(), myOgre.getYPosition());
+			position = Utilities.getAdjacentPosition(character.getXPosition(), character.getYPosition());
 		} while (map[position[0]][position[1]] == WALL_CHAR ||
 				map[position[0]][position[1]] == OGRE_CHAR ||
 				map[position[0]][position[1]] == HERO_CHAR ||
 				map[position[0]][position[1]] == DOOR_CHAR ||
 				map[position[0]][position[1]] == "S");
 
-		Club tempClub = myOgre.getMyClub();
+		Club tempClub = character.getMyClub();
 		tempClub.setxPosition(position[0]);
 		tempClub.setyPosition(position[1]);
-		myOgre.setMyClub(tempClub);
+		character.setMyClub(tempClub);
 
-		if(myOgre.getMyClub().getXPosition() == 1 && myOgre.getMyClub().getYPosition() == 7) {
+		if(character.getMyClub().getXPosition() == 1 && character.getMyClub().getYPosition() == 7) {
 			map[1][7] = "$";
 		}else
 		{
-			map[myOgre.getMyClub().getXPosition()][myOgre.getMyClub().getYPosition()] = CLUB_CHAR;
+			map[character.getMyClub().getXPosition()][character.getMyClub().getYPosition()] = CLUB_CHAR;
 			
 			if(!this.lever.isActivated()) {
 				map[1][7] = LEVER_CHAR;
