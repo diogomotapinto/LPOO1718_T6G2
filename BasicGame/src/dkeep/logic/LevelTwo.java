@@ -53,17 +53,15 @@ public class LevelTwo extends Game {
 		// jogada = 0;
 	}
 
+	
+	
+	
+	
+	
 	public final void playLevelTwo() {
 		System.out.println("Nivel 2!!!");
 		boolean advanceLevel = false;
-		for(int i = 0; i < ogresNumber; i++){
-			moveClub(ogreList.get(i));		
-		}
-		for(int i = 0; i < ogresNumber; i++){
-			map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition()] = OGRE_CHAR;	
-		}
-			moveClub(hero);
-			map[hero.getXPosition()][hero.getYPosition()] = HERO_CHAR;	
+		initializeMap();
 		do {
 			printMap();
 			printLegend();
@@ -74,7 +72,7 @@ public class LevelTwo extends Game {
 			for(int i = 0; i < ogresNumber; i++){
 				moveOgre(ogreList.get(i));		
 			}
-			checkifStunned();
+			checkIfStunned();
 			advanceLevel = checkAdvanceLevel();
 		} while (!advanceLevel);
 	}
@@ -87,14 +85,14 @@ public class LevelTwo extends Game {
 		}
 
 		try {
-			if (map[this.hero.getXPosition() - 1][hero.getYPosition()] == OGRE_CHAR
-					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == OGRE_CHAR
-					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == OGRE_CHAR
-					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == OGRE_CHAR
-					|| map[this.hero.getXPosition() - 1][hero.getYPosition()] == CLUB_CHAR
-					|| map[this.hero.getXPosition() + 1][hero.getYPosition()] == CLUB_CHAR
-					|| map[this.hero.getXPosition()][hero.getYPosition() - 1] == CLUB_CHAR
-					|| map[this.hero.getXPosition()][hero.getYPosition() + 1] == CLUB_CHAR) {
+			if (map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(OGRE_CHAR)
+					|| map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(OGRE_CHAR)
+					|| map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(OGRE_CHAR)
+					|| map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(OGRE_CHAR) 
+					|| map[this.hero.getXPosition() - 1][hero.getYPosition()].equals(CLUB_CHAR)
+					|| map[this.hero.getXPosition() + 1][hero.getYPosition()].equals(CLUB_CHAR)
+					|| map[this.hero.getXPosition()][hero.getYPosition() - 1].equals(CLUB_CHAR)
+					|| map[this.hero.getXPosition()][hero.getYPosition() + 1].equals(CLUB_CHAR)) {
 
 				printMap();
 				System.out.print("\nPerdeu jogo");
@@ -106,12 +104,22 @@ public class LevelTwo extends Game {
 		}
 		return false;
 	}
+	
+	
+	public final void initializeMap()
+	{
+		for(int i = 0; i < ogresNumber; i++){
+			moveOgre(ogreList.get(i));
+		}
+			moveClub(hero);
+			map[hero.getXPosition()][hero.getYPosition()] = HERO_CHAR;	
+	}
 
 	private final void moveOgre(Ogre myOgre) {
 		
 		if(myOgre.getStunned()) {
 			if(myOgre.getStunCounter() >0) {
-			myOgre.stunCounter();
+				myOgre.stunCounter();
 			map[myOgre.getXPosition()][myOgre.getYPosition()] = "8";
 				return;
 			}
@@ -139,11 +147,12 @@ public class LevelTwo extends Game {
 		int position[];
 		do {
 			position = Utilities.getAdjacentPosition(character.getXPosition(), character.getYPosition());
-		} while (map[position[0]][position[1]] == WALL_CHAR ||
-				map[position[0]][position[1]] == OGRE_CHAR ||
-				map[position[0]][position[1]] == HERO_CHAR ||
-				map[position[0]][position[1]] == DOOR_CHAR ||
-				map[position[0]][position[1]] == "S");
+		} while (map[position[0]][position[1]].equals(WALL_CHAR)  ||
+				map[position[0]][position[1]].equals(OGRE_CHAR) ||
+				map[position[0]][position[1]].equals(HERO_CHAR) ||
+				map[position[0]][position[1]].equals(DOOR_CHAR) ||
+				map[position[0]][position[1]].equals("S") ||
+				map[position[0]][position[1]].equals("HCLUB_CHAR"));
 
 		Club tempClub = character.getMyClub();
 		tempClub.setxPosition(position[0]);
@@ -151,7 +160,9 @@ public class LevelTwo extends Game {
 		character.setMyClub(tempClub);
 
 		if(character.getMyClub().getXPosition() == 1 && character.getMyClub().getYPosition() == 7) {
-			map[1][7] = "$";
+			if(!this.lever.isActivated()) {
+				map[1][7] = "$";
+			}
 		}else
 		{
 			if(character instanceof Ogre ) {
@@ -167,15 +178,16 @@ public class LevelTwo extends Game {
 
 	}
 	
-	public void checkifStunned()
+	
+	public void checkIfStunned()
 	{
 		
 		for(int i = 0; i < ogreList.size(); i++)
 		{
-			if( map[ogreList.get(i).getXPosition() - 1][ogreList.get(i).getYPosition()] == HCLUB_CHAR
-					|| map[ogreList.get(i).getXPosition() + 1][ogreList.get(i).getYPosition()] == HCLUB_CHAR
-					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() - 1] == HCLUB_CHAR
-					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() + 1] == HCLUB_CHAR) {
+			if( map[ogreList.get(i).getXPosition() - 1][ogreList.get(i).getYPosition()].equals(HCLUB_CHAR) 
+					|| map[ogreList.get(i).getXPosition() + 1][ogreList.get(i).getYPosition()].equals(HCLUB_CHAR)
+					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() - 1].equals(HCLUB_CHAR) 
+					|| map[ogreList.get(i).getXPosition()][ogreList.get(i).getYPosition() + 1].equals(HCLUB_CHAR)) {
 				ogreList.get(i).setStunned(true);
 			}
 		}
