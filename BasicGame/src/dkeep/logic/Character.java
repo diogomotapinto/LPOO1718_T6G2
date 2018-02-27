@@ -3,12 +3,11 @@ package dkeep.logic;
 public class Character {
 	protected int xPosition;
 	protected int yPosition;
-	protected Club myClub;
-
+	
 	public Character(int xPos, int yPos) {
 		this.xPosition = xPos;
 		this.yPosition = yPos;
-		myClub = new Club(xPos, yPos);
+		
 	}
 
 	public final int getXPosition() {
@@ -26,13 +25,4 @@ public class Character {
 	public final void setyPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
-
-	public Club getMyClub() {
-		return myClub;
-	}
-
-	public void setMyClub(Club myClub) {
-		this.myClub = myClub;
-	}
-
 }
