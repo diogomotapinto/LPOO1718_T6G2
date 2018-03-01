@@ -11,8 +11,7 @@ public final class Rookie extends Guard {
 		if (index == route.length) {
 			index = 0;
 		}
-		setXPosition(route[index][0]);
-		setYPosition(route[index][1]);
+		this.setPosition(new Position(route[index][0], route[index][1]));
 
 	}
 

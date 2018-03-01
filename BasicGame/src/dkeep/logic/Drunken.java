@@ -18,8 +18,7 @@ public final class Drunken extends Guard {
 				index = 0;
 			}
 
-			setXPosition(route[index][0]);
-			setYPosition(route[index][1]);
+			this.setPosition(new Position(route[index][0], route[index][1]));
 		}
 		sleep = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}

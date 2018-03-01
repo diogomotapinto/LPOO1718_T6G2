@@ -2,6 +2,8 @@ package utilities;
 
 import java.util.Random;
 
+import dkeep.logic.Position;
+
 public class Utilities {
 	private static final byte MOVE_UP = 1;
 	private static final byte MOVE_DOWN = 2;
@@ -47,4 +49,23 @@ public class Utilities {
 		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound;
 	}
 
+	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
+		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
+			return true;
+		}
+		// check if there is an Ogre up
+		if (posOne.getXPosition() - 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
+			return true;
+		}
+		// check if there is an Ogre on the left
+		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() - 1 == posTwo.getYPosition()) {
+			return true;
+		}
+		// check if there is an Ogre on the right
+		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() + 1 == posTwo.getYPosition()) {
+			return true;
+		}
+
+		return false;
+	}
 }

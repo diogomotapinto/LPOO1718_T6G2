@@ -23,8 +23,7 @@ public final class Suspicious extends Guard {
 				index = route.length - 1;
 			}
 		}
-		setXPosition(route[index][0]);
-		setYPosition(route[index][1]);
+		this.setPosition(new Position(route[index][0], route[index][1]));
 		direction = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}
 

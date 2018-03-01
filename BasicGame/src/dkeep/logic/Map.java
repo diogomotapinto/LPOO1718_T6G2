@@ -14,7 +14,6 @@ public abstract class Map {
 	protected static final char CHAR_DOOR_CLOSED = 'I';
 	protected static final char CHAR_DOOR_OPEN = 'S';
 
-
 	protected static final char CHAR_BLANK_SPACE = ' ';
 
 	private final String legend;
@@ -47,25 +46,29 @@ public abstract class Map {
 	}
 
 	protected final void moveHero(char move) {
+		Position p = hero.getPosition();
+		int xPosition = p.getXPosition();
+		int yPosition = p.getYPosition();
+
 		switch (move) {
 		case CHAR_MOVE_UP:
-			if (checkMoveHero(this.hero.getXPosition() - 1, hero.getYPosition())) {
-				moveHero(this.hero.getXPosition() - 1, hero.getYPosition());
+			if (checkMoveHero(xPosition - 1, yPosition)) {
+				moveHero(xPosition - 1, yPosition);
 			}
 			break;
 		case CHAR_MOVE_DOWN:
-			if (checkMoveHero(this.hero.getXPosition() + 1, hero.getYPosition())) {
-				moveHero(this.hero.getXPosition() + 1, hero.getYPosition());
+			if (checkMoveHero(xPosition + 1, yPosition)) {
+				moveHero(xPosition + 1, yPosition);
 			}
 			break;
 		case CHAR_MOVE_RIGHT:
-			if (checkMoveHero(this.hero.getXPosition(), hero.getYPosition() + 1)) {
-				moveHero(this.hero.getXPosition(), hero.getYPosition() + 1);
+			if (checkMoveHero(xPosition, yPosition + 1)) {
+				moveHero(xPosition, yPosition + 1);
 			}
 			break;
 		case CHAR_MOVE_LEFT:
-			if (checkMoveHero(this.hero.getXPosition(), hero.getYPosition() - 1)) {
-				moveHero(this.hero.getXPosition(), hero.getYPosition() - 1);
+			if (checkMoveHero(xPosition, yPosition - 1)) {
+				moveHero(xPosition, yPosition - 1);
 			}
 			break;
 		default:
@@ -75,9 +78,11 @@ public abstract class Map {
 	}
 
 	private void moveHero(int x, int y) {
-		map[this.hero.getXPosition()][hero.getYPosition()] = CHAR_BLANK_SPACE;
-		hero.setXPosition(x);
-		hero.setYPosition(y);
+		Position heroPosition = hero.getPosition();
+		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
+		heroPosition.setXPosition(x);
+		heroPosition.setYPosition(y);
+		hero.setPosition(heroPosition);
 		map[x][y] = Hero.getHeroChar();
 	}
 
@@ -90,8 +95,10 @@ public abstract class Map {
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
 	// coordenadas do objeto lever) em vez de usar coordenadas do map
 	protected final void checkLever() {
+		Position heroPosition = hero.getPosition();
+		Position leverPosition = lever.getPosition();
 
-		if (this.hero.getXPosition() == lever.getXPosition() && this.hero.getYPosition() == lever.getYPosition()) {
+		if (leverPosition.equals(heroPosition) && (heroPosition.hashCode() == leverPosition.hashCode())) {
 			lever.activateLever();
 
 			// para que utilizar o caracter A

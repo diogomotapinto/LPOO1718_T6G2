@@ -62,13 +62,15 @@ public final class DungeonMap extends Map implements MapRules {
 		} while (!checkEndLevel());
 
 		// printar estado final do mapa deste nivel
-		super.printMap();
+		// super.printMap();
 	}
 
 	private final void moveGuard() {
-		map[guard.getXPosition()][guard.getYPosition()] = CHAR_BLANK_SPACE;
+		Position guardPosition = guard.getPosition();
+		map[guardPosition.getXPosition()][guardPosition.getYPosition()] = CHAR_BLANK_SPACE;
 		this.guard.moveToNextPosition();
-		map[guard.getXPosition()][guard.getYPosition()] = Guard.getGuardChar();
+		guardPosition = guard.getPosition();
+		map[guardPosition.getXPosition()][guardPosition.getYPosition()] = Guard.getGuardChar();
 	}
 
 	@Override
@@ -80,18 +82,21 @@ public final class DungeonMap extends Map implements MapRules {
 
 	@Override
 	public final void initializeMap() {
-		map[hero.getXPosition()][hero.getYPosition()] = hero.getHeroChar();
+		Position heroPosition = hero.getPosition();
+		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar();
 	}
 
 	@Override
 	public final boolean checkEndLevel() {
-
-		if (checkWon(hero.getXPosition(), hero.getYPosition())) {
+		Position heroPosition = hero.getPosition();
+		int xPosition = heroPosition.getXPosition();
+		int yPosition = heroPosition.getYPosition();
+		if (checkWon(xPosition, yPosition)) {
 			System.out.println("\nProximo Nivel!!!\n");
 			return true;
 		}
 
-		if (checkLost(hero.getXPosition(), hero.getYPosition())) {
+		if (checkLost(xPosition, yPosition)) {
 			printMap();
 			System.out.print("\nPerdeu jogo");
 			super.gameState = false;
@@ -112,8 +117,8 @@ public final class DungeonMap extends Map implements MapRules {
 	public final boolean checkLost(int x, int y) {
 		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
 		// argumento (heroi) sao as do guarda
-		return (((x - 1) == guard.getXPosition() || (x + 1) == guard.getXPosition()) && y == guard.getYPosition())
-				|| (((y - 1) == guard.getYPosition() || (y + 1) == guard.getYPosition()) && x == guard.getXPosition());
+		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
+
 	}
 
 }
