@@ -25,7 +25,7 @@ public class DungeonMap extends Map implements MapRules {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, CHAR_BLANK_SPACE, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE,
-						WALL_CHAR, CHAR_LEVER, CHAR_BLANK_SPACE, WALL_CHAR },
+						WALL_CHAR, Lever.getLeverChar(), CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
 				"\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space", 1, 1);
@@ -105,7 +105,7 @@ public class DungeonMap extends Map implements MapRules {
 
 	@Override
 	public boolean checkLost(int x, int y) {
-		// confirma se posiçoes adjacentes verticais e horizontais as passadas por
+		// confirma se posiï¿½oes adjacentes verticais e horizontais as passadas por
 		// argumento (heroi) sao as do guarda
 		return (((x - 1) == guard.getXPosition() || (x + 1) == guard.getXPosition()) && y == guard.getYPosition())
 				|| (((y - 1) == guard.getYPosition() || (y + 1) == guard.getYPosition()) && x == guard.getXPosition());

@@ -5,23 +5,18 @@ public class Lever {
 
 	private boolean activated;
 	// private String leverChar;
-	private int xPosition;
-	private int yPosition;
-
+	private Position position;
+	
 	public Lever(int xPosition, int yPosition) {
-		this.xPosition = xPosition;
-		this.yPosition = yPosition;
+		position = new Position(xPosition, yPosition);
 		activated = false;
-		// leverChar = "k";
+	
 	}
 
-	// public String getLever() {
-	// return leverChar;
-	// }
-
-	// public void setLever(String lever) {
-	// leverChar = lever;
-	// }
+	public static char getLeverChar() {
+		return CHAR_LEVER;
+	}
+	
 
 	public void activateLever() {
 		activated = true;
@@ -30,13 +25,17 @@ public class Lever {
 	public boolean isActivated() {
 		return activated;
 	}
+	
+	public Position getPosition() {
+		return position;
+	}
 
 	public int getXPosition() {
-		return xPosition;
+		return position.getXPosition();
 	}
 
 	public int getYPosition() {
-		return yPosition;
+		return position.getYPosition();
 	}
 
 }

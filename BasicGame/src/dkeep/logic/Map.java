@@ -14,7 +14,6 @@ public abstract class Map {
 	protected static final char CHAR_DOOR_CLOSED = 'I';
 	protected static final char CHAR_DOOR_OPEN = 'S';
 
-	protected static final char CHAR_HERO = 'H';
 
 	protected static final char CHAR_BLANK_SPACE = ' ';
 
@@ -85,7 +84,7 @@ public abstract class Map {
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
 	private boolean checkMoveHero(int x, int y) {
-		return (map[x][y] == CHAR_LEVER || map[x][y] == CHAR_BLANK_SPACE || map[x][y] == CHAR_DOOR_OPEN);
+		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE || map[x][y] == CHAR_DOOR_OPEN);
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das

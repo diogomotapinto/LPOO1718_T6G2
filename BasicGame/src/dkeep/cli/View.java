@@ -31,12 +31,12 @@ public class View {
 			for (int j = 0; j < map[i].length; j++) {
 				printString(" " + map[i][j]);
 			}
-			printString("\n");
+			System.out.println();
 		}
 	}
 
 	public void printString(String s) {
-		System.out.println(s);
+		System.out.print(s);
 	}
 
 }

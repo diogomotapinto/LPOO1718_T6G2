@@ -1,28 +1,32 @@
 package dkeep.logic;
 
 public abstract class Character {
-	protected int xPosition;
-	protected int yPosition;
+	protected Position position;
 
 	public Character(int xPos, int yPos) {
-		this.xPosition = xPos;
-		this.yPosition = yPos;
+		position = new Position(xPos, yPos);
 
 	}
 
-	public final int getXPosition() {
-		return this.xPosition;
+//	public void setPosition(int xPosition,int yPosition)
+//	{
+//		this.position.setXPosition(xPosition);
+//		this.position.setYPosition(yPosition);
+//	}
+	
+	protected final int getXPosition() {
+		return position.getXPosition();
 	}
 
-	public final int getYPosition() {
-		return this.yPosition;
+	protected final int getYPosition() {
+		return position.getYPosition();
 	}
 
-	public final void setXPosition(int xPosition) {
-		this.xPosition = xPosition;
+	protected final void setXPosition(int xPosition) {
+		position.setXPosition(xPosition);;
 	}
 
-	public final void setYPosition(int yPosition) {
-		this.yPosition = yPosition;
+	protected final void setYPosition(int yPosition) {
+		position.setYPosition(yPosition);
 	}
 }

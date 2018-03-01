@@ -2,6 +2,9 @@ package dkeep.logic;
 
 public class Hero extends Character {
 
+	protected static final char CHAR_HERO = 'H';
+	protected static final char CHAR_HERO_KEY = 'A';
+
 	// ver se se altera este caracter, e se sim discutir em grupo
 	private char heroChar;
 	private Club club;

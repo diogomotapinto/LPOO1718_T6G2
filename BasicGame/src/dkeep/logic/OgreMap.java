@@ -8,7 +8,7 @@ public class OgreMap extends Map {
 
 	private static final char OGRE_CHAR = 'O';
 	private static final char CLUB_CHAR = '*';
-	private static final char HCLUB_CHAR = 'º';
+	private static final char HCLUB_CHAR = 'ï¿½';
 	private Ogre ogre;
 	private ArrayList<Ogre> ogreList;
 	private int ogresNumber;
@@ -18,7 +18,7 @@ public class OgreMap extends Map {
 		super(new char[][] {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR },
 				{ CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_LEVER, WALL_CHAR },
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, Lever.getLeverChar(), WALL_CHAR },
 				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
 						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
