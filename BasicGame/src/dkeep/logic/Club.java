@@ -1,31 +1,25 @@
 package dkeep.logic;
 
 public class Club {
-	private int xPosition;
-	private int yPosition;
-
-	public Club() {
-	}
+	private Position position;
+	private static final char CLUB_CHAR = '*';
 
 	public Club(int xPos, int yPos) {
-		this.xPosition = xPos;
-		this.yPosition = yPos;
+		position = new Position(xPos, yPos);
+	}
+	
+	public static char getClubChar() {
+		return CLUB_CHAR;
 	}
 
-	public final int getXPosition() {
-		return this.xPosition;
+
+	public final Position getPosition()
+	{
+		return this.position;
 	}
 
-	public final int getYPosition() {
-		return this.yPosition;
-	}
-
-	public final void setxPosition(int xPosition) {
-		this.xPosition = xPosition;
-	}
-
-	public final void setyPosition(int yPosition) {
-		this.yPosition = yPosition;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
 }

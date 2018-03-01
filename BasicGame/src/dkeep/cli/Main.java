@@ -1,13 +1,13 @@
 package dkeep.cli;
 
-import dkeep.logic.DungeonMap;
+import dkeep.logic.OgreMap;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		DungeonMap levelOne = new DungeonMap();
-		levelOne.playLevel();
+		OgreMap levelOne = new OgreMap();
+		levelOne.playLevelTwo();
 	}
 
 }

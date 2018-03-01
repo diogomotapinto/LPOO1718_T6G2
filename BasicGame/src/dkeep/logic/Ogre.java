@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public class Ogre extends Character {
+public final class Ogre extends Character {
 	private static final char MASSIVE_CLUB = '*';
 	private int counter;
 	private boolean stunned;
@@ -17,30 +17,30 @@ public class Ogre extends Character {
 		return MASSIVE_CLUB;
 	}
 
-	public void setStunned(boolean isStunned) {
+	public final void setStunned(boolean isStunned) {
 		if (stunned) {
 			counter = 2;
 		}
 		stunned = isStunned;
 	}
 
-	public boolean getStunned() {
+	public final boolean getStunned() {
 		return stunned;
 	}
 
-	public void stunCounter() {
+	public final void stunCounter() {
 		counter--;
 	}
 
-	public int getStunCounter() {
+	public final int getStunCounter() {
 		return counter;
 	}
 
-	public Club getMyClub() {
+	public final Club getMyClub() {
 		return myClub;
 	}
 
-	public void setMyClub(Club myClub) {
+	public  final void setMyClub(Club myClub) {
 		this.myClub = myClub;
 	}
 }

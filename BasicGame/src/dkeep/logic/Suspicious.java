@@ -2,16 +2,16 @@ package dkeep.logic;
 
 import utilities.Utilities;
 
-public class Suspicious extends Guard {
+public final class Suspicious extends Guard {
 
 	private boolean direction;
 
-	public Suspicious(int xPos, int yPos) {
-		super(xPos, yPos);
+	public Suspicious(int xPos, int yPos, int[][] route) {
+		super(xPos, yPos, route);
 		direction = true;
 	}
 
-	public void moveToNextPosition() {
+	public final void moveToNextPosition() {
 		if (direction) {
 			index++;
 			if (index == route.length) {
@@ -24,8 +24,12 @@ public class Suspicious extends Guard {
 			}
 		}
 		setXPosition(route[index][0]);
-		setXPosition(route[index][1]);
+		setYPosition(route[index][1]);
 		direction = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}
 
+	@Override
+	public String toString() {
+		return "Guard [tipo= " + getClass().getSimpleName() + "]";
+	}
 }

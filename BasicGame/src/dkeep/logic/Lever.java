@@ -30,12 +30,7 @@ public class Lever {
 		return position;
 	}
 
-	public int getXPosition() {
-		return position.getXPosition();
+	public void setPosition(Position position) {
+		this.position = position;
 	}
-
-	public int getYPosition() {
-		return position.getYPosition();
-	}
-
 }

@@ -1,9 +1,11 @@
 package dkeep.logic;
 
-public class Hero extends Character {
+public final class Hero extends Character {
 
 	protected static final char CHAR_HERO = 'H';
 	protected static final char CHAR_HERO_KEY = 'A';
+	
+	private boolean lever;
 
 	// ver se se altera este caracter, e se sim discutir em grupo
 	private char heroChar;
@@ -13,21 +15,35 @@ public class Hero extends Character {
 		super(xPos, yPos);
 		club = new Club(xPos, yPos);
 		heroChar = 'H';
+		lever = false;
 	}
 
-	public char getHeroChar() {
-		return heroChar;
+	
+	public final char getHeroClubChar() {
+		return club.getClubChar();
+	}
+	
+	public final boolean getLeverState() {
+		return lever;
+	}
+	
+	public  final void setLeverState(boolean leverState) {
+		this.lever = leverState;
+	}
+	
+	public final static char getHeroChar() {
+		return CHAR_HERO;
 	}
 
-	public void setHeroChar(char ch) {
+	public final void setHeroChar(char ch) {
 		heroChar = ch;
 	}
 
-	public Club getMyClub() {
+	public final Club getMyClub() {
 		return club;
 	}
 
-	public void setMyClub(Club myClub) {
+	public final void setMyClub(Club myClub) {
 		this.club = myClub;
 	}
 

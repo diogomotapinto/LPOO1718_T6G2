@@ -2,9 +2,12 @@ package dkeep.logic;
 
 import utilities.Utilities;
 
-public class DungeonMap extends Map implements MapRules {
+public final class DungeonMap extends Map implements MapRules {
 
 	private Guard guard;
+	private static final int route[][] = new int[][] { { 1, 8 }, { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 },
+			{ 5, 6 }, { 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 6, 1 }, { 6, 2 }, { 6, 3 }, { 6, 4 },
+			{ 6, 5 }, { 6, 6 }, { 6, 7 }, { 6, 8 }, { 5, 8 }, { 4, 8 }, { 3, 8 }, { 2, 8 } };
 
 	public DungeonMap() {
 		super(new char[][] {
@@ -32,16 +35,16 @@ public class DungeonMap extends Map implements MapRules {
 		createGuard();
 	}
 
-	private void createGuard() {
+	private final void createGuard() {
 		switch (Utilities.generateRandomNumber(0, 2)) {
 		case 0:
-			guard = new Rookie(1, 8);
+			guard = new Rookie(1, 8, route);
 			break;
 		case 1:
-			guard = new Drunken(1, 8);
+			guard = new Drunken(1, 8, route);
 			break;
 		case 2:
-			guard = new Suspicious(1, 8);
+			guard = new Suspicious(1, 8, route);
 			break;
 		}
 
@@ -69,17 +72,19 @@ public class DungeonMap extends Map implements MapRules {
 	}
 
 	@Override
-	public void printHeader() {
+	public final void printHeader() {
 		System.out.println("Nivel 1!!!");
+		System.out.println(guard);
+		System.out.println();
 	}
 
 	@Override
-	public void initializeMap() {
-		map[hero.getXPosition()][hero.getYPosition()] = CHAR_HERO;
+	public final void initializeMap() {
+		map[hero.getXPosition()][hero.getYPosition()] = hero.getHeroChar();
 	}
 
 	@Override
-	public boolean checkEndLevel() {
+	public final boolean checkEndLevel() {
 
 		if (checkWon(hero.getXPosition(), hero.getYPosition())) {
 			System.out.println("\nProximo Nivel!!!\n");
@@ -97,14 +102,14 @@ public class DungeonMap extends Map implements MapRules {
 	}
 
 	@Override
-	public boolean checkWon(int x, int y) {
+	public final boolean checkWon(int x, int y) {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
 		return y == 0;
 	}
 
 	@Override
-	public boolean checkLost(int x, int y) {
+	public final boolean checkLost(int x, int y) {
 		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
 		// argumento (heroi) sao as do guarda
 		return (((x - 1) == guard.getXPosition() || (x + 1) == guard.getXPosition()) && y == guard.getYPosition())
