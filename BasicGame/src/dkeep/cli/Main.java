@@ -1,13 +1,13 @@
 package dkeep.cli;
 
-import dkeep.logic.LevelTwo;
+import dkeep.logic.DungeonMap;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		LevelTwo levelTwo = new LevelTwo();
-		levelTwo.playLevelTwo();
+		DungeonMap levelOne = new DungeonMap();
+		levelOne.playLevel();
 	}
 
 }

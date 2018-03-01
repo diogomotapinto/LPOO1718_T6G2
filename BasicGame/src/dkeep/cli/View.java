@@ -2,14 +2,14 @@ package dkeep.cli;
 
 import java.util.Scanner;
 
-public class Interface {
+public class View {
 
-	public Interface() {
+	public View() {
 	}
 
 	private static final Scanner keyboard = new Scanner(System.in);
 
-	public final String getMove() {
+	public final char getMove() {
 		String move = "";
 
 		boolean flag = false;
@@ -22,7 +22,21 @@ public class Interface {
 				System.out.println("Introduziu op�ao invalida");
 			}
 		} while (!flag);
-		return move;
+		return move.charAt(0);
+	}
+
+	public void printMatrix(char[][] map) {
+		System.out.println();
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				printString(" " + map[i][j]);
+			}
+			printString("\n");
+		}
+	}
+
+	public void printString(String s) {
+		System.out.println(s);
 	}
 
 }

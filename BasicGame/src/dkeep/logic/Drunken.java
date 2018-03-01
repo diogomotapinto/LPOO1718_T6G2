@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import utilities.Utilities;
+
 public class Drunken extends Guard {
 
 	private boolean sleep;
@@ -19,7 +21,7 @@ public class Drunken extends Guard {
 			this.xPosition = route[index][0];
 			this.yPosition = route[index][1];
 		}
-		sleep = Utilities.generateRandom();
+		sleep = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}
 
 }

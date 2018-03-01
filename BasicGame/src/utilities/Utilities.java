@@ -1,10 +1,8 @@
-package dkeep.logic;
+package utilities;
 
 import java.util.Random;
 
 public class Utilities {
-	private static final byte lowerBound = 1;
-	private static final byte upperBound = 4;
 	private static final byte MOVE_UP = 1;
 	private static final byte MOVE_DOWN = 2;
 	private static final byte MOVE_RIGHT = 3;
@@ -17,6 +15,8 @@ public class Utilities {
 	public static final int[] getAdjacentPosition(int xPosition, int yPosition) {
 		int[] position = { xPosition, yPosition };
 		Random random = new Random();
+		byte lowerBound = 1;
+		byte upperBound = 4;
 		int result = random.nextInt((upperBound - lowerBound) + 1) + lowerBound;
 
 		switch (result) {
@@ -39,14 +39,6 @@ public class Utilities {
 
 	}
 
-	public static final boolean generateRandom() {
-		Random random = new Random();
-		int lower_Bound = 0;
-		int upper_Bound = 1;
-
-		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound == 1 ? true : false;
-	}
-	
 	public static final int generateRandomNumber(int lowerBound, int upperBound) {
 		Random random = new Random();
 		int lower_Bound = lowerBound;

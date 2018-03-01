@@ -1,13 +1,10 @@
 package dkeep.logic;
 
-import java.util.Random;
-
 public class Ogre extends Character {
-	private static final String MASSIVE_CLUB = "*";
+	private static final char MASSIVE_CLUB = '*';
 	private int counter;
 	private boolean stunned;
 	protected Club myClub;
-
 
 	public Ogre(int xPos, int yPos) {
 		super(xPos, yPos);
@@ -16,30 +13,26 @@ public class Ogre extends Character {
 		myClub = new Club(xPos, yPos);
 	}
 
-	public final String getClub() {
+	public final char getClub() {
 		return MASSIVE_CLUB;
 	}
-	
-	public void setStunned(boolean isStunned)
-	{
-		if(stunned) {
+
+	public void setStunned(boolean isStunned) {
+		if (stunned) {
 			counter = 2;
 		}
 		stunned = isStunned;
 	}
-	
-	public boolean getStunned()
-	{
+
+	public boolean getStunned() {
 		return stunned;
 	}
-	
-	public void stunCounter()
-	{
+
+	public void stunCounter() {
 		counter--;
 	}
-	
-	public int getStunCounter()
-	{
+
+	public int getStunCounter() {
 		return counter;
 	}
 

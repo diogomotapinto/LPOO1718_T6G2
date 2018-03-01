@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import utilities.Utilities;
+
 public class Suspicious extends Guard {
 
 	private boolean direction;
@@ -23,7 +25,7 @@ public class Suspicious extends Guard {
 		}
 		this.xPosition = route[index][0];
 		this.yPosition = route[index][1];
-		direction = Utilities.generateRandom();
+		direction = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}
 
 }
