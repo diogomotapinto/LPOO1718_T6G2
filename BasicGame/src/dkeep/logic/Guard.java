@@ -18,4 +18,6 @@ public abstract class Guard extends Character {
 		return GUARD_CHAR;
 	}
 
+	
+
 }

@@ -33,6 +33,8 @@ public abstract class Map {
 		this.view = new View();
 	}
 
+	public abstract void playLevel();
+
 	// deve.se tirar este metodo, substituir por um get q passa por argumento para o
 	// controller e o the view printa
 	protected final void printMap() {

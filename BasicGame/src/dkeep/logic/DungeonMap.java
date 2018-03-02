@@ -50,6 +50,7 @@ public final class DungeonMap extends Map implements MapRules {
 
 	}
 
+	@Override
 	public final void playLevel() {
 		printHeader();
 		initializeMap();
@@ -75,9 +76,9 @@ public final class DungeonMap extends Map implements MapRules {
 
 	@Override
 	public final void printHeader() {
-		System.out.println("Nivel 1!!!");
+		view.printString("Nivel 1!!!");
 		System.out.println(guard);
-		System.out.println();
+		// view.printCharacter(guard);
 	}
 
 	@Override

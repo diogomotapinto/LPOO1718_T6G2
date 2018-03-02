@@ -1,27 +1,22 @@
 package dkeep.logic;
 
-public final class Ogre extends Character {
-	private static final char MASSIVE_CLUB = '*';
+public final class Ogre extends ClubHolder {
+	private static final int STUN_COUNTER = 2;
 	private int counter;
 	private boolean stunned;
-	protected Club myClub;
 
 	public Ogre(int xPos, int yPos) {
 		super(xPos, yPos);
-		counter = 2;
+		counter = STUN_COUNTER;
 		stunned = false;
-		myClub = new Club(xPos, yPos);
-	}
-
-	public final char getClub() {
-		return MASSIVE_CLUB;
 	}
 
 	public final void setStunned(boolean isStunned) {
 		if (stunned) {
-			counter = 2;
+			counter = STUN_COUNTER;
+		} else {
+			stunned = isStunned;
 		}
-		stunned = isStunned;
 	}
 
 	public final boolean getStunned() {
@@ -36,11 +31,4 @@ public final class Ogre extends Character {
 		return counter;
 	}
 
-	public final Club getMyClub() {
-		return myClub;
-	}
-
-	public  final void setMyClub(Club myClub) {
-		this.myClub = myClub;
-	}
 }

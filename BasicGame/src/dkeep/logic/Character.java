@@ -7,13 +7,13 @@ public abstract class Character {
 		position = new Position(xPos, yPos);
 
 	}
-	
+
 	protected final Position getPosition() {
 		return position;
 	}
-	
+
 	public void setPosition(Position position) {
 		this.position = position;
-	}
+	} 
 
 }
