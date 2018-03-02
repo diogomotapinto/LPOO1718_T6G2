@@ -15,27 +15,29 @@ public class OgreMap extends Map implements MapRules {
 	public OgreMap() {
 		// passes map and legend as argument
 		super(new char[][] {
-				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR },
-				{ CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, Lever.getLeverChar(), WALL_CHAR },
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+			{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR },
+			{ CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+				CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, Lever.getLeverChar(), WALL_CHAR },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+					CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
 						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+							CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+								CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+									CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
 
-				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR } },
+			{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+										CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+			{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR } },
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space", 7, 1);
 
 		ogreList = new ArrayList<Ogre>();
-		int ogresNumber = Utilities.generateRandomNumber(1, 3);
+		int ogresNumber = Utilities.generateRandomNumber(1, 1);
+		Position leverPos = new Position(1,7);
+		lever.setPosition(leverPos);
 		int x;
 		int y;
 		for (int i = 0; i < ogresNumber; i++) {
@@ -105,16 +107,18 @@ public class OgreMap extends Map implements MapRules {
 					clubHolder.getPosition().getYPosition());
 		} while (
 
-		map[position[0]][position[1]] == WALL_CHAR || map[position[0]][position[1]] == OGRE_CHAR
+				map[position[0]][position[1]] == WALL_CHAR 
+				|| map[position[0]][position[1]] == OGRE_CHAR
 				|| map[position[0]][position[1]] == this.hero.getHeroChar(this.lever.isActivated())
 				|| map[position[0]][position[1]] == CHAR_DOOR_CLOSED || map[position[0]][position[1]] == 'S'
 				|| map[position[0]][position[1]] == Club.getClubChar()
-		// clubPosition.equals(ogre.getPosition()) ||
-		// clubPosition.equals(hero.getPosition())
-		// || map[position[0]][position[1]] == WALL_CHAR ||
-		// map[position[0]][position[1]] == this.CHAR_DOOR_CLOSED
-		// || map[position[0]][position[1]] == this.CHAR_DOOR_OPEN
-		);
+
+				// clubPosition.equals(ogre.getPosition()) ||
+				// clubPosition.equals(hero.getPosition())
+				// || map[position[0]][position[1]] == WALL_CHAR ||
+				// map[position[0]][position[1]] == this.CHAR_DOOR_CLOSED
+				// || map[position[0]][position[1]] == this.CHAR_DOOR_OPEN
+				);
 
 		// ogre.getMyClub().setPosition(clubPosition);
 		Position newClubPosition = new Position(position[0], position[1]);
