@@ -85,7 +85,7 @@ public abstract class Map {
 		heroPosition.setXPosition(x);
 		heroPosition.setYPosition(y);
 		hero.setPosition(heroPosition);
-		map[x][y] = Hero.getHeroChar();
+		map[x][y] = hero.getHeroChar(this.lever.isActivated());
 	}
 
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
@@ -113,6 +113,7 @@ public abstract class Map {
 					if (map[i][j] == CHAR_DOOR_CLOSED) {
 						map[i][j] = CHAR_DOOR_OPEN;
 						hero.setLeverState(true);
+						this.lever.activateLever();
 					}
 				}
 			}

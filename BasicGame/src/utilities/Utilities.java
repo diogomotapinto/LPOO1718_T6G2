@@ -50,18 +50,19 @@ public class Utilities {
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
+		// check if there is something down
 		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is an Ogre up
+		// check if there is something up
 		if (posOne.getXPosition() - 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is an Ogre on the left
+		// check if there is something on the left
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() - 1 == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is an Ogre on the right
+		// check if there is something on the right
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() + 1 == posTwo.getYPosition()) {
 			return true;
 		}

@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		OgreMap levelOne = new OgreMap();
-		levelOne.playLevelTwo();
+		levelOne.playLevel();
 	}
 
 }

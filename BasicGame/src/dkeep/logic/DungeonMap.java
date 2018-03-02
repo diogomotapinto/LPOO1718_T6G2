@@ -84,7 +84,7 @@ public final class DungeonMap extends Map implements MapRules {
 	@Override
 	public final void initializeMap() {
 		Position heroPosition = hero.getPosition();
-		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar();
+		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar(this.lever.isActivated());
 	}
 
 	@Override

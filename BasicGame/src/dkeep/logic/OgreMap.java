@@ -29,7 +29,7 @@ public class OgreMap extends Map implements MapRules {
 				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
 						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
 
-				{ WALL_CHAR, Hero.getHeroChar(), CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
 						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR } },
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space", 7, 1);
@@ -56,9 +56,9 @@ public class OgreMap extends Map implements MapRules {
 			super.printMap();
 			super.printLegend();
 			super.moveHero(this.view.getMove());
-			moveClub(hero);
+			moveClub(this.hero);
 			checkLever();
-			map[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = Hero.getHeroChar();
+			map[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
 			for (int i = 0; i < ogreList.size(); i++) {
 				moveOgre(ogreList.get(i));
 			}
@@ -106,7 +106,7 @@ public class OgreMap extends Map implements MapRules {
 		} while (
 
 		map[position[0]][position[1]] == WALL_CHAR || map[position[0]][position[1]] == OGRE_CHAR
-				|| map[position[0]][position[1]] == Hero.getHeroChar()
+				|| map[position[0]][position[1]] == this.hero.getHeroChar(this.lever.isActivated())
 				|| map[position[0]][position[1]] == CHAR_DOOR_CLOSED || map[position[0]][position[1]] == 'S'
 				|| map[position[0]][position[1]] == Club.getClubChar()
 		// clubPosition.equals(ogre.getPosition()) ||
@@ -152,7 +152,7 @@ public class OgreMap extends Map implements MapRules {
 	@Override
 	public boolean checkEndLevel() {
 		// para terminar basta chegar a um dos cantos
-		Position heroPosition = hero.getPosition();
+		Position heroPosition = this.hero.getPosition();
 
 		if (checkWon(heroPosition.getXPosition(), heroPosition.getYPosition())) {
 			System.out.println("\nGanhou o jogo");
@@ -180,7 +180,7 @@ public class OgreMap extends Map implements MapRules {
 		return checkOgreCollision() || checkClubCollision();
 	}
 
-	// corrigido porque se perdia o jogo se passar numa posição adjacente ao ogre
+	// corrigido porque se perdia o jogo se passar numa posiï¿½ï¿½o adjacente ao ogre
 	// mas com ele atordoado
 	private final boolean checkOgreCollision() {
 		for (int i = 0; i < ogreList.size(); i++) {
@@ -192,11 +192,11 @@ public class OgreMap extends Map implements MapRules {
 		return false;
 	}
 
-	// corrigido porque se perdia o jogo se passar numa posição adjacente ao ogre
+	// corrigido porque se perdia o jogo se passar numa posiï¿½ï¿½o adjacente ao ogre
 	// mas com ele atordoado
 	private final boolean checkClubCollision() {
 		for (int i = 0; i < ogreList.size(); i++) {
-			if (!ogre.getStunned() && Utilities.checkAdjacentCollision(this.hero.getPosition(),
+			if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
 					this.ogreList.get(i).getClub().getPosition())) {
 				return true;
 			}
@@ -211,7 +211,7 @@ public class OgreMap extends Map implements MapRules {
 		}
 		moveClub(hero);
 		Position heroPosition = hero.getPosition();
-		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getHeroChar();
+		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
 
 	}
 

@@ -24,8 +24,15 @@ public final class Hero extends ClubHolder {
 		this.lever = leverState;
 	}
 
-	public final static char getHeroChar() {
-		return CHAR_HERO;
+	public final char getHeroChar(boolean leverState) {
+	
+		if(!leverState) {
+			return CHAR_HERO;
+		}else
+		{
+			return CHAR_HERO_KEY;
+		}
+		
 	}
 
 	public final void setHeroChar(char ch) {
