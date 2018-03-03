@@ -84,13 +84,13 @@ public class OgreMap extends Map implements MapRules {
 
 		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = CHAR_BLANK_SPACE;
 
-		int position[];
+		Position newPosition;
 		do {
-			position = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
-		} while (map[position[0]][position[1]] != CHAR_BLANK_SPACE);
+			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
+		} while (map[newPosition.getXPosition()][newPosition.getYPosition()] != CHAR_BLANK_SPACE);
 
-		Position newOgrePosition = new Position(position[0], position[1]);
-		ogre.setPosition(newOgrePosition);
+		
+		ogre.setPosition(newPosition);
 		ogrePosition = ogre.getPosition();
 		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
 	}
@@ -101,27 +101,16 @@ public class OgreMap extends Map implements MapRules {
 
 		map[clubPosition.getXPosition()][clubPosition.getYPosition()] = CHAR_BLANK_SPACE;
 
-		int position[];
+		Position newClubPosition;
 		do {
-			position = Utilities.getAdjacentPosition(clubHolder.getPosition().getXPosition(),
+			newClubPosition = Utilities.getAdjacentPosition(clubHolder.getPosition().getXPosition(),
 					clubHolder.getPosition().getYPosition());
-		} while (
+		} while ( map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR 
+				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_CLOSED 
+				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == 'S'
+				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Club.getClubChar()
+				||checkValidPosition(newClubPosition));
 
-				map[position[0]][position[1]] == WALL_CHAR 
-				|| map[position[0]][position[1]] == OGRE_CHAR
-				|| map[position[0]][position[1]] == this.hero.getHeroChar(this.lever.isActivated())
-				|| map[position[0]][position[1]] == CHAR_DOOR_CLOSED || map[position[0]][position[1]] == 'S'
-				|| map[position[0]][position[1]] == Club.getClubChar()
-
-				// clubPosition.equals(ogre.getPosition()) ||
-				// clubPosition.equals(hero.getPosition())
-				// || map[position[0]][position[1]] == WALL_CHAR ||
-				// map[position[0]][position[1]] == this.CHAR_DOOR_CLOSED
-				// || map[position[0]][position[1]] == this.CHAR_DOOR_OPEN
-				);
-
-		// ogre.getMyClub().setPosition(clubPosition);
-		Position newClubPosition = new Position(position[0], position[1]);
 		clubHolder.getClub().setPosition(newClubPosition);
 
 		if (newClubPosition.getXPosition() == 1 && newClubPosition.getYPosition() == 7) {
@@ -133,9 +122,23 @@ public class OgreMap extends Map implements MapRules {
 			if (!this.lever.isActivated()) {
 				map[1][7] = Lever.getLeverChar();
 			}
+		}
+	}
 
+	private boolean checkValidPosition(Position position) {
+
+		for(int i = 0; i < this.ogreList.size(); i++){
+			if(position.equals(this.ogreList.get(i).getPosition()))
+			{
+				return true;
+			}
 		}
 
+		if(position.equals(this.hero.getPosition())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private void checkIfStunned() {

@@ -14,7 +14,7 @@ public class Utilities {
 
 	}
 
-	public static final int[] getAdjacentPosition(int xPosition, int yPosition) {
+	public static final Position getAdjacentPosition(int xPosition, int yPosition) {
 		int[] position = { xPosition, yPosition };
 		Random random = new Random();
 		byte lowerBound = 1;
@@ -37,7 +37,7 @@ public class Utilities {
 		default:
 			break;
 		}
-		return position;
+		return new Position(position[0], position[1]);
 
 	}
 

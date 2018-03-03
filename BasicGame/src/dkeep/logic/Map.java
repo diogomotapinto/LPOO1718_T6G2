@@ -91,7 +91,8 @@ public abstract class Map {
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
 	private boolean checkMoveHero(int x, int y) {
-		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE ||map[x][y] == hero.getClub().getClubChar() || map[x][y] == CHAR_DOOR_OPEN);
+		hero.getClub();
+		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE ||map[x][y] == Club.getClubChar() || map[x][y] == CHAR_DOOR_OPEN);
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
