@@ -25,18 +25,24 @@ public class View {
 		return move.charAt(0);
 	}
 
-	public void printMatrix(char[][] map) {
+	// implementar um toString na classe Dungeon
+	public void printGameInfo(char[][] map, String legend) {
+		printMatrix(map);
+		printString(legend);
+	}
+
+	private void printMatrix(char[][] map) {
 		System.out.println();
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				printString(" " + map[i][j]);
+				System.out.print(" " + map[i][j]);
 			}
 			System.out.println();
 		}
 	}
 
-	public void printString(String s) {
-		System.out.print(s);
+	private void printString(String s) {
+		System.out.println(s);
 	}
 
 }

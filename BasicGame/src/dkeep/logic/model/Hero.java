@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public final class Hero extends ClubHolder {
 
@@ -7,8 +7,12 @@ public final class Hero extends ClubHolder {
 
 	private boolean lever;
 
+	// ver se se altera este caracter, e se sim discutir em grupo
+	private char heroChar;
+
 	public Hero(int xPos, int yPos) {
 		super(xPos, yPos);
+		heroChar = 'H';
 		lever = false;
 	}
 
@@ -32,6 +36,7 @@ public final class Hero extends ClubHolder {
 	}
 
 	public final void setHeroChar(char ch) {
+		heroChar = ch;
 	}
 
 }

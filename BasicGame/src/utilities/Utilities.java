@@ -2,7 +2,7 @@ package utilities;
 
 import java.util.Random;
 
-import dkeep.logic.Position;
+import dkeep.logic.model.Position;
 
 public class Utilities {
 	private static final byte MOVE_UP = 1;
@@ -37,7 +37,7 @@ public class Utilities {
 		default:
 			break;
 		}
-		return new Position(position[0], position[1]);
+		return new Position(position[0],position[1]); 
 
 	}
 
@@ -50,19 +50,18 @@ public class Utilities {
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
-		// check if there is something down
 		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is something up
+		// check if there is an Ogre up
 		if (posOne.getXPosition() - 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is something on the left
+		// check if there is an Ogre on the left
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() - 1 == posTwo.getYPosition()) {
 			return true;
 		}
-		// check if there is something on the right
+		// check if there is an Ogre on the right
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() + 1 == posTwo.getYPosition()) {
 			return true;
 		}

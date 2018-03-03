@@ -1,8 +1,14 @@
 package dkeep.logic;
 
+import dkeep.logic.model.Drunken;
+import dkeep.logic.model.Guard;
+import dkeep.logic.model.Lever;
+import dkeep.logic.model.Position;
+import dkeep.logic.model.Rookie;
+import dkeep.logic.model.Suspicious;
 import utilities.Utilities;
 
-public final class DungeonMap extends Map implements MapRules {
+public final class DungeonMap extends Map {
 
 	private Guard guard;
 	private static final int route[][] = new int[][] { { 1, 8 }, { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 },
@@ -31,36 +37,22 @@ public final class DungeonMap extends Map implements MapRules {
 						WALL_CHAR, Lever.getLeverChar(), CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
-				"\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space", 1, 1);
-		createGuard();
-	}
-
-	private final void createGuard() {
-		switch (Utilities.generateRandomNumber(0, 2)) {
-		case 0:
-			guard = new Rookie(1, 8, route);
-			break;
-		case 1:
-			guard = new Drunken(1, 8, route);
-			break;
-		case 2:
-			guard = new Suspicious(1, 8, route);
-			break;
-		}
-
+				"\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space", "Nivel 1!!!", 1,
+				1);
+		generateFoes();
+		initializeMap();
 	}
 
 	@Override
-	public final void playLevel() {
-		printHeader();
-		initializeMap();
-		do {
-			super.printMap();
-			super.printLegend();
-			super.moveHero(this.view.getMove());
-			super.checkLever();
-			this.moveGuard();
-		} while (!checkEndLevel());
+	public final void play(char move) {
+		// printHeader();
+		// do {
+		// super.printMap();
+		// super.printLegend();
+		super.moveHero(move);
+		super.checkLever();
+		this.moveGuard();
+		// } while (!checkEndLevel());
 
 		// printar estado final do mapa deste nivel
 		// super.printMap();
@@ -75,10 +67,47 @@ public final class DungeonMap extends Map implements MapRules {
 	}
 
 	@Override
-	public final void printHeader() {
-		view.printString("Nivel 1!!!");
-		System.out.println(guard);
-		// view.printCharacter(guard);
+	public void generateFoes() {
+		switch (Utilities.generateRandomNumber(0, 2)) {
+		case 0:
+			guard = new Rookie(1, 8, route);
+			break;
+		case 1:
+			guard = new Drunken(1, 8, route);
+			break;
+		case 2:
+		default:
+			guard = new Suspicious(1, 8, route);
+			break;
+
+		}
+	}
+
+	@Override
+	public final boolean checkEndLevel() {
+		Position heroPosition = hero.getPosition();
+		int xPosition = heroPosition.getXPosition();
+		int yPosition = heroPosition.getYPosition();
+
+		if (checkWon(xPosition, yPosition)) {
+			System.out.println("\nProximo Nivel!!!\n");
+			return true;
+		}
+
+		if (checkLost(xPosition, yPosition)) {
+			System.out.print("\nPerdeu jogo");
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public final boolean checkLost(int x, int y) {
+		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
+		// argumento (heroi) sao as do guarda
+		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
+
 	}
 
 	@Override
@@ -88,38 +117,8 @@ public final class DungeonMap extends Map implements MapRules {
 	}
 
 	@Override
-	public final boolean checkEndLevel() {
-		Position heroPosition = hero.getPosition();
-		int xPosition = heroPosition.getXPosition();
-		int yPosition = heroPosition.getYPosition();
-		if (checkWon(xPosition, yPosition)) {
-			System.out.println("\nProximo Nivel!!!\n");
-			return true;
-		}
-
-		if (checkLost(xPosition, yPosition)) {
-			printMap();
-			System.out.print("\nPerdeu jogo");
-			super.gameState = false;
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public final boolean checkWon(int x, int y) {
-		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
-		// futuro poder escalar o sistema
-		return y == 0;
-	}
-
-	@Override
-	public final boolean checkLost(int x, int y) {
-		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
-		// argumento (heroi) sao as do guarda
-		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
-
+	public Map nextLevel() {
+		return new OgreMap();
 	}
 
 }

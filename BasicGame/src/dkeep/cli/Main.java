@@ -1,13 +1,14 @@
 package dkeep.cli;
 
+import dkeep.logic.Controller;
 import dkeep.logic.OgreMap;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		OgreMap levelOne = new OgreMap();
-		levelOne.playLevel();
+		Controller c = new Controller();
+		c.run();
 	}
 
 }

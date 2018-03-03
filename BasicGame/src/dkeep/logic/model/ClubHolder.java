@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public class ClubHolder extends Character {
 

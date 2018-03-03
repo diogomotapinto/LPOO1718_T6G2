@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public final class Rookie extends Guard {
 

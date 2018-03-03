@@ -1,8 +1,11 @@
 package dkeep.logic;
 
-import dkeep.cli.View;
+import dkeep.logic.model.Club;
+import dkeep.logic.model.Hero;
+import dkeep.logic.model.Lever;
+import dkeep.logic.model.Position;
 
-public abstract class Map {
+public abstract class Map implements MapRules {
 
 	// mudar variaveis para classes respetivas
 	private static final char CHAR_MOVE_UP = 'w';
@@ -17,35 +20,21 @@ public abstract class Map {
 	protected static final char CHAR_BLANK_SPACE = ' ';
 
 	private final String legend;
-	protected final View view;
+	private final String header;
 
 	protected Lever lever;
 	protected final Hero hero;
 	protected final char[][] map;
-	protected boolean gameState; // fazer tipo Enum
 
-	protected Map(char[][] map, String legend, int heroXPosition, int heroYPosition) {
+	protected Map(char[][] map, String legend, String header, int heroXPosition, int heroYPosition) {
 		this.map = map;
 		this.legend = legend;
-		gameState = true;
+		this.header = header;
 		hero = new Hero(heroXPosition, heroYPosition);
 		this.lever = new Lever(8, 8);
-		this.view = new View();
 	}
 
-	public abstract void playLevel();
-
-	// deve.se tirar este metodo, substituir por um get q passa por argumento para o
-	// controller e o the view printa
-	protected final void printMap() {
-		view.printMatrix(map);
-	}
-
-	// deve.se tirar este metodo, substituir por um get q passa por argumento para o
-	// controller e o the view printa
-	protected final void printLegend() {
-		view.printString(legend);
-	}
+	public abstract Map nextLevel();
 
 	protected final void moveHero(char move) {
 		Position p = hero.getPosition();
@@ -91,8 +80,8 @@ public abstract class Map {
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
 	private boolean checkMoveHero(int x, int y) {
-		hero.getClub();
-		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE ||map[x][y] == Club.getClubChar() || map[x][y] == CHAR_DOOR_OPEN);
+		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE || map[x][y] == Club.getClubChar()
+				|| map[x][y] == CHAR_DOOR_OPEN);
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
@@ -113,6 +102,20 @@ public abstract class Map {
 				}
 			}
 		}
+	}
+
+	protected final boolean checkWon(int x, int y) {
+		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
+		// futuro poder escalar o sistema
+		return this.hero.getLeverState() && y == 0;// ogre map
+	}
+
+	public final String getLegend() {
+		return legend;
+	}
+
+	public final char[][] getMap() {
+		return map;
 	}
 
 }

@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public final class Ogre extends ClubHolder {
 	private static final int STUN_COUNTER = 2;

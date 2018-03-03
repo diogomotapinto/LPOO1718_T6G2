@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public class Lever {
 	protected static final char CHAR_LEVER = 'k';

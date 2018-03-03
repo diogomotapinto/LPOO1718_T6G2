@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public abstract class Guard extends Character {
 
@@ -12,7 +12,7 @@ public abstract class Guard extends Character {
 		index = 0;
 	}
 
-	protected abstract void moveToNextPosition();
+	public abstract void moveToNextPosition();
 
 	public final static char getGuardChar() {
 		return GUARD_CHAR;

@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic.model;
 
 public abstract class Character {
 	protected Position position;
@@ -8,7 +8,7 @@ public abstract class Character {
 
 	}
 
-	protected final Position getPosition() {
+	public final Position getPosition() {
 		return position;
 	}
 
