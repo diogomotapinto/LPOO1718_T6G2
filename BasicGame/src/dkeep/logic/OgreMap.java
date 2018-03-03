@@ -71,16 +71,8 @@ public class OgreMap extends Map implements MapRules {
 
 	private final void moveOgre(Ogre ogre) {
 		Position ogrePosition = ogre.getPosition();
-
-		if (ogre.getStunned()) {
-			if (ogre.getStunCounter() > 0) {
-				ogre.stunCounter();
-				map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '8';
-				return;
-			} else {
-				ogre.setStunned(false);
-			}
-		}
+		
+		isStunned(ogre, ogrePosition);
 
 		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = CHAR_BLANK_SPACE;
 
@@ -89,10 +81,24 @@ public class OgreMap extends Map implements MapRules {
 			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
 		} while (map[newPosition.getXPosition()][newPosition.getYPosition()] != CHAR_BLANK_SPACE);
 
-		
 		ogre.setPosition(newPosition);
 		ogrePosition = ogre.getPosition();
 		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
+	}
+	
+	private final boolean isStunned(Ogre ogre, Position ogrePosition)
+	{
+		if (ogre.getStunned()) {
+			if (ogre.getStunCounter() > 0) {
+				ogre.stunCounter();
+				map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '8';
+				return true;
+			} else {
+				ogre.setStunned(false);
+				return false;
+			}
+		}
+		return false;
 	}
 
 	// qnd recebes o clubHolder, utilizando
@@ -107,7 +113,7 @@ public class OgreMap extends Map implements MapRules {
 					clubHolder.getPosition().getYPosition());
 		} while ( map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR 
 				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_CLOSED 
-				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == 'S'
+				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_OPEN
 				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Club.getClubChar()
 				||checkValidPosition(newClubPosition));
 
@@ -124,7 +130,7 @@ public class OgreMap extends Map implements MapRules {
 			}
 		}
 	}
-
+	
 	private boolean checkValidPosition(Position position) {
 
 		for(int i = 0; i < this.ogreList.size(); i++){
