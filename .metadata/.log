@@ -1258,3 +1258,26 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.core.net 1 0 2018-03-02 10:21:16.211
 !MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2018-03-02 17:42:30.435 -----------------------------------------------
+eclipse.buildId=4.7.2.M20171130-0510
+java.version=1.8.0_162
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=pt_PT
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/diogomotapinto/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/diogomotapinto/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2018-03-02 17:42:33.908
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.pitest.pitclipse.core 1 0 2018-03-02 17:51:57.855
+!MESSAGE Classpath: [/Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/resources.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/rt.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/jsse.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/jce.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/charsets.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/jfr.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/sunec.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/nashorn.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/cldrdata.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/jfxrt.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/dnsns.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/localedata.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/jaccess.jar, /Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/ext/zipfs.jar, /System/Library/Java/Extensions/MRJToolkit.jar, /Users/diogomotapinto/git/LPOO1718_T6G2/BasicGame/bin, /Users/diogomotapinto/.p2/pool/plugins/org.junit.jupiter.api_5.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.jupiter.engine_5.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.jupiter.params_5.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.platform.commons_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.platform.engine_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.platform.launcher_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.platform.runner_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.platform.suite.api_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit.vintage.engine_4.12.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.opentest4j_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.apiguardian_1.0.0.v20170910-2246.jar, /Users/diogomotapinto/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar, /Users/diogomotapinto/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar, /Users/diogomotapinto/.p2/pool/plugins/org.pitest.command-line-osgi_1.1.9.jar, /Users/diogomotapinto/.p2/pool/plugins/org.pitest.html-report-osgi_1.1.9.jar, /Users/diogomotapinto/.p2/pool/plugins/org.pitest.osgi_1.1.9.jar, /Users/diogomotapinto/.p2/pool/plugins/org.pitest.pitrunner_1.1.6.201607050705.jar, /Users/diogomotapinto/.p2/pool/plugins/org.pitest.guava-shade-osgi_18.0.0.jar]
+!SESSION 2018-03-03 09:24:38.192 -----------------------------------------------
+eclipse.buildId=4.7.2.M20171130-0510
+java.version=1.8.0_162
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=pt_PT
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/diogomotapinto/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/diogomotapinto/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2018-03-03 09:24:41.802
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

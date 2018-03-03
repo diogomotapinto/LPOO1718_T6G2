@@ -61,10 +61,11 @@ public class OgreMap extends Map implements MapRules {
 			moveClub(this.hero);
 			checkLever();
 			map[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
+			checkIfStunned();
 			for (int i = 0; i < ogreList.size(); i++) {
 				moveOgre(ogreList.get(i));
+				moveClub(ogreList.get(i));
 			}
-			checkIfStunned();
 		} while (!checkEndLevel());
 	}
 
@@ -92,7 +93,6 @@ public class OgreMap extends Map implements MapRules {
 		ogre.setPosition(newOgrePosition);
 		ogrePosition = ogre.getPosition();
 		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
-		moveClub(ogre);
 	}
 
 	// qnd recebes o clubHolder, utilizando
@@ -150,7 +150,7 @@ public class OgreMap extends Map implements MapRules {
 	@Override
 	public void printHeader() {
 		view.printString("Nivel 2!!!");
-		view.printString("Numero de ogres= " + this.ogreList.size());
+		view.printString("\nNumero de ogres= " + this.ogreList.size());
 	}
 
 	@Override
@@ -212,6 +212,8 @@ public class OgreMap extends Map implements MapRules {
 	public void initializeMap() {
 		for (int i = 0; i < ogreList.size(); i++) {
 			moveOgre(ogreList.get(i));
+			moveClub(ogreList.get(i));
+			
 		}
 		moveClub(hero);
 		Position heroPosition = hero.getPosition();
