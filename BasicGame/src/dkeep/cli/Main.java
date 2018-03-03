@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Controller c = new Controller();
+		Controller c = Controller.getInstance();
 		c.run();
 	}
 

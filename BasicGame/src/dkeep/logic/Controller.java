@@ -4,14 +4,20 @@ import dkeep.cli.View;
 
 public class Controller {
 
+	private static final Controller INSTANCE = new Controller();
+
 	private final View view;
 	private StateMachine stateMachine;
 	private Map currentMap;
 
-	public Controller() {
+	private Controller() {
 		stateMachine = new StateMachine();
 		currentMap = new DungeonMap();
 		this.view = new View();
+	}
+
+	public static Controller getInstance() {
+		return INSTANCE;
 	}
 
 	public void run() {
@@ -48,17 +54,6 @@ public class Controller {
 		} while (!advanceLevel(currentMap.checkEndLevel()));
 		stateMachine.advanceState(StateMachine.Event.WON);
 	}
-
-	// private void runStateGameLost() {
-	// }
-	//
-	// private void runStateGameWon() {
-	// // TODO Auto-generated method stub
-	// }
-	//
-	// private void runStateGameClose() {
-	// // TODO Auto-generated method stub
-	// }
 
 	private boolean advanceLevel(boolean endLevel) {
 		if (!endLevel) {
