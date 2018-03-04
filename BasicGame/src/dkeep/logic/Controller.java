@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import dkeep.cli.View;
 
-public class Controller {
+public final class Controller {
 
 	private static final Controller INSTANCE = new Controller();
 
@@ -52,18 +52,25 @@ public class Controller {
 			currentMap.play(view.getMove());
 			view.printGameInfo(currentMap.getMap(), currentMap.getLegend());
 		} while (!advanceLevel(currentMap.checkEndLevel()));
-		stateMachine.advanceState(StateMachine.Event.WON);
 	}
 
-	private boolean advanceLevel(boolean endLevel) {
-		if (!endLevel) {
-			return false;
-		}
-
-		if (currentMap.nextLevel() == null) {
+	private boolean advanceLevel(byte endLevel) {
+		switch (endLevel) {
+		case -1:
+			stateMachine.advanceState(StateMachine.Event.OVER);
 			return true;
-		} else {
-			currentMap = currentMap.nextLevel();
+		case 0:
+			return false;
+		case 1:
+			if (currentMap.nextLevel() == null) {
+				stateMachine.advanceState(StateMachine.Event.WON);
+				return true;
+			} else {
+				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
+				currentMap = currentMap.nextLevel();
+				return false;
+			}
+		default:
 			return false;
 		}
 	}

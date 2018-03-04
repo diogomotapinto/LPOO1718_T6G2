@@ -9,7 +9,7 @@ import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 import utilities.Utilities;
 
-public class OgreMap extends Map {
+public final class OgreMap extends Map {
 
 	private static final char OGRE_CHAR = 'O';
 	private static final char CLUB_CHAR = '*';
@@ -190,22 +190,22 @@ public class OgreMap extends Map {
 	}
 
 	@Override
-	public boolean checkEndLevel() {
+	public byte checkEndLevel() {
 		// para terminar basta chegar a um dos cantos
 		Position heroPosition = this.hero.getPosition();
 
 		if (checkWon(heroPosition.getXPosition(), heroPosition.getYPosition())) {
 			System.out.println("\nGanhou o jogo");
-			return true;
+			return 1;
 		}
 
 		// tem de se fazer refactor do codigo
 		if (checkLost(0, 0)) {
 			System.out.print("\nPerdeu jogo");
-			return true;
+			return -1;
 		}
 
-		return false;
+		return 0;
 	}
 
 	@Override

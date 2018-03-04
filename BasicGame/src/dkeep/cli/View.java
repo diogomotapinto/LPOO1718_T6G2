@@ -2,7 +2,7 @@ package dkeep.cli;
 
 import java.util.Scanner;
 
-public class View {
+public final class View {
 
 	public View() {
 	}

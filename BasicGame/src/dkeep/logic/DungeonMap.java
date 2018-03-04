@@ -84,22 +84,22 @@ public final class DungeonMap extends Map {
 	}
 
 	@Override
-	public final boolean checkEndLevel() {
+	public final byte checkEndLevel() {
 		Position heroPosition = hero.getPosition();
 		int xPosition = heroPosition.getXPosition();
 		int yPosition = heroPosition.getYPosition();
 
 		if (checkWon(xPosition, yPosition)) {
 			System.out.println("\nProximo Nivel!!!\n");
-			return true;
+			return 1;
 		}
 
 		if (checkLost(xPosition, yPosition)) {
 			System.out.print("\nPerdeu jogo");
-			return true;
+			return -1;
 		}
 
-		return false;
+		return 0;
 	}
 
 	@Override

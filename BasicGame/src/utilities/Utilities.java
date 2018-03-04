@@ -4,14 +4,13 @@ import java.util.Random;
 
 import dkeep.logic.model.Position;
 
-public class Utilities {
+public final class Utilities {
 	private static final byte MOVE_UP = 1;
 	private static final byte MOVE_DOWN = 2;
 	private static final byte MOVE_RIGHT = 3;
 	private static final byte MOVE_LEFT = 4;
 
 	private Utilities() {
-
 	}
 
 	public static final Position getAdjacentPosition(int xPosition, int yPosition) {
@@ -37,7 +36,7 @@ public class Utilities {
 		default:
 			break;
 		}
-		return new Position(position[0],position[1]); 
+		return new Position(position[0], position[1]);
 
 	}
 

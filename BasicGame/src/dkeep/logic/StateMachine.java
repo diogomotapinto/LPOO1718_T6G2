@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public class StateMachine {
+public final class StateMachine {
 
 	private State gameState;
 
