@@ -40,8 +40,8 @@ public final class OgreMap extends Map {
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
 				"Nivel 2!!!", 7, 1);
 
-		// view.printString("\nNumero de ogres= " + this.ogreList.size());
 		generateFoes();
+		super.header = "\nNumero de ogres= " + ogreList.size();
 		initializeMap();
 	}
 
@@ -50,23 +50,23 @@ public final class OgreMap extends Map {
 
 		isStunned(ogre, ogrePosition);
 
-		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = CHAR_BLANK_SPACE;
+		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = CHAR_BLANK_SPACE;
 
 		Position newPosition;
 		do {
 			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
-		} while (map[newPosition.getXPosition()][newPosition.getYPosition()] != CHAR_BLANK_SPACE);
+		} while (playMap[newPosition.getXPosition()][newPosition.getYPosition()] != CHAR_BLANK_SPACE);
 
 		ogre.setPosition(newPosition);
 		ogrePosition = ogre.getPosition();
-		map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
+		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
 	}
 
 	private final boolean isStunned(Ogre ogre, Position ogrePosition) {
 		if (ogre.getStunned()) {
 			if (ogre.getStunCounter() > 0) {
 				ogre.stunCounter();
-				map[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '8';
+				playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '8';
 				return true;
 			} else {
 				ogre.setStunned(false);
@@ -79,28 +79,28 @@ public final class OgreMap extends Map {
 	private final void moveClub(ClubHolder clubHolder) {
 		Position clubPosition = clubHolder.getClub().getPosition();
 
-		map[clubPosition.getXPosition()][clubPosition.getYPosition()] = CHAR_BLANK_SPACE;
+		playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = CHAR_BLANK_SPACE;
 
 		Position newClubPosition;
 		do {
 			newClubPosition = Utilities.getAdjacentPosition(clubHolder.getPosition().getXPosition(),
 					clubHolder.getPosition().getYPosition());
-		} while (map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
-				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_CLOSED
-				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_OPEN
-				|| map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Club.getClubChar()
+		} while (playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
+				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_CLOSED
+				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_OPEN
+				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Club.getClubChar()
 				|| checkValidPosition(newClubPosition));
 
 		clubHolder.getClub().setPosition(newClubPosition);
 
 		if (newClubPosition.getXPosition() == 1 && newClubPosition.getYPosition() == 7) {
 			if (!this.lever.isActivated()) {
-				map[1][7] = '$';
+				playMap[1][7] = '$';
 			}
 		} else {
-			map[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
+			playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
 			if (!this.lever.isActivated()) {
-				map[1][7] = Lever.getLeverChar();
+				playMap[1][7] = Lever.getLeverChar();
 			}
 		}
 	}
@@ -108,12 +108,13 @@ public final class OgreMap extends Map {
 	private boolean checkValidPosition(Position position) {
 
 		for (int i = 0; i < this.ogreList.size(); i++) {
-			if (position.equals(this.ogreList.get(i).getPosition())) {
+			if (position.equals(this.ogreList.get(i).getPosition())
+					&& position.hashCode() == this.ogreList.get(i).getPosition().hashCode()) {
 				return true;
 			}
 		}
 
-		if (position.equals(this.hero.getPosition())) {
+		if (position.equals(this.hero.getPosition()) && position.hashCode() == this.hero.getPosition().hashCode()) {
 			return true;
 		}
 
@@ -156,23 +157,19 @@ public final class OgreMap extends Map {
 	}
 
 	@Override
-	public void play(char move) {
-		// do {
-		super.moveHero(move);
-		moveClub(this.hero);
-		super.checkLever();
-		map[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero
-				.getHeroChar(this.lever.isActivated());
-		checkIfStunned();
+	protected void initializeMap() {
 		for (int i = 0; i < ogreList.size(); i++) {
 			moveOgre(ogreList.get(i));
 			moveClub(ogreList.get(i));
+
 		}
-		// } while (!checkEndLevel());
+		moveClub(hero);
+		Position heroPosition = hero.getPosition();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
 	}
 
 	@Override
-	public void generateFoes() {
+	protected void generateFoes() {
 		ogreList = new ArrayList<Ogre>();
 		int ogresNumber = Utilities.generateRandomNumber(1, 1);
 		Position leverPos = new Position(1, 7);
@@ -184,8 +181,27 @@ public final class OgreMap extends Map {
 				x = Utilities.generateRandomNumber(1, 7);
 				y = Utilities.generateRandomNumber(1, 7);
 				ogre = new Ogre(x, y);
-			} while (map[x][y] != CHAR_BLANK_SPACE);
+			} while (playMap[x][y] != CHAR_BLANK_SPACE);
 			ogreList.add(ogre);
+		}
+	}
+
+	@Override
+	protected boolean checkLost(int x, int y) {
+		return checkOgreCollision() || checkClubCollision();
+	}
+
+	@Override
+	public void play(char move) {
+		super.moveHero(move);
+		moveClub(this.hero);
+		super.checkLever();
+		playMap[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero
+				.getHeroChar(this.lever.isActivated());
+		checkIfStunned();
+		for (int i = 0; i < ogreList.size(); i++) {
+			moveOgre(ogreList.get(i));
+			moveClub(ogreList.get(i));
 		}
 	}
 
@@ -194,36 +210,16 @@ public final class OgreMap extends Map {
 		// para terminar basta chegar a um dos cantos
 		Position heroPosition = this.hero.getPosition();
 
-		if (checkWon(heroPosition.getXPosition(), heroPosition.getYPosition())) {
-			System.out.println("\nGanhou o jogo");
+		if (checkWon(heroPosition.getYPosition())) {
 			return 1;
 		}
 
 		// tem de se fazer refactor do codigo
 		if (checkLost(0, 0)) {
-			System.out.print("\nPerdeu jogo");
 			return -1;
 		}
 
 		return 0;
-	}
-
-	@Override
-	public boolean checkLost(int x, int y) {
-		return checkOgreCollision() || checkClubCollision();
-	}
-
-	@Override
-	public void initializeMap() {
-		for (int i = 0; i < ogreList.size(); i++) {
-			moveOgre(ogreList.get(i));
-			moveClub(ogreList.get(i));
-
-		}
-		moveClub(hero);
-		Position heroPosition = hero.getPosition();
-		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
-
 	}
 
 	@Override

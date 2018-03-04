@@ -40,47 +40,57 @@ public final class DungeonMap extends Map {
 				"\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space", "Nivel 1!!!", 1,
 				1);
 		generateFoes();
+		super.header = guard.toString();
 		initializeMap();
-	}
-
-	@Override
-	public final void play(char move) {
-		// printHeader();
-		// do {
-		// super.printMap();
-		// super.printLegend();
-		super.moveHero(move);
-		super.checkLever();
-		this.moveGuard();
-		// } while (!checkEndLevel());
-
-		// printar estado final do mapa deste nivel
-		// super.printMap();
 	}
 
 	private final void moveGuard() {
 		Position guardPosition = guard.getPosition();
-		map[guardPosition.getXPosition()][guardPosition.getYPosition()] = CHAR_BLANK_SPACE;
+		playMap[guardPosition.getXPosition()][guardPosition.getYPosition()] = CHAR_BLANK_SPACE;
 		this.guard.moveToNextPosition();
 		guardPosition = guard.getPosition();
-		map[guardPosition.getXPosition()][guardPosition.getYPosition()] = Guard.getGuardChar();
+		playMap[guardPosition.getXPosition()][guardPosition.getYPosition()] = Guard.getGuardChar();
 	}
 
 	@Override
-	public void generateFoes() {
+	protected final void initializeMap() {
+		Position heroPosition = hero.getPosition();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar(this.lever.isActivated());
+	}
+
+	@Override
+	protected void generateFoes() {
 		switch (Utilities.generateRandomNumber(0, 2)) {
 		case 0:
-			guard = new Rookie(1, 8, route);
+			guard = new Rookie(route);
 			break;
 		case 1:
-			guard = new Drunken(1, 8, route);
+			guard = new Drunken(route);
 			break;
 		case 2:
 		default:
-			guard = new Suspicious(1, 8, route);
+			guard = new Suspicious(route);
 			break;
-
 		}
+	}
+
+	@Override
+	protected final boolean checkLost(int x, int y) {
+		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
+		// argumento (heroi) sao as do guarda
+		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
+	}
+
+	@Override
+	public final void play(char move) {
+		super.moveHero(move);
+		super.checkLever();
+		this.moveGuard();
+	}
+
+	@Override
+	public Map nextLevel() {
+		return new OgreMap();
 	}
 
 	@Override
@@ -89,36 +99,15 @@ public final class DungeonMap extends Map {
 		int xPosition = heroPosition.getXPosition();
 		int yPosition = heroPosition.getYPosition();
 
-		if (checkWon(xPosition, yPosition)) {
-			System.out.println("\nProximo Nivel!!!\n");
+		if (checkWon(yPosition)) {
 			return 1;
 		}
 
 		if (checkLost(xPosition, yPosition)) {
-			System.out.print("\nPerdeu jogo");
 			return -1;
 		}
 
 		return 0;
-	}
-
-	@Override
-	public final boolean checkLost(int x, int y) {
-		// confirma se posi�oes adjacentes verticais e horizontais as passadas por
-		// argumento (heroi) sao as do guarda
-		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
-
-	}
-
-	@Override
-	public final void initializeMap() {
-		Position heroPosition = hero.getPosition();
-		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar(this.lever.isActivated());
-	}
-
-	@Override
-	public Map nextLevel() {
-		return new OgreMap();
 	}
 
 }

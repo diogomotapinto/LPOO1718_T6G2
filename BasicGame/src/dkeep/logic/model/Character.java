@@ -1,11 +1,10 @@
 package dkeep.logic.model;
 
 public abstract class Character {
-	protected Position position;
+	private Position position;
 
 	public Character(int xPos, int yPos) {
 		position = new Position(xPos, yPos);
-
 	}
 
 	public final Position getPosition() {
@@ -14,6 +13,6 @@ public abstract class Character {
 
 	public void setPosition(Position position) {
 		this.position = position;
-	} 
+	}
 
 }

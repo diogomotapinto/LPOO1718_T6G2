@@ -50,7 +50,6 @@ public final class Position {
 
 		Position otherObj = (Position) obj;
 		return this.xPosition == otherObj.getXPosition() && this.yPosition == otherObj.getYPosition();
-
 	}
 
 }

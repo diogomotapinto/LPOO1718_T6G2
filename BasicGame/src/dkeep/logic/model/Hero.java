@@ -2,17 +2,12 @@ package dkeep.logic.model;
 
 public final class Hero extends ClubHolder {
 
-	protected static final char CHAR_HERO = 'H';
-	protected static final char CHAR_HERO_KEY = 'A';
-
+	private static final char CHAR_HERO = 'H';
+	private static final char CHAR_HERO_KEY = 'A';
 	private boolean lever;
-
-	// ver se se altera este caracter, e se sim discutir em grupo
-	private char heroChar;
 
 	public Hero(int xPos, int yPos) {
 		super(xPos, yPos);
-		heroChar = 'H';
 		lever = false;
 	}
 
@@ -20,23 +15,16 @@ public final class Hero extends ClubHolder {
 		return lever;
 	}
 
-	public final void setLeverState(boolean leverState) {
-		this.lever = leverState;
+	public final void setLeverState(boolean lever) {
+		this.lever = lever;
 	}
 
 	public final char getHeroChar(boolean leverState) {
-	
-		if(!leverState) {
+		if (!leverState) {
 			return CHAR_HERO;
-		}else
-		{
+		} else {
 			return CHAR_HERO_KEY;
 		}
-		
-	}
-
-	public final void setHeroChar(char ch) {
-		heroChar = ch;
 	}
 
 }

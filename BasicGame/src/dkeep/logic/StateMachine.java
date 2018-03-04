@@ -55,6 +55,8 @@ public final class StateMachine {
 				this.gameState = State.GAME_PLAYING;
 			}
 			break;
+		case GAME_CLOSE:
+			break;
 		}
 	}
 

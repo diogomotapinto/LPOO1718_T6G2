@@ -2,8 +2,8 @@ package dkeep.logic.model;
 
 public final class Rookie extends Guard {
 
-	public Rookie(int xPos, int yPos, int[][] route) {
-		super(xPos, yPos, route);
+	public Rookie(int[][] route) {
+		super(route);
 	}
 
 	public final void moveToNextPosition() {

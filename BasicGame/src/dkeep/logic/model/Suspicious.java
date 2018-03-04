@@ -6,8 +6,8 @@ public final class Suspicious extends Guard {
 
 	private boolean direction;
 
-	public Suspicious(int xPos, int yPos, int[][] route) {
-		super(xPos, yPos, route);
+	public Suspicious(int[][] route) {
+		super(route);
 		direction = true;
 	}
 

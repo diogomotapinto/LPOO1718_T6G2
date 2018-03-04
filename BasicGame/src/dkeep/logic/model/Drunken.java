@@ -6,8 +6,8 @@ public final class Drunken extends Guard {
 
 	private boolean sleep;
 
-	public Drunken(int xPos, int yPos, int[][] route) {
-		super(xPos, yPos, route);
+	public Drunken(int[][] route) {
+		super(route);
 		sleep = false;
 	}
 

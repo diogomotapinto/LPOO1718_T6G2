@@ -1,7 +1,6 @@
 package dkeep.cli;
 
 import dkeep.logic.Controller;
-import dkeep.logic.OgreMap;
 
 public final class Main {
 

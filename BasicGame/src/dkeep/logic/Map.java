@@ -5,7 +5,7 @@ import dkeep.logic.model.Hero;
 import dkeep.logic.model.Lever;
 import dkeep.logic.model.Position;
 
-public abstract class Map implements MapRules {
+public abstract class Map implements PlayMap {
 
 	// mudar variaveis para classes respetivas
 	private static final char CHAR_MOVE_UP = 'w';
@@ -20,21 +20,27 @@ public abstract class Map implements MapRules {
 	protected static final char CHAR_BLANK_SPACE = ' ';
 
 	private final String legend;
-	private final String header;
+	protected String header;
 
-	protected Lever lever;
+	protected final Lever lever;
 	protected final Hero hero;
-	protected final char[][] map;
+	protected final char[][] playMap;
 
-	protected Map(char[][] map, String legend, String header, int heroXPosition, int heroYPosition) {
-		this.map = map;
+	protected Map(char[][] playMap, String legend, String header, int heroXPosition, int heroYPosition) {
+		this.playMap = playMap;
 		this.legend = legend;
 		this.header = header;
 		hero = new Hero(heroXPosition, heroYPosition);
 		this.lever = new Lever(8, 8);
 	}
 
-	public abstract Map nextLevel();
+	/* Abstract Methods to be implemented in subclasses */
+	protected abstract void initializeMap();
+
+	protected abstract void generateFoes();
+
+	protected abstract boolean checkLost(int x, int y);
+	/* End of Abstract Methods */
 
 	protected final void moveHero(char move) {
 		Position p = hero.getPosition();
@@ -68,20 +74,20 @@ public abstract class Map implements MapRules {
 
 	}
 
-	private void moveHero(int x, int y) {
-		Position heroPosition = hero.getPosition();
-		map[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
-		heroPosition.setXPosition(x);
-		heroPosition.setYPosition(y);
-		hero.setPosition(heroPosition);
-		map[x][y] = hero.getHeroChar(this.lever.isActivated());
-	}
-
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
 	private boolean checkMoveHero(int x, int y) {
-		return (map[x][y] == Lever.getLeverChar() || map[x][y] == CHAR_BLANK_SPACE || map[x][y] == Club.getClubChar()
-				|| map[x][y] == CHAR_DOOR_OPEN);
+		return (playMap[x][y] == Lever.getLeverChar() || playMap[x][y] == CHAR_BLANK_SPACE
+				|| playMap[x][y] == Club.getClubChar() || playMap[x][y] == CHAR_DOOR_OPEN);
+	}
+
+	private void moveHero(int x, int y) {
+		Position heroPosition = hero.getPosition();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
+		heroPosition.setXPosition(x);
+		heroPosition.setYPosition(y);
+		hero.setPosition(heroPosition);
+		playMap[x][y] = hero.getHeroChar(this.lever.isActivated());
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
@@ -93,10 +99,10 @@ public abstract class Map implements MapRules {
 			lever.activateLever();
 			// criar classe porta com icone porta fechada e porta aberta em vez de usar
 			// coordenadas do map
-			for (int i = 0; i < this.map.length; i++) {
-				for (int j = 0; j < this.map[i].length; j++) {
-					if (map[i][j] == CHAR_DOOR_CLOSED) {
-						map[i][j] = CHAR_DOOR_OPEN;
+			for (int i = 0; i < this.playMap.length; i++) {
+				for (int j = 0; j < this.playMap[i].length; j++) {
+					if (playMap[i][j] == CHAR_DOOR_CLOSED) {
+						playMap[i][j] = CHAR_DOOR_OPEN;
 						hero.setLeverState(true);
 					}
 				}
@@ -104,7 +110,7 @@ public abstract class Map implements MapRules {
 		}
 	}
 
-	protected final boolean checkWon(int x, int y) {
+	protected final boolean checkWon(int y) {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
 		return this.hero.getLeverState() && y == 0;// ogre map
@@ -115,7 +121,11 @@ public abstract class Map implements MapRules {
 	}
 
 	public final char[][] getMap() {
-		return map;
+		return playMap;
+	}
+
+	public final String getHeader() {
+		return header;
 	}
 
 }

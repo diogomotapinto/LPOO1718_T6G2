@@ -7,7 +7,7 @@ public final class Controller {
 	private static final Controller INSTANCE = new Controller();
 
 	private final View view;
-	private StateMachine stateMachine;
+	private final StateMachine stateMachine;
 	private Map currentMap;
 
 	private Controller() {
@@ -27,16 +27,10 @@ public final class Controller {
 				runStateInit();
 			} else if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 				runStateGamePlaying();
-			} else if (stateMachine.getGameState() == StateMachine.State.GAME_LOST) {
-				// runStateGameLost();
-			} else if (stateMachine.getGameState() == StateMachine.State.GAME_WON) {
-				// runStateGameWon();
-			} else if (stateMachine.getGameState() == StateMachine.State.GAME_CLOSE) {
-				// runStateGameClose();
 			}
 
-			// retirar condiçoes a medida que as funcionalidades dentro dos ifs respetivos
-			// forem implementadas
+			// retirar condiçoes de terminação a medida que as funcionalidadaes do estado
+			// respetivod forem implementadas e associadas a cadeia de ifs acima
 		} while (stateMachine.getGameState() != StateMachine.State.GAME_LOST
 				&& stateMachine.getGameState() != StateMachine.State.GAME_WON
 				&& stateMachine.getGameState() != StateMachine.State.GAME_CLOSE);
@@ -47,27 +41,30 @@ public final class Controller {
 	}
 
 	private void runStateGamePlaying() {
-		view.printGameInfo(currentMap.getMap(), currentMap.getLegend());
+		view.printGameInfo(currentMap.getHeader(), currentMap.getMap(), currentMap.getLegend());
 		do {
 			currentMap.play(view.getMove());
-			view.printGameInfo(currentMap.getMap(), currentMap.getLegend());
+			view.printGameInfo(currentMap.getHeader(), currentMap.getMap(), currentMap.getLegend());
 		} while (!advanceLevel(currentMap.checkEndLevel()));
 	}
 
 	private boolean advanceLevel(byte endLevel) {
 		switch (endLevel) {
 		case -1:
+			view.printString("\nPerdeu jogo");
 			stateMachine.advanceState(StateMachine.Event.OVER);
 			return true;
 		case 0:
 			return false;
 		case 1:
+			view.printString("\nProximo Nivel!!!");
 			if (currentMap.nextLevel() == null) {
 				stateMachine.advanceState(StateMachine.Event.WON);
 				return true;
 			} else {
 				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
 				currentMap = currentMap.nextLevel();
+				view.printGameInfo(currentMap.getHeader(), currentMap.getMap(), currentMap.getLegend());
 				return false;
 			}
 		default:

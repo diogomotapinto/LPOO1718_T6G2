@@ -1,6 +1,6 @@
 package dkeep.logic.model;
 
-public class ClubHolder extends Character {
+public abstract class ClubHolder extends Character {
 
 	private Club club;
 
@@ -11,10 +11,6 @@ public class ClubHolder extends Character {
 
 	public final Club getClub() {
 		return club;
-	}
-
-	public final void setClub(Club club) {
-		this.club = club;
 	}
 
 }

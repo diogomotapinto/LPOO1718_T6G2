@@ -42,13 +42,11 @@ public final class Utilities {
 
 	public static final int generateRandomNumber(int lowerBound, int upperBound) {
 		Random random = new Random();
-		int lower_Bound = lowerBound;
-		int upper_Bound = upperBound;
-
-		return random.nextInt((upper_Bound - lower_Bound) + 1) + lower_Bound;
+		return random.nextInt((upperBound - lowerBound) + 1) + lowerBound;
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
+		// check if there is an Ogre down
 		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
 		}

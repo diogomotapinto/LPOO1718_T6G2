@@ -7,14 +7,12 @@ public class Club {
 	public Club(int xPos, int yPos) {
 		position = new Position(xPos, yPos);
 	}
-	
+
 	public static char getClubChar() {
 		return CLUB_CHAR;
 	}
 
-
-	public final Position getPosition()
-	{
+	public final Position getPosition() {
 		return this.position;
 	}
 
