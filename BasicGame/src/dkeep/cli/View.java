@@ -38,9 +38,9 @@ public final class View {
 		printString("");
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				printString(" " + map[i][j]);
+				System.out.print(" " + map[i][j]);
 			}
-			printString("");
+			System.out.println("");
 		}
 	}
 
