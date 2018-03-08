@@ -52,4 +52,13 @@ public final class Position {
 		return this.xPosition == otherObj.getXPosition() && this.yPosition == otherObj.getYPosition();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("xPosition= ");
+		s.append(xPosition);
+		s.append(" yPosition= ");
+		s.append(yPosition);
+		return s.toString();
+	}
 }

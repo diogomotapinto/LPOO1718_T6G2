@@ -55,11 +55,26 @@ public final class OgreMap extends Map {
 		Position newPosition;
 		do {
 			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
-		} while (playMap[newPosition.getXPosition()][newPosition.getYPosition()] != CHAR_BLANK_SPACE);
+		} while (!(playMap[newPosition.getXPosition()][newPosition.getYPosition()] == CHAR_BLANK_SPACE
+				|| playMap[newPosition.getXPosition()][newPosition.getYPosition()] == Lever.getLeverChar()));
 
+		System.out.println("ogre posiçao antiga " + ogre.getPosition());
 		ogre.setPosition(newPosition);
 		ogrePosition = ogre.getPosition();
 		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
+		System.out.println("ogre posiçao nova " + ogre.getPosition());
+
+		// mudar club para $ qnd estivesse em cima da lever
+		if (ogrePosition.getXPosition() == 1 && ogrePosition.getYPosition() == 7) {
+			if (!this.lever.isActivated()) {
+				playMap[1][7] = '$';
+			}
+		} else {
+			playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
+			if (!this.lever.isActivated()) {
+				playMap[1][7] = Lever.getLeverChar();
+			}
+		}
 	}
 
 	private final boolean isStunned(Ogre ogre, Position ogrePosition) {
@@ -89,20 +104,12 @@ public final class OgreMap extends Map {
 				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_CLOSED
 				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == CHAR_DOOR_OPEN
 				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Club.getClubChar()
+				|| playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == Lever.getLeverChar()
 				|| checkValidPosition(newClubPosition));
 
 		clubHolder.getClub().setPosition(newClubPosition);
+		playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
 
-		if (newClubPosition.getXPosition() == 1 && newClubPosition.getYPosition() == 7) {
-			if (!this.lever.isActivated()) {
-				playMap[1][7] = '$';
-			}
-		} else {
-			playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
-			if (!this.lever.isActivated()) {
-				playMap[1][7] = Lever.getLeverChar();
-			}
-		}
 	}
 
 	private boolean checkValidPosition(Position position) {
@@ -122,6 +129,7 @@ public final class OgreMap extends Map {
 	}
 
 	private void checkIfStunned() {
+		System.out.println("checkIfStunned");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (Utilities.checkAdjacentCollision(this.ogreList.get(i).getPosition(),
 					this.hero.getClub().getPosition())) {
@@ -134,6 +142,7 @@ public final class OgreMap extends Map {
 	// ogre
 	// mas com ele atordoado
 	private final boolean checkOgreCollision() {
+		System.out.println("checkOgreCollision");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (!ogre.getStunned()
 					&& Utilities.checkAdjacentCollision(this.hero.getPosition(), this.ogreList.get(i).getPosition())) {
@@ -147,6 +156,7 @@ public final class OgreMap extends Map {
 	// ogre
 	// mas com ele atordoado
 	private final boolean checkClubCollision() {
+		System.out.println("checkClubCollision");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
 					this.ogreList.get(i).getClub().getPosition())) {
@@ -165,7 +175,8 @@ public final class OgreMap extends Map {
 		}
 		moveClub(hero);
 		Position heroPosition = hero.getPosition();
-		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar(this.lever.isActivated());
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero
+				.getHeroChar(this.lever.isActivated());
 	}
 
 	@Override
@@ -178,8 +189,8 @@ public final class OgreMap extends Map {
 		int y;
 		for (int i = 0; i < ogresNumber; i++) {
 			do {
-				x = Utilities.generateRandomNumber(1, 7);
-				y = Utilities.generateRandomNumber(1, 7);
+				x = Utilities.generateRandomNumber(1, 5);
+				y = Utilities.generateRandomNumber(1, 5);
 				ogre = new Ogre(x, y);
 			} while (playMap[x][y] != CHAR_BLANK_SPACE);
 			ogreList.add(ogre);
@@ -198,11 +209,11 @@ public final class OgreMap extends Map {
 		super.checkLever();
 		playMap[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero
 				.getHeroChar(this.lever.isActivated());
-		checkIfStunned();
 		for (int i = 0; i < ogreList.size(); i++) {
 			moveOgre(ogreList.get(i));
 			moveClub(ogreList.get(i));
 		}
+		checkIfStunned();
 	}
 
 	@Override

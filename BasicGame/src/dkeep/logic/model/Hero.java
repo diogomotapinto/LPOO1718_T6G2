@@ -3,7 +3,7 @@ package dkeep.logic.model;
 public final class Hero extends ClubHolder {
 
 	private static final char CHAR_HERO = 'H';
-	private static final char CHAR_HERO_KEY = 'A';
+	private static final char CHAR_HERO_KEY = 'K';
 	private boolean lever;
 
 	public Hero(int xPos, int yPos) {
