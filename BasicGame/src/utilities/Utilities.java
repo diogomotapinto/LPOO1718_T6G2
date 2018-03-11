@@ -46,29 +46,20 @@ public final class Utilities {
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
-		System.out.print("hero ");
-		System.out.println(posOne);
-		System.out.print("ogre ");
-		System.out.println(posTwo);
-
 		// check if there is an Ogre down
 		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
-			System.out.println("baixo");
 			return true;
 		}
 		// check if there is an Ogre up
 		if (posOne.getXPosition() - 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
-			System.out.println("cima");
 			return true;
 		}
 		// check if there is an Ogre on the left
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() - 1 == posTwo.getYPosition()) {
-			System.out.println("esquerda");
 			return true;
 		}
 		// check if there is an Ogre on the right
 		if (posOne.getXPosition() == posTwo.getXPosition() && posOne.getYPosition() + 1 == posTwo.getYPosition()) {
-			System.out.println("direita");
 			return true;
 		}
 

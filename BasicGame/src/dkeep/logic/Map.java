@@ -128,4 +128,8 @@ public abstract class Map implements PlayMap {
 		return header;
 	}
 
+	public final Hero getHero() {
+		return hero;
+	}
+
 }

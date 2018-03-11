@@ -29,8 +29,6 @@ public final class Controller {
 				runStateGamePlaying();
 			}
 
-			// retirar condiçoes de terminação a medida que as funcionalidadaes do estado
-			// respetivod forem implementadas e associadas a cadeia de ifs acima
 		} while (stateMachine.getGameState() != StateMachine.State.GAME_LOST
 				&& stateMachine.getGameState() != StateMachine.State.GAME_WON
 				&& stateMachine.getGameState() != StateMachine.State.GAME_CLOSE);

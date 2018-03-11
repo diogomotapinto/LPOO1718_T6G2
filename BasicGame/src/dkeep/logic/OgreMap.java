@@ -58,11 +58,9 @@ public final class OgreMap extends Map {
 		} while (!(playMap[newPosition.getXPosition()][newPosition.getYPosition()] == CHAR_BLANK_SPACE
 				|| playMap[newPosition.getXPosition()][newPosition.getYPosition()] == Lever.getLeverChar()));
 
-		System.out.println("ogre posiçao antiga " + ogre.getPosition());
 		ogre.setPosition(newPosition);
 		ogrePosition = ogre.getPosition();
 		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = OGRE_CHAR;
-		System.out.println("ogre posiçao nova " + ogre.getPosition());
 
 		// mudar club para $ qnd estivesse em cima da lever
 		if (ogrePosition.getXPosition() == 1 && ogrePosition.getYPosition() == 7) {
@@ -121,15 +119,10 @@ public final class OgreMap extends Map {
 			}
 		}
 
-		if (position.equals(this.hero.getPosition()) && position.hashCode() == this.hero.getPosition().hashCode()) {
-			return true;
-		}
-
-		return false;
+		return position.equals(this.hero.getPosition()) && position.hashCode() == this.hero.getPosition().hashCode();
 	}
 
 	private void checkIfStunned() {
-		System.out.println("checkIfStunned");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (Utilities.checkAdjacentCollision(this.ogreList.get(i).getPosition(),
 					this.hero.getClub().getPosition())) {
@@ -142,7 +135,6 @@ public final class OgreMap extends Map {
 	// ogre
 	// mas com ele atordoado
 	private final boolean checkOgreCollision() {
-		System.out.println("checkOgreCollision");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (!ogre.getStunned()
 					&& Utilities.checkAdjacentCollision(this.hero.getPosition(), this.ogreList.get(i).getPosition())) {
@@ -156,7 +148,6 @@ public final class OgreMap extends Map {
 	// ogre
 	// mas com ele atordoado
 	private final boolean checkClubCollision() {
-		System.out.println("checkClubCollision");
 		for (int i = 0; i < ogreList.size(); i++) {
 			if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
 					this.ogreList.get(i).getClub().getPosition())) {
@@ -171,7 +162,6 @@ public final class OgreMap extends Map {
 		for (int i = 0; i < ogreList.size(); i++) {
 			moveOgre(ogreList.get(i));
 			moveClub(ogreList.get(i));
-
 		}
 		moveClub(hero);
 		Position heroPosition = hero.getPosition();
