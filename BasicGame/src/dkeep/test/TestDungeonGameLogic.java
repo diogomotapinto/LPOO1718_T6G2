@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import dkeep.logic.DungeonMap;
+import dkeep.logic.DungeonMapTest;
 import dkeep.logic.model.Position;
-import dkeep.logic.model.TestGuard;
-import utilities.Utilities;
 
 class TestDungeonGameLogic {
 
@@ -15,7 +14,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToFreeCell() {
-		map = new DungeonMap();
+		map = new DungeonMapTest();
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
 		map.play('d');
 		assertEquals(new Position(1, 2), map.getHero().getPosition());
@@ -24,7 +23,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToWall() {
-		map = new DungeonMap();
+		map = new DungeonMapTest();
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
 		map.play('w');
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
@@ -33,8 +32,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToGuard() {
-		TestGuard t = new TestGuard();
-		map = new DungeonMap(t);
+		map = new DungeonMapTest();
 		map.play('d');
 		map.play('d');
 
@@ -54,14 +52,12 @@ class TestDungeonGameLogic {
 		map.play('w');
 
 		assertEquals(new Position(1, 7), map.getHero().getPosition());
-		assertEquals(true, Utilities.checkAdjacentCollision(t.getPosition(), map.getHero().getPosition()));
 		assertEquals(-1, map.checkEndLevel());
 	}
 
 	@Test
 	void testMoveHeroIntoToClosedExitDoors() {
-		TestGuard t = new TestGuard();
-		map = new DungeonMap(t);
+		map = new DungeonMapTest();
 		map.play('d');
 		map.play('d');
 
@@ -97,8 +93,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToOpenDoorsTotheKeep() {
-		TestGuard t = new TestGuard();
-		map = new DungeonMap(t);
+		map = new DungeonMapTest();
 		map.play('d');
 		map.play('d');
 

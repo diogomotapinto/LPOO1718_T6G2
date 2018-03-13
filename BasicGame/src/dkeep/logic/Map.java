@@ -39,7 +39,7 @@ public abstract class Map implements PlayMap {
 
 	protected abstract void generateFoes();
 
-	protected abstract boolean checkLost(int x, int y);
+	protected abstract boolean checkLost();
 	/* End of Abstract Methods */
 
 	protected final void moveHero(char move) {

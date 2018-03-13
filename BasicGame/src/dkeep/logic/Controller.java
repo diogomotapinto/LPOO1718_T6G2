@@ -12,7 +12,7 @@ public final class Controller {
 
 	private Controller() {
 		stateMachine = new StateMachine();
-		currentMap = new DungeonMap();
+		currentMap = new OgreMap();
 		this.view = new View();
 	}
 

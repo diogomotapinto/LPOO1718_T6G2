@@ -188,7 +188,7 @@ public final class OgreMap extends Map {
 	}
 
 	@Override
-	protected boolean checkLost(int x, int y) {
+	protected boolean checkLost() {
 		return checkOgreCollision() || checkClubCollision();
 	}
 
@@ -216,7 +216,7 @@ public final class OgreMap extends Map {
 		}
 
 		// tem de se fazer refactor do codigo
-		if (checkLost(0, 0)) {
+		if (checkLost()) {
 			return -1;
 		}
 
