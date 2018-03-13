@@ -18,9 +18,9 @@ public final class Lever {
 		activated = true;
 	}
 
-	public boolean isActivated() {
-		return activated;
-	}
+//	public boolean isActivated() {
+//		return activated;
+//	}
 
 	public Position getPosition() {
 		return position;

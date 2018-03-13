@@ -30,5 +30,13 @@ public final class Ogre extends ClubHolder {
 	public final int getStunCounter() {
 		return counter;
 	}
+	
+	public final char getOgreChar() {
+		if(stunned) {
+			return '8';
+		}else {
+			return 'O';
+		}
+	}
 
 }
