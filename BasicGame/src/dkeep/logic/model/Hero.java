@@ -1,6 +1,6 @@
 package dkeep.logic.model;
 
-public final class Hero extends ClubHolder {
+public final class Hero extends Character {
 
 	private static final char CHAR_HERO = 'H';
 	private static final char CHAR_HERO_KEY = 'K';
