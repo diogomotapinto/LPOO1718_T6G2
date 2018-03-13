@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-public class DungeonMapTest extends DungeonMap {
+public final class DungeonMapTest extends DungeonMap {
 
 	public DungeonMapTest() {
 		super();
