@@ -8,7 +8,7 @@ import dkeep.logic.model.Rookie;
 import dkeep.logic.model.Suspicious;
 import utilities.Utilities;
 
-public final class DungeonMap extends Map {
+public class DungeonMap extends Map {
 
 	private static final int route[][] = new int[][] { { 1, 8 }, { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 },
 			{ 5, 6 }, { 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 6, 1 }, { 6, 2 }, { 6, 3 }, { 6, 4 },
@@ -45,7 +45,7 @@ public final class DungeonMap extends Map {
 		initializeMap();
 	}
 
-	private final void moveGuard() {
+	protected void moveGuard() {
 		Position guardPosition = guard.getPosition();
 		playMap[guardPosition.getXPosition()][guardPosition.getYPosition()] = CHAR_BLANK_SPACE;
 		this.guard.moveToNextPosition();
@@ -60,7 +60,7 @@ public final class DungeonMap extends Map {
 	}
 
 	@Override
-	protected void generateFoes() {
+	protected final void generateFoes() {
 		switch (Utilities.generateRandomNumber(0, 2)) {
 		case 0:
 			guard = new Rookie(route);
@@ -90,7 +90,7 @@ public final class DungeonMap extends Map {
 	}
 
 	@Override
-	public Map nextLevel() {
+	public final Map nextLevel() {
 		return new OgreMap();
 	}
 
