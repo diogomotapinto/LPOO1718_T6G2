@@ -87,7 +87,7 @@ public abstract class Map implements PlayMap {
 		heroPosition.setXPosition(x);
 		heroPosition.setYPosition(y);
 		hero.setPosition(heroPosition);
-		playMap[x][y] = hero.getHeroChar(this.lever.isActivated());
+		playMap[x][y] = hero.getHeroChar();
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
