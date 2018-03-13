@@ -33,24 +33,14 @@ class TestDungeonGameLogic {
 	@Test
 	void testMoveHeroIntoToGuard() {
 		map = new DungeonMapTest();
-		map.play('d');
-		map.play('d');
 
-		map.play('s');
-		map.play('s');
-		map.play('s');
-		map.play('s');
+		StringBuilder s = new StringBuilder();
+		s.append("ddssssddddwwww");
 
-		map.play('d');
-		map.play('d');
-		map.play('d');
-		map.play('d');
-
-		map.play('w');
-		map.play('w');
-		map.play('w');
-		map.play('w');
-
+		while (s.length() > 0) {
+			map.play(s.charAt(0));
+			s.deleteCharAt(0);
+		}
 		assertEquals(new Position(1, 7), map.getHero().getPosition());
 		assertEquals(-1, map.checkEndLevel());
 	}
@@ -58,17 +48,14 @@ class TestDungeonGameLogic {
 	@Test
 	void testMoveHeroIntoToClosedExitDoors() {
 		map = new DungeonMapTest();
-		map.play('d');
-		map.play('d');
 
-		map.play('s');
-		map.play('s');
-		map.play('s');
-		map.play('s');
+		StringBuilder s = new StringBuilder();
+		s.append("ddssssaaa");
 
-		map.play('a');
-		map.play('a');
-		map.play('a');
+		while (s.length() > 0) {
+			map.play(s.charAt(0));
+			s.deleteCharAt(0);
+		}
 		assertEquals(new Position(5, 1), map.getHero().getPosition());
 		assertEquals(0, map.checkEndLevel());
 
@@ -94,40 +81,14 @@ class TestDungeonGameLogic {
 	@Test
 	void testMoveHeroIntoToOpenDoorsTotheKeep() {
 		map = new DungeonMapTest();
-		map.play('d');
-		map.play('d');
 
-		map.play('s');
-		map.play('s');
-		map.play('s');
-		map.play('s');
-		map.play('s');
+		StringBuilder s = new StringBuilder();
+		s.append("ddsssssdddddssadwwaaaaaaaa");
 
-		map.play('d');
-		map.play('d');
-		map.play('d');
-		map.play('d');
-		map.play('d');
-
-		map.play('s');
-		map.play('s');
-
-		map.play('a');
-
-		map.play('d');
-
-		map.play('w');
-		map.play('w');
-
-		map.play('a');
-		map.play('a');
-		map.play('a');
-		map.play('a');
-		map.play('a');
-		map.play('a');
-		map.play('a');
-		map.play('a');
-
+		while (s.length() > 0) {
+			map.play(s.charAt(0));
+			s.deleteCharAt(0);
+		}
 		assertEquals(1, map.checkEndLevel());
 	}
 }
