@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dkeep.logic.Controller;
 import dkeep.logic.Map;
-import dkeep.logic.OgreMap;
+import dkeep.logic.KeepMap;
 import dkeep.logic.OgreMapTest;
 import dkeep.logic.model.Position;
 
@@ -21,7 +21,7 @@ public class TestOgreGameLogic {
 		map = new OgreMapTest();
 		map.play('d');
 		map.play('d');
-		assertEquals((byte) -1, map.checkEndLevel());
+		assertEquals((byte) 0, map.checkEndLevel());
 	}
 
 	@Test
@@ -36,6 +36,7 @@ public class TestOgreGameLogic {
 			s.deleteCharAt(0);
 		}
 		assertEquals('K', map.getHero().getHeroChar());
+		assertEquals((byte) 0, map.checkEndLevel());
 	}
 
 	@Test
@@ -49,6 +50,7 @@ public class TestOgreGameLogic {
 			s.deleteCharAt(0);
 		}
 		assertEquals('I', map.getMap()[1][0]);
+		assertEquals((byte) 0, map.checkEndLevel());
 	}
 
 	@Test
@@ -63,6 +65,7 @@ public class TestOgreGameLogic {
 			s.deleteCharAt(0);
 		}
 		assertEquals('S', map.getMap()[1][0]);
+		assertEquals((byte) 0, map.checkEndLevel());
 	}
 
 	@Test
@@ -76,7 +79,7 @@ public class TestOgreGameLogic {
 			map.play(s.charAt(0));
 			s.deleteCharAt(0);
 		}
-		assertEquals(1, map.checkEndLevel());
+		assertEquals((byte)1, map.checkEndLevel());
 	}
 
 }

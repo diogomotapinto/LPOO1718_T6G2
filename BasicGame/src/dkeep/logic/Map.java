@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Arrays;
+
 import dkeep.logic.model.Club;
 import dkeep.logic.model.Hero;
 import dkeep.logic.model.Lever;
@@ -25,13 +27,15 @@ public abstract class Map implements PlayMap {
 	protected final Lever lever;
 	protected final Hero hero;
 	protected final char[][] playMap;
-
+	private StringBuilder stringbuilder;
+	
 	protected Map(char[][] playMap, String legend, String header, int heroXPosition, int heroYPosition) {
 		this.playMap = playMap;
 		this.legend = legend;
 		this.header = header;
 		hero = new Hero(heroXPosition, heroYPosition);
 		this.lever = new Lever(8, 8);
+		this.stringbuilder = new StringBuilder();
 	}
 
 	/* Abstract Methods to be implemented in subclasses */
@@ -131,5 +135,20 @@ public abstract class Map implements PlayMap {
 	public final Hero getHero() {
 		return hero;
 	}
+
+	@Override
+	public String toString() {
+		
+		for (int i = 0; i < this.playMap.length; i++) {
+			for (int j = 0; j < this.playMap[i].length; j++) {
+				stringbuilder.append(this.playMap[i][j]);
+			}
+			stringbuilder.append("\n");
+		}
+	
+			return stringbuilder.toString();
+	}
+	
+	
 
 }

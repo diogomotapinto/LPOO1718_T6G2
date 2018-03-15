@@ -1,19 +1,24 @@
 package dkeep.logic;
 
+import java.util.Arrays;
+
 import dkeep.cli.View;
+import dkeep.gui.Window;
 
 public final class Controller {
 
 	private static final Controller INSTANCE = new Controller();
 
+	private final Window window;
 	private final View view;
 	private final StateMachine stateMachine;
 	private Map currentMap;
 
 	private Controller() {
 		stateMachine = new StateMachine();
-		currentMap = new OgreMap();
+		currentMap = new KeepMap();
 		this.view = new View();
+		this.window = new Window();
 	}
 
 	public static Controller getInstance() {
@@ -43,6 +48,7 @@ public final class Controller {
 		do {
 			currentMap.play(view.getMove());
 			view.printGameInfo(currentMap.getHeader(), currentMap.getMap(), currentMap.getLegend());
+			window.showMap(currentMap.toString());
 		} while (!advanceLevel(currentMap.checkEndLevel()));
 	}
 
@@ -69,5 +75,7 @@ public final class Controller {
 			return false;
 		}
 	}
+	
+	
 
 }

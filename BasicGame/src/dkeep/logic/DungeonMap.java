@@ -91,7 +91,7 @@ public class DungeonMap extends Map {
 
 	@Override
 	public final Map nextLevel() {
-		return new OgreMap();
+		return new KeepMap();
 	}
 
 	@Override
