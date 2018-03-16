@@ -38,12 +38,12 @@ public abstract class Map implements PlayMap {
 	/* Abstract Methods to be implemented in subclasses */
 	protected abstract void initializeMap();
 
-	protected abstract void generateFoes();
+	protected abstract void generateFoes(String info);
 
 	protected abstract boolean checkLost();
 	/* End of Abstract Methods */
 
-	protected final void moveHero(char move) {
+	protected final void moveHero(char move, char heroChar) {
 		Position p = hero.getPosition();
 		int xPosition = p.getXPosition();
 		int yPosition = p.getYPosition();
@@ -51,22 +51,22 @@ public abstract class Map implements PlayMap {
 		switch (move) {
 		case CHAR_MOVE_UP:
 			if (checkMoveHero(xPosition - 1, yPosition)) {
-				moveHero(xPosition - 1, yPosition);
+				moveHero(xPosition - 1, yPosition, heroChar);
 			}
 			break;
 		case CHAR_MOVE_DOWN:
 			if (checkMoveHero(xPosition + 1, yPosition)) {
-				moveHero(xPosition + 1, yPosition);
+				moveHero(xPosition + 1, yPosition, heroChar);
 			}
 			break;
 		case CHAR_MOVE_RIGHT:
 			if (checkMoveHero(xPosition, yPosition + 1)) {
-				moveHero(xPosition, yPosition + 1);
+				moveHero(xPosition, yPosition + 1, heroChar);
 			}
 			break;
 		case CHAR_MOVE_LEFT:
 			if (checkMoveHero(xPosition, yPosition - 1)) {
-				moveHero(xPosition, yPosition - 1);
+				moveHero(xPosition, yPosition - 1, heroChar);
 			}
 			break;
 		default:
@@ -82,13 +82,13 @@ public abstract class Map implements PlayMap {
 				|| playMap[x][y] == Club.getClubChar() || playMap[x][y] == CHAR_DOOR_OPEN);
 	}
 
-	private void moveHero(int x, int y) {
+	private void moveHero(int x, int y, char heroChar) {
 		Position heroPosition = hero.getPosition();
 		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
 		heroPosition.setXPosition(x);
 		heroPosition.setYPosition(y);
 		hero.setPosition(heroPosition);
-		playMap[x][y] = hero.getHeroChar();
+		playMap[x][y] = heroChar;
 	}
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das

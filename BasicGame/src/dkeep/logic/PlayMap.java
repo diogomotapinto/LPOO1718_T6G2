@@ -6,6 +6,6 @@ public interface PlayMap {
 
 	public byte checkEndLevel();
 
-	public Map nextLevel();
+	public Map nextLevel(String info);
 
 }

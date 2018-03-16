@@ -35,7 +35,8 @@ public class TestOgreGameLogic {
 			map.play(s.charAt(0));
 			s.deleteCharAt(0);
 		}
-		assertEquals('K', map.getHero().getHeroChar());
+		
+		//
 		assertEquals((byte) 0, map.checkEndLevel());
 	}
 

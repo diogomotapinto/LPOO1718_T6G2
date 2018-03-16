@@ -17,7 +17,7 @@ public class DungeonMap extends Map {
 	private static final String header = "\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space";
 	private Guard guard;
 
-	public DungeonMap() {
+	public DungeonMap(String personality) {
 		super(new char[][] {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR },
@@ -40,7 +40,7 @@ public class DungeonMap extends Map {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
 				header, "Nivel 1!!!", 1, 1, 8, 7);
-		generateFoes();
+		generateFoes(personality);
 		super.header = guard.toString();
 		initializeMap();
 	}
@@ -56,19 +56,19 @@ public class DungeonMap extends Map {
 	@Override
 	protected final void initializeMap() {
 		Position heroPosition = hero.getPosition();
-		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getHeroChar();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getCharHero();
 	}
 
 	@Override
-	protected final void generateFoes() {
-		switch (Utilities.generateRandomNumber(0, 2)) {
-		case 0:
+	protected final void generateFoes(String personality) {
+		switch (personality) {
+		case "Rookie":
 			guard = new Rookie(route);
 			break;
-		case 1:
+		case "Drunken":
 			guard = new Drunken(route);
 			break;
-		case 2:
+		case "Suspicious":
 		default:
 			guard = new Suspicious(route);
 			break;
@@ -84,14 +84,14 @@ public class DungeonMap extends Map {
 
 	@Override
 	public final void play(char move) {
-		super.moveHero(move);
+		super.moveHero(move, hero.getCharHero());
 		super.checkLever();
 		this.moveGuard();
 	}
 
 	@Override
-	public final Map nextLevel() {
-		return new KeepMap();
+	public final Map nextLevel(String info) {
+		return new KeepMap(info);
 	}
 
 	@Override

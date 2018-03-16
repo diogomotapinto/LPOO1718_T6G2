@@ -11,11 +11,11 @@ import utilities.Utilities;
 public class KeepMap extends Map {
 	private static final char OGRE_CHAR = 'O';
 	private static final char CLUB_CHAR = '*';
-	private int ogresNumber;
+//	private int ogresNumber;
 	private Ogre ogre;
 	private ArrayList<Ogre> ogreList;
 
-	public KeepMap() {
+	public KeepMap(String ogresNumber) {
 		// passes map and legend as argument
 		super(new char[][] {
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR },
@@ -38,8 +38,8 @@ public class KeepMap extends Map {
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
 				"Nivel 2!!!", 7, 1, 3, 7);
 
-		this.ogresNumber = 1;
-		generateFoes();
+//		this.ogresNumber = ogresNumber;
+		generateFoes(ogresNumber);
 		super.header = "\nNumero de ogres= " + ogreList.size();
 		initializeMap();
 	}
@@ -181,27 +181,23 @@ public class KeepMap extends Map {
 			moveClub(ogreList.get(i));
 		}
 		Position heroPosition = hero.getPosition();
-		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getCharHeroLvl2();
 	}
 
-	public void setNumberOgre(int number) {
-		this.ogresNumber = number;
-	}
+	
 
 	@Override
-	protected void generateFoes() {
+	protected void generateFoes(String numberOfOgres) {
 		ogreList = new ArrayList<Ogre>();
-		int ogresNumber = this.ogresNumber;
+		int ogresNumber = Integer.parseInt(numberOfOgres);
 		Position leverPos = new Position(1, 7);
 		lever.setPosition(leverPos);
 		int x;
 		int y;
 		for (int i = 0; i < ogresNumber; i++) {
 			do {
-				// x = Utilities.generateRandomNumber(1, 5);
-				// y = Utilities.generateRandomNumber(1, 5);
-				x = 7;
-				y = 4;
+				 x = Utilities.generateRandomNumber(1, 5);
+				 y = Utilities.generateRandomNumber(1, 5);
 				ogre = new Ogre(x, y);
 			} while (playMap[x][y] != CHAR_BLANK_SPACE);
 			ogreList.add(ogre);
@@ -215,10 +211,8 @@ public class KeepMap extends Map {
 
 	@Override
 	public void play(char move) {
-		super.moveHero(move);
+		super.moveHero(move, super.lever.isActivated() ?  hero.getCharHeroKey() : hero.getCharHeroLvl2());
 		super.checkLever();
-		playMap[this.hero.getPosition().getXPosition()][this.hero.getPosition().getYPosition()] = this.hero
-				.getHeroChar();
 		for (int i = 0; i < ogreList.size(); i++) {
 			// moveOgre(ogreList.get(i));
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
@@ -248,7 +242,7 @@ public class KeepMap extends Map {
 	}
 
 	@Override
-	public Map nextLevel() {
+	public Map nextLevel(String info) {
 		return null;
 	}
 

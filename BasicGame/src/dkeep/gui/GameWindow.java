@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import dkeep.logic.Controller;
@@ -21,11 +22,12 @@ import javax.swing.JTextArea;
 
 public class GameWindow {
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField ogreTextField;
 	private String map;
 	private String legend;
 	private JTextArea textArea;
 	private Controller controller;
+	private JLabel lblYouCanStart;
 
 	/**
 	 * Create the application.
@@ -44,8 +46,10 @@ public class GameWindow {
 	}
 
 	public void setLegend(String legend) {
-		this.legend = legend;
+		this.lblYouCanStart.setText(legend);
 	}
+	
+	
 
 	private void initialize() {
 
@@ -59,24 +63,32 @@ public class GameWindow {
 		lblNewLabel.setBounds(20, 20, 116, 16);
 		frame.getContentPane().add(lblNewLabel);
 
-		textField = new JTextField();
-		textField.setBounds(143, 14, 43, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		String str = textField.getText();
+		ogreTextField = new JTextField();
+		ogreTextField.setBounds(143, 14, 43, 26);
+		frame.getContentPane().add(ogreTextField);
+		ogreTextField.setColumns(10);
+		//numberOfOgres = ogreTextField.getText();
 
 		JLabel lblGuardPersonality = new JLabel("Guard personality");
 		lblGuardPersonality.setBounds(20, 47, 122, 16);
 		frame.getContentPane().add(lblGuardPersonality);
 
-		JComboBox comboBox = new JComboBox();
+		String[] guardTypes = {"","Rookie","Drunken","Suspicious"};
+		JComboBox comboBox = new JComboBox(guardTypes);
 		comboBox.setBounds(143, 43, 147, 27);
 		frame.getContentPane().add(comboBox);
 
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.newGame();
+				//JOption pane
+				 String numberOfOgres = ogreTextField.getText();
+				 String personality = comboBox.getSelectedItem().toString();
+				 if(numberOfOgres.equals("") || personality.equals("")) {
+					 JOptionPane.showMessageDialog(frame, "Missing information", "Error", JOptionPane.ERROR_MESSAGE);
+				 }else {		
+				controller.newGame(numberOfOgres, personality);
+				 }
 			}
 		});
 		btnNewGame.setBounds(367, 42, 117, 29);
@@ -119,9 +131,10 @@ public class GameWindow {
 		frame.getContentPane().add(btnDown);
 
 		textArea = new JTextArea();
-		textArea.setFont(new Font("Consolas", Font.PLAIN, 18));
+		textArea.setFont(new Font("Courier", Font.PLAIN, 18));
 		textArea.setBounds(20, 82, 270, 263);
 		textArea.setVisible(true);
+		textArea.setEditable(false);
 
 		frame.getContentPane().add(textArea);
 
@@ -135,10 +148,12 @@ public class GameWindow {
 		btnExit.setBounds(367, 298, 117, 29);
 		frame.getContentPane().add(btnExit);
 
-		JLabel lblYouCanStart = new JLabel("you can Start a new game");
+		lblYouCanStart = new JLabel("You can start now");
 		lblYouCanStart.setBounds(20, 357, 275, 16);
 		frame.getContentPane().add(lblYouCanStart);
+		
 
 		frame.setVisible(true);
 	}
 }
+

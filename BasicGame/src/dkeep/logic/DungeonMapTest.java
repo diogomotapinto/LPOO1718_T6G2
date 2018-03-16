@@ -2,8 +2,8 @@ package dkeep.logic;
 
 public final class DungeonMapTest extends DungeonMap {
 
-	public DungeonMapTest() {
-		super();
+	public DungeonMapTest(String personality) {
+		super(personality);
 	}
 
 	@Override

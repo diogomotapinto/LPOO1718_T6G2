@@ -46,6 +46,10 @@ public final class Utilities {
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
+		//check if it is in the same position
+		if (posOne.equals(posTwo)) {
+			return true;
+		}
 		// check if there is an Ogre down
 		if (posOne.getXPosition() + 1 == posTwo.getXPosition() && posOne.getYPosition() == posTwo.getYPosition()) {
 			return true;
