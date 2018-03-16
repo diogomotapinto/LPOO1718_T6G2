@@ -1,12 +1,14 @@
 package dkeep.logic.model;
 
-public final class Ogre extends ClubHolder {
+public final class Ogre extends Character {
 	private static final int STUN_COUNTER = 2;
 	private int counter;
 	private boolean stunned;
+	private Club club;
 
 	public Ogre(int xPos, int yPos) {
 		super(xPos, yPos);
+		club = new Club(xPos, yPos);
 		counter = STUN_COUNTER;
 		stunned = false;
 	}
@@ -30,13 +32,16 @@ public final class Ogre extends ClubHolder {
 	public final int getStunCounter() {
 		return counter;
 	}
-	
+
 	public final char getOgreChar() {
-		if(stunned) {
+		if (stunned) {
 			return '8';
-		}else {
+		} else {
 			return 'O';
 		}
 	}
 
+	public final Club getClub() {
+		return club;
+	}
 }

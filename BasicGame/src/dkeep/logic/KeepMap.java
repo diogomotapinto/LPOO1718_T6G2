@@ -3,7 +3,6 @@ package dkeep.logic;
 import java.util.ArrayList;
 
 import dkeep.logic.model.Club;
-import dkeep.logic.model.ClubHolder;
 import dkeep.logic.model.Lever;
 import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
@@ -37,7 +36,7 @@ public class KeepMap extends Map {
 						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR } },
 				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
-				"Nivel 2!!!", 7, 1);
+				"Nivel 2!!!", 7, 1, 3, 7);
 
 		this.ogresNumber = 1;
 		generateFoes();
@@ -98,7 +97,7 @@ public class KeepMap extends Map {
 		return false;
 	}
 
-	private final void moveClub(ClubHolder clubHolder) {
+	private final void moveClub(Ogre clubHolder) {
 		Position clubPosition = clubHolder.getClub().getPosition();
 
 		playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = CHAR_BLANK_SPACE;
@@ -184,8 +183,7 @@ public class KeepMap extends Map {
 		Position heroPosition = hero.getPosition();
 		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = this.hero.getHeroChar();
 	}
-	
-	
+
 	public void setNumberOgre(int number) {
 		this.ogresNumber = number;
 	}
@@ -253,7 +251,5 @@ public class KeepMap extends Map {
 	public Map nextLevel() {
 		return null;
 	}
-
-	
 
 }

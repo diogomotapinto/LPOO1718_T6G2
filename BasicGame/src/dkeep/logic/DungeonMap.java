@@ -39,7 +39,7 @@ public class DungeonMap extends Map {
 						WALL_CHAR, Lever.getLeverChar(), CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
-				header, "Nivel 1!!!", 1, 1);
+				header, "Nivel 1!!!", 1, 1, 8, 7);
 		generateFoes();
 		super.header = guard.toString();
 		initializeMap();

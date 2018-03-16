@@ -1,7 +1,5 @@
 package dkeep.logic;
 
-import java.util.Arrays;
-
 import dkeep.logic.model.Club;
 import dkeep.logic.model.Hero;
 import dkeep.logic.model.Lever;
@@ -27,15 +25,14 @@ public abstract class Map implements PlayMap {
 	protected final Lever lever;
 	protected final Hero hero;
 	protected final char[][] playMap;
-	private StringBuilder stringbuilder;
-	
-	protected Map(char[][] playMap, String legend, String header, int heroXPosition, int heroYPosition) {
+
+	protected Map(char[][] playMap, String legend, String header, int heroXPosition, int heroYPosition,
+			int leverXPosition, int leverYPosition) {
 		this.playMap = playMap;
 		this.legend = legend;
 		this.header = header;
 		hero = new Hero(heroXPosition, heroYPosition);
-		this.lever = new Lever(8, 8);
-		this.stringbuilder = new StringBuilder();
+		this.lever = new Lever(leverXPosition, leverYPosition);
 	}
 
 	/* Abstract Methods to be implemented in subclasses */
@@ -99,6 +96,13 @@ public abstract class Map implements PlayMap {
 	protected final void checkLever() {
 		Position heroPosition = hero.getPosition();
 		Position leverPosition = lever.getPosition();
+		System.out.println();
+		System.out.print("Lever ");
+		System.out.println(leverPosition);
+
+		System.out.print("Heroi ");
+		System.out.println(heroPosition);
+
 		if (leverPosition.equals(heroPosition) && (heroPosition.hashCode() == leverPosition.hashCode())) {
 			lever.activateLever();
 			// criar classe porta com icone porta fechada e porta aberta em vez de usar
@@ -138,17 +142,17 @@ public abstract class Map implements PlayMap {
 
 	@Override
 	public String toString() {
-		
+		StringBuilder stringbuilder = new StringBuilder();
+
 		for (int i = 0; i < this.playMap.length; i++) {
 			for (int j = 0; j < this.playMap[i].length; j++) {
 				stringbuilder.append(this.playMap[i][j]);
+				stringbuilder.append(" ");
 			}
 			stringbuilder.append("\n");
 		}
-	
-			return stringbuilder.toString();
+
+		return stringbuilder.toString();
 	}
-	
-	
 
 }
