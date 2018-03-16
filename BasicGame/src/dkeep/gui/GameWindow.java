@@ -112,7 +112,6 @@ public class GameWindow {
 		btnLeft.setBounds(293, 192, 117, 29);
 		frame.getContentPane().add(btnLeft);
 
-		
 		JButton btnRight = new JButton("Right");
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
