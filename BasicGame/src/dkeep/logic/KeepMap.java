@@ -70,7 +70,7 @@ public class KeepMap extends Map {
 		// ogre.getOgreChar();
 
 		// mudar club para $ qnd estivesse em cima da lever
-		if (ogrePosition.getXPosition() == 1 && ogrePosition.getYPosition() == 7) {
+		if (ogrePosition.equals(lever.getPosition())) {
 			if (!this.hero.getLeverState()) {
 				playMap[1][7] = '$';
 			}
@@ -115,15 +115,13 @@ public class KeepMap extends Map {
 		clubHolder.getClub().setPosition(newClubPosition);
 
 		// mudar club para $ qnd estivesse em cima da lever
-		if (newClubPosition.getXPosition() == 1 && newClubPosition.getYPosition() == 7) {
+		if (newClubPosition.equals(lever.getPosition())) {
 			if (!this.hero.getLeverState()) {
 				playMap[1][7] = '$';
 			}
 		} else {
 			playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
-			if (!this.hero.getLeverState()) {
-				playMap[1][7] = Lever.getLeverChar();
-			}
+			
 		}
 
 	}
