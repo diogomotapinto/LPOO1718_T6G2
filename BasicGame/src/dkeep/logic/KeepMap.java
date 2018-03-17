@@ -14,6 +14,7 @@ public class KeepMap extends Map {
 //	private int ogresNumber;
 	private Ogre ogre;
 	private ArrayList<Ogre> ogreList;
+	
 
 	public KeepMap(String ogresNumber) {
 		// passes map and legend as argument
@@ -76,9 +77,6 @@ public class KeepMap extends Map {
 			}
 		} else {
 			playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ogre.getOgreChar();
-			if (!this.hero.getLeverState()) {
-				playMap[1][7] = Lever.getLeverChar();
-			}
 		}
 
 	}
@@ -121,8 +119,8 @@ public class KeepMap extends Map {
 			}
 		} else {
 			playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = CLUB_CHAR;
-			
 		}
+		
 
 	}
 
@@ -213,12 +211,14 @@ public class KeepMap extends Map {
 		super.checkLever();
 		for (int i = 0; i < ogreList.size(); i++) {
 			// moveOgre(ogreList.get(i));
+			
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
 			checkOgreCollision();
 
 			moveClub(ogreList.get(i));
 
 		}
+		checkLeverMap();
 		checkIfStunned();
 	}
 
@@ -239,6 +239,13 @@ public class KeepMap extends Map {
 		return 0;
 	}
 
+	public void checkLeverMap() {
+		Position leverPos = lever.getPosition();
+		if(playMap[leverPos.getXPosition()][leverPos.getYPosition()] == ' '  && !this.hero.getLeverState()) {
+			playMap[leverPos.getXPosition()][leverPos.getYPosition()] = 'k';
+		}
+	}
+	
 	@Override
 	public Map nextLevel(String info) {
 		return null;
