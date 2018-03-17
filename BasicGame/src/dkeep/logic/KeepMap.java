@@ -53,7 +53,11 @@ public class KeepMap extends Map {
 		}
 
 		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = CHAR_BLANK_SPACE;
-
+		
+		if(canMove(ogre.getPosition())) {
+			return ogre.getPosition();
+		}
+		
 		Position newPosition;
 		do {
 			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
@@ -79,6 +83,43 @@ public class KeepMap extends Map {
 			playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ogre.getOgreChar();
 		}
 
+	}
+	public final boolean canMove(Position position) {
+		int counter = 0;
+		
+		//checks above
+		if(playMap[position.getXPosition()-1][position.getYPosition()] != CHAR_BLANK_SPACE
+				|| playMap[position.getXPosition()-1][position.getYPosition()] != Lever.getLeverChar()
+				|| playMap[position.getXPosition()-1][position.getYPosition()] != ogre.getOgreChar()) {
+			counter++;
+		}
+
+		//checks bellow
+		if(playMap[position.getXPosition()+1][position.getYPosition()] != CHAR_BLANK_SPACE
+				|| playMap[position.getXPosition()+1][position.getYPosition()] != Lever.getLeverChar()
+				|| playMap[position.getXPosition()+1][position.getYPosition()] != ogre.getOgreChar()) {
+			counter++;
+		}
+		//checks right
+		if(playMap[position.getXPosition()][position.getYPosition()+1] != CHAR_BLANK_SPACE
+				|| playMap[position.getXPosition()][position.getYPosition()+1] != Lever.getLeverChar()
+				|| playMap[position.getXPosition()][position.getYPosition()+1] != ogre.getOgreChar()) {
+			counter++;
+		}
+
+		//checks left
+		if(playMap[position.getXPosition()][position.getYPosition()-1] != CHAR_BLANK_SPACE
+				|| playMap[position.getXPosition()][position.getYPosition()-1] != Lever.getLeverChar()
+				|| playMap[position.getXPosition()][position.getYPosition()-1] != ogre.getOgreChar()) {
+			counter++;
+		}
+		
+		if(counter == 4) {
+			return false;
+		}else
+		{
+			return true;
+		}
 	}
 
 	private final boolean isStunned(Ogre ogre, Position ogrePosition) {
