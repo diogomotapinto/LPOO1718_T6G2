@@ -23,8 +23,7 @@ public final class Controller {
 	public void newGame(String ogresNumber, String personality) {
 		this.ogresNumber = ogresNumber;
 		stateMachine.advanceState(StateMachine.Event.PLAY);
-		//currentMap = new DungeonMap(personality);
-		currentMap = new KeepMap(this.ogresNumber);
+		currentMap = new DungeonMap(personality);
 		gameWdw.setMap(currentMap.toString());
 		gameWdw.setLegend("You can play now");
 	}

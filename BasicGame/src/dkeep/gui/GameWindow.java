@@ -84,10 +84,13 @@ public class GameWindow {
 				//JOption pane
 				 String numberOfOgres = ogreTextField.getText();
 				 String personality = comboBox.getSelectedItem().toString();
-				 if(numberOfOgres.equals("") || personality.equals("")) {
+				 if(numberOfOgres.equals("") 
+						 || personality.equals("") ) {
 					 JOptionPane.showMessageDialog(frame, "Missing information", "Error", JOptionPane.ERROR_MESSAGE);
-				 }else {		
-				controller.newGame(numberOfOgres, personality);
+				 }else if(!(Integer.parseInt(numberOfOgres) > 0 && Integer.parseInt(numberOfOgres)< 5)) {
+					 JOptionPane.showMessageDialog(frame, "Invalid number of Ogres", "Warning", JOptionPane.WARNING_MESSAGE);
+				 }else {
+					 controller.newGame(numberOfOgres, personality);
 				 }
 			}
 		});
