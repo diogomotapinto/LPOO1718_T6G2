@@ -5,34 +5,29 @@ import dkeep.gui.GameWindow;
 public final class Controller {
 
 	private static final Controller INSTANCE = new Controller();
-
 	private final StateMachine stateMachine;
-	private final GameWindow gameWdw;
+	private final WindowController wdwController;
 	private Map currentMap;
-	private String ogresNumber;
 
 	private Controller() {
 		stateMachine = new StateMachine();
-		gameWdw = new GameWindow(this);
+		wdwController = new WindowController(this);
 	}
 
 	public static Controller getInstance() {
 		return INSTANCE;
 	}
 
-	public void newGame(String ogresNumber, String personality) {
-		this.ogresNumber = ogresNumber;
+	public void newGame(String personality) {
 		stateMachine.advanceState(StateMachine.Event.PLAY);
 		currentMap = new DungeonMap(personality);
-		gameWdw.setMap(currentMap.toString());
-		gameWdw.setLegend("You can play now");
+		wdwController.updateGameWindow(currentMap.toString(), "You can play now");
 	}
 
 	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
-			gameWdw.setMap(currentMap.toString());
-			gameWdw.setLegend("You can move");
+			wdwController.updateGameWindow(currentMap.toString(), "You can move");
 			advanceLevel(currentMap.checkEndLevel());
 		}
 	}
@@ -41,20 +36,19 @@ public final class Controller {
 		switch (endLevel) {
 		case -1:
 			stateMachine.advanceState(StateMachine.Event.OVER);
-			gameWdw.setLegend("Game Over");
+			wdwController.updateGameWindow(currentMap.toString(), "Game Over");
 			return true;
 		case 0:
 			return false;
 		case 1:
-			if (currentMap.nextLevel(this.ogresNumber) == null) {
+			if (currentMap.nextLevel(wdwController.getOgreNumber()) == null) {
 				stateMachine.advanceState(StateMachine.Event.WON);
-				gameWdw.setLegend("Game Won");
+				wdwController.updateGameWindow(currentMap.toString(), "Game Won");
 				return true;
 			} else {
 				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
-				currentMap = currentMap.nextLevel(this.ogresNumber);
-				gameWdw.setMap(currentMap.toString());
-				gameWdw.setLegend("Next Level");
+				currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
+				wdwController.updateGameWindow(currentMap.toString(), "Next Level");
 				return false;
 			}
 		default:

@@ -5,9 +5,8 @@ import dkeep.logic.model.Position;
 
 public final class OgreMapTest extends KeepMap {
 
-	public OgreMapTest(int ogresNumber) {
+	public OgreMapTest(String ogresNumber) {
 		super(ogresNumber);
-		
 	}
 
 	@Override

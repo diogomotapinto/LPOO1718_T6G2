@@ -18,7 +18,7 @@ public class TestOgreGameLogic {
 	@Test
 	public void testMoveHeroIntoTo() {
 		Position ogrePosition = new Position(7, 4);
-		map = new OgreMapTest();
+		map = new OgreMapTest("1");
 		map.play('d');
 		map.play('d');
 		assertEquals((byte) 0, map.checkEndLevel());
@@ -26,7 +26,7 @@ public class TestOgreGameLogic {
 
 	@Test
 	public void testChangeToK() {
-		map = new OgreMapTest();
+		map = new OgreMapTest("1");
 
 		StringBuilder s = new StringBuilder();
 		s.append("wwwwwwdddddd");
@@ -35,14 +35,14 @@ public class TestOgreGameLogic {
 			map.play(s.charAt(0));
 			s.deleteCharAt(0);
 		}
-		
+
 		//
 		assertEquals((byte) 0, map.checkEndLevel());
 	}
 
 	@Test
 	public void movesToCloseDoor() {
-		map = new OgreMapTest();
+		map = new OgreMapTest("1");
 		StringBuilder s = new StringBuilder();
 		s.append("wwwwwwa");
 
@@ -56,7 +56,7 @@ public class TestOgreGameLogic {
 
 	@Test
 	public void movesToOpenDoor() {
-		map = new OgreMapTest();
+		map = new OgreMapTest("1");
 
 		StringBuilder s = new StringBuilder();
 		s.append("wwwwwwddddddaaaaaa");
@@ -71,7 +71,7 @@ public class TestOgreGameLogic {
 
 	@Test
 	public void movesWin() {
-		map = new OgreMapTest();
+		map = new OgreMapTest("1");
 
 		StringBuilder s = new StringBuilder();
 		s.append("wwwwwwddddddaaaaaaa");
@@ -80,7 +80,7 @@ public class TestOgreGameLogic {
 			map.play(s.charAt(0));
 			s.deleteCharAt(0);
 		}
-		assertEquals((byte)1, map.checkEndLevel());
+		assertEquals((byte) 1, map.checkEndLevel());
 	}
 
 }

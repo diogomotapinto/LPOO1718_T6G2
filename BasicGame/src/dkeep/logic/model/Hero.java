@@ -33,14 +33,4 @@ public final class Hero extends Character {
 		return CHAR_HERO_lvl2;
 	}
 
-//	public final char getHeroChar() {
-//		if (!lever) {
-//			return CHAR_HERO;
-//		} else {
-//			return CHAR_HERO_KEY;
-//		}
-//	}
-	
-	
-
 }

@@ -14,7 +14,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToFreeCell() {
-		map = new DungeonMapTest();
+		map = new DungeonMapTest("rookie");
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
 		map.play('d');
 		assertEquals(new Position(1, 2), map.getHero().getPosition());
@@ -23,7 +23,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToWall() {
-		map = new DungeonMapTest();
+		map = new DungeonMapTest("rookie");
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
 		map.play('w');
 		assertEquals(new Position(1, 1), map.getHero().getPosition());
@@ -32,7 +32,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToGuard() {
-		map = new DungeonMapTest();
+		map = new DungeonMapTest("rookie");
 
 		StringBuilder s = new StringBuilder();
 		s.append("ddssssddddwwww");
@@ -47,7 +47,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToClosedExitDoors() {
-		map = new DungeonMapTest();
+		map = new DungeonMapTest("rookie");
 
 		StringBuilder s = new StringBuilder();
 		s.append("ddssssaaa");
@@ -80,7 +80,7 @@ class TestDungeonGameLogic {
 
 	@Test
 	void testMoveHeroIntoToOpenDoorsTotheKeep() {
-		map = new DungeonMapTest();
+		map = new DungeonMapTest("rookie");
 
 		StringBuilder s = new StringBuilder();
 		s.append("ddsssssdddddssadwwaaaaaaaa");
