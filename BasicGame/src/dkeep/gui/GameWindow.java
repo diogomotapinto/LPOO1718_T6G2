@@ -22,13 +22,16 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import java.awt.event.KeyAdapter;
 
-public final class GameWindow extends JFrame implements KeyListener {
+public final class GameWindow extends JFrame {
 	private JFrame frame;
 	private JTextField ogreTextField;
 	private String map;
@@ -36,7 +39,6 @@ public final class GameWindow extends JFrame implements KeyListener {
 	private JTextArea textArea;
 	private WindowController wdwController;
 	private JLabel contextLbl;
-	// private MoveKeyListener moveKeyLst;
 
 	/**
 	 * Create the application.
@@ -45,7 +47,6 @@ public final class GameWindow extends JFrame implements KeyListener {
 		super();
 		this.wdwController = windowController;
 		initializeWindow();
-		initializeListeners();
 		textArea.requestFocus();
 	}
 
@@ -114,8 +115,27 @@ public final class GameWindow extends JFrame implements KeyListener {
 		frame.getContentPane().add(btnDown);
 
 		textArea = new JTextArea();
+		textArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_UP:
+					wdwController.makeMove('w');
+					break;
+				case KeyEvent.VK_DOWN:
+					wdwController.makeMove('s');
+					break;
+				case KeyEvent.VK_LEFT:
+					wdwController.makeMove('a');
+					break;
+				case KeyEvent.VK_RIGHT:
+					wdwController.makeMove('d');
+					break;
+				}
+			}
+		});
 		textArea.setFont(new Font("Courier", Font.PLAIN, 18));
-		textArea.setBounds(0, 0, 400, 400);
+		textArea.setBounds(0, 41, 400, 400);
 		textArea.setVisible(true);
 		textArea.setEditable(false);
 
@@ -128,11 +148,11 @@ public final class GameWindow extends JFrame implements KeyListener {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(475, 300, 120, 30);
+		btnExit.setBounds(475, 300, 120, 25);
 		frame.getContentPane().add(btnExit);
 
 		contextLbl = new JLabel("You can start now");
-		contextLbl.setBounds(10, 416, 275, 16);
+		contextLbl.setBounds(0, 9, 140, 16);
 		frame.getContentPane().add(contextLbl);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -149,53 +169,27 @@ public final class GameWindow extends JFrame implements KeyListener {
 		});
 		mnMenu.add(mntmGameSettings);
 
+		JMenuItem mntmEditMap = new JMenuItem("Create Map");
+		mntmEditMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				wdwController.showCreateGameWindow();
+			}
+		});
+		mnMenu.add(mntmEditMap);
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (UnsupportedLookAndFeelException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
 		frame.setVisible(true);
 	}
 
-	private void initializeListeners() {
-		// moveKeyLst = new MoveKeyListener();
-		this.textArea.addKeyListener(this);
-		// this.textArea.addKeyListener(moveKeyLst);
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			wdwController.makeMove('w');
-			break;
-		case KeyEvent.VK_DOWN:
-			wdwController.makeMove('s');
-			break;
-		case KeyEvent.VK_LEFT:
-			wdwController.makeMove('a');
-			break;
-		case KeyEvent.VK_RIGHT:
-			wdwController.makeMove('d');
-			break;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
 }

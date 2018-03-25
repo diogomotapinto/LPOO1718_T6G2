@@ -1,6 +1,6 @@
 package dkeep.logic.model;
 
-public abstract class Guard extends Character {
+public abstract class Guard extends GameObject {
 
 	private static final char GUARD_CHAR = 'G';
 	protected final int route[][];

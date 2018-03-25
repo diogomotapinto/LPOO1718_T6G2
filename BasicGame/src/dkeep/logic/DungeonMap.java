@@ -39,7 +39,7 @@ public class DungeonMap extends Map {
 						WALL_CHAR, Lever.getLeverChar(), CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
-				header, "Nivel 1!!!", 1, 1, 8, 7);
+				header, "Nivel 1!!!", new Position(1, 1), new Position(8, 7));
 		generateFoes(personality);
 		super.header = guard.toString();
 		initializeMap();
@@ -84,14 +84,23 @@ public class DungeonMap extends Map {
 
 	@Override
 	public final void play(char move) {
+
 		super.moveHero(move, hero.getCharHero());
 		super.checkLever();
 		this.moveGuard();
+		if (!hero.getPosition().equals(super.lever.getPosition())) {
+			printLever();
+		}
+	}
+
+	protected final void printLever() {
+		Position position = super.lever.getPosition();
+		playMap[position.getXPosition()][position.getYPosition()] = Lever.getLeverChar();
 	}
 
 	@Override
 	public final Map nextLevel(String info) {
-		return new KeepMap(info);
+		return new NewKeepMap(info);
 	}
 
 	@Override
@@ -107,6 +116,11 @@ public class DungeonMap extends Map {
 		}
 
 		return 0;
+	}
+
+	@Override
+	public Map nextLevel(String info, char[][] map) {
+		return new NewKeepMap(info, map);
 	}
 
 }

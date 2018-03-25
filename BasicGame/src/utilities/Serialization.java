@@ -1,26 +1,27 @@
-// package utilities;
+//package utilities;
 //
-// import java.io.FileInputStream;
-// import java.io.FileNotFoundException;
-// import java.io.FileOutputStream;
-// import java.io.IOException;
-// import java.io.ObjectInputStream;
-// import java.io.ObjectOutputStream;
-// import java.io.Serializable;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
+//import java.io.Serializable;
 //
-// public class Serialization {
+//import dkeep.logic.Controller;
 //
-// private static final String PatientSerFile = "registoDoentes.ser";
+//public class Serialization {
 //
-// public static void serialize() {
-// try {
-// InformationCenter.serializeAES();
-// FileOutputStream fileOut1 = new FileOutputStream(PatientSerFile);
-// ObjectOutputStream outStream1 = new ObjectOutputStream(fileOut1);
-// outStream1.writeObject((Serializable) InformationCenter.getPatientList());
-// outStream1.close();
-// } catch (FileNotFoundException e) {
-// e.printStackTrace();
+//	private static final String PatientSerFile = "registoDoentes.ser";
+//
+//	public static void serialize() {
+//		try {
+//			FileOutputStream fileOut1 = new FileOutputStream(PatientSerFile);
+//			ObjectOutputStream outStream1 = new ObjectOutputStream(fileOut1);
+//			outStream1.writeObject((Serializable) Controller.getInstance());
+//			outStream1.close();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
 //		} catch (IOException e) {
 //
 //		} catch (Exception e) {

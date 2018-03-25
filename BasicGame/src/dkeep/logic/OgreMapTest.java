@@ -3,7 +3,7 @@ package dkeep.logic;
 import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 
-public final class OgreMapTest extends KeepMap {
+public final class OgreMapTest extends NewKeepMap {
 
 	public OgreMapTest(String ogresNumber) {
 		super(ogresNumber);

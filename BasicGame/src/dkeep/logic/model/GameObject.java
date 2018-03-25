@@ -1,9 +1,9 @@
 package dkeep.logic.model;
 
-public abstract class Character {
+public abstract class GameObject {
 	private Position position;
 
-	public Character(int xPos, int yPos) {
+	public GameObject(int xPos, int yPos) {
 		position = new Position(xPos, yPos);
 	}
 

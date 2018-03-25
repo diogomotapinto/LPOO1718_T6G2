@@ -46,7 +46,7 @@ public final class Utilities {
 	}
 
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
-		//check if it is in the same position
+		// check if it is in the same position
 		if (posOne.equals(posTwo)) {
 			return true;
 		}
@@ -69,4 +69,19 @@ public final class Utilities {
 
 		return false;
 	}
+
+	public static Position findPosition(char[][] map, char letter) {
+		Position pos = new Position(0, 0);
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				if (map[i][j] == letter) {
+					pos.setXPosition(i);
+					pos.setYPosition(j);
+					return pos;
+				}
+			}
+		}
+		return pos;
+	}
+
 }

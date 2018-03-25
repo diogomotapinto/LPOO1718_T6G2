@@ -1,9 +1,12 @@
 package dkeep.logic;
 
 import dkeep.logic.model.Club;
+import dkeep.logic.model.Door;
 import dkeep.logic.model.Hero;
 import dkeep.logic.model.Lever;
+import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
+import dkeep.logic.model.Wall;
 
 public abstract class Map implements PlayMap {
 
@@ -26,13 +29,12 @@ public abstract class Map implements PlayMap {
 	protected final Hero hero;
 	protected final char[][] playMap;
 
-	protected Map(char[][] playMap, String legend, String header, int heroXPosition, int heroYPosition,
-			int leverXPosition, int leverYPosition) {
+	protected Map(char[][] playMap, String legend, String header, Position heroPosition, Position leverPosition) {
 		this.playMap = playMap;
 		this.legend = legend;
 		this.header = header;
-		hero = new Hero(heroXPosition, heroYPosition);
-		this.lever = new Lever(leverXPosition, leverYPosition);
+		hero = new Hero(heroPosition.getXPosition(), heroPosition.getXPosition());
+		this.lever = new Lever(leverPosition.getXPosition(), leverPosition.getYPosition());
 	}
 
 	/* Abstract Methods to be implemented in subclasses */

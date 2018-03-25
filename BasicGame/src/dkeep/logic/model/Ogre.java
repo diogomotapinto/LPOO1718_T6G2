@@ -1,6 +1,6 @@
 package dkeep.logic.model;
 
-public final class Ogre extends Character {
+public final class Ogre extends GameObject {
 	private static final int STUN_COUNTER = 2;
 	private int counter;
 	private boolean stunned;

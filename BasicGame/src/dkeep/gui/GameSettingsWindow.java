@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dkeep.logic.WindowController;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -50,7 +49,7 @@ public final class GameSettingsWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GameSettingsWindow(WindowController windowController) {
+	public GameSettingsWindow() {
 		super();
 		this.ogreNumber = "";
 		this.guardPersonality = "";
@@ -86,7 +85,8 @@ public final class GameSettingsWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ogreNumber = ogreNumberTxtField.getText();
 				guardPersonality = (String) guardPersonalityComboBox.getSelectedItem();
-			}
+				setVisible(false);
+}
 		});
 		applyBtn.setBounds(15, 160, 100, 20);
 		contentPane.add(applyBtn);
@@ -94,7 +94,7 @@ public final class GameSettingsWindow extends JFrame {
 		closeBtn = new JButton("Close");
 		closeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				setVisible(false);
 			}
 		});
 		closeBtn.setBounds(15, 199, 100, 20);
@@ -109,5 +109,4 @@ public final class GameSettingsWindow extends JFrame {
 	public final String getGuardPersonality() {
 		return guardPersonality;
 	}
-
 }
