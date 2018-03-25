@@ -130,7 +130,7 @@ public abstract class Map implements PlayMap {
 		return legend;
 	}
 
-	public final char[][] getMap() {
+	public final char[][] getPlayMap() {
 		return playMap;
 	}
 

@@ -23,13 +23,13 @@ public final class Controller implements Serializable {
 	public void newGame(String personality) {
 		stateMachine.advanceState(StateMachine.Event.PLAY);
 		currentMap = new DungeonMap(personality);
-		wdwController.updateGameWindow(currentMap.getMap().toString(), "You can play now");
+		wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
 	}
 
 	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
-			wdwController.updateGameWindow(currentMap.getMap().toString(), "You can move");
+			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can move");
 			advanceLevel(currentMap.checkEndLevel());
 		}
 	}
@@ -38,28 +38,32 @@ public final class Controller implements Serializable {
 		switch (endLevel) {
 		case -1:
 			stateMachine.advanceState(StateMachine.Event.OVER);
-			wdwController.updateGameWindow(currentMap.getMap().toString(), "Game Over");
+			wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Over");
 			return true;
 		case 0:
 			return false;
 		case 1:
 			if (currentMap.nextLevel(wdwController.getOgreNumber()) == null) {
 				stateMachine.advanceState(StateMachine.Event.WON);
-				wdwController.updateGameWindow(currentMap.getMap().toString(), "Game Won");
+				wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Won");
 				return true;
 			} else {
-				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
-				currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
-				wdwController.updateGameWindow(currentMap.getMap().toString(), "Next Level");
+				char[][] editMap = wdwController.getEditMap();
+				if (editMap.length == 0) {
+					stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
+					currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
+					wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
+				} else {
+					stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
+					currentMap = currentMap.nextLevel(wdwController.getOgreNumber(), editMap);
+					wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
+				}
+
 				return false;
 			}
 		default:
 			return false;
 		}
 	}
-
-	// public void setMap(char[][] map) {
-	// currentMap.setMap(map);
-	// }
 
 }

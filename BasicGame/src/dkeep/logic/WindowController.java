@@ -24,19 +24,53 @@ public final class WindowController {
 
 	public WindowController(Controller controller) {
 		this.controller = controller;
-		this.gameWdw = new GameWindow(this);
-		this.gameStgWdw = new GameSettingsWindow();
 		this.imageLoader = new ImageLoader();
-		this.createMapWdw = new CreateMapWindow(this, imageLoader);
+		this.gameStgWdw = new GameSettingsWindow();
+		this.createMapWdw = new CreateMapWindow(imageLoader);
+		this.gameWdw = new GameWindow(this, imageLoader);
 		this.popUpWdw = new PopUpWindow();
 		this.regex = new Regex();
 		ogreNumber = "";
 		guardPersonality = "";
 	}
 
-	public void updateGameWindow(String map, String legend) {
-		gameWdw.setMap(map);
+	public void updateGameWindow(char[][] map, String legend) {
+		setMap(map);
 		gameWdw.setLegend(legend);
+	}
+
+	private void setMap(char[][] map) {
+		ImageIcon[][] imgMap = new ImageIcon[map.length][map[0].length];
+
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+
+				if (map[i][j] == 'H') {
+					imgMap[i][j] = imageLoader.getHeroImg();
+				} else if (map[i][j] == 'A') {
+					imgMap[i][j] = imageLoader.getHeroArmedImg();
+				} else if (map[i][j] == 'O') {
+					imgMap[i][j] = imageLoader.getOgreImg();
+				} else if (map[i][j] == 'I') {
+					imgMap[i][j] = imageLoader.getKeyImg();
+				} else if (map[i][j] == 'k') {
+					imgMap[i][j] = imageLoader.getDoorImg();
+				} else if (map[i][j] == 'X') {
+					imgMap[i][j] = imageLoader.getWallImg();
+				} else if (map[i][j] == ' ') {
+					imgMap[i][j] = imageLoader.getBlankSpaceImg();
+				} else if (map[i][j] == 'G') {
+					imgMap[i][j] = imageLoader.getGuardImg();
+				} else if (map[i][j] == 'S') {
+					imgMap[i][j] = imageLoader.getDoorOpenImg();
+				}
+
+			}
+		}
+		if (map[6][0] == 'H') {
+			int a = 0;
+		}
+		gameWdw.paintMap(imgMap);
 	}
 
 	public void newGame() {
@@ -67,23 +101,35 @@ public final class WindowController {
 		createMapWdw.setVisible(true);
 	}
 
-	// public void generateMap(ImageIcon[][] editMap) {
-	// char[][] map = new char[editMap.length][editMap[0].length];
-	//
-	// for (int i = 0; i < editMap.length; i++) {
-	// for (int j = 0; j < editMap[0].length; j++) {
-	// if (editMap[i][j] == imageLoader.getBlankSpaceImg()) {
-	//
-	// } else if (editMap[i][j] == imageLoader.getHeroImg()) {
-	//
-	// } else if (editMap[i][j] == imageLoader.getOgreImg()) {
-	//
-	// } else if (editMap[i][j] == imageLoader.getBlankSpaceImg()) {
-	//
-	// }
-	//
-	// }
-	// }
-	// controller.setMap(map);
-	// }
+	public char[][] getEditMap() {
+		ImageIcon[][] imgMap = createMapWdw.getEditMap();
+		char[][] charMap = new char[imgMap.length][imgMap[0].length];
+		int counter = 0;
+
+		for (int i = 0; i < imgMap.length; i++) {
+			for (int j = 0; j < imgMap[0].length; j++) {
+				if (imgMap[i][j] == imageLoader.getHeroImg()) {
+					charMap[i][j] = 'A';
+				} else if (imgMap[i][j] == imageLoader.getOgreImg()) {
+					charMap[i][j] = 'O';
+				} else if (imgMap[i][j] == imageLoader.getDoorImg()) {
+					charMap[i][j] = 'I';
+				} else if (imgMap[i][j] == imageLoader.getKeyImg()) {
+					charMap[i][j] = 'k';
+				} else if (imgMap[i][j] == imageLoader.getWallImg()) {
+					charMap[i][j] = 'X';
+				} else if (imgMap[i][j] == imageLoader.getBlankSpaceImg()) {
+					charMap[i][j] = ' ';
+					counter++;
+				}
+
+			}
+		}
+		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
+	}
+
+	public int getEditPanelSubSquareLength() {
+		return createMapWdw.getEditPanelSubSquareLength();
+	}
+
 }

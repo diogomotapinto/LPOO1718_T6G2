@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -14,10 +16,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import dkeep.logic.Controller;
 import dkeep.logic.Map;
 import dkeep.logic.WindowController;
+import utilities.ImageLoader;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Window;
+
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -36,39 +42,50 @@ public final class GameWindow extends JFrame {
 	private JTextField ogreTextField;
 	private String map;
 	private String legend;
-	private JTextArea textArea;
+	private GameMapPanel gamePanel;
 	private WindowController wdwController;
 	private JLabel contextLbl;
+	private JButton btnNewGame;
+	private JButton btnLeft;
+	private JButton btnUp;
+	private JButton btnRight;
+	private JButton btnDown;
+	private JButton btnExit;
+	private JMenuBar menuBar;
+	private JMenu mnMenu;
+	private JMenuItem mntmGameSettings;
+	private JMenuItem mntmEditMap;
 
 	/**
 	 * Create the application.
 	 */
-	public GameWindow(WindowController windowController) {
+	public GameWindow(WindowController windowController, ImageLoader imageLoader) {
 		super();
 		this.wdwController = windowController;
-		initializeWindow();
-		textArea.requestFocus();
+		initializeWindow(imageLoader);
+		gamePanel.requestFocus();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void setMap(String map) {
-		this.textArea.setText(map);
+	public void paintMap(ImageIcon[][] imgMap) {
+		this.gamePanel.setMap(imgMap);
+		gamePanel.repaint();
 	}
 
 	public void setLegend(String legend) {
 		this.contextLbl.setText(legend);
 	}
 
-	private void initializeWindow() {
+	private void initializeWindow(ImageLoader imageLoader) {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 528);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JButton btnNewGame = new JButton("New Game");
+		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// // JOption pane
@@ -78,7 +95,7 @@ public final class GameWindow extends JFrame {
 		btnNewGame.setBounds(475, 85, 120, 25);
 		frame.getContentPane().add(btnNewGame);
 
-		JButton btnUp = new JButton("Up");
+		btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				wdwController.makeMove('w');
@@ -87,7 +104,7 @@ public final class GameWindow extends JFrame {
 		btnUp.setBounds(495, 150, 75, 30);
 		frame.getContentPane().add(btnUp);
 
-		JButton btnLeft = new JButton("Left");
+		btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wdwController.makeMove('a');
@@ -96,7 +113,7 @@ public final class GameWindow extends JFrame {
 		btnLeft.setBounds(415, 190, 75, 30);
 		frame.getContentPane().add(btnLeft);
 
-		JButton btnRight = new JButton("Right");
+		btnRight = new JButton("Right");
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wdwController.makeMove('d');
@@ -105,7 +122,7 @@ public final class GameWindow extends JFrame {
 		btnRight.setBounds(575, 190, 75, 30);
 		frame.getContentPane().add(btnRight);
 
-		JButton btnDown = new JButton("Down");
+		btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wdwController.makeMove('s');
@@ -114,8 +131,8 @@ public final class GameWindow extends JFrame {
 		btnDown.setBounds(495, 230, 75, 30);
 		frame.getContentPane().add(btnDown);
 
-		textArea = new JTextArea();
-		textArea.addKeyListener(new KeyAdapter() {
+		gamePanel = new GameMapPanel(imageLoader);
+		gamePanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
@@ -134,14 +151,13 @@ public final class GameWindow extends JFrame {
 				}
 			}
 		});
-		textArea.setFont(new Font("Courier", Font.PLAIN, 18));
-		textArea.setBounds(0, 41, 400, 400);
-		textArea.setVisible(true);
-		textArea.setEditable(false);
+		gamePanel.setFont(new Font("Courier", Font.PLAIN, 18));
+		gamePanel.setBounds(0, 41, 400, 400);
+		gamePanel.setVisible(true);
+		gamePanel.setSubSquareLength(wdwController.getEditPanelSubSquareLength());
+		frame.getContentPane().add(gamePanel);
 
-		frame.getContentPane().add(textArea);
-
-		JButton btnExit = new JButton("Exit");
+		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Exit");
@@ -155,13 +171,13 @@ public final class GameWindow extends JFrame {
 		contextLbl.setBounds(0, 9, 140, 16);
 		frame.getContentPane().add(contextLbl);
 
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 
-		JMenu mnMenu = new JMenu("Menu");
+		mnMenu = new JMenu("Menu");
 		menuBar.add(mnMenu);
 
-		JMenuItem mntmGameSettings = new JMenuItem("Game Settings");
+		mntmGameSettings = new JMenuItem("Game Settings");
 		mntmGameSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				wdwController.showWindowGameSettings();
@@ -169,7 +185,7 @@ public final class GameWindow extends JFrame {
 		});
 		mnMenu.add(mntmGameSettings);
 
-		JMenuItem mntmEditMap = new JMenuItem("Create Map");
+		mntmEditMap = new JMenuItem("Create Map");
 		mntmEditMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				wdwController.showCreateGameWindow();

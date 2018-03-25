@@ -60,14 +60,14 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // limpa fundo ...
-		System.out.println("paintComponent EditMapPanel");
 		if (paintIcon == true) {
 			editMap[xCoordinatesPanel * matrixSize / panelLength][yCoordinatesPanel * matrixSize
 					/ panelLength] = chosenImage;
 			for (int i = 0; i < editMap.length; i++) {
 				for (int j = 0; j < editMap[0].length; j++) {
-					g.drawImage(editMap[i][j].getImage(), i * panelLength / matrixSize, j * panelLength / matrixSize,
-							null);
+					if (editMap[i][j] != null)
+						g.drawImage(editMap[i][j].getImage(), i * panelLength / matrixSize,
+								j * panelLength / matrixSize, null);
 				}
 			}
 			int counter = 0;
@@ -175,6 +175,10 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 		this.editMap = tempMap;
+	}
+
+	public final ImageIcon[][] getEditMap() {
+		return editMap;
 	}
 
 }

@@ -49,9 +49,8 @@ public class CreateMapWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateMapWindow(WindowController wdwController, ImageLoader imageLoader) {
+	public CreateMapWindow(ImageLoader imageLoader) {
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
-		this.wdwController = wdwController;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 525);
@@ -172,7 +171,7 @@ public class CreateMapWindow extends JFrame {
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				int value = slider.getValue();
-				int editPanelSize = editPanel.getSubSquareLength() * slider.getValue();
+				int editPanelSize = editPanel.getSubSquareLength() * value;
 				setBounds(100, 100, 300 + editPanelSize, 125 + editPanelSize);
 
 				editPanel.setBounds(0, 69, editPanelSize, editPanelSize);
@@ -208,7 +207,12 @@ public class CreateMapWindow extends JFrame {
 
 	}
 
-	public void setFrameVisible() {
-		setVisible(true);
+	public ImageIcon[][] getEditMap() {
+		return editPanel.getEditMap();
 	}
+
+	public final int getEditPanelSubSquareLength() {
+		return editPanel.getSubSquareLength();
+	}
+
 }
