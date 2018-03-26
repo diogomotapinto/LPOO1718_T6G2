@@ -148,6 +148,7 @@ public final class WindowController {
 		boolean f = checkCharacter(' ', 1, charMap.length * charMap.length, charMap);
 		boolean g = checkWalls(charMap);
 		boolean h = checkWaytoKey(charMap);
+		boolean i = checkWaytoDoor(charMap);
 
 		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
 	}
@@ -209,14 +210,13 @@ public final class WindowController {
 	private boolean findGoalRec(int x, int y) {
 		// Check if this position is worth visiting (limits checking could
 		// be omitted because the labyrinth is surrounded by walls)
-		if (((x < 0 || y < 0) ||( x >= this.labirinth.length-1 || x >=  this.labirinth.length-1))|| (this.labirinth[y][x] == 0 || this.visited[y][x]==1))
+		if (((x < 0 || y < 0) ||( x > this.labirinth.length || x >  this.labirinth.length))|| (this.labirinth[y][x] == 0 || this.visited[y][x]==1))
 			return false;
 		// Mark as visited
 		visited[y][x] = 1;
 		// Check if the exit was reached
 		if (labirinth[y][x] == 2) {
 			System.out.println("Goald Found");
-			
 			return true;
 		}
 		// Try all the adjacent cells
@@ -247,6 +247,48 @@ public final class WindowController {
 					 labirinth[i][j] = 1;
 				 }else if(map[i][j]=='k') {
 					 labirinth[i][j] = 2;
+				 }else {
+					 labirinth[i][j] = 0;
+				 }
+			 }
+		 }
+		 
+		initializedVisited(map);
+		
+		
+		if(findGoalRec(x,y)) {
+			return true;
+		}
+			
+		return false;
+	}
+	
+	
+
+	private boolean checkWaytoDoor(char[][] map) {
+		labirinth = new int[map.length][map.length];
+		int x=0, y=0; 
+		
+		 for(int i = 0; i < map.length; i++) {
+			 for(int j = 0; j < map[i].length; j++) {
+				 
+				 if(map[i][j]=='k') {
+					 x = i;
+					 y = j;
+				 }
+			 }
+		 }
+		
+		
+		 for(int i = 0; i < map.length; i++) {
+			 for(int j = 0; j < map[i].length; j++) {
+				 
+				 if(map[i][j]==' ') {
+					 labirinth[i][j] = 1;
+				 }else if(map[i][j]=='I') {
+					 labirinth[i][j] = 2;
+				 }else {
+					 labirinth[i][j] = 0;
 				 }
 			 }
 		 }
