@@ -4,23 +4,44 @@ public final class Position {
 	private int xPosition;
 	private int yPosition;
 
+	/**
+	 * Class constructor
+	 * @param xPosition position in the x-axis 
+	 * @param yPosition position in the y-axis
+	 */
 	public Position(int xPosition, int yPosition) {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
 
+	/**
+	 * Get position in the x-axis
+	 * @return int equal or bigger than zero
+	 */
 	public final int getXPosition() {
 		return this.xPosition;
 	}
-
+	
+	/**
+	 * Set position in the x-axis
+	 * @param xPosition position in the x-axis
+	 */
 	public final void setXPosition(int xPosition) {
 		this.xPosition = xPosition;
 	}
-
+	
+	/**
+	 * Get position in the y-axis
+	 * @return int equal or bigger than zero
+	 */
 	public final int getYPosition() {
 		return this.yPosition;
 	}
 
+	/**
+	 * Set position in the y-axis
+	 * @param yPosition position in the y-axis
+	 */
 	public final void setYPosition(int yPosition) {
 		this.yPosition = yPosition;
 	}
@@ -33,6 +54,11 @@ public final class Position {
 		return result;
 	}
 
+	/**
+	 * check if the object is equals as the one passed as a @param
+	 * @param obj
+	 * @return true if the obj is equals false otherwise
+	 */
 	@Override
 	public final boolean equals(Object obj) {
 

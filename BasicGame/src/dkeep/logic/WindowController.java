@@ -132,4 +132,8 @@ public final class WindowController {
 		return createMapWdw.getEditPanelSubSquareLength();
 	}
 
+	public boolean validateMap(char [][] map) {
+			
+		
+	}
 }

@@ -28,7 +28,15 @@ public abstract class Map implements PlayMap {
 	protected final Lever lever;
 	protected final Hero hero;
 	protected final char[][] playMap;
-
+	
+	/**
+	 * Class constructor
+	 * @param playMap
+	 * @param legend
+	 * @param header
+	 * @param heroPosition
+	 * @param leverPosition
+	 */
 	protected Map(char[][] playMap, String legend, String header, Position heroPosition, Position leverPosition) {
 		this.playMap = playMap;
 		this.legend = legend;
@@ -45,6 +53,11 @@ public abstract class Map implements PlayMap {
 	protected abstract boolean checkLost();
 	/* End of Abstract Methods */
 
+	/**
+	 * Makes the hero move
+	 * @param move direction of the movement 
+	 * @param heroChar character of the hero
+	 */
 	protected final void moveHero(char move, char heroChar) {
 		Position p = hero.getPosition();
 		int xPosition = p.getXPosition();
@@ -79,6 +92,13 @@ public abstract class Map implements PlayMap {
 
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
+	
+	/**
+	 *Check if the move is allowed 
+	 * @param x
+	 * @param y
+	 * @return true if it is, false otherwise
+	 */
 	private boolean checkMoveHero(int x, int y) {
 		return (playMap[x][y] == Lever.getLeverChar() || playMap[x][y] == CHAR_BLANK_SPACE
 				|| playMap[x][y] == Club.getClubChar() || playMap[x][y] == CHAR_DOOR_OPEN);
@@ -95,6 +115,11 @@ public abstract class Map implements PlayMap {
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
 	// coordenadas do objeto lever) em vez de usar coordenadas do map
+	
+	
+	/**
+	 * Checks if the hero has reached the lever
+	 */
 	protected final void checkLever() {
 		Position heroPosition = hero.getPosition();
 		Position leverPosition = lever.getPosition();
@@ -120,12 +145,18 @@ public abstract class Map implements PlayMap {
 		}
 	}
 
+	/**
+	 * checks if the game is won 
+	 * @param y position of the hero in the y-axis
+	 * @return true if it is won and false otherwise
+	 */
 	protected final boolean checkWon(int y) {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
 		return this.hero.getLeverState() && y == 0;// ogre map
 	}
-
+	
+	
 	public final String getLegend() {
 		return legend;
 	}

@@ -10,9 +10,18 @@ public final class Utilities {
 	private static final byte MOVE_RIGHT = 3;
 	private static final byte MOVE_LEFT = 4;
 
+	/**
+	 * Class constructor
+	 */
 	private Utilities() {
 	}
 
+	/**
+	 * Generates an adjacent position.
+	 * @param xPosition position in the x-axis
+	 * @param yPosition position in the y-axis
+	 * @return position generated randomly 
+	 */
 	public static final Position getAdjacentPosition(int xPosition, int yPosition) {
 		int[] position = { xPosition, yPosition };
 		Random random = new Random();
@@ -45,6 +54,12 @@ public final class Utilities {
 		return random.nextInt((upperBound - lowerBound) + 1) + lowerBound;
 	}
 
+	/**
+	 * Check if there is a collision between two game characters
+	 * @param posOne position of the game character
+	 * @param posTwo position of the other game character
+	 * @return true if there is collision and false otherwise
+	 */
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
 		// check if it is in the same position
 		if (posOne.equals(posTwo)) {
@@ -70,6 +85,12 @@ public final class Utilities {
 		return false;
 	}
 
+	/**
+	 * Finds the position of some letter in the array
+	 * @param map used in the game
+	 * @param letter to be searched for in the array
+	 * @return the position of the letter, if the letter isn't found returns a default position
+	 */
 	public static Position findPosition(char[][] map, char letter) {
 		Position pos = new Position(0, 0);
 		for (int i = 0; i < map.length; i++) {

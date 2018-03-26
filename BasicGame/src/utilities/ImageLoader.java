@@ -24,9 +24,9 @@ public final class ImageLoader {
 
 	private void loadImages() {
 		try {
-			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice.png")));
+			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
 			heroAmredImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
-			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice1.png")));
+			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice6.png")));
 			wallImg = new ImageIcon(ImageIO.read(new File("Images/indice2.png")));
 			blankSpaceImg = new ImageIcon(ImageIO.read(new File("Images/indice3.png")));
 			doorImg = new ImageIcon(ImageIO.read(new File("Images/indice4.png")));

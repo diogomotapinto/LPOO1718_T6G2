@@ -25,7 +25,7 @@ public final class Controller implements Serializable {
 		currentMap = new DungeonMap(personality);
 		wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
 	}
-
+	
 	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
@@ -65,5 +65,6 @@ public final class Controller implements Serializable {
 			return false;
 		}
 	}
-
+	
+	
 }
