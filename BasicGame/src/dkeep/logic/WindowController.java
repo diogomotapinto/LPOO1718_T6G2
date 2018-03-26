@@ -21,6 +21,9 @@ public final class WindowController {
 	private final ImageLoader imageLoader;
 	private String ogreNumber;
 	private String guardPersonality;
+	private int[][] visited;
+	private int[][] labirinth;
+
 
 	public WindowController(Controller controller) {
 		this.controller = controller;
@@ -32,6 +35,7 @@ public final class WindowController {
 		this.regex = new Regex();
 		ogreNumber = "";
 		guardPersonality = "";
+		visited = new int[15][15];
 	}
 
 	public void updateGameWindow(char[][] map, String legend) {
@@ -141,6 +145,7 @@ public final class WindowController {
 		boolean e = checkCharacter('X', 1, 1, charMap);
 		boolean f = checkCharacter(' ', 1, charMap.length * charMap.length, charMap);
 		boolean g = checkWalls(charMap);
+		boolean h = checkWaytoKey(charMap);
 
 		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
 	}
@@ -188,5 +193,68 @@ public final class WindowController {
 		}
 
 		return true;
+	}
+	
+	
+	private void initializedVisited(char[][] map) {
+		{
+			for (int i = 0; i < map.length; i++)
+				for (int j = 0; j < map[i].length; j++)
+					visited[i][j] = 0;
+		}
+	}
+	
+	private boolean findGoalRec(int x, int y) {
+		// Check if this position is worth visiting (limits checking could
+		// be omitted because the labyrinth is surrounded by walls)
+		if (((x < 0 || y < 0) ||( x >= this.labirinth.length-1 || x >=  this.labirinth.length-1))|| (this.labirinth[y][x] == 0 || this.visited[y][x]==1))
+			return false;
+		// Mark as visited
+		visited[y][x] = 1;
+		// Check if the exit was reached
+		if (labirinth[y][x] == 2) {
+			System.out.println("Goald Found");
+			return true;
+		}
+		// Try all the adjacent cells
+		return findGoalRec(x-1, y) || findGoalRec(x+1, y)
+				|| findGoalRec(x, y-1) || findGoalRec(x, y+1);
+	}
+	
+	
+	private boolean checkWaytoKey(char[][] map) {
+		labirinth = new int[map.length][map.length];
+		int x=0, y=0; 
+		
+		 for(int i = 0; i < map.length; i++) {
+			 for(int j = 0; j < map[i].length; j++) {
+				 
+				 if(map[i][j]=='A') {
+					 x = i;
+					 y = j;
+				 }
+			 }
+		 }
+		
+		
+		 for(int i = 0; i < map.length; i++) {
+			 for(int j = 0; j < map[i].length; j++) {
+				 
+				 if(map[i][j]==' ') {
+					 labirinth[i][j] = 1;
+				 }else if(map[i][j]=='k') {
+					 labirinth[i][j] = 2;
+				 }
+			 }
+		 }
+		 
+		initializedVisited(map);
+		
+		
+		if(findGoalRec(x,y)) {
+			return true;
+		}
+			
+		return false;
 	}
 }
