@@ -1,6 +1,8 @@
 package dkeep.gui;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -34,21 +36,10 @@ public class GameMapPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println("GameMapPanel paintComponent");
 		if (paintMap == true) {
-			if (counter == 29) {
-				int a = 0;
-			}
-			System.out.println("GameMapPanel paintComponent true");
 			for (int i = 0; i < gameMap.length; i++) {
 				for (int j = 0; j < gameMap[0].length; j++) {
-					// int value = i * subSquareLength;
-					// int value2 = j * subSquareLength;
-					// System.out.println("i= " + i);
-					// System.out.println("j= " + j);
-					// System.out.println("\n");
-					if (gameMap[i][j] != null)
-						g.drawImage(gameMap[i][j].getImage(), j * subSquareLength, i * subSquareLength, null);
+					g.drawImage(gameMap[i][j].getImage(), j * subSquareLength, i * subSquareLength, null);
 
 				}
 			}

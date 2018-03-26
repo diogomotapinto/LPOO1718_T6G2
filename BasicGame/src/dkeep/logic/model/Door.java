@@ -1,13 +1,17 @@
 package dkeep.logic.model;
 
-public class Door extends GameObject{
+public class Door extends GameObject {
 	private boolean open;
 	private final char close;
 	private final char openChar;
+
 	/**
-	 * Class constructor 
-	 * @param xPos position of the door in the x-axis
-	 * @param yPos position of the door in the y-axis
+	 * Class constructor
+	 * 
+	 * @param xPos
+	 *            position of the door in the x-axis
+	 * @param yPos
+	 *            position of the door in the y-axis
 	 */
 	public Door(int xPos, int yPos) {
 		super(xPos, yPos);
@@ -18,6 +22,7 @@ public class Door extends GameObject{
 
 	/**
 	 * method used to know if the door is open
+	 * 
 	 * @return true if the door is open and false otherwise
 	 */
 	public boolean isOpen() {
@@ -26,7 +31,9 @@ public class Door extends GameObject{
 
 	/**
 	 * method to set the state of the door
-	 * @param open true if the door is open and false otherwise
+	 * 
+	 * @param open
+	 *            true if the door is open and false otherwise
 	 */
 	public void setOpen(boolean open) {
 		this.open = open;
@@ -34,12 +41,13 @@ public class Door extends GameObject{
 
 	/**
 	 * method to get the door character
+	 * 
 	 * @return 'S' if the door is open and 'I' otherwise
 	 */
 	public char getChar() {
-		if(this.open) {
+		if (this.open) {
 			return this.openChar;
-		}else {
+		} else {
 			return this.close;
 		}
 	}

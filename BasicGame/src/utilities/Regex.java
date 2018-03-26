@@ -10,11 +10,14 @@ public final class Regex {
 	 */
 	public Regex() {
 	}
-	
+
 	/**
 	 * Checks with a regular expression if the number of ogres is acceptable
-	 * @param ogreNumber number of ogres
-	 * @return true is the number of ogres is accepted by the regular expression and false otherwise
+	 * 
+	 * @param ogreNumber
+	 *            number of ogres
+	 * @return true is the number of ogres is accepted by the regular expression and
+	 *         false otherwise
 	 */
 	public boolean checkOgreNumber(String ogreNumber) {
 		Pattern pattern = Pattern.compile("^([1-5]{1})\\b$");

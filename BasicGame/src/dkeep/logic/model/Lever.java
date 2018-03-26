@@ -1,12 +1,11 @@
 package dkeep.logic.model;
 
-public final class Lever {
+public final class Lever extends GameObject {
 	private static final char CHAR_LEVER = 'k';
 	private boolean activated;
-	private Position position;
 
-	public Lever(int xPosition, int yPosition) {
-		position = new Position(xPosition, yPosition);
+	public Lever(int xPos, int yPos) {
+		super(xPos, yPos);
 		activated = false;
 	}
 
@@ -22,11 +21,4 @@ public final class Lever {
 		return activated;
 	}
 
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position position) {
-		this.position = position;
-	}
 }

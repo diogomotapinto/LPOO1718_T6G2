@@ -8,8 +8,11 @@ public final class Ogre extends GameObject {
 
 	/**
 	 * Class constructor
-	 * @param xPos position on the x-axis
-	 * @param yPos position on the y-axis
+	 * 
+	 * @param xPos
+	 *            position on the x-axis
+	 * @param yPos
+	 *            position on the y-axis
 	 */
 	public Ogre(int xPos, int yPos) {
 		super(xPos, yPos);
@@ -19,8 +22,11 @@ public final class Ogre extends GameObject {
 	}
 
 	/**
-	 * Set if the ogre is stunned or not, if he is stunner put a counter equals to two
-	 * @param isStunned true if the ogre is stunned false otherwise
+	 * Set if the ogre is stunned or not, if he is stunner put a counter equals to
+	 * two
+	 * 
+	 * @param isStunned
+	 *            true if the ogre is stunned false otherwise
 	 */
 	public final void setStunned(boolean isStunned) {
 		if (stunned) {
@@ -29,13 +35,16 @@ public final class Ogre extends GameObject {
 			stunned = isStunned;
 		}
 	}
+
 	/**
 	 * Method used to know if the ogre is stunned or not
+	 * 
 	 * @return the state of the ogre
 	 */
 	public final boolean getStunned() {
 		return stunned;
 	}
+
 	/**
 	 * Used to decrement the stun counter
 	 */
@@ -45,6 +54,7 @@ public final class Ogre extends GameObject {
 
 	/**
 	 * method used to know for how many plays the ogre is stunned
+	 * 
 	 * @return 2, 1 or 0
 	 */
 	public final int getStunCounter() {
@@ -53,6 +63,7 @@ public final class Ogre extends GameObject {
 
 	/**
 	 * Method used to know get the ogre character
+	 * 
 	 * @return 'O' if the ogre isn't stunned and '8' otherwise
 	 */
 	public final char getOgreChar() {
@@ -64,7 +75,8 @@ public final class Ogre extends GameObject {
 	}
 
 	/**
-	 * Method use to get the club that belongs to the ogre 
+	 * Method use to get the club that belongs to the ogre
+	 * 
 	 * @return club of the ogre
 	 */
 	public final Club getClub() {

@@ -9,8 +9,11 @@ public final class Hero extends GameObject {
 
 	/**
 	 * Class constructor
-	 * @param xPos position of the hero in the x-axis
-	 * @param yPos position of the hero in the y-axis
+	 * 
+	 * @param xPos
+	 *            position of the hero in the x-axis
+	 * @param yPos
+	 *            position of the hero in the y-axis
 	 */
 	public Hero(int xPos, int yPos) {
 		super(xPos, yPos);
@@ -18,7 +21,8 @@ public final class Hero extends GameObject {
 	}
 
 	/**
-	 * Used to know if the hero has the key 
+	 * Used to know if the hero has the key
+	 * 
 	 * @return true if the hero has the key and false otherwise
 	 */
 	public final boolean getLeverState() {
@@ -27,13 +31,15 @@ public final class Hero extends GameObject {
 
 	/**
 	 * used to set the lever state
-	 * @param lever true if the hero has caught the key and false otherwise
+	 * 
+	 * @param lever
+	 *            true if the hero has caught the key and false otherwise
 	 * 
 	 */
 	public final void setLeverState(boolean lever) {
 		this.lever = lever;
 	}
-	
+
 	/**
 	 * 
 	 * @return 'H'
@@ -41,7 +47,7 @@ public final class Hero extends GameObject {
 	public static char getCharHero() {
 		return CHAR_HERO;
 	}
-	
+
 	/**
 	 * 
 	 * @return 'k'
@@ -49,7 +55,7 @@ public final class Hero extends GameObject {
 	public static char getCharHeroKey() {
 		return CHAR_HERO_KEY;
 	}
-	
+
 	/**
 	 * 
 	 * @return 'A'

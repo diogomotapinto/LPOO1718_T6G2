@@ -18,9 +18,12 @@ public final class Utilities {
 
 	/**
 	 * Generates an adjacent position.
-	 * @param xPosition position in the x-axis
-	 * @param yPosition position in the y-axis
-	 * @return position generated randomly 
+	 * 
+	 * @param xPosition
+	 *            position in the x-axis
+	 * @param yPosition
+	 *            position in the y-axis
+	 * @return position generated randomly
 	 */
 	public static final Position getAdjacentPosition(int xPosition, int yPosition) {
 		int[] position = { xPosition, yPosition };
@@ -56,8 +59,11 @@ public final class Utilities {
 
 	/**
 	 * Check if there is a collision between two game characters
-	 * @param posOne position of the game character
-	 * @param posTwo position of the other game character
+	 * 
+	 * @param posOne
+	 *            position of the game character
+	 * @param posTwo
+	 *            position of the other game character
 	 * @return true if there is collision and false otherwise
 	 */
 	public static final boolean checkAdjacentCollision(Position posOne, Position posTwo) {
@@ -87,9 +93,13 @@ public final class Utilities {
 
 	/**
 	 * Finds the position of some letter in the array
-	 * @param map used in the game
-	 * @param letter to be searched for in the array
-	 * @return the position of the letter, if the letter isn't found returns a default position
+	 * 
+	 * @param map
+	 *            used in the game
+	 * @param letter
+	 *            to be searched for in the array
+	 * @return the position of the letter, if the letter isn't found returns a
+	 *         default position
 	 */
 	public static Position findPosition(char[][] map, char letter) {
 		Position pos = new Position(0, 0);

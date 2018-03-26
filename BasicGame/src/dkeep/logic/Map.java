@@ -28,9 +28,10 @@ public abstract class Map implements PlayMap {
 	protected final Lever lever;
 	protected final Hero hero;
 	protected final char[][] playMap;
-	
+
 	/**
 	 * Class constructor
+	 * 
 	 * @param playMap
 	 * @param legend
 	 * @param header
@@ -55,8 +56,11 @@ public abstract class Map implements PlayMap {
 
 	/**
 	 * Makes the hero move
-	 * @param move direction of the movement 
-	 * @param heroChar character of the hero
+	 * 
+	 * @param move
+	 *            direction of the movement
+	 * @param heroChar
+	 *            character of the hero
 	 */
 	protected final void moveHero(char move, char heroChar) {
 		Position p = hero.getPosition();
@@ -87,14 +91,13 @@ public abstract class Map implements PlayMap {
 		default:
 			break;
 		}
-
 	}
 
 	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
 	// de usar coordenadas do map
-	
 	/**
-	 *Check if the move is allowed 
+	 * Check if the move is allowed
+	 * 
 	 * @param x
 	 * @param y
 	 * @return true if it is, false otherwise
@@ -115,20 +118,12 @@ public abstract class Map implements PlayMap {
 
 	// criar objeto door (com boolean aberto/fechado e checkar atraves das
 	// coordenadas do objeto lever) em vez de usar coordenadas do map
-	
-	
 	/**
 	 * Checks if the hero has reached the lever
 	 */
 	protected final void checkLever() {
 		Position heroPosition = hero.getPosition();
 		Position leverPosition = lever.getPosition();
-		System.out.println();
-		System.out.print("Lever ");
-		System.out.println(leverPosition);
-
-		System.out.print("Heroi ");
-		System.out.println(heroPosition);
 
 		if (leverPosition.equals(heroPosition) && (heroPosition.hashCode() == leverPosition.hashCode())) {
 			lever.activateLever();
@@ -146,8 +141,10 @@ public abstract class Map implements PlayMap {
 	}
 
 	/**
-	 * checks if the game is won 
-	 * @param y position of the hero in the y-axis
+	 * checks if the game is won
+	 * 
+	 * @param y
+	 *            position of the hero in the y-axis
 	 * @return true if it is won and false otherwise
 	 */
 	protected final boolean checkWon(int y) {
@@ -155,8 +152,7 @@ public abstract class Map implements PlayMap {
 		// futuro poder escalar o sistema
 		return this.hero.getLeverState() && y == 0;// ogre map
 	}
-	
-	
+
 	public final String getLegend() {
 		return legend;
 	}

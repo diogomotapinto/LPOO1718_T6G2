@@ -49,12 +49,14 @@ public final class WindowController {
 					imgMap[i][j] = imageLoader.getHeroImg();
 				} else if (map[i][j] == 'A') {
 					imgMap[i][j] = imageLoader.getHeroArmedImg();
+				} else if (map[i][j] == 'K') {
+					imgMap[i][j] = imageLoader.getHeroArmedImg();
 				} else if (map[i][j] == 'O') {
 					imgMap[i][j] = imageLoader.getOgreImg();
 				} else if (map[i][j] == 'I') {
-					imgMap[i][j] = imageLoader.getKeyImg();
-				} else if (map[i][j] == 'k') {
 					imgMap[i][j] = imageLoader.getDoorImg();
+				} else if (map[i][j] == 'k') {
+					imgMap[i][j] = imageLoader.getKeyImg();
 				} else if (map[i][j] == 'X') {
 					imgMap[i][j] = imageLoader.getWallImg();
 				} else if (map[i][j] == ' ') {
@@ -63,12 +65,11 @@ public final class WindowController {
 					imgMap[i][j] = imageLoader.getGuardImg();
 				} else if (map[i][j] == 'S') {
 					imgMap[i][j] = imageLoader.getDoorOpenImg();
+				} else if (map[i][j] == '*') {
+					imgMap[i][j] = imageLoader.getClubImg();
 				}
 
 			}
-		}
-		if (map[6][0] == 'H') {
-			int a = 0;
 		}
 		gameWdw.paintMap(imgMap);
 	}
@@ -76,13 +77,21 @@ public final class WindowController {
 	public void newGame() {
 		ogreNumber = gameStgWdw.getOgreNumber();
 		guardPersonality = gameStgWdw.getGuardPersonality();
-		if (ogreNumber.equals("") || guardPersonality.equals("")) {
-			popUpWdw.printErrorMessageDialog("Missing information");
-		} else if (!regex.checkOgreNumber(ogreNumber)) {
-			popUpWdw.printWarningMessageDialog("Invalid number of Ogres");
-		} else {
-			controller.newGame(guardPersonality);
+		if (guardPersonality.equals("")) {
+			popUpWdw.printErrorMessageDialog("Dungeon Map needs a guard personality");
+			return;
 		}
+
+		if (!regex.checkOgreNumber(ogreNumber) && !createMapWdw.isMapCreated()) {
+			popUpWdw.printWarningMessageDialog("Invalid number of ogres");
+			return;
+		}
+
+		if (!ogreNumber.equals("") && createMapWdw.isMapCreated()) {
+			popUpWdw.printErrorMessageDialog("Keep Map cannot have default and edit maps at same time");
+			return;
+		}
+		controller.newGame(guardPersonality);
 	}
 
 	public void makeMove(char move) {
@@ -122,9 +131,17 @@ public final class WindowController {
 					charMap[i][j] = ' ';
 					counter++;
 				}
-
 			}
 		}
+		
+		boolean a = checkCharacter('A', 1, 1, charMap);
+		boolean b = checkCharacter('O', 1, 5, charMap);
+		boolean c = checkCharacter('I', 1, charMap.length * charMap.length, charMap);
+		boolean d = checkCharacter('k', 1, charMap.length * charMap.length, charMap);
+		boolean e = checkCharacter('X', 1, 1, charMap);
+		boolean f = checkCharacter(' ', 1, charMap.length * charMap.length, charMap);
+		boolean g = checkWalls(charMap);
+
 		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
 	}
 
@@ -132,8 +149,44 @@ public final class WindowController {
 		return createMapWdw.getEditPanelSubSquareLength();
 	}
 
-	public boolean validateMap(char [][] map) {
-			
-		
+	private boolean checkCharacter(char character, int numMin, int numMax, char[][] map) {
+		int counter = 0;
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				if (map[i][j] == character) {
+					counter++;
+				}
+			}
+		}
+		return (counter >= numMin && counter <= numMax);
+	}
+
+	private boolean checkWalls(char[][] map) {
+		for (int j = 0; j < map[0].length; j++) {
+			if (map[0][j] != 'X' || map[0][j] != 'I') {
+				return false;
+			}
+		}
+
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; i < map[i].length; j++) {
+
+				if (map[i][0] != 'X' || map[0][j] != 'I') {
+					return false;
+				}
+
+				if (map[i][map.length - 1] != 'X' || map[0][j] != 'I') {
+					return false;
+				}
+			}
+		}
+
+		for (int j = 0; j < map[0].length; j++) {
+			if (map[map.length - 1][j] != 'X' || map[0][j] != 'I') {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

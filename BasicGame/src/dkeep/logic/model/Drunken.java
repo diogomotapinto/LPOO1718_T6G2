@@ -5,9 +5,12 @@ import utilities.Utilities;
 public final class Drunken extends Guard {
 
 	private boolean sleep;
+
 	/**
 	 * Class constructor
-	 * @param route of the drunken guard
+	 * 
+	 * @param route
+	 *            of the drunken guard
 	 */
 	public Drunken(int[][] route) {
 		super(route);

@@ -8,13 +8,15 @@ public final class Suspicious extends Guard {
 
 	/**
 	 * Class constructor
-	 * @param route of the Suspicious Guard
+	 * 
+	 * @param route
+	 *            of the Suspicious Guard
 	 */
 	public Suspicious(int[][] route) {
 		super(route);
 		direction = true;
 	}
-	
+
 	/**
 	 * Makes Suspicious Guard move to the next position in the route
 	 */
@@ -34,9 +36,6 @@ public final class Suspicious extends Guard {
 		direction = (Utilities.generateRandomNumber(0, 1) == 0) ? false : true;
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public String toString() {
 		return "Guard [tipo= " + getClass().getSimpleName() + "]";

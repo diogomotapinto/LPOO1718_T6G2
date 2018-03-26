@@ -8,6 +8,6 @@ public interface PlayMap {
 
 	public Map nextLevel(String info);
 
-	public Map nextLevel(String info, char[][] map);
+	public Map nextLevel(char[][] map);
 
 }

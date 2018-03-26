@@ -4,7 +4,9 @@ public final class Rookie extends Guard {
 
 	/**
 	 * Class constructor
-	 * @param route of the Rookie Guard
+	 * 
+	 * @param route
+	 *            of the Rookie Guard
 	 */
 	public Rookie(int[][] route) {
 		super(route);
@@ -22,9 +24,6 @@ public final class Rookie extends Guard {
 
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public String toString() {
 		return "Guard [tipo= " + getClass().getSimpleName() + "]";

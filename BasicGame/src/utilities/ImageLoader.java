@@ -17,6 +17,7 @@ public final class ImageLoader {
 	private ImageIcon doorImg;
 	private ImageIcon guardImg;
 	private ImageIcon doorOpenImg;
+	private ImageIcon clubImg;
 
 	public ImageLoader() {
 		loadImages();
@@ -24,15 +25,16 @@ public final class ImageLoader {
 
 	private void loadImages() {
 		try {
-			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
+			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice.png")));
 			heroAmredImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
-			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice6.png")));
+			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice1.png")));
 			wallImg = new ImageIcon(ImageIO.read(new File("Images/indice2.png")));
 			blankSpaceImg = new ImageIcon(ImageIO.read(new File("Images/indice3.png")));
 			doorImg = new ImageIcon(ImageIO.read(new File("Images/indice4.png")));
 			keyImg = new ImageIcon(ImageIO.read(new File("Images/indice5.png")));
 			guardImg = new ImageIcon(ImageIO.read(new File("Images/indice6.png")));
 			doorOpenImg = new ImageIcon(ImageIO.read(new File("Images/indice8.png")));
+			clubImg = new ImageIcon(ImageIO.read(new File("Images/indice9.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -72,6 +74,10 @@ public final class ImageLoader {
 
 	public ImageIcon getDoorOpenImg() {
 		return doorOpenImg;
+	}
+
+	public final ImageIcon getClubImg() {
+		return clubImg;
 	}
 
 }

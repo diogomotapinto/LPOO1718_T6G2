@@ -1,37 +1,22 @@
 package dkeep.gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Component;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import dkeep.logic.Controller;
-import dkeep.logic.Map;
 import dkeep.logic.WindowController;
 import utilities.ImageLoader;
 
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Window;
 
-import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextArea;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -39,9 +24,6 @@ import java.awt.event.KeyAdapter;
 
 public final class GameWindow extends JFrame {
 	private JFrame frame;
-	private JTextField ogreTextField;
-	private String map;
-	private String legend;
 	private GameMapPanel gamePanel;
 	private WindowController wdwController;
 	private JLabel contextLbl;
@@ -63,7 +45,6 @@ public final class GameWindow extends JFrame {
 		super();
 		this.wdwController = windowController;
 		initializeWindow(imageLoader);
-		gamePanel.requestFocus();
 	}
 
 	/**
@@ -71,6 +52,23 @@ public final class GameWindow extends JFrame {
 	 */
 	public void paintMap(ImageIcon[][] imgMap) {
 		this.gamePanel.setMap(imgMap);
+		resizeFrame(imgMap.length);
+		gamePanel.repaint();
+
+	}
+
+	private void resizeFrame(int subSquareNumber) {
+		int gamePanelSize = wdwController.getEditPanelSubSquareLength() * subSquareNumber;
+
+		frame.setBounds(100, 100, 300 + gamePanelSize, 128 + gamePanelSize);
+		btnNewGame.setBounds(75 + gamePanelSize, 85, 120, 25);
+		btnExit.setBounds(75 + gamePanelSize, 300, 120, 25);
+		btnDown.setBounds(95 + gamePanelSize, 230, 75, 30);
+		btnRight.setBounds(175 + gamePanelSize, 190, 75, 30);
+		btnLeft.setBounds(15 + gamePanelSize, 190, 75, 30);
+		btnUp.setBounds(95 + gamePanelSize, 150, 75, 30);
+		btnDown.setBounds(95 + gamePanelSize, 230, 75, 30);
+		gamePanel.setBounds(0, 41, gamePanelSize, gamePanelSize);
 		gamePanel.repaint();
 	}
 
@@ -88,7 +86,6 @@ public final class GameWindow extends JFrame {
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// // JOption pane
 				wdwController.newGame();
 			}
 		});
@@ -135,6 +132,7 @@ public final class GameWindow extends JFrame {
 		gamePanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				System.out.println("KEY PRESSED");
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 					wdwController.makeMove('w');
@@ -151,11 +149,12 @@ public final class GameWindow extends JFrame {
 				}
 			}
 		});
+
 		gamePanel.setFont(new Font("Courier", Font.PLAIN, 18));
 		gamePanel.setBounds(0, 41, 400, 400);
-		gamePanel.setVisible(true);
 		gamePanel.setSubSquareLength(wdwController.getEditPanelSubSquareLength());
 		frame.getContentPane().add(gamePanel);
+		gamePanel.setVisible(true);
 
 		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {

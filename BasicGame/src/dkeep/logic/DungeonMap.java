@@ -18,8 +18,10 @@ public class DungeonMap extends Map {
 	private Guard guard;
 
 	/**
-	 * Class constructor 
-	 * @param personality of the guard it can be 'Rookie', 'Drunken' or 'Suspicious'
+	 * Class constructor
+	 * 
+	 * @param personality
+	 *            of the guard it can be 'Rookie', 'Drunken' or 'Suspicious'
 	 */
 	public DungeonMap(String personality) {
 		super(new char[][] {
@@ -48,8 +50,9 @@ public class DungeonMap extends Map {
 		super.header = guard.toString();
 		initializeMap();
 	}
+
 	/**
-	 * Makes the gurad move 
+	 * Makes the gurad move
 	 */
 	protected void moveGuard() {
 		Position guardPosition = guard.getPosition();
@@ -58,6 +61,7 @@ public class DungeonMap extends Map {
 		guardPosition = guard.getPosition();
 		playMap[guardPosition.getXPosition()][guardPosition.getYPosition()] = Guard.getGuardChar();
 	}
+
 	/**
 	 * Initializes the Map with the hero in it
 	 */
@@ -66,9 +70,12 @@ public class DungeonMap extends Map {
 		Position heroPosition = hero.getPosition();
 		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = hero.getCharHero();
 	}
+
 	/**
 	 * Generates the Hero "enimies"
-	 * @param personality of the guard to be generated
+	 * 
+	 * @param personality
+	 *            of the guard to be generated
 	 */
 	@Override
 	protected final void generateFoes(String personality) {
@@ -85,8 +92,10 @@ public class DungeonMap extends Map {
 			break;
 		}
 	}
+
 	/**
-	 * Checks if the game is lost by checking if the guard is in a adjacent position to the hero
+	 * Checks if the game is lost by checking if the guard is in a adjacent position
+	 * to the hero
 	 */
 	@Override
 	protected final boolean checkLost() {
@@ -94,13 +103,16 @@ public class DungeonMap extends Map {
 		// argumento (heroi) sao as do guarda
 		return Utilities.checkAdjacentCollision(hero.getPosition(), guard.getPosition());
 	}
-	
+
 	/**
 	 * Makes the hero move
-	 * @param move char that set the hero direction 
+	 * 
+	 * @param move
+	 *            char that set the hero direction
 	 */
 	@Override
 	public final void play(char move) {
+
 		super.moveHero(move, hero.getCharHero());
 		super.checkLever();
 		this.moveGuard();
@@ -108,23 +120,26 @@ public class DungeonMap extends Map {
 			printLever();
 		}
 	}
-	
+
 	/**
-	 *Puts the lever in the map
+	 * Puts the lever in the map
 	 */
 	protected final void printLever() {
 		Position position = super.lever.getPosition();
 		playMap[position.getXPosition()][position.getYPosition()] = Lever.getLeverChar();
 	}
-	
+
 	/**
 	 * Game goes to the next level
-	 * @param info needed the next level
+	 * 
+	 * @param info
+	 *            needed the next level
 	 */
 	@Override
 	public final Map nextLevel(String info) {
-		return new NewKeepMap(info);
+		return new KeepMap(info);
 	}
+
 	/**
 	 * Checks the state of the game
 	 */
@@ -145,11 +160,13 @@ public class DungeonMap extends Map {
 
 	/**
 	 * Game goes to the next level
-	 * @param map needed to be run in the next level
+	 * 
+	 * @param map
+	 *            needed to be run in the next level
 	 */
 	@Override
-	public Map nextLevel(String info, char[][] map) {
-		return new NewKeepMap(info, map);
+	public Map nextLevel(char[][] map) {
+		return new KeepMap(map);
 	}
 
 }

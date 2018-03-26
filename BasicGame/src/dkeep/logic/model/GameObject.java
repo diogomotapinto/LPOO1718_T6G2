@@ -5,22 +5,30 @@ public abstract class GameObject {
 
 	/**
 	 * Class constructor
-	 * @param xPos position of the game object in the x-axis
-	 * @param yPos position of the game object in the y-axis
+	 * 
+	 * @param xPos
+	 *            position of the game object in the x-axis
+	 * @param yPos
+	 *            position of the game object in the y-axis
 	 */
 	public GameObject(int xPos, int yPos) {
 		position = new Position(xPos, yPos);
 	}
+
 	/**
 	 * Gives the position of the game object
+	 * 
 	 * @return game object position
 	 */
 	public final Position getPosition() {
 		return position;
 	}
+
 	/**
 	 * Sets the position of the game object
-	 * @param position, new position of the game object
+	 * 
+	 * @param position,
+	 *            new position of the game object
 	 */
 	public void setPosition(Position position) {
 		this.position = position;

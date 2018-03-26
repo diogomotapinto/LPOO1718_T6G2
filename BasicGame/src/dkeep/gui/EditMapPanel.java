@@ -37,7 +37,9 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 				editMap[i][j] = imageLoader.getBlankSpaceImg();
 			}
 		}
+
 		this.imageLoader = imageLoader;
+		this.chosenImage = imageLoader.getBlankSpaceImg();
 
 	}
 
@@ -61,26 +63,17 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // limpa fundo ...
 		if (paintIcon == true) {
-			editMap[xCoordinatesPanel * matrixSize / panelLength][yCoordinatesPanel * matrixSize
+			editMap[yCoordinatesPanel * matrixSize / panelLength][xCoordinatesPanel * matrixSize
 					/ panelLength] = chosenImage;
 			for (int i = 0; i < editMap.length; i++) {
 				for (int j = 0; j < editMap[0].length; j++) {
-					if (editMap[i][j] != null)
-						g.drawImage(editMap[i][j].getImage(), i * panelLength / matrixSize,
-								j * panelLength / matrixSize, null);
+					g.drawImage(editMap[j][i].getImage(), i * subSquareLength, j * subSquareLength, null);
 				}
 			}
-			int counter = 0;
-			for (int i = 0; i < editMap.length; i++) {
-				for (int j = 0; j < editMap[0].length; j++) {
-					if (editMap[i][j].getImage() != imageLoader.getBlankSpaceImg().getImage()) {
-						counter++;
-					}
-				}
-			}
-			System.out.println("Numero de elementos diferentes de branco= " + counter);
+
 			paintIcon = false;
 		}
+
 	}
 
 	@Override

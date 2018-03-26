@@ -5,15 +5,19 @@ public abstract class Guard extends GameObject {
 	private static final char GUARD_CHAR = 'G';
 	protected final int route[][];
 	protected int index;
+
 	/**
 	 * Class constructor
-	 * @param route of the guard
+	 * 
+	 * @param route
+	 *            of the guard
 	 */
 	protected Guard(int[][] route) {
 		super(route[0][0], route[0][1]);
 		this.route = route;
 		index = 0;
 	}
+
 	/**
 	 * Makes guard move to the next position
 	 */
@@ -21,12 +25,12 @@ public abstract class Guard extends GameObject {
 
 	/**
 	 * Gives the guard character
-	 * @return 'G' 
+	 * 
+	 * @return 'G'
 	 */
 	public static final char getGuardChar() {
 		return GUARD_CHAR;
 	}
-	
-	
+
 	public abstract String toString();
 }

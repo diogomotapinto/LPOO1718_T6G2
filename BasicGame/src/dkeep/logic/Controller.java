@@ -25,10 +25,13 @@ public final class Controller implements Serializable {
 		currentMap = new DungeonMap(personality);
 		wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
 	}
-	
+
 	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
+			if (currentMap.getHero().getPosition().getYPosition() == 0) {
+				int a = 0;
+			}
 			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can move");
 			advanceLevel(currentMap.checkEndLevel());
 		}
@@ -43,21 +46,22 @@ public final class Controller implements Serializable {
 		case 0:
 			return false;
 		case 1:
-			if (currentMap.nextLevel(wdwController.getOgreNumber()) == null) {
+
+			if (currentMap.nextLevel("0") == null) {
 				stateMachine.advanceState(StateMachine.Event.WON);
 				wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Won");
 				return true;
 			} else {
+
 				char[][] editMap = wdwController.getEditMap();
+				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
 				if (editMap.length == 0) {
-					stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
 					currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
-					wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
 				} else {
-					stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
-					currentMap = currentMap.nextLevel(wdwController.getOgreNumber(), editMap);
-					wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
+					currentMap = currentMap.nextLevel(editMap);
 				}
+
+				wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
 
 				return false;
 			}
@@ -65,6 +69,5 @@ public final class Controller implements Serializable {
 			return false;
 		}
 	}
-	
-	
+
 }

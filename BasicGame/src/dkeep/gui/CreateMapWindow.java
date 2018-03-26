@@ -43,13 +43,15 @@ public class CreateMapWindow extends JFrame {
 	private JLabel keyLbl;
 	private JLabel doorLbl;
 	private JLabel blankSpaceLbl;
-	private boolean iconClicked;
+	private boolean mapCreated;
 	private JSlider slider;
 
 	/**
 	 * Create the frame.
 	 */
 	public CreateMapWindow(ImageLoader imageLoader) {
+		this.mapCreated = false;
+
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +70,7 @@ public class CreateMapWindow extends JFrame {
 		exitBtn = new JButton("Exit");
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				mapCreated = false;
 				dispose();
 			}
 		});
@@ -77,7 +80,7 @@ public class CreateMapWindow extends JFrame {
 		applyBtn = new JButton("Apply");
 		applyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// wdwController.generateMap(editMap);
+				dispose();
 			}
 		});
 		applyBtn.setBounds(433, 424, 104, 29);
@@ -91,10 +94,9 @@ public class CreateMapWindow extends JFrame {
 		heroLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getHeroImg());
-				editPanel.setPaintIcon(iconClicked);
-				// editPanel.setMatrixCoordinates(e.getX(), e.getY());
+				editPanel.setPaintIcon(true);
 			}
 		});
 		heroLbl.setBounds(459, 65, 40, 40);
@@ -105,9 +107,9 @@ public class CreateMapWindow extends JFrame {
 		ogreLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getOgreImg());
-				editPanel.setPaintIcon(iconClicked);
+				editPanel.setPaintIcon(true);
 			}
 		});
 		ogreLbl.setBounds(575, 65, 40, 40);
@@ -118,9 +120,9 @@ public class CreateMapWindow extends JFrame {
 		doorLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getDoorImg());
-				editPanel.setPaintIcon(iconClicked);
+				editPanel.setPaintIcon(true);
 			}
 		});
 		doorLbl.setBounds(459, 120, 40, 40);
@@ -131,9 +133,9 @@ public class CreateMapWindow extends JFrame {
 		keyLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getKeyImg());
-				editPanel.setPaintIcon(iconClicked);
+				editPanel.setPaintIcon(true);
 			}
 		});
 		keyLbl.setBounds(575, 120, 40, 40);
@@ -144,9 +146,9 @@ public class CreateMapWindow extends JFrame {
 		wallLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getWallImg());
-				editPanel.setPaintIcon(iconClicked);
+				editPanel.setPaintIcon(true);
 			}
 		});
 		wallLbl.setBounds(459, 175, 40, 40);
@@ -157,10 +159,9 @@ public class CreateMapWindow extends JFrame {
 		blankSpaceLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				iconClicked = true;
+				mapCreated = true;
 				editPanel.setImage(imageLoader.getBlankSpaceImg());
-				editPanel.setPaintIcon(iconClicked);
-				// editPanel.setMatrixCoordinates(e.getX(), e.getY());
+				editPanel.setPaintIcon(true);
 			}
 		});
 		blankSpaceLbl.setBounds(575, 175, 40, 40);
@@ -176,10 +177,6 @@ public class CreateMapWindow extends JFrame {
 
 				editPanel.setBounds(0, 69, editPanelSize, editPanelSize);
 				editPanel.setEditMapSize(slider.getValue());
-				// if(value!=10) {
-				// editPanel.setPaintIcon(true);
-				// }
-				// editPanel.repaint();
 
 				heroLbl.setBounds(59 + editPanelSize, 65, 40, 40);
 				ogreLbl.setBounds(175 + editPanelSize, 65, 40, 40);
@@ -213,6 +210,10 @@ public class CreateMapWindow extends JFrame {
 
 	public final int getEditPanelSubSquareLength() {
 		return editPanel.getSubSquareLength();
+	}
+
+	public final boolean isMapCreated() {
+		return mapCreated;
 	}
 
 }
