@@ -14,9 +14,6 @@ import dkeep.logic.model.Position;
 import utilities.Utilities;
 
 public class KeepMap extends Map {
-	private HashMap<Position, Wall> wallMap;
-	private HashMap<Position, Door> doorMap;
-	private ArrayList<Ogre> ogreList;
 	private Ogre ogre;
 
 	public KeepMap(String ogresNumber) {
@@ -46,9 +43,7 @@ public class KeepMap extends Map {
 
 		);
 
-		this.wallMap = new HashMap<Position, Wall>();
-		this.doorMap = new HashMap<Position, Door>();
-		this.ogreList = new ArrayList<Ogre>();
+		
 		parseMap();
 		generateFoes(ogresNumber);
 		initializeMap();
@@ -68,6 +63,7 @@ public class KeepMap extends Map {
 
 	}
 
+	@Override
 	public void parseMap() {
 		for (int i = 0; i < super.playMap.length; i++) {
 			for (int j = 0; j < super.playMap[i].length; j++) {
@@ -224,6 +220,7 @@ public class KeepMap extends Map {
 		} while (playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
 				|| checkWalls(newClubPosition) || checkDoors(newClubPosition) || checkClubs(newClubPosition));
 
+		
 		if (newClubPosition.equals(this.lever.getPosition())) {
 			if (!this.hero.getLeverState()) {
 				playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = '$';
@@ -373,9 +370,18 @@ public class KeepMap extends Map {
 			ogreList.add(ogre);
 		}
 	}
+	
+	
+	protected final void printStatic() {
+		
+		for (Position key : doorMap.keySet()) {
+			playMap[key.getXPosition()][key.getYPosition()] = door.getChar();
+		}
+	}
 
 	@Override
 	public void play(char move) {
+		printStatic();
 		super.moveHero(move, super.lever.isActivated() ? hero.getCharHeroKey() : hero.getCharHeroLvl2());
 		super.checkLever();
 		for (int i = 0; i < ogreList.size(); i++) {

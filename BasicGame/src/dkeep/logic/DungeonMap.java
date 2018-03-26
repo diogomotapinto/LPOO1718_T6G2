@@ -48,6 +48,7 @@ public class DungeonMap extends Map {
 				header, "Nivel 1!!!", new Position(1, 1), new Position(8, 7));
 		generateFoes(personality);
 		super.header = guard.toString();
+		parseMap();
 		initializeMap();
 	}
 
@@ -116,17 +117,21 @@ public class DungeonMap extends Map {
 		super.moveHero(move, hero.getCharHero());
 		super.checkLever();
 		this.moveGuard();
-		if (!hero.getPosition().equals(super.lever.getPosition())) {
-			printLever();
+		if (!hero.getPosition().equals(super.lever.getPosition()) && !checkOnDoors(hero.getPosition())) {
+			printStatic();
 		}
 	}
 
 	/**
 	 * Puts the lever in the map
 	 */
-	protected final void printLever() {
+	protected final void printStatic() {
 		Position position = super.lever.getPosition();
 		playMap[position.getXPosition()][position.getYPosition()] = Lever.getLeverChar();
+		
+		for (Position key : doorMap.keySet()) {
+			playMap[key.getXPosition()][key.getYPosition()] = door.getChar();
+		}
 	}
 
 	/**

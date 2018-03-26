@@ -1,5 +1,8 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import dkeep.logic.model.Club;
 import dkeep.logic.model.Door;
 import dkeep.logic.model.Hero;
@@ -24,7 +27,11 @@ public abstract class Map implements PlayMap {
 
 	private final String legend;
 	protected String header;
+	protected HashMap<Position, Wall> wallMap;
+	protected HashMap<Position, Door> doorMap;
+	protected ArrayList<Ogre> ogreList;
 
+	protected Door door;
 	protected final Lever lever;
 	protected final Hero hero;
 	protected final char[][] playMap;
@@ -42,6 +49,10 @@ public abstract class Map implements PlayMap {
 		this.playMap = playMap;
 		this.legend = legend;
 		this.header = header;
+		this.door = new Door(0,0);
+		this.wallMap = new HashMap<Position, Wall>();
+		this.doorMap = new HashMap<Position, Door>();
+		this.ogreList = new ArrayList<Ogre>();
 		hero = new Hero(heroPosition.getXPosition(), heroPosition.getXPosition());
 		this.lever = new Lever(leverPosition.getXPosition(), leverPosition.getYPosition());
 	}
@@ -53,6 +64,24 @@ public abstract class Map implements PlayMap {
 
 	protected abstract boolean checkLost();
 	/* End of Abstract Methods */
+	
+	
+	protected void parseMap() {
+		for(int i = 0; i < this.playMap.length; i++) {
+			for(int j = 0; j < this.playMap[i].length; j++) {
+				Position position = new Position(i,j);
+
+				switch(this.playMap[i][j]) {
+				case 'X':	Wall wall = new Wall(i,j);
+				this.wallMap.put(position, wall);
+				break;
+				case 'I': Door door = new Door(i,j);
+				this.doorMap.put(position, door);
+				}
+			}
+		}
+
+	}
 
 	/**
 	 * Makes the hero move
@@ -134,6 +163,7 @@ public abstract class Map implements PlayMap {
 					if (playMap[i][j] == CHAR_DOOR_CLOSED) {
 						playMap[i][j] = CHAR_DOOR_OPEN;
 						hero.setLeverState(true);
+						door.setOpen(true);
 					}
 				}
 			}
@@ -150,7 +180,19 @@ public abstract class Map implements PlayMap {
 	protected final boolean checkWon(int y) {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
-		return this.hero.getLeverState() && y == 0;// ogre map
+		return (this.hero.getLeverState() && checkOnDoors(hero.getPosition())
+				&& (hero.getPosition().getYPosition() == 0) || hero.getPosition().getXPosition() == 0);// ogre map
+	}
+	
+
+	protected final boolean checkOnDoors(Position pos) {
+
+		for (Position key : doorMap.keySet()) {
+			if (key.equals(pos)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public final String getLegend() {
