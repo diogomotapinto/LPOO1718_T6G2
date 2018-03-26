@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.EmptyStackException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -214,6 +216,7 @@ public final class WindowController {
 		// Check if the exit was reached
 		if (labirinth[y][x] == 2) {
 			System.out.println("Goald Found");
+			
 			return true;
 		}
 		// Try all the adjacent cells

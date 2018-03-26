@@ -181,7 +181,8 @@ public abstract class Map implements PlayMap {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
 		return (this.hero.getLeverState() && checkOnDoors(hero.getPosition())
-				&& (hero.getPosition().getYPosition() == 0) || hero.getPosition().getXPosition() == 0);// ogre map
+				&& (((hero.getPosition().getYPosition() == 0) || hero.getPosition().getXPosition() == 0) 
+				||(hero.getPosition().getYPosition() == playMap.length-1) || hero.getPosition().getXPosition() == playMap.length-1));// ogre map
 	}
 	
 
