@@ -25,13 +25,13 @@ public final class ImageLoader {
 
 	private void loadImages() {
 		try {
-			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice.png")));
+			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
 			heroAmredImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
-			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice1.png")));
-			wallImg = new ImageIcon(ImageIO.read(new File("Images/indice2.png")));
+			ogreImg = new ImageIcon(ImageIO.read(new File("Images/ogre.png")));
+			wallImg = new ImageIcon(ImageIO.read(new File("Images/wall40.png")));
 			blankSpaceImg = new ImageIcon(ImageIO.read(new File("Images/indice3.png")));
-			doorImg = new ImageIcon(ImageIO.read(new File("Images/indice4.png")));
-			keyImg = new ImageIcon(ImageIO.read(new File("Images/indice5.png")));
+			doorImg = new ImageIcon(ImageIO.read(new File("Images/closed40.png")));
+			keyImg = new ImageIcon(ImageIO.read(new File("Images/key40.png")));
 			guardImg = new ImageIcon(ImageIO.read(new File("Images/indice6.png")));
 			doorOpenImg = new ImageIcon(ImageIO.read(new File("Images/indice8.png")));
 			clubImg = new ImageIcon(ImageIO.read(new File("Images/indice9.png")));
