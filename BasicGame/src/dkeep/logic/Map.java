@@ -11,220 +11,236 @@ import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 import dkeep.logic.model.Wall;
 
-public abstract class Map implements PlayMap {
+abstract class Map implements PlayMap {
 
-	// mudar variaveis para classes respetivas
-	private static final char CHAR_MOVE_UP = 'w';
-	private static final char CHAR_MOVE_DOWN = 's';
-	private static final char CHAR_MOVE_RIGHT = 'd';
-	private static final char CHAR_MOVE_LEFT = 'a';
+  // mudar variaveis para classes respetivas
+  private static final char CHAR_MOVE_UP = 'w';
+  private static final char CHAR_MOVE_DOWN = 's';
+  private static final char CHAR_MOVE_RIGHT = 'd';
+  private static final char CHAR_MOVE_LEFT = 'a';
 
-	protected static final char WALL_CHAR = 'X';
-	protected static final char CHAR_DOOR_CLOSED = 'I';
-	protected static final char CHAR_DOOR_OPEN = 'S';
+  protected static final char WALL_CHAR = 'X';
+  protected static final char CHAR_DOOR_CLOSED = 'I';
+  private static final char CHAR_DOOR_OPEN = 'S';
 
-	protected static final char CHAR_BLANK_SPACE = ' ';
+  protected static final char CHAR_BLANK_SPACE = ' ';
 
-	private final String legend;
-	protected String header;
-	protected HashMap<Position, Wall> wallMap;
-	protected HashMap<Position, Door> doorMap;
-	protected ArrayList<Ogre> ogreList;
+  private final String legend;
+  protected String header;
+  protected HashMap<Position, Wall> wallMap;
+  protected HashMap<Position, Door> doorMap;
+  protected ArrayList<Ogre> ogreList;
 
-	protected Door door;
-	protected final Lever lever;
-	protected final Hero hero;
-	protected final char[][] playMap;
+  protected Door door;
+  protected final Lever lever;
+  protected final Hero hero;
+  protected final char[][] playMap;
 
-	/**
-	 * Class constructor
-	 * 
-	 * @param playMap
-	 * @param legend
-	 * @param header
-	 * @param heroPosition
-	 * @param leverPosition
-	 */
-	protected Map(char[][] playMap, String legend, String header, Position heroPosition, Position leverPosition) {
-		this.playMap = playMap;
-		this.legend = legend;
-		this.header = header;
-		this.door = new Door(0,0);
-		this.wallMap = new HashMap<Position, Wall>();
-		this.doorMap = new HashMap<Position, Door>();
-		this.ogreList = new ArrayList<Ogre>();
-		hero = new Hero(heroPosition.getXPosition(), heroPosition.getXPosition());
-		this.lever = new Lever(leverPosition.getXPosition(), leverPosition.getYPosition());
-	}
+  /**
+   * Class constructor
+   * 
+   * @param playMap
+   * @param legend
+   * @param header
+   * @param heroPosition
+   * @param leverPosition
+   */
+  protected Map(char[][] playMap, String legend, String header, Position heroPosition,
+      Position leverPosition) {
+    this.playMap = playMap;
+    this.legend = legend;
+    this.header = header;
+    this.door = new Door(0, 0);
+    this.wallMap = new HashMap<Position, Wall>();
+    this.doorMap = new HashMap<Position, Door>();
+    this.ogreList = new ArrayList<Ogre>();
+    hero = new Hero(heroPosition.getXPosition(), heroPosition.getYPosition());
+    this.lever = new Lever(leverPosition.getXPosition(), leverPosition.getYPosition());
+  }
 
-	/* Abstract Methods to be implemented in subclasses */
-	protected abstract void initializeMap();
+  /* Abstract Methods to be implemented in subclasses */
+  protected abstract void initializeMap();
 
-	protected abstract void generateFoes(String info);
+  protected abstract void generateFoes(String info);
 
-	protected abstract boolean checkLost();
-	/* End of Abstract Methods */
-	
-	
-	protected void parseMap() {
-		for(int i = 0; i < this.playMap.length; i++) {
-			for(int j = 0; j < this.playMap[i].length; j++) {
-				Position position = new Position(i,j);
+  protected abstract boolean checkLost();
 
-				switch(this.playMap[i][j]) {
-				case 'X':	Wall wall = new Wall(i,j);
-				this.wallMap.put(position, wall);
-				break;
-				case 'I': Door door = new Door(i,j);
-				this.doorMap.put(position, door);
-				}
-			}
-		}
+  protected abstract void resetBackground();
+  /* End of Abstract Methods */
 
-	}
+  protected void parseMap() {
+    for (int i = 0; i < this.playMap.length; i++) {
+      for (int j = 0; j < this.playMap[i].length; j++) {
+        Position position = new Position(i, j);
 
-	/**
-	 * Makes the hero move
-	 * 
-	 * @param move
-	 *            direction of the movement
-	 * @param heroChar
-	 *            character of the hero
-	 */
-	protected final void moveHero(char move, char heroChar) {
-		Position p = hero.getPosition();
-		int xPosition = p.getXPosition();
-		int yPosition = p.getYPosition();
+        if (playMap[i][j] == 'X') {
+          Wall wall = new Wall(i, j);
+          this.wallMap.put(position, wall);
+        } else if (playMap[i][j] == 'I') {
+          this.doorMap.put(position, new Door(i, j));
+        }
+      }
+    }
 
-		switch (move) {
-		case CHAR_MOVE_UP:
-			if (checkMoveHero(xPosition - 1, yPosition)) {
-				moveHero(xPosition - 1, yPosition, heroChar);
-			}
-			break;
-		case CHAR_MOVE_DOWN:
-			if (checkMoveHero(xPosition + 1, yPosition)) {
-				moveHero(xPosition + 1, yPosition, heroChar);
-			}
-			break;
-		case CHAR_MOVE_RIGHT:
-			if (checkMoveHero(xPosition, yPosition + 1)) {
-				moveHero(xPosition, yPosition + 1, heroChar);
-			}
-			break;
-		case CHAR_MOVE_LEFT:
-			if (checkMoveHero(xPosition, yPosition - 1)) {
-				moveHero(xPosition, yPosition - 1, heroChar);
-			}
-			break;
-		default:
-			break;
-		}
-	}
+  }
 
-	// criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
-	// de usar coordenadas do map
-	/**
-	 * Check if the move is allowed
-	 * 
-	 * @param x
-	 * @param y
-	 * @return true if it is, false otherwise
-	 */
-	private boolean checkMoveHero(int x, int y) {
-		return (playMap[x][y] == Lever.getLeverChar() || playMap[x][y] == CHAR_BLANK_SPACE
-				|| playMap[x][y] == Club.getClubChar() || playMap[x][y] == CHAR_DOOR_OPEN);
-	}
+  /**
+   * Makes the hero move
+   * 
+   * @param move
+   *          direction of the movement
+   * @param heroChar
+   *          character of the hero
+   */
+  protected final void moveHero(char move, char heroChar) {
+    Position p = hero.getPosition();
+    int xPosition = p.getXPosition();
+    int yPosition = p.getYPosition();
 
-	private void moveHero(int x, int y, char heroChar) {
-		Position heroPosition = hero.getPosition();
-		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
-		heroPosition.setXPosition(x);
-		heroPosition.setYPosition(y);
-		hero.setPosition(heroPosition);
-		playMap[x][y] = heroChar;
-	}
+    switch (move) {
+    case CHAR_MOVE_UP:
+      if (checkMoveHero(xPosition - 1, yPosition)) {
+        moveHero(xPosition - 1, yPosition, heroChar);
+      }
+      break;
+    case CHAR_MOVE_DOWN:
+      if (checkMoveHero(xPosition + 1, yPosition)) {
+        moveHero(xPosition + 1, yPosition, heroChar);
+      }
+      break;
+    case CHAR_MOVE_RIGHT:
+      if (checkMoveHero(xPosition, yPosition + 1)) {
+        moveHero(xPosition, yPosition + 1, heroChar);
+      }
+      break;
+    case CHAR_MOVE_LEFT:
+      if (checkMoveHero(xPosition, yPosition - 1)) {
+        moveHero(xPosition, yPosition - 1, heroChar);
+      }
+      break;
+    default:
+      break;
+    }
+  }
 
-	// criar objeto door (com boolean aberto/fechado e checkar atraves das
-	// coordenadas do objeto lever) em vez de usar coordenadas do map
-	/**
-	 * Checks if the hero has reached the lever
-	 */
-	protected final void checkLever() {
-		Position heroPosition = hero.getPosition();
-		Position leverPosition = lever.getPosition();
+  // criar objeto lever e checkar atraves das coordenadas do objeto lever em vez
+  // de usar coordenadas do map
+  /**
+   * Check if the move is allowed
+   * 
+   * @param x
+   * @param y
+   * @return true if it is, false otherwise
+   */
+  private boolean checkMoveHero(int x, int y) {
+    return (playMap[x][y] == Lever.getLeverChar() || playMap[x][y] == CHAR_BLANK_SPACE
+        || playMap[x][y] == Club.getClubChar() || playMap[x][y] == CHAR_DOOR_OPEN);
+  }
 
-		if (leverPosition.equals(heroPosition) && (heroPosition.hashCode() == leverPosition.hashCode())) {
-			lever.activateLever();
-			// criar classe porta com icone porta fechada e porta aberta em vez de usar
-			// coordenadas do map
-			for (int i = 0; i < this.playMap.length; i++) {
-				for (int j = 0; j < this.playMap[i].length; j++) {
-					if (playMap[i][j] == CHAR_DOOR_CLOSED) {
-						playMap[i][j] = CHAR_DOOR_OPEN;
-						hero.setLeverState(true);
-						door.setOpen(true);
-					}
-				}
-			}
-		}
-	}
+  private void moveHero(int x, int y, char heroChar) {
+    Position heroPosition = hero.getPosition();
+    playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = CHAR_BLANK_SPACE;
+    heroPosition.setXPosition(x);
+    heroPosition.setYPosition(y);
+    hero.setPosition(heroPosition);
+    playMap[x][y] = heroChar;
+  }
 
-	/**
-	 * checks if the game is won
-	 * 
-	 * @param y
-	 *            position of the hero in the y-axis
-	 * @return true if it is won and false otherwise
-	 */
-	protected final boolean checkWon(int y) {
-		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
-		// futuro poder escalar o sistema
-		return (this.hero.getLeverState() && checkOnDoors(hero.getPosition())
-				&& (((hero.getPosition().getYPosition() == 0) || hero.getPosition().getXPosition() == 0) 
-				||(hero.getPosition().getYPosition() == playMap.length-1) || hero.getPosition().getXPosition() == playMap.length-1));// ogre map
-	}
-	
+  // criar objeto door (com boolean aberto/fechado e checkar atraves das
+  // coordenadas do objeto lever) em vez de usar coordenadas do map
+  /**
+   * Checks if the hero has reached the lever
+   */
+  protected final void checkLever() {
+    Position heroPosition = hero.getPosition();
+    Position leverPosition = lever.getPosition();
 
-	protected final boolean checkOnDoors(Position pos) {
+    if (leverPosition.equals(heroPosition)
+        && (heroPosition.hashCode() == leverPosition.hashCode())) {
+      lever.activateLever();
+      // criar classe porta com icone porta fechada e porta aberta em vez de usar
+      // coordenadas do map
+      for (int i = 0; i < this.playMap.length; i++) {
+        for (int j = 0; j < this.playMap[i].length; j++) {
+          if (playMap[i][j] == CHAR_DOOR_CLOSED) {
+            playMap[i][j] = CHAR_DOOR_OPEN;
+            hero.setLeverState(true);
+            door.setOpen(true);
+          }
+        }
+      }
+    }
+  }
 
-		for (Position key : doorMap.keySet()) {
-			if (key.equals(pos)) {
-				return true;
-			}
-		}
-		return false;
-	}
+  /**
+   * checks if the game is won
+   * 
+   * @param y
+   *          position of the hero in the y-axis
+   * @return true if it is won and false otherwise
+   */
+  protected final boolean checkWon() {
+    // devia-se criar um objeto door e testava-se as coordenadas, de forma a no
+    // futuro poder escalar o sistema
+    return (this.hero.getLeverState() && checkOnDoors(hero.getPosition())
+        && (hero.getPosition().getYPosition() == 0) || hero.getPosition().getXPosition() == 0);// ogre
+                                                                                               // map
+  }
 
-	public final String getLegend() {
-		return legend;
-	}
+  protected final boolean checkOnDoors(Position pos) {
 
-	public final char[][] getPlayMap() {
-		return playMap;
-	}
+    for (Position key : doorMap.keySet()) {
+      if (key.equals(pos)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	public final String getHeader() {
-		return header;
-	}
+  public final String getLegend() {
+    return legend;
+  }
 
-	public final Hero getHero() {
-		return hero;
-	}
+  public final char[][] getPlayMap() {
+    return playMap;
+  }
 
-	@Override
-	public String toString() {
-		StringBuilder stringbuilder = new StringBuilder();
+  public final String getHeader() {
+    return header;
+  }
 
-		for (int i = 0; i < this.playMap.length; i++) {
-			for (int j = 0; j < this.playMap[i].length; j++) {
-				stringbuilder.append(this.playMap[i][j]);
-				stringbuilder.append(" ");
-			}
-			stringbuilder.append("\n");
-		}
+  public final Hero getHero() {
+    return hero;
+  }
 
-		return stringbuilder.toString();
-	}
+  @Override
+  public String toString() {
+    StringBuilder stringbuilder = new StringBuilder();
+
+    for (int i = 0; i < this.playMap.length; i++) {
+      for (int j = 0; j < this.playMap[i].length; j++) {
+        stringbuilder.append(this.playMap[i][j]);
+        stringbuilder.append(" ");
+      }
+      stringbuilder.append("\n");
+    }
+
+    return stringbuilder.toString();
+  }
+
+  public byte checkEndLevel() {
+    // para terminar basta chegar a um dos cantos
+
+    if (checkWon()) {
+      return 1;
+    }
+
+    // tem de se fazer refactor do codigo
+    if (checkLost()) {
+      return -1;
+    }
+
+    return 0;
+  }
 
 }

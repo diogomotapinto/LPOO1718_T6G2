@@ -1,7 +1,6 @@
 package dkeep.gui;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
 
 import utilities.ImageLoader;
 
-public class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
+class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 
 	private int xCoordinatesPanel;
 	private int yCoordinatesPanel;
@@ -25,7 +24,7 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 	private int subSquareLength;
 	private ImageLoader imageLoader;
 
-	public EditMapPanel(ImageLoader imageLoader) {
+	EditMapPanel(ImageLoader imageLoader) {
 		super();
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -62,7 +61,7 @@ public class EditMapPanel extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // limpa fundo ...
-		if (paintIcon == true) {
+		if (paintIcon) {
 			editMap[yCoordinatesPanel * matrixSize / panelLength][xCoordinatesPanel * matrixSize
 					/ panelLength] = chosenImage;
 			for (int i = 0; i < editMap.length; i++) {

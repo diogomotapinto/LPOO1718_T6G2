@@ -11,7 +11,7 @@ public class Club extends GameObject {
 	 * @param yPos
 	 *            coordinate fo the club in the y axis
 	 */
-	public Club(int xPos, int yPos) {
+	 Club(int xPos, int yPos) {
 		super(xPos, yPos);
 	}
 

@@ -1,6 +1,6 @@
 package dkeep.logic.model;
 
-public abstract class GameObject {
+ abstract class GameObject {
 	private Position position;
 
 	/**
@@ -11,7 +11,7 @@ public abstract class GameObject {
 	 * @param yPos
 	 *            position of the game object in the y-axis
 	 */
-	public GameObject(int xPos, int yPos) {
+	GameObject(int xPos, int yPos) {
 		position = new Position(xPos, yPos);
 	}
 

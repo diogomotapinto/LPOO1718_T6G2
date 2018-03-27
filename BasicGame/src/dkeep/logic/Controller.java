@@ -1,73 +1,65 @@
 package dkeep.logic;
 
-import java.io.Serializable;
+public final class Controller {
 
-import dkeep.gui.GameWindow;
+  private static final Controller INSTANCE = new Controller();
+  private final StateMachine stateMachine;
+  private final WindowController wdwController;
+  private Map currentMap;
 
-public final class Controller implements Serializable {
+  private Controller() {
+    stateMachine = new StateMachine();
+    wdwController = new WindowController(this);
+  }
 
-	private static final Controller INSTANCE = new Controller();
-	private final StateMachine stateMachine;
-	private final WindowController wdwController;
-	private Map currentMap;
+  public static Controller getInstance() {
+    return INSTANCE;
+  }
 
-	private Controller() {
-		stateMachine = new StateMachine();
-		wdwController = new WindowController(this);
-	}
+  void newGame(String personality) {
+    stateMachine.advanceState(StateMachine.Event.PLAY);
+    currentMap = new DungeonMap(personality);
+    wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
+  }
 
-	public static Controller getInstance() {
-		return INSTANCE;
-	}
+  void makeMove(char move) {
+    if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
+      currentMap.play(move);
+      wdwController.updateGameWindow(currentMap.getPlayMap(), "You can move");
+      advanceLevel(currentMap.checkEndLevel());
+    }
+  }
 
-	public void newGame(String personality) {
-		stateMachine.advanceState(StateMachine.Event.PLAY);
-		currentMap = new DungeonMap(personality);
-		wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
-	}
+  private boolean advanceLevel(byte endLevel) {
+    switch (endLevel) {
+    case -1:
+      stateMachine.advanceState(StateMachine.Event.OVER);
+      wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Over");
+      return true;
+    case 0:
+      return false;
+    case 1:
 
-	public void makeMove(char move) {
-		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
-			currentMap.play(move);
-			if (currentMap.getHero().getPosition().getYPosition() == 0) {
-				int a = 0;
-			}
-			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can move");
-			advanceLevel(currentMap.checkEndLevel());
-		}
-	}
+      if (currentMap.nextLevel("0") == null) {
+        stateMachine.advanceState(StateMachine.Event.WON);
+        wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Won");
+        return true;
+      } else {
 
-	private boolean advanceLevel(byte endLevel) {
-		switch (endLevel) {
-		case -1:
-			stateMachine.advanceState(StateMachine.Event.OVER);
-			wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Over");
-			return true;
-		case 0:
-			return false;
-		case 1:
+        char[][] editMap = wdwController.generateMap();
+        stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
+        if (editMap.length == 0) {
+          currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
+        } else {
+          currentMap = currentMap.nextLevel(editMap);
+        }
 
-			if (currentMap.nextLevel("0") == null) {
-				stateMachine.advanceState(StateMachine.Event.WON);
-				wdwController.updateGameWindow(currentMap.getPlayMap(), "Game Won");
-				return true;
-			} else {
-
-				char[][] editMap = wdwController.getEditMap();
-				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
-				if (editMap.length == 0) {
-					currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
-				} else {
-					currentMap = currentMap.nextLevel(editMap);
-				}
-
-				wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
-
-				return false;
-			}
-		default:
-			return false;
-		}
-	}
+        wdwController.updateGameWindow(currentMap.getPlayMap(), "Next Level");
+        return false;
+      }
+    default:
+      return false;
+    }
+  }
 
 }

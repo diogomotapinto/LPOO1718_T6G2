@@ -7,7 +7,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import dkeep.logic.WindowController;
-import utilities.ImageLoader;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import java.awt.Font;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,188 +21,189 @@ import javax.swing.JMenu;
 import java.awt.event.KeyAdapter;
 
 public final class GameWindow extends JFrame {
-	private JFrame frame;
-	private GameMapPanel gamePanel;
-	private WindowController wdwController;
-	private JLabel contextLbl;
-	private JButton btnNewGame;
-	private JButton btnLeft;
-	private JButton btnUp;
-	private JButton btnRight;
-	private JButton btnDown;
-	private JButton btnExit;
-	private JMenuBar menuBar;
-	private JMenu mnMenu;
-	private JMenuItem mntmGameSettings;
-	private JMenuItem mntmEditMap;
+  private JFrame frame;
+  private GameMapPanel gamePnl;
+  private WindowController windowController;
+  private JLabel gameContextLbl;
+  private JButton newGameBtn;
+  private JButton leftBtn;
+  private JButton upBtn;
+  private JButton rightBtn;
+  private JButton downBtn;
+  private JButton exitBtn;
 
-	/**
-	 * Create the application.
-	 */
-	public GameWindow(WindowController windowController, ImageLoader imageLoader) {
-		super();
-		this.wdwController = windowController;
-		initializeWindow(imageLoader);
-	}
+  /**
+   * Create the application.
+   */
+  public GameWindow(WindowController windowController) {
+    super();
+    this.windowController = windowController;
+    initializeWindow();
+  }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	public void paintMap(ImageIcon[][] imgMap) {
-		this.gamePanel.setMap(imgMap);
-		resizeFrame(imgMap.length);
-		gamePanel.repaint();
+  /**
+   * Initialize the contents of the frame.
+   */
+  public void paintMap(ImageIcon[][] imgMap) {
+    this.gamePnl.setMap(imgMap);
+    resizeFrame(imgMap.length);
+    gamePnl.validate();
+    gamePnl.revalidate();
+    gamePnl.updateUI();
+    gamePnl.repaint();
 
-	}
+  }
 
-	private void resizeFrame(int subSquareNumber) {
-		int gamePanelSize = wdwController.getEditPanelSubSquareLength() * subSquareNumber;
+  private void resizeFrame(int subSquareNumber) {
+    int gamePanelSize = windowController.getEditPanelSubSquareLength() * subSquareNumber;
 
-		frame.setBounds(100, 100, 300 + gamePanelSize, 128 + gamePanelSize);
-		btnNewGame.setBounds(75 + gamePanelSize, 85, 120, 25);
-		btnExit.setBounds(75 + gamePanelSize, 300, 120, 25);
-		btnDown.setBounds(95 + gamePanelSize, 230, 75, 30);
-		btnRight.setBounds(175 + gamePanelSize, 190, 75, 30);
-		btnLeft.setBounds(15 + gamePanelSize, 190, 75, 30);
-		btnUp.setBounds(95 + gamePanelSize, 150, 75, 30);
-		btnDown.setBounds(95 + gamePanelSize, 230, 75, 30);
-		gamePanel.setBounds(0, 41, gamePanelSize, gamePanelSize);
-		gamePanel.repaint();
-	}
+    frame.setBounds(100, 100, 300 + gamePanelSize, 128 + gamePanelSize);
+    newGameBtn.setBounds(75 + gamePanelSize, 85, 120, 25);
+    exitBtn.setBounds(75 + gamePanelSize, 300, 120, 25);
+    downBtn.setBounds(95 + gamePanelSize, 230, 75, 30);
+    rightBtn.setBounds(175 + gamePanelSize, 190, 75, 30);
+    leftBtn.setBounds(15 + gamePanelSize, 190, 75, 30);
+    upBtn.setBounds(95 + gamePanelSize, 150, 75, 30);
+    downBtn.setBounds(95 + gamePanelSize, 230, 75, 30);
+    gamePnl.setBounds(0, 41, gamePanelSize, gamePanelSize);
+    gamePnl.repaint();
+  }
 
-	public void setLegend(String legend) {
-		this.contextLbl.setText(legend);
-	}
+  public void setLegend(String legend) {
+    this.gameContextLbl.setText(legend);
+  }
 
-	private void initializeWindow(ImageLoader imageLoader) {
+  private void initializeWindow() {
 
-		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 528);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+    frame = new JFrame();
+    frame.setBounds(100, 100, 700, 528);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().setLayout(null);
 
-		btnNewGame = new JButton("New Game");
-		btnNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				wdwController.newGame();
-			}
-		});
-		btnNewGame.setBounds(475, 85, 120, 25);
-		frame.getContentPane().add(btnNewGame);
+    newGameBtn = new JButton("New Game");
+    newGameBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        windowController.newGame();
+      }
+    });
+    newGameBtn.setBounds(475, 85, 120, 25);
+    frame.getContentPane().add(newGameBtn);
 
-		btnUp = new JButton("Up");
-		btnUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				wdwController.makeMove('w');
-			}
-		});
-		btnUp.setBounds(495, 150, 75, 30);
-		frame.getContentPane().add(btnUp);
+    upBtn = new JButton("Up");
+    upBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        windowController.makeMove('w');
+      }
+    });
+    upBtn.setBounds(495, 150, 75, 30);
+    frame.getContentPane().add(upBtn);
 
-		btnLeft = new JButton("Left");
-		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				wdwController.makeMove('a');
-			}
-		});
-		btnLeft.setBounds(415, 190, 75, 30);
-		frame.getContentPane().add(btnLeft);
+    leftBtn = new JButton("Left");
+    leftBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        windowController.makeMove('a');
+      }
+    });
+    leftBtn.setBounds(415, 190, 75, 30);
+    frame.getContentPane().add(leftBtn);
 
-		btnRight = new JButton("Right");
-		btnRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				wdwController.makeMove('d');
-			}
-		});
-		btnRight.setBounds(575, 190, 75, 30);
-		frame.getContentPane().add(btnRight);
+    rightBtn = new JButton("Right");
+    rightBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        windowController.makeMove('d');
+      }
+    });
+    rightBtn.setBounds(575, 190, 75, 30);
+    frame.getContentPane().add(rightBtn);
 
-		btnDown = new JButton("Down");
-		btnDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				wdwController.makeMove('s');
-			}
-		});
-		btnDown.setBounds(495, 230, 75, 30);
-		frame.getContentPane().add(btnDown);
+    downBtn = new JButton("Down");
+    downBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        windowController.makeMove('s');
+      }
+    });
+    downBtn.setBounds(495, 230, 75, 30);
+    frame.getContentPane().add(downBtn);
 
-		gamePanel = new GameMapPanel(imageLoader);
-		gamePanel.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				System.out.println("KEY PRESSED");
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_UP:
-					wdwController.makeMove('w');
-					break;
-				case KeyEvent.VK_DOWN:
-					wdwController.makeMove('s');
-					break;
-				case KeyEvent.VK_LEFT:
-					wdwController.makeMove('a');
-					break;
-				case KeyEvent.VK_RIGHT:
-					wdwController.makeMove('d');
-					break;
-				}
-			}
-		});
+    gamePnl = new GameMapPanel();
+    gamePnl.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        System.out.println("KEY PRESSED");
+        switch (e.getKeyCode()) {
+        case KeyEvent.VK_UP:
+          windowController.makeMove('w');
+          break;
+        case KeyEvent.VK_DOWN:
+          windowController.makeMove('s');
+          break;
+        case KeyEvent.VK_LEFT:
+          windowController.makeMove('a');
+          break;
+        case KeyEvent.VK_RIGHT:
+          windowController.makeMove('d');
+          break;
+        default:
+          break;
+        }
+      }
+    });
 
-		gamePanel.setFont(new Font("Courier", Font.PLAIN, 18));
-		gamePanel.setBounds(0, 41, 400, 400);
-		gamePanel.setSubSquareLength(wdwController.getEditPanelSubSquareLength());
-		frame.getContentPane().add(gamePanel);
-		gamePanel.setVisible(true);
+    gamePnl.setFont(new Font("Courier", Font.PLAIN, 18));
+    gamePnl.setBounds(0, 41, 400, 400);
+    gamePnl.setSubSquareLength(windowController.getEditPanelSubSquareLength());
+    frame.getContentPane().add(gamePnl);
+    gamePnl.setVisible(true);
 
-		btnExit = new JButton("Exit");
-		btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Exit");
-				System.exit(0);
-			}
-		});
-		btnExit.setBounds(475, 300, 120, 25);
-		frame.getContentPane().add(btnExit);
+    exitBtn = new JButton("Exit");
+    exitBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Exit");
+        System.exit(0);
+      }
+    });
+    exitBtn.setBounds(475, 300, 120, 25);
+    frame.getContentPane().add(exitBtn);
 
-		contextLbl = new JLabel("You can start now");
-		contextLbl.setBounds(0, 9, 140, 16);
-		frame.getContentPane().add(contextLbl);
+    gameContextLbl = new JLabel("You can start now");
+    gameContextLbl.setBounds(0, 9, 140, 16);
+    frame.getContentPane().add(gameContextLbl);
 
-		menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+    JMenuBar menuBar = new JMenuBar();
+    frame.setJMenuBar(menuBar);
 
-		mnMenu = new JMenu("Menu");
-		menuBar.add(mnMenu);
+    JMenu menuMn = new JMenu("Menu");
+    menuBar.add(menuMn);
 
-		mntmGameSettings = new JMenuItem("Game Settings");
-		mntmGameSettings.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				wdwController.showWindowGameSettings();
-			}
-		});
-		mnMenu.add(mntmGameSettings);
+    JMenuItem gameSettingsMI = new JMenuItem("Game Settings");
+    gameSettingsMI.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        windowController.showWindowGameSettings();
+      }
+    });
+    menuMn.add(gameSettingsMI);
 
-		mntmEditMap = new JMenuItem("Create Map");
-		mntmEditMap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				wdwController.showCreateGameWindow();
-			}
-		});
-		mnMenu.add(mntmEditMap);
+    JMenuItem editMapMI = new JMenuItem("Create Map");
+    editMapMI.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        windowController.showCreateGameWindow();
+      }
+    });
+    menuMn.add(editMapMI);
 
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (InstantiationException e1) {
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			e1.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
-		}
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (ClassNotFoundException e1) {
+      e1.printStackTrace();
+    } catch (InstantiationException e1) {
+      e1.printStackTrace();
+    } catch (IllegalAccessException e1) {
+      e1.printStackTrace();
+    } catch (UnsupportedLookAndFeelException e1) {
+      e1.printStackTrace();
+    }
 
-		frame.setVisible(true);
-	}
+    frame.setVisible(true);
+  }
 
 }

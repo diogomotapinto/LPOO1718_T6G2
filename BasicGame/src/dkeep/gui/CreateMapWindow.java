@@ -1,14 +1,7 @@
 package dkeep.gui;
 
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import dkeep.logic.WindowController;
-import dkeep.logic.model.Position;
 import utilities.ImageLoader;
 
 import javax.swing.ImageIcon;
@@ -19,20 +12,13 @@ import java.awt.event.ActionEvent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.SystemColor;
-import javax.swing.JTextField;
-import java.awt.GridLayout;
 import javax.swing.JSlider;
-import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
 public class CreateMapWindow extends JFrame {
 
-	private WindowController wdwController;
 	private EditMapPanel editPanel;
 	private JLabel heroLbl;
 	private JButton applyBtn;
@@ -44,7 +30,7 @@ public class CreateMapWindow extends JFrame {
 	private JLabel doorLbl;
 	private JLabel blankSpaceLbl;
 	private boolean mapCreated;
-	private JSlider slider;
+	private JSlider mapSizeSld;
 
 	/**
 	 * Create the frame.
@@ -168,15 +154,15 @@ public class CreateMapWindow extends JFrame {
 		blankSpaceLbl.setIcon(imageLoader.getBlankSpaceImg());
 		getContentPane().add(blankSpaceLbl);
 
-		slider = new JSlider();
-		slider.addChangeListener(new ChangeListener() {
+		mapSizeSld = new JSlider();
+		mapSizeSld.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				int value = slider.getValue();
+				int value = mapSizeSld.getValue();
 				int editPanelSize = editPanel.getSubSquareLength() * value;
 				setBounds(100, 100, 300 + editPanelSize, 125 + editPanelSize);
 
 				editPanel.setBounds(0, 69, editPanelSize, editPanelSize);
-				editPanel.setEditMapSize(slider.getValue());
+				editPanel.setEditMapSize(mapSizeSld.getValue());
 
 				heroLbl.setBounds(59 + editPanelSize, 65, 40, 40);
 				ogreLbl.setBounds(175 + editPanelSize, 65, 40, 40);
@@ -190,17 +176,17 @@ public class CreateMapWindow extends JFrame {
 				exitBtn.setBounds(159 + editPanelSize, 24 + editPanelSize, 104, 29);
 			}
 		});
-		slider.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		slider.setMinorTickSpacing(1);
-		slider.setMajorTickSpacing(5);
-		slider.setToolTipText("");
-		slider.setPaintLabels(true);
-		slider.setValue(10);
-		slider.setSnapToTicks(true);
-		slider.setMaximum(15);
-		slider.setMinimum(5);
-		slider.setBounds(68, 26, 200, 35);
-		getContentPane().add(slider);
+		mapSizeSld.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mapSizeSld.setMinorTickSpacing(1);
+		mapSizeSld.setMajorTickSpacing(5);
+		mapSizeSld.setToolTipText("");
+		mapSizeSld.setPaintLabels(true);
+		mapSizeSld.setValue(10);
+		mapSizeSld.setSnapToTicks(true);
+		mapSizeSld.setMaximum(15);
+		mapSizeSld.setMinimum(5);
+		mapSizeSld.setBounds(68, 26, 200, 35);
+		getContentPane().add(mapSizeSld);
 
 	}
 

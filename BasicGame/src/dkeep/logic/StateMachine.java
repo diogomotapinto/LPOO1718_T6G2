@@ -1,14 +1,14 @@
 package dkeep.logic;
 
-public final class StateMachine {
+final class StateMachine {
 
 	private State gameState;
 
-	public enum State {
+	enum State {
 		INIT, GAME_PLAYING, GAME_LOST, GAME_WON, GAME_CLOSE;
 	}
 
-	public enum Event {
+	enum Event {
 		PLAY, OVER, LEVEL_UP, WON, END;
 	}
 
@@ -16,7 +16,7 @@ public final class StateMachine {
 		gameState = State.INIT;
 	}
 
-	public void advanceState(Event evt) {
+	void advanceState(Event evt) {
 
 		switch (this.gameState) {
 		case INIT:
