@@ -24,6 +24,10 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener,
 	private int subSquareLength;
 	private ImageLoader imageLoader;
 
+	/**
+	 * Class constructor 
+	 * @param imageLoader
+	 */
 	EditMapPanel(ImageLoader imageLoader) {
 		super();
 		addMouseListener(this);

@@ -7,5 +7,7 @@ interface PlayMap {
   public Map nextLevel(String info);
 
   public Map nextLevel(char[][] map);
+  
+ public abstract void checkLever();
 
 }

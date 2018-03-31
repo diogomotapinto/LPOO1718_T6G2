@@ -14,6 +14,10 @@ import utilities.Utilities;
 
 class KeepMap extends Map {
 
+/**
+ * Class constructor 
+ * @param ogresNumber number of ogres in the game
+ */
   KeepMap(String ogresNumber) {
     super(new char[][] {
         { WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
@@ -47,6 +51,10 @@ class KeepMap extends Map {
     initializeMap();
   }
 
+  /**
+   * Class constructor that receives the map as a @param instead of the number of ogres
+   * @param map of the game
+   */
   KeepMap(char[][] map) {
     super(map,
         "\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
@@ -60,6 +68,11 @@ class KeepMap extends Map {
 
   }
 
+  
+  /**
+   * Parses the information of the map and initializes the objects in it
+   * it also sets the new position for the hero and for the lever
+   */
   @Override
   public void parseMap() {
     for (int i = 0; i < super.playMap.length; i++) {
@@ -93,6 +106,11 @@ class KeepMap extends Map {
 
   }
 
+  /**
+   * Generates a position for the ogre
+   * @param ogre that is going to have a new position
+   * @return new ogre position
+   */
   protected Position moveOgre(Ogre ogre) {
     Position ogrePosition = ogre.getPosition();
 
@@ -116,6 +134,11 @@ class KeepMap extends Map {
     return newPosition;
   }
 
+  /**
+   * Sets the new position for the ogre and in the map
+   * @param ogrePosition new ogre position
+   * @param ogre ogre to have a new position
+   */
   private final void setOgre(Position ogrePosition, Ogre ogre) {
 
     ogre.setPosition(ogrePosition);
@@ -129,7 +152,13 @@ class KeepMap extends Map {
     }
   }
 
-  private final boolean canMove(Position position) {
+  /**
+   * Validates if the ogre can move,
+   * if he is with objects around him he won't be able to move and it will return false
+   * @param position
+   * @return true if he is able to move and false otherwise
+   */
+  protected final boolean canMove(Position position) {
     int counter = 0;
     // check above
     if (playMap[position.getXPosition() - 1][position.getYPosition()] != ' '
@@ -190,6 +219,11 @@ class KeepMap extends Map {
     return counter == 4;
   }
 
+  /**
+   * Check if the ogre is stunned and reduces the stun counter by one everytime it is called
+   * @param ogre
+   * @return true if he is stunned and false otherwise
+   */
   private final boolean isStunned(Ogre ogre) {
     if (ogre.getStunned()) {
       if (ogre.getStunCounter() > 0) {
@@ -203,6 +237,10 @@ class KeepMap extends Map {
     return false;
   }
 
+  /**
+   * Ganerates and sets a new position for the ogre club
+   * @param ogre
+   */
   private final void moveClub(Ogre ogre) {
     Position clubPosition = ogre.getClub().getPosition();
 
@@ -229,6 +267,11 @@ class KeepMap extends Map {
 
   }
 
+  /**
+   * Checks if the position passed as @param is the same as the position of the one of the walls
+   * @param pos
+   * @return true if the position is the same and false otherwise
+   */
   private final boolean checkWalls(Position pos) {
 
     for (Position key : wallMap.keySet()) {
@@ -239,6 +282,11 @@ class KeepMap extends Map {
     return false;
   }
 
+  /**
+   Checks if the position passed as @param is the same as the position of the one of the doors
+   * @param pos
+   * @return true if the position is the same and false otherwise
+   */
   private final boolean checkDoors(Position pos) {
 
     for (Position key : doorMap.keySet()) {
@@ -249,6 +297,12 @@ class KeepMap extends Map {
     return false;
   }
 
+  
+  /**
+  Checks if the position passed as @param is the same as the position of the one of the clubs
+  * @param pos
+  * @return true if the position is the same and false otherwise
+  */
   private final boolean checkClubs(Position pos) {
     for (int i = 0; i < this.ogreList.size(); i++) {
       if (ogreList.get(i).getClub().getPosition().equals(pos)) {
@@ -258,6 +312,11 @@ class KeepMap extends Map {
     return false;
   }
 
+  /**
+   * Checks if the hero is on an adjacent position to the ogre,
+   * if it is sets the ogre as stunned
+   * 
+   */
   private final void checkIfStunned() {
     for (int i = 0; i < ogreList.size(); i++) {
       if (Utilities.checkAdjacentCollision(this.ogreList.get(i).getPosition(),
@@ -267,6 +326,7 @@ class KeepMap extends Map {
     }
   }
 
+  // ver com o joao 
   private final boolean checkOgreCollision() {
     for (int i = 0; i < ogreList.size(); i++) {
       if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
@@ -278,9 +338,12 @@ class KeepMap extends Map {
     return false;
   }
 
-  // corrigido porque se perdia o jogo se passar numa posi��o adjacente ao
-  // ogre
-  // mas com ele atordoado
+ 
+
+  /**
+   * Checks if one of the clubs is in an adjacent position to the club
+   * @return if it is and false otherwise
+   */
   private final boolean checkClubCollision() {
     for (int i = 0; i < ogreList.size(); i++) {
       if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
@@ -290,12 +353,20 @@ class KeepMap extends Map {
     }
     return false;
   }
-
+  
+  
+  /**
+   * Checks if the game is lost, in case there is collision between the hero and the club
+   * @return true if it is and false otherwise
+   */
   @Override
   protected boolean checkLost() {
     return checkClubCollision();
   }
-
+  
+  /**
+   * Puts the key on the map if the hero ha
+   */
   private void checkLeverMap() {
     Position leverPos = lever.getPosition();
     if (playMap[leverPos.getXPosition()][leverPos.getYPosition()] == ' '
@@ -313,7 +384,11 @@ class KeepMap extends Map {
   public Map nextLevel(char[][] map) {
     return null;
   }
-
+  
+  /**
+   * Initializes Map with the characters and sets their position on the map
+   * 
+   */
   @Override
   protected void initializeMap() {
     for (int i = 0; i < ogreList.size(); i++) {
@@ -324,6 +399,11 @@ class KeepMap extends Map {
     playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getCharHeroLvl2();
   }
 
+  
+ /**
+  * Generates the enemies positions if the map hasn't been created by the user 
+  * @param numberOfOgres to be initialized and generated with random positions
+  */
   @Override
   protected void generateFoes(String numberOfOgres) {
 
@@ -349,7 +429,6 @@ class KeepMap extends Map {
    */
   @Override
   protected final void resetBackground() {
-
     for (Position key : doorMap.keySet()) {
       playMap[key.getXPosition()][key.getYPosition()] = door.getChar();
     }
@@ -358,9 +437,11 @@ class KeepMap extends Map {
   @Override
   public void play(char move) {
     resetBackground();
+    
     super.moveHero(move,
         super.lever.isActivated() ? Hero.getCharHeroKey() : Hero.getCharHeroLvl2());
-    super.checkLever();
+    openDoors();
+    checkLever();
     for (int i = 0; i < ogreList.size(); i++) {
       setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
       checkOgreCollision();
@@ -369,5 +450,37 @@ class KeepMap extends Map {
     checkLeverMap();
     checkIfStunned();
   }
+  
+  @Override
+public void checkLever() {
+	    Position heroPosition = hero.getPosition();
+	    Position leverPosition = lever.getPosition();
+
+	    if (leverPosition.equals(heroPosition)
+	        && (heroPosition.hashCode() == leverPosition.hashCode())) {
+	      lever.activateLever();
+	      // criar classe porta com icone porta fechada e porta aberta em vez de usar
+	      // coordenadas do map
+	      for (int i = 0; i < this.playMap.length; i++) {
+	        for (int j = 0; j < this.playMap[i].length; j++) {
+	          if (playMap[i][j] == 'I') {
+	            hero.setLeverState(true);
+	          }
+	        }
+	      }
+	    }
+	  }
+  
+  protected void openDoors() {
+		
+	  for (Position key : doorMap.keySet()) {
+	      if (Utilities.checkAdjacentCollision(key, hero.getPosition()) && this.hero.getLeverState()) {
+	    	  		playMap[key.getXPosition()][key.getYPosition()] = 'S';
+	    	  		door.setOpen(true);
+	      }
+	    }
+	  
+  }
+
 
 }

@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.controller;
 
 import javax.swing.ImageIcon;
 import dkeep.gui.CreateMapWindow;
@@ -220,6 +220,8 @@ public final class WindowController {
     return true;
   }
 
+  
+ 
   // private void initializedVisited(char[][] map) {
   // {
   // for (int i = 0; i < map.length; i++)

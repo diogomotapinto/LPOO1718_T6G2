@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import dkeep.logic.WindowController;
+import dkeep.controller.WindowController;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

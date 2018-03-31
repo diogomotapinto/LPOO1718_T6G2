@@ -11,7 +11,7 @@ import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 import dkeep.logic.model.Wall;
 
-abstract class Map implements PlayMap {
+public abstract class Map implements PlayMap {
 
   // mudar variaveis para classes respetivas
   private static final char CHAR_MOVE_UP = 'w';
@@ -146,31 +146,7 @@ abstract class Map implements PlayMap {
     playMap[x][y] = heroChar;
   }
 
-  // criar objeto door (com boolean aberto/fechado e checkar atraves das
-  // coordenadas do objeto lever) em vez de usar coordenadas do map
-  /**
-   * Checks if the hero has reached the lever
-   */
-  protected final void checkLever() {
-    Position heroPosition = hero.getPosition();
-    Position leverPosition = lever.getPosition();
 
-    if (leverPosition.equals(heroPosition)
-        && (heroPosition.hashCode() == leverPosition.hashCode())) {
-      lever.activateLever();
-      // criar classe porta com icone porta fechada e porta aberta em vez de usar
-      // coordenadas do map
-      for (int i = 0; i < this.playMap.length; i++) {
-        for (int j = 0; j < this.playMap[i].length; j++) {
-          if (playMap[i][j] == CHAR_DOOR_CLOSED) {
-            playMap[i][j] = CHAR_DOOR_OPEN;
-            hero.setLeverState(true);
-            door.setOpen(true);
-          }
-        }
-      }
-    }
-  }
 
   /**
    * checks if the game is won
@@ -187,6 +163,12 @@ abstract class Map implements PlayMap {
                                                                                                // map
   }
 
+  
+  /**
+   * Checks if the position passed as @param is the same as the position of one of the doors
+   * @param pos
+   * @return true if the position is the same and false otherwise
+   */
   protected final boolean checkOnDoors(Position pos) {
 
     for (Position key : doorMap.keySet()) {

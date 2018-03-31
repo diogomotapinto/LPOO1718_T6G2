@@ -190,14 +190,26 @@ public class CreateMapWindow extends JFrame {
 
 	}
 
+	/**
+	 * Method to get the map edited by the user
+	 * @return 
+	 */
 	public ImageIcon[][] getEditMap() {
 		return editPanel.getEditMap();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public final int getEditPanelSubSquareLength() {
 		return editPanel.getSubSquareLength();
 	}
 
+	/**
+	 * 
+	 * @return true if the map is created by the user and false otherwise
+	 */
 	public final boolean isMapCreated() {
 		return mapCreated;
 	}

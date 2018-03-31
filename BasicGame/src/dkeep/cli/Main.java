@@ -1,6 +1,6 @@
 package dkeep.cli;
 
-import dkeep.logic.Controller;
+import dkeep.controller.Controller;
 
 public final class Main {
 

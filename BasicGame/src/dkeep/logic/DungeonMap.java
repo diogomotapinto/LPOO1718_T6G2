@@ -24,7 +24,7 @@ public class DungeonMap extends Map {
    * @param personality
    *          of the guard it can be 'Rookie', 'Drunken' or 'Suspicious'
    */
-  DungeonMap(String personality) {
+  public DungeonMap(String personality) {
     super(new char[][] {
         { WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
             WALL_CHAR, WALL_CHAR },
@@ -128,7 +128,7 @@ public class DungeonMap extends Map {
   public final void play(char move) {
 
     super.moveHero(move, Hero.getCharHero());
-    super.checkLever();
+    checkLever();
     this.moveGuard();
     if (!hero.getPosition().equals(super.lever.getPosition())
         && !checkOnDoors(hero.getPosition())) {
@@ -158,4 +158,31 @@ public class DungeonMap extends Map {
     return new KeepMap(map);
   }
 
+  
+  // criar objeto door (com boolean aberto/fechado e checkar atraves das
+  // coordenadas do objeto lever) em vez de usar coordenadas do map
+  /**
+   * Checks if the hero has reached the lever
+   */
+  @Override
+  public void checkLever() {
+    Position heroPosition = hero.getPosition();
+    Position leverPosition = lever.getPosition();
+
+    if (leverPosition.equals(heroPosition)
+        && (heroPosition.hashCode() == leverPosition.hashCode())) {
+      lever.activateLever();
+      // criar classe porta com icone porta fechada e porta aberta em vez de usar
+      // coordenadas do map
+      for (int i = 0; i < this.playMap.length; i++) {
+        for (int j = 0; j < this.playMap[i].length; j++) {
+          if (playMap[i][j] == 'I') {
+            playMap[i][j] = 'S';
+            hero.setLeverState(true);
+            door.setOpen(true);
+          }
+        }
+      }
+    }
+  }
 }

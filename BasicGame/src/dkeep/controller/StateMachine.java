@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.controller;
 
 final class StateMachine {
 
@@ -31,7 +31,7 @@ final class StateMachine {
 			}
 			if (evt == Event.LEVEL_UP) {
 				// carregar novo mapa
-				// dar sinalizalçao que subiu de nivel
+				// dar sinalizalï¿½ao que subiu de nivel
 			}
 			if (evt == Event.WON) {
 				this.gameState = State.GAME_WON;
