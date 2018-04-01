@@ -14,473 +14,481 @@ import utilities.Utilities;
 
 class KeepMap extends Map {
 
-/**
- * Class constructor 
- * @param ogresNumber number of ogres in the game
- */
-  KeepMap(String ogresNumber) {
-    super(new char[][] {
-        { WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
-            WALL_CHAR, WALL_CHAR },
-        { CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, Lever.getLeverChar(), WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
-            CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
-        { WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
-            WALL_CHAR, WALL_CHAR } },
-        "\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
-        "Nivel 2!!!", new Position(8, 1), new Position(3, 7)
+	/**
+	 * Class constructor
+	 * 
+	 * @param ogresNumber
+	 *            number of ogres in the game
+	 */
+	KeepMap(String ogresNumber) {
+		super(new char[][] {
+				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
+						WALL_CHAR },
+				{ CHAR_DOOR_CLOSED, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, Lever.getLeverChar(), WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE,
+						CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, CHAR_BLANK_SPACE, WALL_CHAR },
+				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
+						WALL_CHAR } },
+				"\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
+				"Nivel 2!!!", new Position(8, 1), new Position(3, 7)
 
-    );
+		);
 
-    ogreList = new ArrayList<Ogre>();
-    parseMap();
-    generateFoes(ogresNumber);
-    initializeMap();
-  }
+		ogreList = new ArrayList<Ogre>();
+		parseMap();
+		generateFoes(ogresNumber);
+		initializeMap();
+	}
 
-  /**
-   * Class constructor that receives the map as a @param instead of the number of ogres
-   * @param map of the game
-   */
-  KeepMap(char[][] map) {
-    super(map,
-        "\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
-        "Nivel 2!!!", Utilities.findPosition(map, 'A'), Utilities.findPosition(map, 'k'));
+	/**
+	 * Class constructor that receives the map as a @param instead of the number of
+	 * ogres
+	 * 
+	 * @param map
+	 *            of the game
+	 */
+	KeepMap(char[][] map) {
+		super(map, "\nX - Wall \nI - Exit Door \nH - Hero \nO - Crazy Ogre \nk - key \nempty cell - free space",
+				"Nivel 2!!!", Utilities.findPosition(map, 'A'), Utilities.findPosition(map, 'k'));
 
-    this.wallMap = new HashMap<Position, Wall>();
-    this.doorMap = new HashMap<Position, Door>();
-    this.ogreList = new ArrayList<Ogre>();
-    parseMap();
-    initializeMap();
+		this.wallMap = new HashMap<Position, Wall>();
+		this.doorMap = new HashMap<Position, Door>();
+		this.ogreList = new ArrayList<Ogre>();
+		parseMap();
+		initializeMap();
 
-  }
+	}
 
-  
-  /**
-   * Parses the information of the map and initializes the objects in it
-   * it also sets the new position for the hero and for the lever
-   */
-  @Override
-  public void parseMap() {
-    for (int i = 0; i < super.playMap.length; i++) {
-      for (int j = 0; j < super.playMap[i].length; j++) {
-        Position position = new Position(i, j);
+	/**
+	 * Parses the information of the map and initializes the objects in it it also
+	 * sets the new position for the hero and for the lever
+	 */
+	@Override
+	public void parseMap() {
+		for (int i = 0; i < super.playMap.length; i++) {
+			for (int j = 0; j < super.playMap[i].length; j++) {
+				Position position = new Position(i, j);
 
-        switch (super.playMap[i][j]) {
-        case 'X':
-          Wall wall = new Wall(i, j);
-          this.wallMap.put(position, wall);
-          break;
-        case 'I':
-          Door door = new Door(i, j);
-          this.doorMap.put(position, door);
-          break;
-        case 'O':
-          Ogre ogre = new Ogre(i, j);
-          this.ogreList.add(ogre);
-          break;
-        case 'H':
-          this.hero.setPosition(position);
-          break;
-        case 'K':
-          this.lever.setPosition(position);
-          break;
-        default:
-          break;
-        }
-      }
-    }
+				switch (super.playMap[i][j]) {
+				case 'X':
+					Wall wall = new Wall(i, j);
+					this.wallMap.put(position, wall);
+					break;
+				case 'I':
+					Door door = new Door(i, j);
+					this.doorMap.put(position, door);
+					break;
+				case 'O':
+					Ogre ogre = new Ogre(i, j);
+					this.ogreList.add(ogre);
+					break;
+				case 'H':
+					this.hero.setPosition(position);
+					break;
+				case 'K':
+					this.lever.setPosition(position);
+					break;
+				default:
+					break;
+				}
+			}
+		}
 
-  }
+	}
 
-  /**
-   * Generates a position for the ogre
-   * @param ogre that is going to have a new position
-   * @return new ogre position
-   */
-  protected Position moveOgre(Ogre ogre) {
-    Position ogrePosition = ogre.getPosition();
+	/**
+	 * Generates a position for the ogre
+	 * 
+	 * @param ogre
+	 *            that is going to have a new position
+	 * @return new ogre position
+	 */
+	protected Position moveOgre(Ogre ogre) {
+		Position ogrePosition = ogre.getPosition();
 
-    if (isStunned(ogre)) {
-      return ogre.getPosition();
-    }
+		if (isStunned(ogre)) {
+			return ogre.getPosition();
+		}
 
-    playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ' ';
+		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ' ';
 
-    if (canMove(ogre.getPosition())) {
-      return ogre.getPosition();
-    }
+		if (canMove(ogre.getPosition())) {
+			return ogre.getPosition();
+		}
 
-    Position newPosition;
-    do {
-      newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(),
-          ogrePosition.getYPosition());
-    } while (playMap[newPosition.getXPosition()][newPosition.getYPosition()] != ' '
-        || (ogre.getPosition().equals(this.lever.getPosition())));
+		Position newPosition;
+		do {
+			newPosition = Utilities.getAdjacentPosition(ogrePosition.getXPosition(), ogrePosition.getYPosition());
+		} while (playMap[newPosition.getXPosition()][newPosition.getYPosition()] != ' '
+				|| (ogre.getPosition().equals(this.lever.getPosition())));
 
-    return newPosition;
-  }
+		return newPosition;
+	}
 
-  /**
-   * Sets the new position for the ogre and in the map
-   * @param ogrePosition new ogre position
-   * @param ogre ogre to have a new position
-   */
-  private final void setOgre(Position ogrePosition, Ogre ogre) {
+	/**
+	 * Sets the new position for the ogre and in the map
+	 * 
+	 * @param ogrePosition
+	 *            new ogre position
+	 * @param ogre
+	 *            ogre to have a new position
+	 */
+	private final void setOgre(Position ogrePosition, Ogre ogre) {
 
-    ogre.setPosition(ogrePosition);
+		ogre.setPosition(ogrePosition);
 
-    if (ogrePosition.equals(this.lever.getPosition())) {
-      if (!this.hero.getLeverState()) {
-        playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '$';
-      }
-    } else {
-      playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ogre.getOgreChar();
-    }
-  }
+		if (ogrePosition.equals(this.lever.getPosition())) {
+			if (!this.hero.getLeverState()) {
+				playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = '$';
+			}
+		} else {
+			playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ogre.getOgreChar();
+		}
+	}
 
-  /**
-   * Validates if the ogre can move,
-   * if he is with objects around him he won't be able to move and it will return false
-   * @param position
-   * @return true if he is able to move and false otherwise
-   */
-  protected final boolean canMove(Position position) {
-    int counter = 0;
-    // check above
-    if (playMap[position.getXPosition() - 1][position.getYPosition()] != ' '
-        || !(position.getXPosition() - 1 == this.lever.getPosition().getXPosition()
-            && position.getYPosition() == this.lever.getPosition().getYPosition())) {
+	/**
+	 * Validates if the ogre can move, if he is with objects around him he won't be
+	 * able to move and it will return false
+	 * 
+	 * @param position
+	 * @return true if he is able to move and false otherwise
+	 */
+	protected final boolean canMove(Position position) {
+		int counter = 0;
+		// check above
+		if (playMap[position.getXPosition() - 1][position.getYPosition()] != ' '
+				|| !(position.getXPosition() - 1 == this.lever.getPosition().getXPosition()
+						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
 
-      for (int i = 0; i < this.ogreList.size(); i++) {
-        if (!(position.getXPosition() - 1 == this.ogreList.get(i).getPosition().getXPosition()
-            && position.getYPosition() == this.ogreList.get(i).getClub().getPosition()
-                .getYPosition())) {
-          counter++;
-        }
-      }
-    }
+			for (int i = 0; i < this.ogreList.size(); i++) {
+				if (!(position.getXPosition() - 1 == this.ogreList.get(i).getPosition().getXPosition()
+						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
+					counter++;
+				}
+			}
+		}
 
-    // check above
-    if (playMap[position.getXPosition() + 1][position.getYPosition()] != ' '
-        || !(position.getXPosition() + 1 == this.lever.getPosition().getXPosition()
-            && position.getYPosition() == this.lever.getPosition().getYPosition())) {
+		// check above
+		if (playMap[position.getXPosition() + 1][position.getYPosition()] != ' '
+				|| !(position.getXPosition() + 1 == this.lever.getPosition().getXPosition()
+						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
 
-      for (int i = 0; i < this.ogreList.size(); i++) {
-        if (!(position.getXPosition() + 1 == this.ogreList.get(i).getPosition().getXPosition()
-            && position.getYPosition() == this.ogreList.get(i).getClub().getPosition()
-                .getYPosition())) {
-          counter++;
-        }
-      }
-    }
+			for (int i = 0; i < this.ogreList.size(); i++) {
+				if (!(position.getXPosition() + 1 == this.ogreList.get(i).getPosition().getXPosition()
+						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
+					counter++;
+				}
+			}
+		}
 
-    // check right
-    if (playMap[position.getXPosition()][position.getYPosition() + 1] != ' '
-        || !(position.getXPosition() == this.lever.getPosition().getXPosition()
-            && position.getYPosition() + 1 == this.lever.getPosition().getYPosition())) {
+		// check right
+		if (playMap[position.getXPosition()][position.getYPosition() + 1] != ' '
+				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
+						&& position.getYPosition() + 1 == this.lever.getPosition().getYPosition())) {
 
-      for (int i = 0; i < this.ogreList.size(); i++) {
-        if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
-            && position.getYPosition() + 1 == this.ogreList.get(i).getClub().getPosition()
-                .getYPosition())) {
-          counter++;
-        }
-      }
-    }
+			for (int i = 0; i < this.ogreList.size(); i++) {
+				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
+						&& position.getYPosition() + 1 == this.ogreList.get(i).getClub().getPosition()
+								.getYPosition())) {
+					counter++;
+				}
+			}
+		}
 
-    // check left
-    if (playMap[position.getXPosition()][position.getYPosition() - 1] != ' '
-        || !(position.getXPosition() == this.lever.getPosition().getXPosition()
-            && position.getYPosition() - 1 == this.lever.getPosition().getYPosition())) {
+		// check left
+		if (playMap[position.getXPosition()][position.getYPosition() - 1] != ' '
+				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
+						&& position.getYPosition() - 1 == this.lever.getPosition().getYPosition())) {
 
-      for (int i = 0; i < this.ogreList.size(); i++) {
-        if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
-            && position.getYPosition() - 1 == this.ogreList.get(i).getClub().getPosition()
-                .getYPosition())) {
-          counter++;
-        }
-      }
-    }
+			for (int i = 0; i < this.ogreList.size(); i++) {
+				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
+						&& position.getYPosition() - 1 == this.ogreList.get(i).getClub().getPosition()
+								.getYPosition())) {
+					counter++;
+				}
+			}
+		}
 
-    return counter == 4;
-  }
+		return counter == 4;
+	}
 
-  /**
-   * Check if the ogre is stunned and reduces the stun counter by one everytime it is called
-   * @param ogre
-   * @return true if he is stunned and false otherwise
-   */
-  private final boolean isStunned(Ogre ogre) {
-    if (ogre.getStunned()) {
-      if (ogre.getStunCounter() > 0) {
-        ogre.stunCounter();
-        return true;
-      } else {
-        ogre.setStunned(false);
-        return false;
-      }
-    }
-    return false;
-  }
+	/**
+	 * Check if the ogre is stunned and reduces the stun counter by one everytime it
+	 * is called
+	 * 
+	 * @param ogre
+	 * @return true if he is stunned and false otherwise
+	 */
+	private final boolean isStunned(Ogre ogre) {
+		if (ogre.getStunned()) {
+			if (ogre.getStunCounter() > 0) {
+				ogre.stunCounter();
+				return true;
+			} else {
+				ogre.setStunned(false);
+				return false;
+			}
+		}
+		return false;
+	}
 
-  /**
-   * Ganerates and sets a new position for the ogre club
-   * @param ogre
-   */
-  private final void moveClub(Ogre ogre) {
-    Position clubPosition = ogre.getClub().getPosition();
+	/**
+	 * Ganerates and sets a new position for the ogre club
+	 * 
+	 * @param ogre
+	 */
+	private final void moveClub(Ogre ogre) {
+		Position clubPosition = ogre.getClub().getPosition();
 
-    playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = ' ';
+		playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = ' ';
 
-    Position newClubPosition;
+		Position newClubPosition;
 
-    do {
-      newClubPosition = Utilities.getAdjacentPosition(ogre.getPosition().getXPosition(),
-          ogre.getPosition().getYPosition());
-    } while (playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
-        || checkWalls(newClubPosition) || checkDoors(newClubPosition)
-        || checkClubs(newClubPosition));
+		do {
+			newClubPosition = Utilities.getAdjacentPosition(ogre.getPosition().getXPosition(),
+					ogre.getPosition().getYPosition());
+		} while (playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
+				|| checkWalls(newClubPosition) || checkDoors(newClubPosition) || checkClubs(newClubPosition));
 
-    if (newClubPosition.equals(this.lever.getPosition())) {
-      if (!this.hero.getLeverState()) {
-        playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = '$';
-      }
-    } else {
-      playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = Club.getClubChar();
-    }
+		if (newClubPosition.equals(this.lever.getPosition())) {
+			if (!this.hero.getLeverState()) {
+				playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = '$';
+			}
+		} else {
+			playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = Club.getClubChar();
+		}
 
-    ogre.getClub().setPosition(newClubPosition);
+		ogre.getClub().setPosition(newClubPosition);
 
-  }
+	}
 
-  /**
-   * Checks if the position passed as @param is the same as the position of the one of the walls
-   * @param pos
-   * @return true if the position is the same and false otherwise
-   */
-  private final boolean checkWalls(Position pos) {
+	/**
+	 * Checks if the position passed as @param is the same as the position of the
+	 * one of the walls
+	 * 
+	 * @param pos
+	 * @return true if the position is the same and false otherwise
+	 */
+	private final boolean checkWalls(Position pos) {
 
-    for (Position key : wallMap.keySet()) {
-      if (key.equals(pos)) {
-        return true;
-      }
-    }
-    return false;
-  }
+		for (Position key : wallMap.keySet()) {
+			if (key.equals(pos)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-  /**
-   Checks if the position passed as @param is the same as the position of the one of the doors
-   * @param pos
-   * @return true if the position is the same and false otherwise
-   */
-  private final boolean checkDoors(Position pos) {
+	/**
+	 * Checks if the position passed as @param is the same as the position of the
+	 * one of the doors
+	 * 
+	 * @param pos
+	 * @return true if the position is the same and false otherwise
+	 */
+	private final boolean checkDoors(Position pos) {
 
-    for (Position key : doorMap.keySet()) {
-      if (key.equals(pos)) {
-        return true;
-      }
-    }
-    return false;
-  }
+		for (Position key : doorMap.keySet()) {
+			if (key.equals(pos)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-  
-  /**
-  Checks if the position passed as @param is the same as the position of the one of the clubs
-  * @param pos
-  * @return true if the position is the same and false otherwise
-  */
-  private final boolean checkClubs(Position pos) {
-    for (int i = 0; i < this.ogreList.size(); i++) {
-      if (ogreList.get(i).getClub().getPosition().equals(pos)) {
-        return true;
-      }
-    }
-    return false;
-  }
+	/**
+	 * Checks if the position passed as @param is the same as the position of the
+	 * one of the clubs
+	 * 
+	 * @param pos
+	 * @return true if the position is the same and false otherwise
+	 */
+	private final boolean checkClubs(Position pos) {
+		for (int i = 0; i < this.ogreList.size(); i++) {
+			if (ogreList.get(i).getClub().getPosition().equals(pos)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-  /**
-   * Checks if the hero is on an adjacent position to the ogre,
-   * if it is sets the ogre as stunned
-   * 
-   */
-  private final void checkIfStunned() {
-    for (int i = 0; i < ogreList.size(); i++) {
-      if (Utilities.checkAdjacentCollision(this.ogreList.get(i).getPosition(),
-          this.hero.getPosition())) {
-        ogreList.get(i).setStunned(true);
-      }
-    }
-  }
+	/**
+	 * Checks if the hero is on an adjacent position to the ogre, if it is sets the
+	 * ogre as stunned
+	 * 
+	 */
+	private final void checkIfStunned() {
+		for (int i = 0; i < ogreList.size(); i++) {
+			if (Utilities.checkAdjacentCollision(this.ogreList.get(i).getPosition(), this.hero.getPosition())) {
+				ogreList.get(i).setStunned(true);
+			}
+		}
+	}
 
-  // ver com o joao 
-  private final boolean checkOgreCollision() {
-    for (int i = 0; i < ogreList.size(); i++) {
-      if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
-          this.ogreList.get(i).getPosition())) {
-        ogreList.get(i).setStunned(true);
-        return true;
-      }
-    }
-    return false;
-  }
+	// ver com o joao
+	private final boolean checkOgreCollision() {
+		for (int i = 0; i < ogreList.size(); i++) {
+			if (Utilities.checkAdjacentCollision(this.hero.getPosition(), this.ogreList.get(i).getPosition())) {
+				ogreList.get(i).setStunned(true);
+				return true;
+			}
+		}
+		return false;
+	}
 
- 
+	/**
+	 * Checks if one of the clubs is in an adjacent position to the club
+	 * 
+	 * @return if it is and false otherwise
+	 */
+	private final boolean checkClubCollision() {
+		for (int i = 0; i < ogreList.size(); i++) {
+			if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
+					this.ogreList.get(i).getClub().getPosition())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-  /**
-   * Checks if one of the clubs is in an adjacent position to the club
-   * @return if it is and false otherwise
-   */
-  private final boolean checkClubCollision() {
-    for (int i = 0; i < ogreList.size(); i++) {
-      if (Utilities.checkAdjacentCollision(this.hero.getPosition(),
-          this.ogreList.get(i).getClub().getPosition())) {
-        return true;
-      }
-    }
-    return false;
-  }
-  
-  
-  /**
-   * Checks if the game is lost, in case there is collision between the hero and the club
-   * @return true if it is and false otherwise
-   */
-  @Override
-  protected boolean checkLost() {
-    return checkClubCollision();
-  }
-  
-  /**
-   * Puts the key on the map if the hero ha
-   */
-  private void checkLeverMap() {
-    Position leverPos = lever.getPosition();
-    if (playMap[leverPos.getXPosition()][leverPos.getYPosition()] == ' '
-        && !this.hero.getLeverState()) {
-      playMap[leverPos.getXPosition()][leverPos.getYPosition()] = 'k';
-    }
-  }
+	/**
+	 * Checks if the game is lost, in case there is collision between the hero and
+	 * the club
+	 * 
+	 * @return true if it is and false otherwise
+	 */
+	@Override
+	protected boolean checkLost() {
+		return checkClubCollision();
+	}
 
-  @Override
-  public Map nextLevel(String info) {
-    return null;
-  }
+	/**
+	 * Puts the key on the map if the hero ha
+	 */
+	private void checkLeverMap() {
+		Position leverPos = lever.getPosition();
+		if (playMap[leverPos.getXPosition()][leverPos.getYPosition()] == ' ' && !this.hero.getLeverState()) {
+			playMap[leverPos.getXPosition()][leverPos.getYPosition()] = 'k';
+		}
+	}
 
-  @Override
-  public Map nextLevel(char[][] map) {
-    return null;
-  }
-  
-  /**
-   * Initializes Map with the characters and sets their position on the map
-   * 
-   */
-  @Override
-  protected void initializeMap() {
-    for (int i = 0; i < ogreList.size(); i++) {
-      setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
-      moveClub(ogreList.get(i));
-    }
-    Position heroPosition = hero.getPosition();
-    playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getCharHeroLvl2();
-  }
+	@Override
+	public Map nextLevel(String info) throws NextLevelNotAvailable {
+		throw new NextLevelNotAvailable();
+	}
 
-  
- /**
-  * Generates the enemies positions if the map hasn't been created by the user 
-  * @param numberOfOgres to be initialized and generated with random positions
-  */
-  @Override
-  protected void generateFoes(String numberOfOgres) {
+	@Override
+	public Map nextLevel(char[][] map) throws NextLevelNotAvailable {
+		throw new NextLevelNotAvailable();
+	}
 
-    Position leverPos = new Position(1, 8);
-    lever.setPosition(leverPos);
+	/**
+	 * Initializes Map with the characters and sets their position on the map
+	 * 
+	 */
+	@Override
+	protected void initializeMap() {
+		for (int i = 0; i < ogreList.size(); i++) {
+			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
+			moveClub(ogreList.get(i));
+		}
+		Position heroPosition = hero.getPosition();
+		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getCharHeroLvl2();
+	}
 
-    int x, y;
-    Ogre ogre;
-    int ogresNumber = Integer.parseInt(numberOfOgres);
-    for (int i = 0; i < ogresNumber; i++) {
-      do {
-        x = Utilities.generateRandomNumber(1, 5);
-        y = Utilities.generateRandomNumber(1, 5);
-        ogre = new Ogre(x, y);
-      } while (playMap[x][y] != CHAR_BLANK_SPACE);
-      moveClub(ogre);
-      ogreList.add(ogre);
-    }
-  }
+	/**
+	 * Generates the enemies positions if the map hasn't been created by the user
+	 * 
+	 * @param numberOfOgres
+	 *            to be initialized and generated with random positions
+	 */
+	@Override
+	protected void generateFoes(String numberOfOgres) {
 
-  /**
-   * Resets the background objects positions
-   */
-  @Override
-  protected final void resetBackground() {
-    for (Position key : doorMap.keySet()) {
-      playMap[key.getXPosition()][key.getYPosition()] = door.getChar();
-    }
-  }
+		Position leverPos = new Position(1, 8);
+		lever.setPosition(leverPos);
 
-  @Override
-  public void play(char move) {
-    resetBackground();
-    
-    super.moveHero(move,
-        super.lever.isActivated() ? Hero.getCharHeroKey() : Hero.getCharHeroLvl2());
-    openDoors();
-    checkLever();
-    for (int i = 0; i < ogreList.size(); i++) {
-      setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
-      checkOgreCollision();
-      moveClub(ogreList.get(i));
-    }
-    checkLeverMap();
-    checkIfStunned();
-  }
-  
-  @Override
-public void checkLever() {
-	    Position heroPosition = hero.getPosition();
-	    Position leverPosition = lever.getPosition();
+		int x, y;
+		Ogre ogre;
+		int ogresNumber = Integer.parseInt(numberOfOgres);
+		for (int i = 0; i < ogresNumber; i++) {
+			do {
+				x = Utilities.generateRandomNumber(1, 5);
+				y = Utilities.generateRandomNumber(1, 5);
+				ogre = new Ogre(x, y);
+			} while (playMap[x][y] != CHAR_BLANK_SPACE);
+			moveClub(ogre);
+			ogreList.add(ogre);
+		}
+	}
 
-	    if (leverPosition.equals(heroPosition)
-	        && (heroPosition.hashCode() == leverPosition.hashCode())) {
-	      lever.activateLever();
-	      // criar classe porta com icone porta fechada e porta aberta em vez de usar
-	      // coordenadas do map
-	      for (int i = 0; i < this.playMap.length; i++) {
-	        for (int j = 0; j < this.playMap[i].length; j++) {
-	          if (playMap[i][j] == 'I') {
-	            hero.setLeverState(true);
-	          }
-	        }
-	      }
-	    }
-	  }
-  
-  protected void openDoors() {
-		
-	  for (Position key : doorMap.keySet()) {
-	      if (Utilities.checkAdjacentCollision(key, hero.getPosition()) && this.hero.getLeverState()) {
-	    	  		playMap[key.getXPosition()][key.getYPosition()] = 'S';
-	    	  		door.setOpen(true);
-	      }
-	    }
-	  
-  }
+	/**
+	 * Resets the background objects positions
+	 */
+	@Override
+	protected final void resetBackground() {
+		for (Position key : doorMap.keySet()) {
+			playMap[key.getXPosition()][key.getYPosition()] = door.getChar();
+		}
+	}
 
+	@Override
+	public void play(char move) {
+		resetBackground();
+
+		super.moveHero(move, super.lever.isActivated() ? Hero.getCharHeroKey() : Hero.getCharHeroLvl2());
+		openDoors();
+		checkLever();
+		for (int i = 0; i < ogreList.size(); i++) {
+			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
+			checkOgreCollision();
+			moveClub(ogreList.get(i));
+		}
+		checkLeverMap();
+		checkIfStunned();
+	}
+
+	@Override
+	public void checkLever() {
+		Position heroPosition = hero.getPosition();
+		Position leverPosition = lever.getPosition();
+
+		if (leverPosition.equals(heroPosition) && (heroPosition.hashCode() == leverPosition.hashCode())) {
+			lever.activateLever();
+			// criar classe porta com icone porta fechada e porta aberta em vez de usar
+			// coordenadas do map
+			for (int i = 0; i < this.playMap.length; i++) {
+				for (int j = 0; j < this.playMap[i].length; j++) {
+					if (playMap[i][j] == 'I') {
+						hero.setLeverState(true);
+					}
+				}
+			}
+		}
+	}
+
+	protected void openDoors() {
+
+		for (Position key : doorMap.keySet()) {
+			if (Utilities.checkAdjacentCollision(key, hero.getPosition()) && this.hero.getLeverState()) {
+				playMap[key.getXPosition()][key.getYPosition()] = 'S';
+				door.setOpen(true);
+			}
+		}
+
+	}
 
 }
