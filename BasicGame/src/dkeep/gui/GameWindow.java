@@ -106,13 +106,7 @@ public final class GameWindow extends JFrame {
     gamePnl.setVisible(true);
 
     exitBtn = new JButton("Exit");
-    exitBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        System.out.println("Exit");
-        System.exit(0);
-      }
-    });
-    exitBtn.setBounds(475, 300, 120, 25);
+    initializeExitBtn(exitBtn);
     frame.getContentPane().add(exitBtn);
 
     gameContextLbl = new JLabel("You can start now");
@@ -126,19 +120,11 @@ public final class GameWindow extends JFrame {
     menuBar.add(menuMn);
 
     JMenuItem gameSettingsMI = new JMenuItem("Game Settings");
-    gameSettingsMI.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        windowController.showWindowGameSettings();
-      }
-    });
+    initializeJMenu(gameSettingsMI);
     menuMn.add(gameSettingsMI);
 
     JMenuItem editMapMI = new JMenuItem("Create Map");
-    editMapMI.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        windowController.showCreateGameWindow();
-      }
-    });
+    initializeJMenuItem(editMapMI);
     menuMn.add(editMapMI);
 
     try {
@@ -205,6 +191,26 @@ public final class GameWindow extends JFrame {
   }
   
   
+  protected void initializeExitBtn(JButton exitBtn) {
+	   exitBtn.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		        System.out.println("Exit");
+		        System.exit(0);
+		      }
+		    });
+		    exitBtn.setBounds(475, 300, 120, 25);
+  }
+  
+  
+  protected void initializeJMenu( JMenuItem gameSettingsMI) {
+	  gameSettingsMI.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent arg0) {
+	        windowController.showWindowGameSettings();
+	      }
+	    });
+  }
+  
+  
   protected void initializeGamePanel(GameMapPanel gamePnl, WindowController windowController) {
 	  gamePnl.addKeyListener(new KeyAdapter() {
 	      @Override
@@ -232,5 +238,13 @@ public final class GameWindow extends JFrame {
 	    gamePnl.setFont(new Font("Courier", Font.PLAIN, 18));
 	    gamePnl.setBounds(0, 41, 400, 400);
 	    gamePnl.setSubSquareLength(windowController.getEditPanelSubSquareLength());
+  }
+  
+  protected void initializeJMenuItem(JMenuItem editMapMI) {
+	  editMapMI.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent arg0) {
+	        windowController.showCreateGameWindow();
+	      }
+	    });
   }
 }
