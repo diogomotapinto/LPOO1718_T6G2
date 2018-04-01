@@ -194,6 +194,9 @@ public abstract class Map implements PlayMap {
 		return hero;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
 		StringBuilder stringbuilder = new StringBuilder();
@@ -209,6 +212,10 @@ public abstract class Map implements PlayMap {
 		return stringbuilder.toString();
 	}
 
+	/**
+	 * Checks if the game is over
+	 * @return 1 if the game is won, -1 if the game is lost and 0 if the game isn't over or lost
+	 */
 	public byte checkEndLevel() {
 		// para terminar basta chegar a um dos cantos
 

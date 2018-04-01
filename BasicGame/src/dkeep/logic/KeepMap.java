@@ -169,60 +169,38 @@ class KeepMap extends Map {
 	protected final boolean canMove(Position position) {
 		int counter = 0;
 		// check above
-		if (playMap[position.getXPosition() - 1][position.getYPosition()] != ' '
-				|| !(position.getXPosition() - 1 == this.lever.getPosition().getXPosition()
+		Position posAbove = new Position(position.getXPosition()-1,position.getYPosition());
+		Position posBelow = new Position(position.getXPosition()+1,position.getYPosition());
+		Position posRight =  new Position(position.getXPosition(),position.getYPosition()+1);
+		Position posLeft =  new Position(position.getXPosition(),position.getYPosition()-1);
+
+		counter += checkPos(posAbove);
+		counter += checkPos(posBelow);
+		counter +=checkPos(posRight);
+		counter += checkPos(posLeft);
+
+		if(counter == 4) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+
+	protected int checkPos(Position position) {
+		
+		if (playMap[position.getXPosition() ][position.getYPosition()] != ' '
+				|| !(position.getXPosition()  == this.lever.getPosition().getXPosition()
 						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
 
 			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition() - 1 == this.ogreList.get(i).getPosition().getXPosition()
+				if (!(position.getXPosition()  == this.ogreList.get(i).getPosition().getXPosition()
 						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
-					counter++;
+					return 1;
 				}
 			}
 		}
-
-		// check above
-		if (playMap[position.getXPosition() + 1][position.getYPosition()] != ' '
-				|| !(position.getXPosition() + 1 == this.lever.getPosition().getXPosition()
-						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
-
-			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition() + 1 == this.ogreList.get(i).getPosition().getXPosition()
-						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
-					counter++;
-				}
-			}
-		}
-
-		// check right
-		if (playMap[position.getXPosition()][position.getYPosition() + 1] != ' '
-				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
-						&& position.getYPosition() + 1 == this.lever.getPosition().getYPosition())) {
-
-			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
-						&& position.getYPosition() + 1 == this.ogreList.get(i).getClub().getPosition()
-								.getYPosition())) {
-					counter++;
-				}
-			}
-		}
-
-		// check left
-		if (playMap[position.getXPosition()][position.getYPosition() - 1] != ' '
-				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
-						&& position.getYPosition() - 1 == this.lever.getPosition().getYPosition())) {
-
-			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
-						&& position.getYPosition() - 1 == this.ogreList.get(i).getClub().getPosition()
-								.getYPosition())) {
-					counter++;
-				}
-			}
-		}
-
-		return counter == 4;
+		return 0;
 	}
 
 	/**
@@ -250,7 +228,7 @@ class KeepMap extends Map {
 	 * 
 	 * @param ogre
 	 */
-	private final void moveClub(Ogre ogre) {
+	private final Position moveClub(Ogre ogre) {
 		Position clubPosition = ogre.getClub().getPosition();
 
 		playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = ' ';
@@ -263,6 +241,13 @@ class KeepMap extends Map {
 		} while (playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] == WALL_CHAR
 				|| checkWalls(newClubPosition) || checkDoors(newClubPosition) || checkClubs(newClubPosition));
 
+		return newClubPosition;
+
+	}
+	
+	
+	private final void setOgreClub(Position newClubPosition, Ogre ogre) {
+		
 		if (newClubPosition.equals(this.lever.getPosition())) {
 			if (!this.hero.getLeverState()) {
 				playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = '$';
@@ -272,7 +257,6 @@ class KeepMap extends Map {
 		}
 
 		ogre.getClub().setPosition(newClubPosition);
-
 	}
 
 	/**
@@ -403,7 +387,7 @@ class KeepMap extends Map {
 	protected void initializeMap() {
 		for (int i = 0; i < ogreList.size(); i++) {
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
-			moveClub(ogreList.get(i));
+			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
 		}
 		Position heroPosition = hero.getPosition();
 		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getCharHeroLvl2();
@@ -429,9 +413,10 @@ class KeepMap extends Map {
 				x = Utilities.generateRandomNumber(1, 5);
 				y = Utilities.generateRandomNumber(1, 5);
 				ogre = new Ogre(x, y);
+				
 			} while (playMap[x][y] != CHAR_BLANK_SPACE);
-			moveClub(ogre);
 			ogreList.add(ogre);
+			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
 		}
 	}
 
@@ -455,12 +440,15 @@ class KeepMap extends Map {
 		for (int i = 0; i < ogreList.size(); i++) {
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
 			checkOgreCollision();
-			moveClub(ogreList.get(i));
+			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
 		}
 		checkLeverMap();
 		checkIfStunned();
 	}
 
+	/**
+	 * Checks if the hero has a key
+	 */
 	@Override
 	public void checkLever() {
 		Position heroPosition = hero.getPosition();
@@ -480,6 +468,9 @@ class KeepMap extends Map {
 		}
 	}
 
+	/**
+	 * Opens the door if the hero has the key and is in an adjacent position to the door
+	 */
 	protected void openDoors() {
 
 		for (Position key : doorMap.keySet()) {

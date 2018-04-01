@@ -54,22 +54,11 @@ public class CreateMapWindow extends JFrame {
 		editPanel.setSubSquareLength(editPanel.getWidth() / 10);
 
 		exitBtn = new JButton("Exit");
-		exitBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mapCreated = false;
-				dispose();
-			}
-		});
-		exitBtn.setBounds(559, 424, 104, 29);
+		initializeExitButton(exitBtn);
 		getContentPane().add(exitBtn);
 
 		applyBtn = new JButton("Apply");
-		applyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-		applyBtn.setBounds(433, 424, 104, 29);
+		initializeApplyButton(applyBtn);
 		getContentPane().add(applyBtn);
 
 		mapSizeLbl = new JLabel("Map Size");
@@ -77,6 +66,54 @@ public class CreateMapWindow extends JFrame {
 		getContentPane().add(mapSizeLbl);
 
 		heroLbl = new JLabel();
+		initializeHeroLbl(heroLbl,imageLoader);
+		getContentPane().add(heroLbl);
+
+		ogreLbl = new JLabel();
+		initializeOgreLbl(ogreLbl ,imageLoader);
+		getContentPane().add(ogreLbl);
+		
+		doorLbl = new JLabel();
+		intializeDoorLbl(doorLbl, imageLoader);
+		getContentPane().add(doorLbl);
+		
+
+		keyLbl = new JLabel();
+		 initializeKeylbl(keyLbl, imageLoader);
+		getContentPane().add(keyLbl);
+
+		wallLbl = new JLabel();
+		initializeWallLbl( wallLbl,imageLoader); 
+		getContentPane().add(wallLbl);
+
+		blankSpaceLbl = new JLabel();
+		initializeJLabel(blankSpaceLbl,imageLoader);
+		
+		mapSizeSld = new JSlider();
+		initializeSlider(mapSizeSld);
+		
+	}
+	
+	protected void initializeExitButton(JButton exitBtn) {
+		exitBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mapCreated = false;
+				dispose();
+			}
+		});
+		exitBtn.setBounds(559, 424, 104, 29);
+	}
+	
+	protected void initializeApplyButton(JButton applyBtn) {
+		applyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		applyBtn.setBounds(433, 424, 104, 29);
+	}
+	
+	protected void initializeHeroLbl(JLabel heroLbl, ImageLoader imageLoader) {
 		heroLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -87,9 +124,12 @@ public class CreateMapWindow extends JFrame {
 		});
 		heroLbl.setBounds(459, 65, 40, 40);
 		heroLbl.setIcon(imageLoader.getHeroImg());
-		getContentPane().add(heroLbl);
-
-		ogreLbl = new JLabel();
+	}
+	
+	
+	
+	
+	protected void initializeOgreLbl(JLabel doorLbl ,ImageLoader imageLoader) {
 		ogreLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -100,9 +140,9 @@ public class CreateMapWindow extends JFrame {
 		});
 		ogreLbl.setBounds(575, 65, 40, 40);
 		ogreLbl.setIcon(imageLoader.getOgreImg());
-		getContentPane().add(ogreLbl);
-
-		doorLbl = new JLabel();
+	}
+	
+	protected void intializeDoorLbl(JLabel doorLbl,  ImageLoader imageLoader) {
 		doorLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -113,9 +153,9 @@ public class CreateMapWindow extends JFrame {
 		});
 		doorLbl.setBounds(459, 120, 40, 40);
 		doorLbl.setIcon(imageLoader.getDoorImg());
-		getContentPane().add(doorLbl);
-
-		keyLbl = new JLabel();
+	}
+	
+	protected void initializeKeylbl(JLabel keyLbl, ImageLoader imageLoader){
 		keyLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -126,9 +166,10 @@ public class CreateMapWindow extends JFrame {
 		});
 		keyLbl.setBounds(575, 120, 40, 40);
 		keyLbl.setIcon(imageLoader.getKeyImg());
-		getContentPane().add(keyLbl);
-
-		wallLbl = new JLabel();
+	}
+	
+	
+	protected void initializeWallLbl(JLabel wallLbl, ImageLoader imageLoader) {
 		wallLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -139,9 +180,10 @@ public class CreateMapWindow extends JFrame {
 		});
 		wallLbl.setBounds(459, 175, 40, 40);
 		wallLbl.setIcon(imageLoader.getWallImg());
-		getContentPane().add(wallLbl);
-
-		blankSpaceLbl = new JLabel();
+	}
+	
+	
+	protected void initializeJLabel(JLabel blankSpaceLbl, ImageLoader imageLoader) {
 		blankSpaceLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -153,8 +195,9 @@ public class CreateMapWindow extends JFrame {
 		blankSpaceLbl.setBounds(575, 175, 40, 40);
 		blankSpaceLbl.setIcon(imageLoader.getBlankSpaceImg());
 		getContentPane().add(blankSpaceLbl);
-
-		mapSizeSld = new JSlider();
+	}
+	
+	public void initializeSlider(JSlider mapSizeSld) {
 		mapSizeSld.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				int value = mapSizeSld.getValue();

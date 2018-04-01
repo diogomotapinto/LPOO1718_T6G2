@@ -10,6 +10,12 @@ public final class View {
 		keyboard = new Scanner(System.in);
 	}
 
+	
+	
+	/**
+	 * Returns the move 
+	 * @return 'w' for the hero to move up, 's' for the hero to move down, 'a' for the hero to move left and 'd' for the hero move right
+	 */
 	public final char getMove() {
 		String move = "";
 
@@ -34,6 +40,10 @@ public final class View {
 		printString(legend);
 	}
 
+	/**
+	 * Prints the map 
+	 * @param map to be printed
+	 */
 	private void printMatrix(char[][] map) {
 		printString("");
 		for (int i = 0; i < map.length; i++) {
@@ -44,6 +54,10 @@ public final class View {
 		}
 	}
 
+	/**
+	 * Prints the string passed as @param
+	 * @param s string to be printed
+	 */
 	public void printString(String s) {
 		System.out.println(s);
 	}
