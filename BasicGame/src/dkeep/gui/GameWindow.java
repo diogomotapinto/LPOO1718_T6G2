@@ -81,77 +81,27 @@ public final class GameWindow extends JFrame {
     frame.getContentPane().setLayout(null);
 
     newGameBtn = new JButton("New Game");
-    newGameBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        windowController.newGame();
-      }
-    });
-    newGameBtn.setBounds(475, 85, 120, 25);
+    initializeNewButton(newGameBtn);
     frame.getContentPane().add(newGameBtn);
 
     upBtn = new JButton("Up");
-    upBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        windowController.makeMove('w');
-      }
-    });
-    upBtn.setBounds(495, 150, 75, 30);
+    initializeUpButton(upBtn);
     frame.getContentPane().add(upBtn);
 
     leftBtn = new JButton("Left");
-    leftBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        windowController.makeMove('a');
-      }
-    });
-    leftBtn.setBounds(415, 190, 75, 30);
+    initializeLeftBtn(leftBtn);
     frame.getContentPane().add(leftBtn);
 
     rightBtn = new JButton("Right");
-    rightBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        windowController.makeMove('d');
-      }
-    });
-    rightBtn.setBounds(575, 190, 75, 30);
+    initializeRightBtn(rightBtn);
     frame.getContentPane().add(rightBtn);
 
     downBtn = new JButton("Down");
-    downBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        windowController.makeMove('s');
-      }
-    });
-    downBtn.setBounds(495, 230, 75, 30);
+    initializeDownBtn(downBtn);
     frame.getContentPane().add(downBtn);
 
     gamePnl = new GameMapPanel();
-    gamePnl.addKeyListener(new KeyAdapter() {
-      @Override
-      public void keyPressed(KeyEvent e) {
-        System.out.println("KEY PRESSED");
-        switch (e.getKeyCode()) {
-        case KeyEvent.VK_UP:
-          windowController.makeMove('w');
-          break;
-        case KeyEvent.VK_DOWN:
-          windowController.makeMove('s');
-          break;
-        case KeyEvent.VK_LEFT:
-          windowController.makeMove('a');
-          break;
-        case KeyEvent.VK_RIGHT:
-          windowController.makeMove('d');
-          break;
-        default:
-          break;
-        }
-      }
-    });
-
-    gamePnl.setFont(new Font("Courier", Font.PLAIN, 18));
-    gamePnl.setBounds(0, 41, 400, 400);
-    gamePnl.setSubSquareLength(windowController.getEditPanelSubSquareLength());
+    initializeGamePanel(gamePnl,windowController);
     frame.getContentPane().add(gamePnl);
     gamePnl.setVisible(true);
 
@@ -206,4 +156,81 @@ public final class GameWindow extends JFrame {
     frame.setVisible(true);
   }
 
+  
+  protected void initializeUpButton(JButton upBtn) {
+	  upBtn.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent arg0) {
+	        windowController.makeMove('w');
+	      }
+	    });
+	    upBtn.setBounds(495, 150, 75, 30);
+  }
+  
+  
+  protected void initializeNewButton(JButton newGameBtn) {
+	  newGameBtn.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+	        windowController.newGame();
+	      }
+	    });
+	    newGameBtn.setBounds(475, 85, 120, 25);
+  }
+  
+  protected void initializeLeftBtn(JButton leftBtn) {
+	  leftBtn.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+	        windowController.makeMove('a');
+	      }
+	    });
+	    leftBtn.setBounds(415, 190, 75, 30);
+  }
+  
+  
+  protected void initializeRightBtn(JButton rightBtn) {
+	  rightBtn.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+	        windowController.makeMove('d');
+	      }
+	    });
+	    rightBtn.setBounds(575, 190, 75, 30);
+  }
+  
+  protected void initializeDownBtn(JButton downBtn) {
+	  downBtn.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent e) {
+	        windowController.makeMove('s');
+	      }
+	    });
+	    downBtn.setBounds(495, 230, 75, 30);
+  }
+  
+  
+  protected void initializeGamePanel(GameMapPanel gamePnl, WindowController windowController) {
+	  gamePnl.addKeyListener(new KeyAdapter() {
+	      @Override
+	      public void keyPressed(KeyEvent e) {
+	        System.out.println("KEY PRESSED");
+	        switch (e.getKeyCode()) {
+	        case KeyEvent.VK_UP:
+	          windowController.makeMove('w');
+	          break;
+	        case KeyEvent.VK_DOWN:
+	          windowController.makeMove('s');
+	          break;
+	        case KeyEvent.VK_LEFT:
+	          windowController.makeMove('a');
+	          break;
+	        case KeyEvent.VK_RIGHT:
+	          windowController.makeMove('d');
+	          break;
+	        default:
+	          break;
+	        }
+	      }
+	    });
+
+	    gamePnl.setFont(new Font("Courier", Font.PLAIN, 18));
+	    gamePnl.setBounds(0, 41, 400, 400);
+	    gamePnl.setSubSquareLength(windowController.getEditPanelSubSquareLength());
+  }
 }
