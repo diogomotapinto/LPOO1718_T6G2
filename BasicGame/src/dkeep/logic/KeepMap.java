@@ -224,9 +224,10 @@ class KeepMap extends Map {
 	}
 
 	/**
-	 * Ganerates and sets a new position for the ogre club
+	 * Ganerates a new position for the ogre club
 	 * 
 	 * @param ogre
+	 * @return newClubPosition
 	 */
 	private final Position moveClub(Ogre ogre) {
 		Position clubPosition = ogre.getClub().getPosition();
@@ -245,7 +246,11 @@ class KeepMap extends Map {
 
 	}
 	
-	
+	/**
+	 * Sets a new position for the ogre club
+	 * @param newClubPosition
+	 * @param ogre
+	 */
 	private final void setOgreClub(Position newClubPosition, Ogre ogre) {
 		
 		if (newClubPosition.equals(this.lever.getPosition())) {
