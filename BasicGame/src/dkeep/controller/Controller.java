@@ -1,5 +1,6 @@
 package dkeep.controller;
 
+import dkeep.cli.View;
 import dkeep.logic.DungeonMap;
 import dkeep.logic.Map;
 import dkeep.logic.NextLevelNotAvailable;
@@ -7,10 +8,16 @@ import dkeep.logic.model.Guard;
 
 public final class Controller {
 
+	public enum GameAmbient {
+		GUI, CONSOLE
+	};
+
 	private static final Controller INSTANCE = new Controller();
 	private final StateMachine stateMachine;
 	private final WindowController wdwController;
+	private final View view;
 	private Map currentMap;
+	private GameAmbient gameAmbient;
 
 	/**
 	 * Class constructor
@@ -18,6 +25,8 @@ public final class Controller {
 	private Controller() {
 		stateMachine = new StateMachine();
 		wdwController = new WindowController(this);
+		view = new View();
+		gameAmbient = GameAmbient.GUI;
 	}
 
 	/**
@@ -34,10 +43,26 @@ public final class Controller {
 	 * @param personality
 	 *            string with the information for the DungeonMap
 	 */
-	void newGame(String personality) {
+	void newGame(String personality, GameAmbient gameAmbient) {
+		this.gameAmbient = gameAmbient;
 		stateMachine.advanceState(StateMachine.Event.PLAY);
 		currentMap = new DungeonMap(personality);
-		wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
+		printGame();
+	}
+
+	private void printGame() {
+
+		if (gameAmbient == GameAmbient.GUI) {
+			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
+		} else if (gameAmbient == GameAmbient.CONSOLE) {
+
+			view.printGameInfo(currentMap.getHeader(), currentMap.getPlayMap(), currentMap.getLegend());
+			do {
+				currentMap.play(view.getMove());
+				view.printGameInfo(currentMap.getHeader(), currentMap.getPlayMap(), currentMap.getLegend());
+			} while (!advanceLevel(currentMap.checkEndLevel()));
+
+		}
 	}
 
 	/**
@@ -50,7 +75,7 @@ public final class Controller {
 	void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
-			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can move");
+			printGame();
 			advanceLevel(currentMap.checkEndLevel());
 		}
 	}

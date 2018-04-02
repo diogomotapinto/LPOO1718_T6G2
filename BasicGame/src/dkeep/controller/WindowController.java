@@ -1,6 +1,8 @@
 package dkeep.controller;
 
 import javax.swing.ImageIcon;
+
+import dkeep.controller.Controller.GameAmbient;
 import dkeep.gui.CreateMapWindow;
 import dkeep.gui.GameSettingsWindow;
 import dkeep.gui.GameWindow;
@@ -37,8 +39,9 @@ public final class WindowController {
 
 	public void newGame() {
 		String guardPersonality = gameStgWdw.getGuardPersonality();
-		if (checkNewGame(guardPersonality))
-			controller.newGame(guardPersonality);
+		GameAmbient gameAmbient = gameStgWdw.getGameAmbient();
+		if (checkNewGame(guardPersonality, gameAmbient))
+			controller.newGame(guardPersonality, gameAmbient);
 	}
 
 	public void makeMove(char move) {
@@ -121,10 +124,9 @@ public final class WindowController {
 		return imgMap;
 	}
 
-	private boolean checkNewGame(String guardPersonality) {
+	private boolean checkNewGame(String guardPersonality, GameAmbient gameAmbient) {
 
 		String ogreNumber = gameStgWdw.getOgreNumber();
-		String gameAmbient = gameStgWdw.getGameAmbient();
 		boolean mapCreated = createMapWdw.isMapCreated();
 
 		if (gameAmbient.equals("")) {
@@ -159,6 +161,9 @@ public final class WindowController {
 				popUpWdw.printWarningMessageDialog("Invalid edit map");
 				return false;
 			}
+		}
+		if (gameAmbient == GameAmbient.CONSOLE) {
+			this.gameWdw.closeWindow();
 		}
 		return true;
 	}

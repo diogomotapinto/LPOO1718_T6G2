@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import dkeep.controller.Controller.GameAmbient;
 
 public final class GameSettingsWindow extends JFrame {
 
@@ -25,14 +26,14 @@ public final class GameSettingsWindow extends JFrame {
 	private final JLabel ogreNumberLbl;
 	private final JTextField ogreNumberTxtFld;
 	private final JLabel guardPersonalityLbl;
-	private final JComboBox guardPersonalityCmbBox;
-	private final JComboBox gameAmbientCmbBox;
+	private final JComboBox<String> guardPersonalityCmbBox;
+	private final JComboBox<GameAmbient> gameAmbientCmbBox;
 	private final JButton applyBtn;
 	private final JButton closeBtn;
 
 	private String ogreNumber;
 	private String guardPersonality;
-	private String gameAmbient;
+	private GameAmbient gameAmbient;
 
 	/**
 	 * Create the frame.
@@ -73,7 +74,7 @@ public final class GameSettingsWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ogreNumber = ogreNumberTxtFld.getText();
 				guardPersonality = (String) guardPersonalityCmbBox.getSelectedItem();
-				gameAmbient = (String) gameAmbientCmbBox.getSelectedItem();
+				gameAmbient = (GameAmbient) gameAmbientCmbBox.getSelectedItem();
 				setVisible(false);
 			}
 		});
@@ -94,8 +95,7 @@ public final class GameSettingsWindow extends JFrame {
 		gameAmbientLbl.setBounds(15, 19, 100, 16);
 		contentPane.add(gameAmbientLbl);
 
-		gameAmbientCmbBox = new JComboBox();
-		gameAmbientCmbBox.setModel(new DefaultComboBoxModel(new String[] { "", "GUI", "Console" }));
+		gameAmbientCmbBox = new JComboBox(GameAmbient.values());
 		gameAmbientCmbBox.setBounds(125, 13, 120, 25);
 		contentPane.add(gameAmbientCmbBox);
 
@@ -105,7 +105,7 @@ public final class GameSettingsWindow extends JFrame {
 		return ogreNumber;
 	}
 
-	public String getGameAmbient() {
+	public GameAmbient getGameAmbient() {
 		return this.gameAmbient;
 	}
 
