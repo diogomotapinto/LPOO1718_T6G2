@@ -6,6 +6,9 @@ import javax.swing.JOptionPane;
 public final class PopUpWindow extends JFrame {
   private JFrame frame;
 
+  /**
+   * Class constructor
+   */
   public PopUpWindow() {
     super();
   }
@@ -14,6 +17,7 @@ public final class PopUpWindow extends JFrame {
     JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
   }
 
+  
   public void printWarningMessageDialog(String message) {
     JOptionPane.showMessageDialog(frame, message, "Warning", JOptionPane.WARNING_MESSAGE);
   }

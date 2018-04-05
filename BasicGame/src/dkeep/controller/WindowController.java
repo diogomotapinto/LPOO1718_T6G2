@@ -251,10 +251,10 @@ public final class WindowController {
 		if (!checkCharacter('O', 1, 5, charMap)) {
 			return false;
 		}
-		if (!checkCharacter('I', 1, charMap.length * charMap.length, charMap)) {
+		if (!checkCharacter('I', 1,1, charMap)) {
 			return false;
 		}
-		if (!checkCharacter('k', 1, charMap.length * charMap.length, charMap)) {
+		if (!checkCharacter('k', 1, 1, charMap)) {
 			return false;
 		}
 		if (!checkCharacter('X', 1, charMap.length * charMap.length, charMap)) {
@@ -297,8 +297,7 @@ public final class WindowController {
 	 * 
 	 * @param map
 	 *            multidimensional array to be checked
-	 * @return false if there is anything different than a door or a wall in the
-	 *         edgesand true otherwise
+	 * @return false if there is anything different than a door or a wall in the edges and true otherwise
 	 */
 	private boolean checkBorders(char[][] map) {
 
@@ -334,10 +333,8 @@ public final class WindowController {
 	/**
 	 * Checks if character is surrounded by another element
 	 * 
-	 * @param multidimensional
-	 *            array to be checked
-	 * @param character
-	 *            to be validated
+	 * @param multidimensional array to be checked
+	 * @param character to be validated
 	 * 
 	 * @return true if it isn't and false otherwise
 	 */
@@ -377,15 +374,15 @@ public final class WindowController {
 		return true;
 	}
 
+	/**
+	 * Recursive function that finds the path between the points given and the goal
+	 * @param x position in the x-axis 
+	 * @param y position in the y-axis
+	 * @return if the goal is reached and false otherwise
+	 */
 	private boolean findGoalRec(int x, int y) {
 		// Check if this position is worth visiting (limits checking could
 		// be omitted because the labyrinth is surrounded by walls)
-		System.out.println("x= " + x);
-		System.out.println("y= " + y);
-		System.out.println();
-		if (x == 4 && y == 0) {
-			int a = 0;
-		}
 		if (x < 0 || y < 0 || x >= this.labirinth.length || y >= this.labirinth.length
 				|| (this.labirinth[x][y] == 0 || this.visited[x][y] == true) || this.labirinth[x][y] == 0)
 			return false;
@@ -394,7 +391,6 @@ public final class WindowController {
 		visited[x][y] = true;
 		// Check if the exit was reached
 		if (labirinth[x][y] == 2) {
-			System.out.println("Goald Found");
 			return true;
 		}
 		// Try all the adjacent cells
@@ -402,6 +398,10 @@ public final class WindowController {
 		// check if maze[x][y] is feasible to move
 	}
 
+	/**
+	 * Validates if the path between the char of origin and the one in the destiny is reached
+	 * @return true if the path is valid and false otherwise
+	 */
 	private boolean validatePath(char[][] map, char origin, char destiny) {
 		labirinth = new int[map.length][map.length];
 		int x = 0, y = 0;
@@ -427,7 +427,6 @@ public final class WindowController {
 		if (findGoalRec(x, y)) {
 			return true;
 		}
-
 		return false;
 	}
 }

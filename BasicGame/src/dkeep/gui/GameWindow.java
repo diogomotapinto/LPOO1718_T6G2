@@ -63,9 +63,6 @@ public final class GameWindow extends JFrame {
 		upBtn.setBounds(95 + gamePanelSize, 150, 75, 30);
 		downBtn.setBounds(95 + gamePanelSize, 230, 75, 30);
 		gamePnl.setBounds(0, 41, gamePanelSize, gamePanelSize);
-		System.out.println("1");
-		gamePnl.setPaintMap(true);
-		System.out.println("2");
 		gamePnl.repaint();
 	}
 

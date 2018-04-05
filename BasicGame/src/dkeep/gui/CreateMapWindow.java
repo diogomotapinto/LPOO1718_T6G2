@@ -34,6 +34,7 @@ public class CreateMapWindow extends JFrame {
 	private JSlider mapSizeSld;
 
 	/**
+	 * Class constructor
 	 * Create the frame.
 	 */
 	public CreateMapWindow(ImageLoader imageLoader) {
@@ -94,6 +95,10 @@ public class CreateMapWindow extends JFrame {
 
 	}
 
+	/**
+	 * Initializes the exit button used in the window
+	 * @param exitBtn
+	 */
 	protected void initializeExitButton(JButton exitBtn) {
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,6 +109,10 @@ public class CreateMapWindow extends JFrame {
 		exitBtn.setBounds(559, 424, 104, 29);
 	}
 
+	/**
+	 * Initializes the apply button in the window 
+	 * @param applyBtn
+	 */
 	protected void initializeApplyButton(JButton applyBtn) {
 		applyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,6 +122,11 @@ public class CreateMapWindow extends JFrame {
 		applyBtn.setBounds(433, 424, 104, 29);
 	}
 
+	/**
+	 * Initializes the hero image in the window 
+	 * @param heroLbl
+	 * @param imageLoader
+	 */
 	protected void initializeHeroLbl(JLabel heroLbl, ImageLoader imageLoader) {
 		heroLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -126,6 +140,11 @@ public class CreateMapWindow extends JFrame {
 		heroLbl.setIcon(imageLoader.getHeroImg());
 	}
 
+	/**
+	 * Initializes the ogre image used in the window
+	 * @param doorLbl
+	 * @param imageLoader
+	 */
 	protected void initializeOgreLbl(JLabel doorLbl, ImageLoader imageLoader) {
 		ogreLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -139,6 +158,11 @@ public class CreateMapWindow extends JFrame {
 		ogreLbl.setIcon(imageLoader.getOgreImg());
 	}
 
+	/**
+	 * Initializes the door image used in the window
+	 * @param doorLbl
+	 * @param imageLoader
+	 */
 	protected void intializeDoorLbl(JLabel doorLbl, ImageLoader imageLoader) {
 		doorLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -152,6 +176,11 @@ public class CreateMapWindow extends JFrame {
 		doorLbl.setIcon(imageLoader.getDoorImg());
 	}
 
+	/**
+	 * Initializes the key image used in the window
+	 * @param keyLbl
+	 * @param imageLoader
+	 */
 	protected void initializeKeylbl(JLabel keyLbl, ImageLoader imageLoader) {
 		keyLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -165,6 +194,11 @@ public class CreateMapWindow extends JFrame {
 		keyLbl.setIcon(imageLoader.getKeyImg());
 	}
 
+	/**
+	 * Initializes the wall image used in the window
+	 * @param wallLbl
+	 * @param imageLoader
+	 */
 	protected void initializeWallLbl(JLabel wallLbl, ImageLoader imageLoader) {
 		wallLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -178,6 +212,11 @@ public class CreateMapWindow extends JFrame {
 		wallLbl.setIcon(imageLoader.getWallImg());
 	}
 
+	/**
+	 * Initializes the blank space image used in the window
+	 * @param blankSpaceLbl
+	 * @param imageLoader
+	 */
 	protected void initializeJLabel(JLabel blankSpaceLbl, ImageLoader imageLoader) {
 		blankSpaceLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -192,6 +231,10 @@ public class CreateMapWindow extends JFrame {
 		getContentPane().add(blankSpaceLbl);
 	}
 
+	/**
+	 * Initializes the slider used in the window
+	 * @param mapSizeSld size of the map created
+	 */
 	public void initializeSlider(JSlider mapSizeSld) {
 		mapSizeSld.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -234,7 +277,7 @@ public class CreateMapWindow extends JFrame {
 	/**
 	 * Method to get the map edited by the user
 	 * 
-	 * @return
+	 * @return the edit map
 	 */
 	public ImageIcon[][] getEditMap() {
 		return editPanel.getEditMap();
