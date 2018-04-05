@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
- abstract class GameObject {
+import java.io.Serializable;
+
+abstract class GameObject implements Serializable  {
 	private Position position;
 
 	/**

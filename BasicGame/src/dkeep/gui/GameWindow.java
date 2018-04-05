@@ -7,6 +7,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import dkeep.controller.WindowController;
+import utilities.Serialization;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -124,6 +125,10 @@ public final class GameWindow extends JFrame {
 		initializeJMenuItem(editMapMI);
 		menuMn.add(editMapMI);
 
+		JMenuItem saveGameMnItem = new JMenuItem("Save Game");
+		initializeSaveGame(saveGameMnItem);
+		menuMn.add(saveGameMnItem);
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e1) {
@@ -198,6 +203,14 @@ public final class GameWindow extends JFrame {
 		gameSettingsMI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				windowController.showWindowGameSettings();
+			}
+		});
+	}
+
+	private void initializeSaveGame(JMenuItem saveGameMnItem) {
+		saveGameMnItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Serialization.serialize();
 			}
 		});
 	}

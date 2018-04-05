@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public final class Lever extends GameObject {
+import java.io.Serializable;
+
+public final class Lever extends GameObject implements Serializable  {
 	private static final char CHAR_LEVER = 'k';
 	private boolean activated;
 

@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public class Door extends GameObject {
+import java.io.Serializable;
+
+public class Door extends GameObject  implements Serializable {
 	private boolean open;
 	private final char close;
 	private final char openChar;

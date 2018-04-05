@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public class Wall extends GameObject {
+import java.io.Serializable;
+
+public class Wall extends GameObject implements Serializable {
 	private final char wallChar;
 
 	/**

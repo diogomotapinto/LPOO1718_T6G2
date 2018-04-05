@@ -1,6 +1,8 @@
 package dkeep.controller;
 
-final class StateMachine {
+import java.io.Serializable;
+
+public final class StateMachine implements Serializable {
 
 	private State gameState;
 

@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.io.Serializable;
+
 import dkeep.logic.model.Drunken;
 import dkeep.logic.model.Guard;
 import dkeep.logic.model.Hero;
@@ -9,7 +11,7 @@ import dkeep.logic.model.Rookie;
 import dkeep.logic.model.Suspicious;
 import utilities.Utilities;
 
-public class DungeonMap extends Map {
+public class DungeonMap extends Map implements Serializable {
 
 	private static final int route[][] = { { 1, 8 }, { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 }, { 5, 6 },
 			{ 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 6, 1 }, { 6, 2 }, { 6, 3 }, { 6, 4 }, { 6, 5 },

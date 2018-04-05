@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public class Club extends GameObject {
+import java.io.Serializable;
+
+public class Club extends GameObject implements Serializable {
 	private static final char CLUB_CHAR = '*';
 
 	/**
@@ -11,7 +13,7 @@ public class Club extends GameObject {
 	 * @param yPos
 	 *            coordinate fo the club in the y axis
 	 */
-	 Club(int xPos, int yPos) {
+	Club(int xPos, int yPos) {
 		super(xPos, yPos);
 	}
 

@@ -1,8 +1,10 @@
 package dkeep.logic.model;
 
+import java.io.Serializable;
+
 import utilities.Utilities;
 
-public final class Suspicious extends Guard {
+public final class Suspicious extends Guard implements Serializable  {
 
 	private boolean direction;
 

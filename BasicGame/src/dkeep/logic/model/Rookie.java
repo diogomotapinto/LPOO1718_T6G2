@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public final class Rookie extends Guard {
+import java.io.Serializable;
+
+public final class Rookie extends Guard  implements Serializable {
 
 	/**
 	 * Class constructor

@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 import utilities.Utilities;
 
-class KeepMap extends Map {
+class KeepMap extends Map implements Serializable {
 
 	/**
 	 * Class constructor
@@ -169,32 +170,31 @@ class KeepMap extends Map {
 	protected final boolean canMove(Position position) {
 		int counter = 0;
 		// check above
-		Position posAbove = new Position(position.getXPosition()-1,position.getYPosition());
-		Position posBelow = new Position(position.getXPosition()+1,position.getYPosition());
-		Position posRight =  new Position(position.getXPosition(),position.getYPosition()+1);
-		Position posLeft =  new Position(position.getXPosition(),position.getYPosition()-1);
+		Position posAbove = new Position(position.getXPosition() - 1, position.getYPosition());
+		Position posBelow = new Position(position.getXPosition() + 1, position.getYPosition());
+		Position posRight = new Position(position.getXPosition(), position.getYPosition() + 1);
+		Position posLeft = new Position(position.getXPosition(), position.getYPosition() - 1);
 
 		counter += checkPos(posAbove);
 		counter += checkPos(posBelow);
-		counter +=checkPos(posRight);
+		counter += checkPos(posRight);
 		counter += checkPos(posLeft);
 
-		if(counter == 4) {
+		if (counter == 4) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
-
 	protected int checkPos(Position position) {
-		
-		if (playMap[position.getXPosition() ][position.getYPosition()] != ' '
-				|| !(position.getXPosition()  == this.lever.getPosition().getXPosition()
+
+		if (playMap[position.getXPosition()][position.getYPosition()] != ' '
+				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
 						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
 
 			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition()  == this.ogreList.get(i).getPosition().getXPosition()
+				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
 						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
 					return 1;
 				}
@@ -245,14 +245,15 @@ class KeepMap extends Map {
 		return newClubPosition;
 
 	}
-	
+
 	/**
 	 * Sets a new position for the ogre club
+	 * 
 	 * @param newClubPosition
 	 * @param ogre
 	 */
 	private final void setOgreClub(Position newClubPosition, Ogre ogre) {
-		
+
 		if (newClubPosition.equals(this.lever.getPosition())) {
 			if (!this.hero.getLeverState()) {
 				playMap[newClubPosition.getXPosition()][newClubPosition.getYPosition()] = '$';
@@ -392,7 +393,7 @@ class KeepMap extends Map {
 	protected void initializeMap() {
 		for (int i = 0; i < ogreList.size(); i++) {
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
-			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
+			setOgreClub(moveClub(ogreList.get(i)), ogreList.get(i));
 		}
 		Position heroPosition = hero.getPosition();
 		playMap[heroPosition.getXPosition()][heroPosition.getYPosition()] = Hero.getCharHeroLvl2();
@@ -418,10 +419,10 @@ class KeepMap extends Map {
 				x = Utilities.generateRandomNumber(1, 5);
 				y = Utilities.generateRandomNumber(1, 5);
 				ogre = new Ogre(x, y);
-				
+
 			} while (playMap[x][y] != CHAR_BLANK_SPACE);
 			ogreList.add(ogre);
-			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
+			setOgreClub(moveClub(ogreList.get(i)), ogreList.get(i));
 		}
 	}
 
@@ -445,7 +446,7 @@ class KeepMap extends Map {
 		for (int i = 0; i < ogreList.size(); i++) {
 			setOgre(moveOgre(ogreList.get(i)), ogreList.get(i));
 			checkOgreCollision();
-			setOgreClub(moveClub(ogreList.get(i)),ogreList.get(i));
+			setOgreClub(moveClub(ogreList.get(i)), ogreList.get(i));
 		}
 		checkLeverMap();
 		checkIfStunned();
@@ -474,7 +475,8 @@ class KeepMap extends Map {
 	}
 
 	/**
-	 * Opens the door if the hero has the key and is in an adjacent position to the door
+	 * Opens the door if the hero has the key and is in an adjacent position to the
+	 * door
 	 */
 	protected void openDoors() {
 

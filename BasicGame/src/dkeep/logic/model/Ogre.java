@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public final class Ogre extends GameObject {
+import java.io.Serializable;
+
+public final class Ogre extends GameObject implements Serializable  {
 	private static final int STUN_COUNTER = 2;
 	private int counter;
 	private boolean stunned;

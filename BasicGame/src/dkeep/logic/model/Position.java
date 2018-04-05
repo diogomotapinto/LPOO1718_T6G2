@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public final class Position {
+import java.io.Serializable;
+
+public final class Position implements Serializable  {
 	private int xPosition;
 	private int yPosition;
 

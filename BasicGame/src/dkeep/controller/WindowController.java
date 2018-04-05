@@ -39,7 +39,6 @@ public final class WindowController {
 	}
 
 	void updateGameWindow(char[][] map, String legend) {
-		System.out.println("wdwController.updateGameWindow");
 		gameWdw.paintMap(createMap(map));
 		gameWdw.setLegend(legend);
 	}
@@ -251,7 +250,7 @@ public final class WindowController {
 		if (!checkCharacter('O', 1, 5, charMap)) {
 			return false;
 		}
-		if (!checkCharacter('I', 1,1, charMap)) {
+		if (!checkCharacter('I', 1, 1, charMap)) {
 			return false;
 		}
 		if (!checkCharacter('k', 1, 1, charMap)) {
@@ -297,7 +296,8 @@ public final class WindowController {
 	 * 
 	 * @param map
 	 *            multidimensional array to be checked
-	 * @return false if there is anything different than a door or a wall in the edges and true otherwise
+	 * @return false if there is anything different than a door or a wall in the
+	 *         edges and true otherwise
 	 */
 	private boolean checkBorders(char[][] map) {
 
@@ -333,8 +333,10 @@ public final class WindowController {
 	/**
 	 * Checks if character is surrounded by another element
 	 * 
-	 * @param multidimensional array to be checked
-	 * @param character to be validated
+	 * @param multidimensional
+	 *            array to be checked
+	 * @param character
+	 *            to be validated
 	 * 
 	 * @return true if it isn't and false otherwise
 	 */
@@ -376,8 +378,11 @@ public final class WindowController {
 
 	/**
 	 * Recursive function that finds the path between the points given and the goal
-	 * @param x position in the x-axis 
-	 * @param y position in the y-axis
+	 * 
+	 * @param x
+	 *            position in the x-axis
+	 * @param y
+	 *            position in the y-axis
 	 * @return if the goal is reached and false otherwise
 	 */
 	private boolean findGoalRec(int x, int y) {
@@ -399,7 +404,9 @@ public final class WindowController {
 	}
 
 	/**
-	 * Validates if the path between the char of origin and the one in the destiny is reached
+	 * Validates if the path between the char of origin and the one in the destiny
+	 * is reached
+	 * 
 	 * @return true if the path is valid and false otherwise
 	 */
 	private boolean validatePath(char[][] map, char origin, char destiny) {

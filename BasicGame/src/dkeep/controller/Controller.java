@@ -29,6 +29,15 @@ public final class Controller {
 		gameAmbient = GameAmbient.GUI;
 	}
 
+	public Controller(Map currentMap, StateMachine stateMachine) {
+		this.currentMap = currentMap;
+		this.stateMachine = stateMachine;
+		view = new View();
+		wdwController = new WindowController(this);
+		gameAmbient = GameAmbient.GUI;
+		printGame();
+	}
+
 	/**
 	 * 
 	 * @return
@@ -118,6 +127,14 @@ public final class Controller {
 		default:
 			return false;
 		}
+	}
+
+	public final StateMachine getStateMachine() {
+		return stateMachine;
+	}
+
+	public final Map getCurrentMap() {
+		return currentMap;
 	}
 
 }

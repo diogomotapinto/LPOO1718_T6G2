@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public final class Hero extends GameObject {
+import java.io.Serializable;
+
+public final class Hero extends GameObject implements Serializable  {
 
 	private static final char CHAR_HERO_lvl2 = 'A';
 	private static final char CHAR_HERO = 'H';

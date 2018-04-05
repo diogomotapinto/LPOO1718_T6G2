@@ -1,18 +1,18 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import dkeep.logic.model.Club;
 import dkeep.logic.model.Door;
-import dkeep.logic.model.Guard;
 import dkeep.logic.model.Hero;
 import dkeep.logic.model.Lever;
 import dkeep.logic.model.Ogre;
 import dkeep.logic.model.Position;
 import dkeep.logic.model.Wall;
 
-public abstract class Map implements PlayMap {
+public abstract class Map implements PlayMap, Serializable {
 
 	// mudar variaveis para classes respetivas
 	private static final char CHAR_MOVE_UP = 'w';
@@ -214,7 +214,9 @@ public abstract class Map implements PlayMap {
 
 	/**
 	 * Checks if the game is over
-	 * @return 1 if the game is won, -1 if the game is lost and 0 if the game isn't over or lost
+	 * 
+	 * @return 1 if the game is won, -1 if the game is lost and 0 if the game isn't
+	 *         over or lost
 	 */
 	public byte checkEndLevel() {
 		// para terminar basta chegar a um dos cantos

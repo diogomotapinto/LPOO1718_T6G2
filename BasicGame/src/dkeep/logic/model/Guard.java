@@ -1,6 +1,8 @@
 package dkeep.logic.model;
 
-public abstract class Guard extends GameObject {
+import java.io.Serializable;
+
+public abstract class Guard extends GameObject implements Serializable  {
 
 	private static final char GUARD_CHAR = 'G';
 	protected final int route[][];
