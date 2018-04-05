@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JMenu;
 import java.awt.event.KeyAdapter;
 
@@ -47,11 +48,7 @@ public final class GameWindow extends JFrame {
 	public void paintMap(ImageIcon[][] imgMap) {
 		this.gamePnl.setMap(imgMap);
 		resizeFrame(imgMap.length);
-		gamePnl.validate();
-		gamePnl.revalidate();
-		gamePnl.updateUI();
-		gamePnl.repaint();
-
+		gamePnl.requestFocus();
 	}
 
 	private void resizeFrame(int subSquareNumber) {
@@ -66,6 +63,9 @@ public final class GameWindow extends JFrame {
 		upBtn.setBounds(95 + gamePanelSize, 150, 75, 30);
 		downBtn.setBounds(95 + gamePanelSize, 230, 75, 30);
 		gamePnl.setBounds(0, 41, gamePanelSize, gamePanelSize);
+		System.out.println("1");
+		gamePnl.setPaintMap(true);
+		System.out.println("2");
 		gamePnl.repaint();
 	}
 
@@ -209,7 +209,6 @@ public final class GameWindow extends JFrame {
 		gamePnl.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println("KEY PRESSED");
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
 					windowController.makeMove('w');

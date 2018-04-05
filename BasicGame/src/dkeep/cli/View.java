@@ -6,6 +6,9 @@ public final class View {
 
 	private final Scanner keyboard;
 
+	/**
+	 * Class constructor
+	 */
 	public View() {
 		keyboard = new Scanner(System.in);
 	}

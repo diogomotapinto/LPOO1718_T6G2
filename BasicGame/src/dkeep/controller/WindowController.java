@@ -7,6 +7,7 @@ import dkeep.gui.CreateMapWindow;
 import dkeep.gui.GameSettingsWindow;
 import dkeep.gui.GameWindow;
 import dkeep.gui.PopUpWindow;
+import dkeep.logic.Map;
 import dkeep.logic.model.Guard;
 import utilities.ImageLoader;
 import utilities.Regex;
@@ -19,9 +20,14 @@ public final class WindowController {
 	private final PopUpWindow popUpWdw;
 	private final CreateMapWindow createMapWdw;
 	private final ImageLoader imageLoader;
-	// private int[][] visited;
-	// private int[][] labirinth;
+	private boolean[][] visited;
+	private int[][] labirinth;
 
+	/**
+	 * Class constructor
+	 * 
+	 * @param controller
+	 */
 	WindowController(Controller controller) {
 		this.controller = controller;
 		this.imageLoader = new ImageLoader();
@@ -29,14 +35,18 @@ public final class WindowController {
 		this.createMapWdw = new CreateMapWindow(imageLoader);
 		this.gameWdw = new GameWindow(this);
 		this.popUpWdw = new PopUpWindow();
-		// visited = new int[15][15];
+		visited = new boolean[0][0];
 	}
 
 	void updateGameWindow(char[][] map, String legend) {
+		System.out.println("wdwController.updateGameWindow");
 		gameWdw.paintMap(createMap(map));
 		gameWdw.setLegend(legend);
 	}
 
+	/**
+	 * Loads a new game
+	 */
 	public void newGame() {
 		String guardPersonality = gameStgWdw.getGuardPersonality();
 		GameAmbient gameAmbient = gameStgWdw.getGameAmbient();
@@ -44,26 +54,51 @@ public final class WindowController {
 			controller.newGame(guardPersonality, gameAmbient);
 	}
 
+	/**
+	 * 
+	 * @param move
+	 */
 	public void makeMove(char move) {
 		controller.makeMove(move);
 	}
 
+	/**
+	 * Used to get the number of ogres chosen by the user
+	 * 
+	 * @return
+	 */
 	public String getOgreNumber() {
 		return gameStgWdw.getOgreNumber();
 	}
 
+	/**
+	 * Makes the window game settings visible
+	 */
 	public void showWindowGameSettings() {
 		gameStgWdw.setVisible(true);
 	}
 
+	/**
+	 * Creates the game window
+	 */
 	public void showCreateGameWindow() {
 		createMapWdw.setVisible(true);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getEditPanelSubSquareLength() {
 		return createMapWdw.getEditPanelSubSquareLength();
 	}
 
+	/**
+	 * Generates the map created by the user
+	 * 
+	 * @return the map if there is more than one image in the map created and an
+	 *         empty otherwise
+	 */
 	char[][] generateMap() {
 		ImageIcon[][] imgMap = createMapWdw.getEditMap();
 		char[][] charMap = new char[imgMap.length][imgMap[0].length];
@@ -90,6 +125,13 @@ public final class WindowController {
 		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
 	}
 
+	/**
+	 * Creates the map with images from the multidimensional array
+	 * 
+	 * @param map
+	 *            to be created with images
+	 * @return multidimensional array of images that represents the map
+	 */
 	private ImageIcon[][] createMap(char[][] map) {
 		ImageIcon[][] imgMap = new ImageIcon[map.length][map[0].length];
 
@@ -124,6 +166,14 @@ public final class WindowController {
 		return imgMap;
 	}
 
+	/**
+	 * Validates the map and gives a warning if some requirement is not fulfilled
+	 * 
+	 * @param guardPersonality
+	 *            string that represents the guard personality
+	 * @param gameAmbient
+	 * @return true if all requirement are fulfilled and false otherwise
+	 */
 	private boolean checkNewGame(String guardPersonality, GameAmbient gameAmbient) {
 
 		String ogreNumber = gameStgWdw.getOgreNumber();
@@ -149,6 +199,28 @@ public final class WindowController {
 			return false;
 		}
 
+		char[][] editMap = generateMap();
+
+		if (mapCreated && !validatePath(editMap, 'A', 'I')) {
+			popUpWdw.printErrorMessageDialog("No path to the door");
+			return false;
+		}
+
+		if (mapCreated && !validatePath(editMap, 'A', 'k')) {
+			popUpWdw.printErrorMessageDialog("No path to key");
+			return false;
+		}
+
+		if (mapCreated && !checkCharacterBlocked(editMap, 'O')) {
+			popUpWdw.printWarningMessageDialog("Ogre is blocked by walls");
+			return false;
+		}
+
+		if (mapCreated && !checkCharacterBlocked(editMap, 'A')) {
+			popUpWdw.printWarningMessageDialog("Hero is blocked by walls");
+			return false;
+		}
+
 		if (!mapCreated) {
 			Regex regex = new Regex();
 			if (!regex.checkOgreNumber(ogreNumber)) {
@@ -156,7 +228,6 @@ public final class WindowController {
 				return false;
 			}
 		} else {
-			char[][] editMap = generateMap();
 			if (!checkMap(editMap)) {
 				popUpWdw.printWarningMessageDialog("Invalid edit map");
 				return false;
@@ -168,6 +239,11 @@ public final class WindowController {
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param charMap
+	 * @return
+	 */
 	private boolean checkMap(char[][] charMap) {
 		if (!checkCharacter('A', 1, 1, charMap)) {
 			return false;
@@ -190,6 +266,20 @@ public final class WindowController {
 		return checkBorders(charMap);
 	}
 
+	/**
+	 * Check if a character is in the right amount on a map
+	 * 
+	 * @param character
+	 *            to be checked
+	 * @param numMin
+	 *            amount of times he is allowed
+	 * @param numMax
+	 *            amount of times he is allowed
+	 * @param map
+	 *            to be checked
+	 * @return true if the character is in the right amount of times and false
+	 *         otherwise
+	 */
 	private boolean checkCharacter(char character, int numMin, int numMax, char[][] map) {
 		int counter = 0;
 		for (int i = 0; i < map.length; i++) {
@@ -202,6 +292,14 @@ public final class WindowController {
 		return (counter >= numMin && counter <= numMax);
 	}
 
+	/**
+	 * Check if the borders are only walls 'X' or doors 'I'
+	 * 
+	 * @param map
+	 *            multidimensional array to be checked
+	 * @return false if there is anything different than a door or a wall in the
+	 *         edgesand true otherwise
+	 */
 	private boolean checkBorders(char[][] map) {
 
 		if (!(map[0][0] == 'X' && map[0][map[0].length - 1] == 'X' && map[map.length - 1][0] == 'X'
@@ -233,64 +331,103 @@ public final class WindowController {
 		return true;
 	}
 
-	// private void initializedVisited(char[][] map) {
-	// {
-	// for (int i = 0; i < map.length; i++)
-	// for (int j = 0; j < map[i].length; j++)
-	// visited[i][j] = 0;
-	// }
-	// }
-	//
-	// private boolean findGoalRec(int x, int y) {
-	// // Check if this position is worth visiting (limits checking could
-	// // be omitted because the labyrinth is surrounded by walls)
-	// if (((x < 0 || y < 0) || (x >= this.labirinth.length - 1 || x >=
-	// this.labirinth.length - 1))
-	// || (this.labirinth[y][x] == 0 || this.visited[y][x] == 1))
-	// return false;
-	// // Mark as visited
-	// visited[y][x] = 1;
-	// // Check if the exit was reached
-	// if (labirinth[y][x] == 2) {
-	// System.out.println("Goald Found");
-	// return true;
-	// }
-	// // Try all the adjacent cells
-	// return findGoalRec(x - 1, y) || findGoalRec(x + 1, y) || findGoalRec(x, y -
-	// 1) || findGoalRec(x, y + 1);
-	// }
-	//
-	// private boolean checkWaytoKey(char[][] map) {
-	// labirinth = new int[map.length][map.length];
-	// int x = 0, y = 0;
-	//
-	// for (int i = 0; i < map.length; i++) {
-	// for (int j = 0; j < map[i].length; j++) {
-	//
-	// if (map[i][j] == 'A') {
-	// x = i;
-	// y = j;
-	// }
-	// }
-	// }
-	//
-	// for (int i = 0; i < map.length; i++) {
-	// for (int j = 0; j < map[i].length; j++) {
-	//
-	// if (map[i][j] == ' ') {
-	// labirinth[i][j] = 1;
-	// } else if (map[i][j] == 'k') {
-	// labirinth[i][j] = 2;
-	// }
-	// }
-	// }
-	//
-	// initializedVisited(map);
-	//
-	// if (findGoalRec(x, y)) {
-	// return true;
-	// }
-	//
-	// return false;
-	// }
+	/**
+	 * Checks if character is surrounded by another element
+	 * 
+	 * @param multidimensional
+	 *            array to be checked
+	 * @param character
+	 *            to be validated
+	 * 
+	 * @return true if it isn't and false otherwise
+	 */
+	private boolean checkCharacterBlocked(char[][] map, char character) {
+
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+
+				if (map[i][j] == character) {
+					return checkSurroundings(map, i, j, 'X');
+				}
+
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if some element is surrounded by another
+	 * 
+	 * @param map
+	 * @param x
+	 *            position of the element in the x-axis
+	 * @param y
+	 *            position of the element in the y-axis
+	 * @param surround
+	 *            char to be checked around other char
+	 * @return false if it is blocked and false otherwise
+	 */
+	private boolean checkSurroundings(char[][] map, int x, int y, char surround) {
+
+		if (map[x - 1][y] == surround && map[x + 1][y] == surround && map[x][y - 1] == surround
+				&& map[x + 1][y + 1] == surround) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean findGoalRec(int x, int y) {
+		// Check if this position is worth visiting (limits checking could
+		// be omitted because the labyrinth is surrounded by walls)
+		System.out.println("x= " + x);
+		System.out.println("y= " + y);
+		System.out.println();
+		if (x == 4 && y == 0) {
+			int a = 0;
+		}
+		if (x < 0 || y < 0 || x >= this.labirinth.length || y >= this.labirinth.length
+				|| (this.labirinth[x][y] == 0 || this.visited[x][y] == true) || this.labirinth[x][y] == 0)
+			return false;
+
+		// Mark as visited
+		visited[x][y] = true;
+		// Check if the exit was reached
+		if (labirinth[x][y] == 2) {
+			System.out.println("Goald Found");
+			return true;
+		}
+		// Try all the adjacent cells
+		return findGoalRec(x - 1, y) || findGoalRec(x + 1, y) || findGoalRec(x, y - 1) || findGoalRec(x, y + 1);
+		// check if maze[x][y] is feasible to move
+	}
+
+	private boolean validatePath(char[][] map, char origin, char destiny) {
+		labirinth = new int[map.length][map.length];
+		int x = 0, y = 0;
+
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				if (map[i][j] == origin) {
+					x = i;
+					y = j;
+				}
+
+				if (map[i][j] == ' ' || map[i][j] == origin) {
+					labirinth[i][j] = 1;
+				} else if (map[i][j] == destiny) {
+					labirinth[i][j] = 2;
+				}
+
+			}
+		}
+
+		visited = new boolean[map.length][map.length];
+
+		if (findGoalRec(x, y)) {
+			return true;
+		}
+
+		return false;
+	}
 }

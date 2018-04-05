@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import utilities.ImageLoader;
 
-class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
+class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener {
 
 	private int xCoordinatesPanel;
 	private int yCoordinatesPanel;
@@ -25,14 +25,15 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener,
 	private ImageLoader imageLoader;
 
 	/**
-	 * Class constructor 
+	 * Class constructor
+	 * 
 	 * @param imageLoader
 	 */
 	EditMapPanel(ImageLoader imageLoader) {
 		super();
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		addKeyListener(this);
+//		addKeyListener(this);
 
 		editMap = new ImageIcon[10][10];
 		for (int i = 0; i < editMap.length; i++) {
@@ -65,7 +66,9 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // limpa fundo ...
+		System.out.println("paintComponent");
 		if (paintIcon) {
+			System.out.println("paintIcon");
 			editMap[yCoordinatesPanel * matrixSize / panelLength][xCoordinatesPanel * matrixSize
 					/ panelLength] = chosenImage;
 			for (int i = 0; i < editMap.length; i++) {
@@ -79,28 +82,32 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener,
 
 	}
 
+	// @Override
+	// public void keyPressed(KeyEvent arg0) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void keyReleased(KeyEvent arg0) {
+	// // TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void keyTyped(KeyEvent arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
+
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mouseDragged(MouseEvent e) {
+		if (e.getX() >= 0 && e.getY() >= 0 && e.getX() < this.getWidth() && e.getY() < this.getWidth()) {
+			xCoordinatesPanel = e.getX() / subSquareLength * subSquareLength;
+			yCoordinatesPanel = e.getY() / subSquareLength * subSquareLength;
+			paintIcon = true;
+			repaint();
+		}
 	}
 
 	@Override
@@ -111,10 +118,12 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		xCoordinatesPanel = e.getX() / subSquareLength * subSquareLength;
-		yCoordinatesPanel = e.getY() / subSquareLength * subSquareLength;
-		paintIcon = true;
-		repaint();
+		if (e.getX() >= 0 && e.getY() >= 0 && e.getX() < this.getWidth() && e.getY() < this.getWidth()) {
+			xCoordinatesPanel = e.getX() / subSquareLength * subSquareLength;
+			yCoordinatesPanel = e.getY() / subSquareLength * subSquareLength;
+			paintIcon = true;
+			repaint();
+		}
 	}
 
 	@Override

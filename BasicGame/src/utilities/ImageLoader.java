@@ -17,6 +17,9 @@ public final class ImageLoader {
 	private ImageIcon doorOpenImg;
 	private ImageIcon clubImg;
 
+	/**
+	 * Class constructor
+	 */
 	public ImageLoader() {
 		loadImages();
 	}

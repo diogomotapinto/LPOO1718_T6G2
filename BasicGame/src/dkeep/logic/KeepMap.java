@@ -125,7 +125,7 @@ class KeepMap extends Map {
 
 		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ' ';
 
-		if (canMove(ogre.getPosition())) {
+		if (!canMove(ogre.getPosition())) {
 			return ogre.getPosition();
 		}
 
