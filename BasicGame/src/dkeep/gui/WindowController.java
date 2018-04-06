@@ -259,7 +259,7 @@ public final class WindowController {
 		for (int i = 1; i < map.length - 1; i++) {
 			if (!(map[i][0] == 'X' || map[i][0] == 'I'))
 				return false;
-
+			
 			if (!(map[i][map.length - 1] == 'X' || map[i][map.length - 1] == 'I'))
 				return false;
 		}
@@ -278,12 +278,12 @@ public final class WindowController {
 				if (map[i][j] == character)
 					return checkSurroundings(map, i, j, block);
 
-		return true;
+		return false;
 	}
 
 	private boolean checkSurroundings(char[][] map, int x, int y, char surround) {
-		return !(map[x - 1][y] == surround && map[x + 1][y] == surround && map[x][y - 1] == surround
-				&& map[x + 1][y + 1] == surround);
+		return (map[x - 1][y] == surround && map[x + 1][y] == surround && map[x][y - 1] == surround
+				&& map[x][y + 1] == surround);
 
 	}
 

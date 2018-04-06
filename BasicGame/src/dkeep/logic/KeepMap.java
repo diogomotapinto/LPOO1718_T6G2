@@ -11,10 +11,6 @@ class KeepMap extends Map implements Serializable {
 	/**
 	 * 
 	 */
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4339149666601813329L;
 
 	/**
@@ -165,8 +161,7 @@ class KeepMap extends Map implements Serializable {
 	/**
 	 * Validates if the ogre can move, if he is with objects around him he won't be
 	 * able to move and it will return false
-	 * 
-	 * @param position
+	 * @param position of the ogre
 	 * @return true if he is able to move and false otherwise
 	 */
 	protected final boolean canMove(Position position) {
@@ -181,6 +176,11 @@ class KeepMap extends Map implements Serializable {
 		return counter != 4;
 	}
 
+	/**
+	 * Check if the ogre can move to that position
+	 * @param position possible
+	 * @return 0 if he can move to that position and 1 otherwise
+	 */
 	private int checkPos(Position position) {
 
 		if (playMap[position.getXPosition()][position.getYPosition()] == ' '
@@ -218,10 +218,10 @@ class KeepMap extends Map implements Serializable {
 	}
 
 	/**
-	 * Ganerates a new position for the ogre club
+	 * Generates a new position for the ogre club
 	 * 
-	 * @param ogre
-	 * @return newClubPosition
+	 * @param ogre to be generated a new position of his club
+	 * @return newClubPosition  
 	 */
 	protected Position moveClub(Ogre ogre) {
 		Position clubPosition = ogre.getClub().getPosition();
@@ -243,8 +243,8 @@ class KeepMap extends Map implements Serializable {
 	/**
 	 * Sets a new position for the ogre club
 	 * 
-	 * @param newClubPosition
-	 * @param ogre
+	 * @param newClubPosition new club position
+	 * @param ogre to be setted a new position of his club
 	 */
 	private final void setOgreClub(Position newClubPosition, Ogre ogre) {
 
@@ -262,7 +262,6 @@ class KeepMap extends Map implements Serializable {
 	/**
 	 * Checks if the position passed as @param is the same as the position of the
 	 * one of the walls
-	 * 
 	 * @param pos
 	 * @return true if the position is the same and false otherwise
 	 */
@@ -279,8 +278,7 @@ class KeepMap extends Map implements Serializable {
 	/**
 	 * Checks if the position passed as @param is the same as the position of the
 	 * one of the doors
-	 * 
-	 * @param pos
+	 * @param pos 
 	 * @return true if the position is the same and false otherwise
 	 */
 	private final boolean checkDoors(Position pos) {
@@ -369,11 +367,17 @@ class KeepMap extends Map implements Serializable {
 		}
 	}
 
+	/**
+	 * Throws exception because there is no level after this one
+	 */
 	@Override
 	public Map nextLevel(String info) throws NextLevelNotAvailable {
 		throw new NextLevelNotAvailable();
 	}
 
+	/**
+	 * Throws exception because there is no level after this one
+	 */
 	@Override
 	public Map nextLevel(char[][] map) throws NextLevelNotAvailable {
 		throw new NextLevelNotAvailable();
@@ -430,6 +434,9 @@ class KeepMap extends Map implements Serializable {
 		}
 	}
 
+	/**
+	 * Applies the changes of a move to the game
+	 */
 	@Override
 	public void play(char move) {
 		resetBackground();
