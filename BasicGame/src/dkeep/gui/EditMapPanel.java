@@ -1,8 +1,6 @@
 package dkeep.gui;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,10 +12,16 @@ import utilities.ImageLoader;
 
 class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7340605719176534433L;
+	/**
+	 * 
+	 */
 	private int xCoordinatesPanel;
 	private int yCoordinatesPanel;
 	private ImageIcon chosenImage;
-	private boolean paintIcon;
 	private ImageIcon[][] editMap;
 	private int matrixSize;
 	private int panelLength;
@@ -33,7 +37,6 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener 
 		super();
 		addMouseListener(this);
 		addMouseMotionListener(this);
-//		addKeyListener(this);
 
 		editMap = new ImageIcon[10][10];
 		for (int i = 0; i < editMap.length; i++) {
@@ -59,61 +62,30 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener 
 		this.chosenImage = chosenImg;
 	}
 
-	public void setPaintIcon(boolean paintIcon) {
-		this.paintIcon = paintIcon;
-	}
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // limpa fundo ...
-		System.out.println("paintComponent");
-		if (paintIcon) {
-			System.out.println("paintIcon");
-			editMap[yCoordinatesPanel * matrixSize / panelLength][xCoordinatesPanel * matrixSize
-					/ panelLength] = chosenImage;
-			for (int i = 0; i < editMap.length; i++) {
-				for (int j = 0; j < editMap[0].length; j++) {
-					g.drawImage(editMap[j][i].getImage(), i * subSquareLength, j * subSquareLength, null);
-				}
+		editMap[yCoordinatesPanel * matrixSize / panelLength][xCoordinatesPanel * matrixSize
+				/ panelLength] = chosenImage;
+		for (int i = 0; i < editMap.length; i++) {
+			for (int j = 0; j < editMap[0].length; j++) {
+				g.drawImage(editMap[j][i].getImage(), i * subSquareLength, j * subSquareLength, null);
 			}
-
-			paintIcon = false;
 		}
-
 	}
-
-	// @Override
-	// public void keyPressed(KeyEvent arg0) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	//
-	// @Override
-	// public void keyReleased(KeyEvent arg0) {
-	// // TODO Auto-generated method stub
-//
-//	}
-//
-//	@Override
-//	public void keyTyped(KeyEvent arg0) {
-//		// TODO Auto-generated method stub
-//
-//	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (e.getX() >= 0 && e.getY() >= 0 && e.getX() < this.getWidth() && e.getY() < this.getWidth()) {
 			xCoordinatesPanel = e.getX() / subSquareLength * subSquareLength;
 			yCoordinatesPanel = e.getY() / subSquareLength * subSquareLength;
-			paintIcon = true;
 			repaint();
 		}
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		// its not to supposed to be implemented
 	}
 
 	@Override
@@ -121,33 +93,28 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener 
 		if (e.getX() >= 0 && e.getY() >= 0 && e.getX() < this.getWidth() && e.getY() < this.getWidth()) {
 			xCoordinatesPanel = e.getX() / subSquareLength * subSquareLength;
 			yCoordinatesPanel = e.getY() / subSquareLength * subSquareLength;
-			paintIcon = true;
 			repaint();
 		}
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		// its not to supposed to be implemented
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		// its not to supposed to be implemented
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		// its not to supposed to be implemented
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+		// its not to supposed to be implemented
 	}
 
 	public void setSubSquareLength(int subSquareLength) {
@@ -184,6 +151,10 @@ class EditMapPanel extends JPanel implements MouseListener, MouseMotionListener 
 
 	public final ImageIcon[][] getEditMap() {
 		return editMap;
+	}
+
+	public void setEditMapSize(ImageIcon[][] editMap) {
+		this.editMap = editMap;
 	}
 
 }

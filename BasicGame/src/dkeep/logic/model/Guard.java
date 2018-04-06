@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 public abstract class Guard extends GameObject implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8469436697778674229L;
+	/**
+	 * 
+	 */
 	private static final char GUARD_CHAR = 'G';
 	protected final int route[][];
 	protected int index;

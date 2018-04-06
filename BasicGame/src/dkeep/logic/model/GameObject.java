@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 abstract class GameObject implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3897431447612446501L;
+	/**
+	 * 
+	 */
 	private Position position;
 
 	/**

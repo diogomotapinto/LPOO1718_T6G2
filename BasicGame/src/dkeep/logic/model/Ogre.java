@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public final class Ogre extends GameObject implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4718734029463699930L;
+	/**
+	 * 
+	 */
 	private static final int STUN_COUNTER = 2;
 	private int counter;
 	private boolean stunned;

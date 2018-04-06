@@ -16,6 +16,15 @@ import utilities.Utilities;
 class KeepMap extends Map implements Serializable {
 
 	/**
+	 * 
+	 */
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4339149666601813329L;
+
+	/**
 	 * Class constructor
 	 * 
 	 * @param ogresNumber
@@ -126,8 +135,8 @@ class KeepMap extends Map implements Serializable {
 
 		playMap[ogrePosition.getXPosition()][ogrePosition.getYPosition()] = ' ';
 
-		if (!canMove(ogre.getPosition())) {
-			return ogre.getPosition();
+		if (!canMove(ogrePosition)) {
+			return ogrePosition;
 		}
 
 		Position newPosition;
@@ -174,33 +183,25 @@ class KeepMap extends Map implements Serializable {
 		Position posBelow = new Position(position.getXPosition() + 1, position.getYPosition());
 		Position posRight = new Position(position.getXPosition(), position.getYPosition() + 1);
 		Position posLeft = new Position(position.getXPosition(), position.getYPosition() - 1);
+		counter = checkPos(posAbove) + checkPos(posBelow) + checkPos(posRight) + checkPos(posLeft);
 
-		counter += checkPos(posAbove);
-		counter += checkPos(posBelow);
-		counter += checkPos(posRight);
-		counter += checkPos(posLeft);
-
-		if (counter == 4) {
-			return true;
-		} else {
-			return false;
-		}
+		return counter != 4;
 	}
 
-	protected int checkPos(Position position) {
+	private int checkPos(Position position) {
 
-		if (playMap[position.getXPosition()][position.getYPosition()] != ' '
-				|| !(position.getXPosition() == this.lever.getPosition().getXPosition()
-						&& position.getYPosition() == this.lever.getPosition().getYPosition())) {
+		if (playMap[position.getXPosition()][position.getYPosition()] == ' '
+				|| position.equals(this.lever.getPosition())) {
+			return 0;
+		}
 
-			for (int i = 0; i < this.ogreList.size(); i++) {
-				if (!(position.getXPosition() == this.ogreList.get(i).getPosition().getXPosition()
-						&& position.getYPosition() == this.ogreList.get(i).getClub().getPosition().getYPosition())) {
-					return 1;
-				}
+		for (int i = 0; i < this.ogreList.size(); i++) {
+			if (position.equals(this.ogreList.get(i).getPosition())) {
+				return 0;
 			}
 		}
-		return 0;
+
+		return 1;
 	}
 
 	/**
@@ -229,7 +230,7 @@ class KeepMap extends Map implements Serializable {
 	 * @param ogre
 	 * @return newClubPosition
 	 */
-	private final Position moveClub(Ogre ogre) {
+	protected Position moveClub(Ogre ogre) {
 		Position clubPosition = ogre.getClub().getPosition();
 
 		playMap[clubPosition.getXPosition()][clubPosition.getYPosition()] = ' ';
@@ -478,7 +479,7 @@ class KeepMap extends Map implements Serializable {
 	 * Opens the door if the hero has the key and is in an adjacent position to the
 	 * door
 	 */
-	protected void openDoors() {
+	private void openDoors() {
 
 		for (Position key : doorMap.keySet()) {
 			if (Utilities.checkAdjacentCollision(key, hero.getPosition()) && this.hero.getLeverState()) {

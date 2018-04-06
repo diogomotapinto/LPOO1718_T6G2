@@ -13,11 +13,20 @@ import utilities.Utilities;
 
 public class DungeonMap extends Map implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2705608731076698375L;
+
+	/**
+	 * 
+	 */
+
 	private static final int route[][] = { { 1, 8 }, { 1, 7 }, { 2, 7 }, { 3, 7 }, { 4, 7 }, { 5, 7 }, { 5, 6 },
 			{ 5, 5 }, { 5, 4 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 6, 1 }, { 6, 2 }, { 6, 3 }, { 6, 4 }, { 6, 5 },
 			{ 6, 6 }, { 6, 7 }, { 6, 8 }, { 5, 8 }, { 4, 8 }, { 3, 8 }, { 2, 8 } };
 
-	private static final String legend = "\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space";
+	private static final String LEGEND = "\nX - Wall \nI - Door \nH - Hero \nG - Guard \nk - lever \nempty cell - free space";
 	private Guard guard;
 
 	/**
@@ -48,7 +57,7 @@ public class DungeonMap extends Map implements Serializable {
 						WALL_CHAR, Lever.getLeverChar(), CHAR_BLANK_SPACE, WALL_CHAR },
 				{ WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR, WALL_CHAR,
 						WALL_CHAR } },
-				legend, "Nivel 1!!!", new Position(1, 1), new Position(8, 7));
+				LEGEND, "Nivel 1!!!", new Position(1, 1), new Position(8, 7));
 		generateFoes(personality);
 		super.header = guard.toString();
 		parseMap();

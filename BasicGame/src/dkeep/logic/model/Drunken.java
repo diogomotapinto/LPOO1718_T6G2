@@ -6,6 +6,13 @@ import utilities.Utilities;
 
 public final class Drunken extends Guard  implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1805847310392460226L;
+	/**
+	 * 
+	 */
 	private boolean sleep;
 
 	/**

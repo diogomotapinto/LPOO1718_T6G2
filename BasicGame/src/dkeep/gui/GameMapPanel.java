@@ -6,6 +6,13 @@ import javax.swing.JPanel;
 
 class GameMapPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3404250020666809834L;
+	/**
+	 * 
+	 */
 	private ImageIcon gameMap[][];
 	private int subSquareLength;
 

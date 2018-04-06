@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public final class Position implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6112035613033930460L;
+	/**
+	 * 
+	 */
 	private int xPosition;
 	private int yPosition;
 

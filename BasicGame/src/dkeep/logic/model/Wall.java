@@ -3,6 +3,10 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public class Wall extends GameObject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8380840094629327405L;
 	private final char wallChar;
 
 	/**

@@ -2,7 +2,12 @@ package dkeep.logic.model;
 
 import java.io.Serializable;
 
-public final class Rookie extends Guard  implements Serializable {
+public final class Rookie extends Guard implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7795474620529992686L;
 
 	/**
 	 * Class constructor

@@ -4,9 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dkeep.controller.Controller;
-import dkeep.logic.model.Guard;
-
+import dkeep.controller.Controller.GameAmbient;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -15,14 +13,18 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
-import dkeep.controller.Controller.GameAmbient;
 
-public final class GameSettingsWindow extends JFrame {
+final class GameSettingsWindow extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7222564576740430316L;
+	/**
+	 * 
+	 */
 
 	private final JPanel contentPane;
-	// private static final String[] guardTypes = { "", "Rookie", "Drunken",
-	// "Suspicious" };
-
 	private final JLabel ogreNumberLbl;
 	private final JTextField ogreNumberTxtFld;
 	private final JLabel guardPersonalityLbl;
@@ -66,9 +68,9 @@ public final class GameSettingsWindow extends JFrame {
 		guardPersonalityLbl.setBounds(15, 55, 100, 16);
 		contentPane.add(guardPersonalityLbl);
 
-		guardPersonalityCmbBox = new JComboBox();
+		guardPersonalityCmbBox = new JComboBox<String>();
 		guardPersonalityCmbBox
-				.setModel(new DefaultComboBoxModel(new String[] { "", "Rookie", "Drunken", "Suspicious" }));
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "", "Rookie", "Drunken", "Suspicious" }));
 		guardPersonalityCmbBox.setBounds(125, 50, 120, 25);
 		contentPane.add(guardPersonalityCmbBox);
 
@@ -98,7 +100,7 @@ public final class GameSettingsWindow extends JFrame {
 		gameAmbientLbl.setBounds(15, 19, 100, 16);
 		contentPane.add(gameAmbientLbl);
 
-		gameAmbientCmbBox = new JComboBox(GameAmbient.values());
+		gameAmbientCmbBox = new JComboBox<GameAmbient>(GameAmbient.values());
 		gameAmbientCmbBox.setBounds(125, 13, 120, 25);
 		contentPane.add(gameAmbientCmbBox);
 
@@ -114,5 +116,9 @@ public final class GameSettingsWindow extends JFrame {
 
 	public final String getGuardPersonality() {
 		return guardPersonality;
+	}
+
+	public void setOgreNumber(String ogreNumber) {
+		this.ogreNumber = ogreNumber;
 	}
 }

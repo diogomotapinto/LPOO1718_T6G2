@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public final class Lever extends GameObject implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7975238719147852428L;
+	/**
+	 * 
+	 */
 	private static final char CHAR_LEVER = 'k';
 	private boolean activated;
 

@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 public final class Hero extends GameObject implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8227693520584850801L;
+	/**
+	 * 
+	 */
 	private static final char CHAR_HERO_lvl2 = 'A';
 	private static final char CHAR_HERO = 'H';
 	private static final char CHAR_HERO_KEY = 'K';

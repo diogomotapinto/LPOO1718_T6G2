@@ -16,10 +16,10 @@ import javax.swing.JSlider;
 import java.awt.Font;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import java.awt.event.MouseMotionAdapter;
 
-public class CreateMapWindow extends JFrame {
+class CreateMapWindow extends JFrame {
 
+	private static final long serialVersionUID = 7059579214567223377L;
 	private EditMapPanel editPanel;
 	private JLabel heroLbl;
 	private JButton applyBtn;
@@ -33,11 +33,7 @@ public class CreateMapWindow extends JFrame {
 	private boolean mapCreated;
 	private JSlider mapSizeSld;
 
-	/**
-	 * Class constructor
-	 * Create the frame.
-	 */
-	public CreateMapWindow(ImageLoader imageLoader) {
+	CreateMapWindow(ImageLoader imageLoader) {
 		this.mapCreated = false;
 
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -72,7 +68,7 @@ public class CreateMapWindow extends JFrame {
 		getContentPane().add(heroLbl);
 
 		ogreLbl = new JLabel();
-		initializeOgreLbl(ogreLbl, imageLoader);
+		initializeOgreLbl(imageLoader);
 		getContentPane().add(ogreLbl);
 
 		doorLbl = new JLabel();
@@ -95,11 +91,7 @@ public class CreateMapWindow extends JFrame {
 
 	}
 
-	/**
-	 * Initializes the exit button used in the window
-	 * @param exitBtn
-	 */
-	protected void initializeExitButton(JButton exitBtn) {
+	private void initializeExitButton(JButton exitBtn) {
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mapCreated = false;
@@ -109,11 +101,7 @@ public class CreateMapWindow extends JFrame {
 		exitBtn.setBounds(559, 424, 104, 29);
 	}
 
-	/**
-	 * Initializes the apply button in the window 
-	 * @param applyBtn
-	 */
-	protected void initializeApplyButton(JButton applyBtn) {
+	private void initializeApplyButton(JButton applyBtn) {
 		applyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -123,17 +111,17 @@ public class CreateMapWindow extends JFrame {
 	}
 
 	/**
-	 * Initializes the hero image in the window 
+	 * Initializes the hero image in the window
+	 * 
 	 * @param heroLbl
 	 * @param imageLoader
 	 */
-	protected void initializeHeroLbl(JLabel heroLbl, ImageLoader imageLoader) {
+	private void initializeHeroLbl(JLabel heroLbl, ImageLoader imageLoader) {
 		heroLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getHeroImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		heroLbl.setBounds(459, 65, 40, 40);
@@ -142,16 +130,16 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the ogre image used in the window
+	 * 
 	 * @param doorLbl
 	 * @param imageLoader
 	 */
-	protected void initializeOgreLbl(JLabel doorLbl, ImageLoader imageLoader) {
+	private void initializeOgreLbl(ImageLoader imageLoader) {
 		ogreLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getOgreImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		ogreLbl.setBounds(575, 65, 40, 40);
@@ -160,16 +148,16 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the door image used in the window
+	 * 
 	 * @param doorLbl
 	 * @param imageLoader
 	 */
-	protected void intializeDoorLbl(JLabel doorLbl, ImageLoader imageLoader) {
+	private void intializeDoorLbl(JLabel doorLbl, ImageLoader imageLoader) {
 		doorLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getDoorImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		doorLbl.setBounds(459, 120, 40, 40);
@@ -178,16 +166,16 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the key image used in the window
+	 * 
 	 * @param keyLbl
 	 * @param imageLoader
 	 */
-	protected void initializeKeylbl(JLabel keyLbl, ImageLoader imageLoader) {
+	private void initializeKeylbl(JLabel keyLbl, ImageLoader imageLoader) {
 		keyLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getKeyImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		keyLbl.setBounds(575, 120, 40, 40);
@@ -196,16 +184,16 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the wall image used in the window
+	 * 
 	 * @param wallLbl
 	 * @param imageLoader
 	 */
-	protected void initializeWallLbl(JLabel wallLbl, ImageLoader imageLoader) {
+	private void initializeWallLbl(JLabel wallLbl, ImageLoader imageLoader) {
 		wallLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getWallImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		wallLbl.setBounds(459, 175, 40, 40);
@@ -214,16 +202,16 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the blank space image used in the window
+	 * 
 	 * @param blankSpaceLbl
 	 * @param imageLoader
 	 */
-	protected void initializeJLabel(JLabel blankSpaceLbl, ImageLoader imageLoader) {
+	private void initializeJLabel(JLabel blankSpaceLbl, ImageLoader imageLoader) {
 		blankSpaceLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mapCreated = true;
 				editPanel.setImage(imageLoader.getBlankSpaceImg());
-				editPanel.setPaintIcon(true);
 			}
 		});
 		blankSpaceLbl.setBounds(575, 175, 40, 40);
@@ -233,9 +221,11 @@ public class CreateMapWindow extends JFrame {
 
 	/**
 	 * Initializes the slider used in the window
-	 * @param mapSizeSld size of the map created
+	 * 
+	 * @param mapSizeSld
+	 *            size of the map created
 	 */
-	public void initializeSlider(JSlider mapSizeSld) {
+	private void initializeSlider(JSlider mapSizeSld) {
 		mapSizeSld.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				int value = mapSizeSld.getValue();
@@ -255,7 +245,6 @@ public class CreateMapWindow extends JFrame {
 
 				applyBtn.setBounds(33 + editPanelSize, 24 + editPanelSize, 104, 29);
 				exitBtn.setBounds(159 + editPanelSize, 24 + editPanelSize, 104, 29);
-				editPanel.setPaintIcon(true);
 				editPanel.repaint();
 
 			}
@@ -297,6 +286,10 @@ public class CreateMapWindow extends JFrame {
 	 */
 	public final boolean isMapCreated() {
 		return mapCreated;
+	}
+
+	public void setEditMap(ImageIcon[][] editMap) {
+		editPanel.setEditMapSize(editMap);
 	}
 
 }

@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public class Club extends GameObject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4450097633388885031L;
+	/**
+	 * 
+	 */
 	private static final char CLUB_CHAR = '*';
 
 	/**

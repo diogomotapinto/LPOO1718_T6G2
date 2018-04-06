@@ -6,9 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import dkeep.controller.WindowController;
-import utilities.Serialization;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -18,11 +15,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JMenu;
 import java.awt.event.KeyAdapter;
 
-public final class GameWindow extends JFrame {
+final class GameWindow extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6133340691884675448L;
+	/**
+	 * 
+	 */
 	private JFrame frame;
 	private GameMapPanel gamePnl;
 	private WindowController windowController;
@@ -37,7 +40,7 @@ public final class GameWindow extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public GameWindow(WindowController windowController) {
+	GameWindow(WindowController windowController) {
 		super();
 		this.windowController = windowController;
 		initializeWindow();
@@ -46,7 +49,7 @@ public final class GameWindow extends JFrame {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void paintMap(ImageIcon[][] imgMap) {
+	void paintMap(ImageIcon[][] imgMap) {
 		this.gamePnl.setMap(imgMap);
 		resizeFrame(imgMap.length);
 		gamePnl.requestFocus();
@@ -144,7 +147,7 @@ public final class GameWindow extends JFrame {
 		frame.setVisible(true);
 	}
 
-	protected void initializeUpButton(JButton upBtn) {
+	private void initializeUpButton(JButton upBtn) {
 		upBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				windowController.makeMove('w');
@@ -153,7 +156,7 @@ public final class GameWindow extends JFrame {
 		upBtn.setBounds(495, 150, 75, 30);
 	}
 
-	protected void initializeNewButton(JButton newGameBtn) {
+	private void initializeNewButton(JButton newGameBtn) {
 		newGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				windowController.newGame();
@@ -162,7 +165,7 @@ public final class GameWindow extends JFrame {
 		newGameBtn.setBounds(475, 85, 120, 25);
 	}
 
-	protected void initializeLeftBtn(JButton leftBtn) {
+	private void initializeLeftBtn(JButton leftBtn) {
 		leftBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				windowController.makeMove('a');
@@ -171,7 +174,7 @@ public final class GameWindow extends JFrame {
 		leftBtn.setBounds(415, 190, 75, 30);
 	}
 
-	protected void initializeRightBtn(JButton rightBtn) {
+	private void initializeRightBtn(JButton rightBtn) {
 		rightBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				windowController.makeMove('d');
@@ -180,7 +183,7 @@ public final class GameWindow extends JFrame {
 		rightBtn.setBounds(575, 190, 75, 30);
 	}
 
-	protected void initializeDownBtn(JButton downBtn) {
+	private void initializeDownBtn(JButton downBtn) {
 		downBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				windowController.makeMove('s');
@@ -189,7 +192,7 @@ public final class GameWindow extends JFrame {
 		downBtn.setBounds(495, 230, 75, 30);
 	}
 
-	protected void initializeExitBtn(JButton exitBtn) {
+	private void initializeExitBtn(JButton exitBtn) {
 		exitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Exit");
@@ -199,7 +202,7 @@ public final class GameWindow extends JFrame {
 		exitBtn.setBounds(475, 300, 120, 25);
 	}
 
-	protected void initializeJMenu(JMenuItem gameSettingsMI) {
+	private void initializeJMenu(JMenuItem gameSettingsMI) {
 		gameSettingsMI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				windowController.showWindowGameSettings();
@@ -210,12 +213,12 @@ public final class GameWindow extends JFrame {
 	private void initializeSaveGame(JMenuItem saveGameMnItem) {
 		saveGameMnItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Serialization.serialize();
+				windowController.serialize();
 			}
 		});
 	}
 
-	protected void initializeGamePanel(GameMapPanel gamePnl, WindowController windowController) {
+	private void initializeGamePanel(GameMapPanel gamePnl, WindowController windowController) {
 		gamePnl.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -243,7 +246,7 @@ public final class GameWindow extends JFrame {
 		gamePnl.setSubSquareLength(windowController.getEditPanelSubSquareLength());
 	}
 
-	protected void initializeJMenuItem(JMenuItem editMapMI) {
+	private void initializeJMenuItem(JMenuItem editMapMI) {
 		editMapMI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				windowController.showCreateGameWindow();
@@ -251,7 +254,7 @@ public final class GameWindow extends JFrame {
 		});
 	}
 
-	public void closeWindow() {
+	void closeWindow() {
 		this.frame.dispose();
 	}
 }

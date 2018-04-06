@@ -12,13 +12,18 @@ import org.junit.Test;
 public class TestOgreGameLogic {
   private OgreMapTest map;
   public char [][] testMap = {
-			{'X','X', 'X' ,'X','X'},
-			{'I',' ', ' ' ,'k','X'},
-			{'X',' ', ' ' ,' ','X'},
-			{'X','A', ' ' ,'O','X'},
-			{'X','X', 'X' ,'X','X'}
+			{'X','X','X', 'X' ,'X','X'},
+			{'I',' ', ' ' ,' ' ,'k','X'},
+			{'X',' ', ' ' ,' ' ,' ','X'},
+			{'X',' ', ' ' ,' ' ,' ','X'},
+			{'X','A', ' ' ,' ' ,'O','X'},
+			{'X','X', 'X','X','X','X'}
 	};
 
+  
+  /**
+   * Moves in the ogre direction and stuns him without loosing
+   */
   @Test
   public void testMoveHeroIntoTo() {
     Position ogrePosition = new Position(7, 4);
@@ -28,47 +33,38 @@ public class TestOgreGameLogic {
     assertEquals((byte) 0, map.checkEndLevel());
   }
 
-  
+  /**
+   * Moves in the ogre direction and stuns him without loosing
+   */
   @Test
   public void testMoveHeroIntoTo2() {
     map = new OgreMapTest(testMap);
     map.play('d');
-    assertEquals((byte) -1, map.checkEndLevel());
+    assertEquals((byte) 0, map.checkEndLevel());
   }
   
+  /**
+   * Test to check if the ogre change is character to 'K' when he has the key
+   */
   @Test
   public void testChangeToK() {
     map = new OgreMapTest("1");
     assertEquals(new Position(8, 1), map.getHero().getPosition());
     StringBuilder s = new StringBuilder();
-    s.append("wwwwwwdddddda");
+    s.append("wwwwwwddddddaa");
 
     while (s.length() > 0) {
       map.play(s.charAt(0));
       s.deleteCharAt(0);
     }
 
-    assertEquals('K', map.getHero().getCharHeroKey());
-    assertEquals((byte) 0, map.checkEndLevel());
+    assertEquals('K', map.getHero().getCharHeroLvl2());
   }
 
-  @Test
-  public void testChangeToK2() {
-	    map = new OgreMapTest(testMap);
-	    assertEquals(new Position(3, 1), map.getHero().getPosition());
-	    StringBuilder s = new StringBuilder();
-	    s.append("wwddda");
 
-	    while (s.length() > 0) {
-	      map.play(s.charAt(0));
-	      s.deleteCharAt(0);
-	    }
-
-	    assertEquals('K', map.getHero().getCharHeroKey());
-	    assertEquals((byte) 0, map.checkEndLevel());
-	  }
-
-  
+  /**
+   * Test to check if the hero opens the door if he is in an adjacent position
+   */
   @Test
   public void movesToCloseDoor() {
     map = new OgreMapTest("1");
@@ -83,11 +79,14 @@ public class TestOgreGameLogic {
     assertEquals((byte) 0, map.checkEndLevel());
   }
   
+  /**
+   * Test to check if the hero opens the door if he is in an adjacent position
+   */
   @Test
   public void movesToCloseDoor2() {
     map = new OgreMapTest(testMap);
     StringBuilder s = new StringBuilder();
-    s.append("ww");
+    s.append("www");
     
     while (s.length() > 0) {
       map.play(s.charAt(0));
@@ -97,7 +96,9 @@ public class TestOgreGameLogic {
     assertEquals((byte) 0, map.checkEndLevel());
   }
 
-
+/**
+ *Test to check if the door  doesn't open when he has the key
+ */
   @Test
   public void movesToOpenDoor() {
     map = new OgreMapTest("1");
@@ -113,6 +114,9 @@ public class TestOgreGameLogic {
     assertEquals((byte) 0, map.checkEndLevel());
   }
 
+  /**
+   * Test to check if the game is won by moving into the open door
+   */
   @Test
   public void movesWin() {
     map = new OgreMapTest("1");

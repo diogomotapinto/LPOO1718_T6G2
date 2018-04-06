@@ -3,6 +3,13 @@ package dkeep.logic.model;
 import java.io.Serializable;
 
 public class Door extends GameObject  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7096019683477771677L;
+	/**
+	 * 
+	 */
 	private boolean open;
 	private final char close;
 	private final char openChar;

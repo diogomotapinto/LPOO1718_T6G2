@@ -1,49 +1,44 @@
 package dkeep.controller;
 
 import dkeep.cli.View;
+import dkeep.gui.WindowController;
 import dkeep.logic.DungeonMap;
 import dkeep.logic.Map;
 import dkeep.logic.NextLevelNotAvailable;
-import dkeep.logic.model.Guard;
+import utilities.Serialization;
 
 public final class Controller {
 
 	public enum GameAmbient {
 		GUI, CONSOLE
-	};
+	}
 
-	private static final Controller INSTANCE = new Controller();
 	private final StateMachine stateMachine;
-	private final WindowController wdwController;
+	private WindowController wdwController;
 	private final View view;
 	private Map currentMap;
 	private GameAmbient gameAmbient;
+	private Serialization ser;
 
 	/**
 	 * Class constructor
 	 */
-	private Controller() {
+	public Controller() {
 		stateMachine = new StateMachine();
 		wdwController = new WindowController(this);
 		view = new View();
 		gameAmbient = GameAmbient.GUI;
+		ser = new Serialization();
 	}
 
-	public Controller(Map currentMap, StateMachine stateMachine) {
+	public Controller(Map currentMap, StateMachine stateMachine, String ogreNmb, char[][] editMap) {
 		this.currentMap = currentMap;
 		this.stateMachine = stateMachine;
 		view = new View();
-		wdwController = new WindowController(this);
 		gameAmbient = GameAmbient.GUI;
+		ser = new Serialization();
+		wdwController = new WindowController(this, ogreNmb, editMap);
 		printGame();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static Controller getInstance() {
-		return INSTANCE;
 	}
 
 	/**
@@ -52,7 +47,7 @@ public final class Controller {
 	 * @param personality
 	 *            string with the information for the DungeonMap
 	 */
-	void newGame(String personality, GameAmbient gameAmbient) {
+	public void newGame(String personality, GameAmbient gameAmbient) {
 		this.gameAmbient = gameAmbient;
 		stateMachine.advanceState(StateMachine.Event.PLAY);
 		currentMap = new DungeonMap(personality);
@@ -61,16 +56,15 @@ public final class Controller {
 
 	private void printGame() {
 
-		if (gameAmbient == GameAmbient.GUI) {
+		if (gameAmbient == GameAmbient.GUI)
 			wdwController.updateGameWindow(currentMap.getPlayMap(), "You can play now");
-		} else if (gameAmbient == GameAmbient.CONSOLE) {
+		else if (gameAmbient == GameAmbient.CONSOLE) {
 
 			view.printGameInfo(currentMap.getHeader(), currentMap.getPlayMap(), currentMap.getLegend());
 			do {
 				currentMap.play(view.getMove());
 				view.printGameInfo(currentMap.getHeader(), currentMap.getPlayMap(), currentMap.getLegend());
 			} while (!advanceLevel(currentMap.checkEndLevel()));
-
 		}
 	}
 
@@ -81,7 +75,7 @@ public final class Controller {
 	 * @param move
 	 *            char that "indicates" the direction of the move
 	 */
-	void makeMove(char move) {
+	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
 			printGame();
@@ -110,7 +104,7 @@ public final class Controller {
 				char[][] editMap = wdwController.generateMap();
 				stateMachine.advanceState(StateMachine.Event.LEVEL_UP);
 
-				if (editMap.length == 0)
+				if (editMap.length == 0 || editMap[0][0] == '-')
 					currentMap = currentMap.nextLevel(wdwController.getOgreNumber());
 				else
 					currentMap = currentMap.nextLevel(editMap);
@@ -135,6 +129,18 @@ public final class Controller {
 
 	public final Map getCurrentMap() {
 		return currentMap;
+	}
+
+	public final char[][] getEditMap() {
+		return this.wdwController.generateMap();
+	}
+
+	public final String getOgreNumber() {
+		return this.wdwController.getOgreNumber();
+	}
+
+	public void serialize() {
+		ser.serialize(this);
 	}
 
 }

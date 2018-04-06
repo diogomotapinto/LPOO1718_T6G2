@@ -14,6 +14,13 @@ import dkeep.logic.model.Wall;
 
 public abstract class Map implements PlayMap, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8616146323120675712L;
+	/**
+	 * 
+	 */
 	// mudar variaveis para classes respetivas
 	private static final char CHAR_MOVE_UP = 'w';
 	private static final char CHAR_MOVE_DOWN = 's';
@@ -153,7 +160,7 @@ public abstract class Map implements PlayMap, Serializable {
 	 *            position of the hero in the y-axis
 	 * @return true if it is won and false otherwise
 	 */
-	protected final boolean checkWon() {
+	private final boolean checkWon() {
 		// devia-se criar um objeto door e testava-se as coordenadas, de forma a no
 		// futuro poder escalar o sistema
 		return (this.hero.getLeverState() && checkOnDoors(hero.getPosition())

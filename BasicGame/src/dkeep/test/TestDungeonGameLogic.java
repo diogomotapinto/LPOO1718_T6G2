@@ -13,6 +13,10 @@ class TestDungeonGameLogic {
   private DungeonMap map;
   private static String guardPersonality = "rookie";
 
+  
+  /**
+   * Test to check if the hero moves into a free cell
+   */
   @Test
   void testMoveHeroIntoToFreeCell() {
     map = new DungeonMapTest(guardPersonality);
@@ -22,6 +26,9 @@ class TestDungeonGameLogic {
     assertEquals(0, map.checkEndLevel());
   }
 
+  /**
+   * Test to check if the hero bumps into the wall
+   */
   @Test
   void testMoveHeroIntoToWall() {
     map = new DungeonMapTest(guardPersonality);
@@ -31,6 +38,9 @@ class TestDungeonGameLogic {
     assertEquals(0, map.checkEndLevel());
   }
 
+  /**
+   * Test to check if the game is lost in case of "collision" between the hero and the ogre
+   */
   @Test
   void testMoveHeroIntoToGuard() {
     map = new DungeonMapTest(guardPersonality);
@@ -46,6 +56,9 @@ class TestDungeonGameLogic {
     assertEquals(-1, map.checkEndLevel());
   }
 
+  /**
+   * Test to check if the hero doesn't go into a close door
+   */
   @Test
   void testMoveHeroIntoToClosedExitDoors() {
     map = new DungeonMapTest(guardPersonality);
@@ -62,23 +75,10 @@ class TestDungeonGameLogic {
 
   }
 
-  // @Test
-  // void testMoveHeroIntoToLeverAndDoorsOpen() {
-  // TestGuard t = new TestGuard();
-  // map = new DungeonMap(t);
-  // map.moveHero('d');
-  // map.moveHero('d');
-  //
-  // map.moveHero('s');
-  // map.moveHero('s');
-  // map.moveHero('s');
-  // map.moveHero('s');
-  //
-  // map.moveHero('a');
-  // map.moveHero('a');
-  // map.moveHero('a');
-  // }
 
+  /**
+   * Test to check if the hero wins by going into the open door on the left wall
+   */
   @Test
   void testMoveHeroIntoToOpenDoorsTotheKeep() {
     map = new DungeonMapTest(guardPersonality);

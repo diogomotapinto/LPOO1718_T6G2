@@ -3,8 +3,15 @@ package dkeep.gui;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public final class PopUpWindow extends JFrame {
-  private JFrame frame;
+final class PopUpWindow extends JFrame {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2900963691202547995L;
+/**
+	 * 
+	 */
+private JFrame frame;
 
   /**
    * Class constructor
@@ -13,12 +20,12 @@ public final class PopUpWindow extends JFrame {
     super();
   }
 
-  public void printErrorMessageDialog(String message) {
+  void printErrorMessageDialog(String message) {
     JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
   }
 
   
-  public void printWarningMessageDialog(String message) {
+  void printWarningMessageDialog(String message) {
     JOptionPane.showMessageDialog(frame, message, "Warning", JOptionPane.WARNING_MESSAGE);
   }
 

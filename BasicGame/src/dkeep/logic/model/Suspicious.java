@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 import utilities.Utilities;
 
-public final class Suspicious extends Guard implements Serializable  {
+public final class Suspicious extends Guard implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7417454072218940051L;
 	private boolean direction;
 
 	/**
