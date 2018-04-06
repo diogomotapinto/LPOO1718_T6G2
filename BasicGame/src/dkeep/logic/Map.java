@@ -4,14 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dkeep.logic.model.Club;
-import dkeep.logic.model.Door;
-import dkeep.logic.model.Hero;
-import dkeep.logic.model.Lever;
-import dkeep.logic.model.Ogre;
-import dkeep.logic.model.Position;
-import dkeep.logic.model.Wall;
-
 public abstract class Map implements PlayMap, Serializable {
 
 	/**
@@ -240,4 +232,8 @@ public abstract class Map implements PlayMap, Serializable {
 		return 0;
 	}
 
+	
+	public Lever getLever() {
+		return this.lever;
+	}
 }

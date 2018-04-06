@@ -1,11 +1,13 @@
 package dkeep.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import dkeep.logic.model.Position;
+
 import utilities.Utilities;
 
 
 import org.junit.jupiter.api.Test;
+
+import dkeep.logic.Position;
 
 class TestRandomBehaviour {
 

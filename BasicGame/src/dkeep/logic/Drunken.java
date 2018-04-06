@@ -1,4 +1,4 @@
-package dkeep.logic.model;
+package dkeep.logic;
 
 import java.io.Serializable;
 

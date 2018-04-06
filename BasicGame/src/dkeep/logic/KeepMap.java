@@ -4,13 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dkeep.logic.model.Lever;
-import dkeep.logic.model.Wall;
-import dkeep.logic.model.Club;
-import dkeep.logic.model.Door;
-import dkeep.logic.model.Hero;
-import dkeep.logic.model.Ogre;
-import dkeep.logic.model.Position;
 import utilities.Utilities;
 
 class KeepMap extends Map implements Serializable {

@@ -2,10 +2,10 @@ package dkeep.test;
 
 import dkeep.controller.Controller;
 import dkeep.logic.OgreMapTest;
+import dkeep.logic.Position;
+
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import dkeep.logic.model.Position;
 
 import org.junit.Test;
 
@@ -48,7 +48,7 @@ public class TestOgreGameLogic {
    */
   @Test
   public void testChangeToK() {
-    map = new OgreMapTest("1");
+    map = new OgreMapTest(testMap);
     assertEquals(new Position(8, 1), map.getHero().getPosition());
     StringBuilder s = new StringBuilder();
     s.append("wwwwwwddddddaa");
@@ -58,6 +58,14 @@ public class TestOgreGameLogic {
       s.deleteCharAt(0);
     }
 
+    Position key = this.map.getLever().getPosition();
+    Position heroPos = this.map.getHero().getPosition();
+    
+    System.out.println(key.getXPosition());
+    System.out.println(key.getYPosition());
+    System.out.println(heroPos.getXPosition());
+    System.out.println(heroPos.getYPosition());
+    
     assertEquals('K', map.getHero().getCharHeroLvl2());
   }
 

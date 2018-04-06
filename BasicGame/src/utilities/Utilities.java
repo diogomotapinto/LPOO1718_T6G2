@@ -2,7 +2,7 @@ package utilities;
 
 import java.util.Random;
 
-import dkeep.logic.model.Position;
+import dkeep.logic.Position;
 
 public final class Utilities {
 	private static final byte MOVE_UP = 1;

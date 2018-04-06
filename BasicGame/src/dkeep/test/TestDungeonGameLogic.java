@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import dkeep.logic.DungeonMap;
 import dkeep.logic.DungeonMapTest;
-import dkeep.logic.model.Position;
+import dkeep.logic.Position;
 
 class TestDungeonGameLogic {
 
