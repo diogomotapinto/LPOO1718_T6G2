@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public class Door extends GameObject  implements Serializable {
+class Door extends GameObject  implements Serializable {
 	/**
 	 * 
 	 */
@@ -22,7 +22,7 @@ public class Door extends GameObject  implements Serializable {
 	 * @param yPos
 	 *            position of the door in the y-axis
 	 */
-	public Door(int xPos, int yPos) {
+	Door(int xPos, int yPos) {
 		super(xPos, yPos);
 		this.open = false;
 		this.close = 'I';

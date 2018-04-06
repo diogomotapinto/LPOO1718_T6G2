@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import utilities.Utilities;
 
-public final class Drunken extends Guard  implements Serializable {
+final class Drunken extends Guard  implements Serializable {
 
 	/**
 	 * 
@@ -21,7 +21,7 @@ public final class Drunken extends Guard  implements Serializable {
 	 * @param route
 	 *            of the drunken guard
 	 */
-	public Drunken(int[][] route) {
+	Drunken(int[][] route) {
 		super(route);
 		sleep = false;
 	}

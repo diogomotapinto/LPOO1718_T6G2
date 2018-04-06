@@ -2,8 +2,6 @@ package dkeep.gui;
 
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
-import utilities.ImageLoader;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +13,9 @@ import java.awt.Color;
 import javax.swing.JSlider;
 import java.awt.Font;
 import javax.swing.event.ChangeListener;
+
+import utilities.ImageLoader;
+
 import javax.swing.event.ChangeEvent;
 
 class CreateMapWindow extends JFrame {

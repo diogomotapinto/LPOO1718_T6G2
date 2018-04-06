@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public class Wall extends GameObject implements Serializable {
+class Wall extends GameObject implements Serializable {
 	/**
 	 * 
 	 */

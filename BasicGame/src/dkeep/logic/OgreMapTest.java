@@ -2,6 +2,11 @@ package dkeep.logic;
 
 public final class OgreMapTest extends KeepMap {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7349597634503963013L;
+
 	public OgreMapTest(String ogresNumber) {
 		super(ogresNumber);
 	}

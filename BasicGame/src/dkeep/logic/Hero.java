@@ -24,7 +24,7 @@ public final class Hero extends GameObject implements Serializable  {
 	 * @param yPos
 	 *            position of the hero in the y-axis
 	 */
-	public Hero(int xPos, int yPos) {
+	Hero(int xPos, int yPos) {
 		super(xPos, yPos);
 		lever = false;
 	}
@@ -53,7 +53,7 @@ public final class Hero extends GameObject implements Serializable  {
 	 * 
 	 * @return 'H'
 	 */
-	public static char getCharHero() {
+	static char getCharHero() {
 		return CHAR_HERO;
 	}
 
@@ -61,7 +61,7 @@ public final class Hero extends GameObject implements Serializable  {
 	 * 
 	 * @return 'k'
 	 */
-	public static char getCharHeroKey() {
+	static char getCharHeroKey() {
 		return CHAR_HERO_KEY;
 	}
 
@@ -69,7 +69,7 @@ public final class Hero extends GameObject implements Serializable  {
 	 * 
 	 * @return 'A'
 	 */
-	public static char getCharHeroLvl2() {
+	static char getCharHeroLvl2() {
 		return CHAR_HERO_lvl2;
 	}
 

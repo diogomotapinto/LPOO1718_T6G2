@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public final class Rookie extends Guard implements Serializable {
+final class Rookie extends Guard implements Serializable {
 
 	/**
 	 * 

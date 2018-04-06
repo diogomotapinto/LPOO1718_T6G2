@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public final class Lever extends GameObject implements Serializable  {
+final class Lever extends GameObject implements Serializable  {
 	/**
 	 * 
 	 */
@@ -18,7 +18,7 @@ public final class Lever extends GameObject implements Serializable  {
 	 * @param xPos
 	 * @param yPos
 	 */
-	public Lever(int xPos, int yPos) {
+	Lever(int xPos, int yPos) {
 		super(xPos, yPos);
 		activated = false;
 	}
@@ -26,14 +26,14 @@ public final class Lever extends GameObject implements Serializable  {
 	 * Returns the level char representation
 	 * @return 'k'
 	 */
-	public static char getLeverChar() {
+	static char getLeverChar() {
 		return CHAR_LEVER;
 	}
 
 	/**
 	 * Sets the state of the lever as true 
 	 */
-	public void activateLever() {
+	void activateLever() {
 		activated = true;
 	}
 

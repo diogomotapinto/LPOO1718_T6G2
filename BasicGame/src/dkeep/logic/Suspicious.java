@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import utilities.Utilities;
 
-public final class Suspicious extends Guard implements Serializable {
+final class Suspicious extends Guard implements Serializable {
 
 	/**
 	 * 

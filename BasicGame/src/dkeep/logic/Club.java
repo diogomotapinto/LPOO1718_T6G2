@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public class Club extends GameObject implements Serializable {
+class Club extends GameObject implements Serializable {
 	/**
 	 * 
 	 */

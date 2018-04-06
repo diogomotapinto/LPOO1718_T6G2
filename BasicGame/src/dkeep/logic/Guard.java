@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public abstract class Guard extends GameObject implements Serializable  {
+abstract class Guard extends GameObject implements Serializable  {
 
 	/**
 	 * 

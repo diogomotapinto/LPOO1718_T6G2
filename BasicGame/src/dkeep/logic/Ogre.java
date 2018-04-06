@@ -2,7 +2,7 @@ package dkeep.logic;
 
 import java.io.Serializable;
 
-public final class Ogre extends GameObject implements Serializable  {
+final class Ogre extends GameObject implements Serializable  {
 	/**
 	 * 
 	 */

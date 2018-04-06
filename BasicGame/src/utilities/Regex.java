@@ -9,6 +9,7 @@ public final class Regex {
 	 * Class constructor
 	 */
 	public Regex() {
+		// its not supposed have body
 	}
 
 	/**
