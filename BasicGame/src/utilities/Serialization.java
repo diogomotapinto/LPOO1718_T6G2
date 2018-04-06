@@ -66,7 +66,6 @@ public class Serialization {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 

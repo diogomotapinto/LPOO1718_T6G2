@@ -39,6 +39,44 @@ class TestDungeonGameLogic {
   }
 
   /**
+   * Test to check if the hero bumps into the wall
+   */
+  @Test
+  void testMoveHeroIntoToWallSuspicious() {
+    map = new DungeonMapTest("Suspicious");
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    map.play('w');
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    assertEquals(0, map.checkEndLevel());
+  }
+
+  
+  /**
+   * Test to check if the hero bumps into the wall
+   */
+  @Test
+  void testMoveHeroIntoToWallDrunken() {
+    map = new DungeonMapTest("Drunken");
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    map.play('w');
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    assertEquals(0, map.checkEndLevel());
+  }
+  
+  /**
+   * Test to check if the hero bumps into the wall
+   */
+  @Test
+  void testMoveHeroIntoToWallRookie() {
+    map = new DungeonMapTest("Rookie");
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    map.play('w');
+    assertEquals(new Position(1, 1), map.getHero().getPosition());
+    assertEquals(0, map.checkEndLevel());
+  }
+  
+  
+  /**
    * Test to check if the game is lost in case of "collision" between the hero and the ogre
    */
   @Test
