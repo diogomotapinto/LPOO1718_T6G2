@@ -20,9 +20,7 @@ public final class Controller {
 	private GameAmbient gameAmbient;
 	private Serialization ser;
 
-	/**
-	 * Class constructor
-	 */
+	
 	public Controller() {
 		stateMachine = new StateMachine();
 		wdwController = new WindowController(this);
@@ -41,12 +39,7 @@ public final class Controller {
 		printGame();
 	}
 
-	/**
-	 * Method called to start a new Game
-	 * 
-	 * @param personality
-	 *            string with the information for the DungeonMap
-	 */
+	
 	public void newGame(String personality, GameAmbient gameAmbient) {
 		this.gameAmbient = gameAmbient;
 		stateMachine.advanceState(StateMachine.Event.PLAY);
@@ -68,13 +61,6 @@ public final class Controller {
 		}
 	}
 
-	/**
-	 * Method called to make the hero move, the other characters in the game will
-	 * also move
-	 * 
-	 * @param move
-	 *            char that "indicates" the direction of the move
-	 */
 	public void makeMove(char move) {
 		if (stateMachine.getGameState() == StateMachine.State.GAME_PLAYING) {
 			currentMap.play(move);
@@ -83,12 +69,7 @@ public final class Controller {
 		}
 	}
 
-	/**
-	 * Methood set the state of the game
-	 * 
-	 * @param endLevel
-	 * @return true if the game is won and false otherwise
-	 */
+	
 	private boolean advanceLevel(byte endLevel) {
 		switch (endLevel) {
 		case -1:

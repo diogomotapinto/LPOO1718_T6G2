@@ -16,6 +16,7 @@ public final class ImageLoader {
 	private ImageIcon guardImg;
 	private ImageIcon doorOpenImg;
 	private ImageIcon clubImg;
+	private ImageIcon ogreStunned;
 
 	/**
 	 * Class constructor
@@ -26,19 +27,24 @@ public final class ImageLoader {
 
 	private void loadImages() {
 		try {
-			heroImg = new ImageIcon(ImageIO.read(new File("Images/indice.png")));
-			heroAmredImg = new ImageIcon(ImageIO.read(new File("Images/indice7.png")));
-			ogreImg = new ImageIcon(ImageIO.read(new File("Images/indice1.png")));
-			wallImg = new ImageIcon(ImageIO.read(new File("Images/indice2.png")));
+			heroImg = new ImageIcon(ImageIO.read(new File("Images/hero40.png")));
+			heroAmredImg = new ImageIcon(ImageIO.read(new File("Images/hero40.png")));
+			ogreImg = new ImageIcon(ImageIO.read(new File("Images/ogre.png")));
+			wallImg = new ImageIcon(ImageIO.read(new File("Images/wall40.png")));
 			blankSpaceImg = new ImageIcon(ImageIO.read(new File("Images/indice3.png")));
-			doorImg = new ImageIcon(ImageIO.read(new File("Images/indice4.png")));
-			keyImg = new ImageIcon(ImageIO.read(new File("Images/indice5.png")));
-			guardImg = new ImageIcon(ImageIO.read(new File("Images/indice6.png")));
-			doorOpenImg = new ImageIcon(ImageIO.read(new File("Images/indice8.png")));
-			clubImg = new ImageIcon(ImageIO.read(new File("Images/indice9.png")));
+			doorImg = new ImageIcon(ImageIO.read(new File("Images/closed40.png")));
+			keyImg = new ImageIcon(ImageIO.read(new File("Images/key40.png")));
+			guardImg = new ImageIcon(ImageIO.read(new File("Images/guard.png")));
+			doorOpenImg = new ImageIcon(ImageIO.read(new File("Images/open40.png")));
+			clubImg = new ImageIcon(ImageIO.read(new File("Images/ogreClub.png")));
+			ogreStunned = new ImageIcon(ImageIO.read(new File("Images/ogrestunned.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ImageIcon getOgreStunned() {
+		return ogreStunned;
 	}
 
 	public ImageIcon getHeroImg() {

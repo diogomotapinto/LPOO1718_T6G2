@@ -19,11 +19,7 @@ public final class WindowController {
 	private int[][] labirinth;
 	private char[][] savedEditMap;
 
-	/**
-	 * Class constructor
-	 * 
-	 * @param controller
-	 */
+	
 	public WindowController(Controller controller) {
 		this.controller = controller;
 		this.imageLoader = new ImageLoader();
@@ -52,9 +48,7 @@ public final class WindowController {
 		gameWdw.setLegend(legend);
 	}
 
-	/**
-	 * Loads a new game
-	 */
+	
 	void newGame() {
 		String guardPersonality = gameStgWdw.getGuardPersonality();
 		GameAmbient gameAmbient = gameStgWdw.getGameAmbient();
@@ -62,59 +56,37 @@ public final class WindowController {
 			controller.newGame(guardPersonality, gameAmbient);
 	}
 
-	/**
-	 * 
-	 * @param move
-	 */
+	
 	void makeMove(char move) {
 		controller.makeMove(move);
 	}
 
-	/**
-	 * Used to get the number of ogres chosen by the user
-	 * 
-	 * @return
-	 */
+	
 	public String getOgreNumber() {
 		return gameStgWdw.getOgreNumber();
 	}
 
-	/**
-	 * Makes the window game settings visible
-	 */
+	
 	void showWindowGameSettings() {
 		gameStgWdw.setVisible(true);
 	}
 
-	/**
-	 * Creates the game window
-	 */
+	
 	void showCreateGameWindow() {
 		createMapWdw.setVisible(true);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public int getEditPanelSubSquareLength() {
 		return createMapWdw.getEditPanelSubSquareLength();
 	}
 
-	/**
-	 * 
-	 * 
-	 */
+	
 	public ImageIcon[][] getEditMap() {
 		return this.createMapWdw.getEditMap();
 	}
 
-	/**
-	 * Generates the map created by the user
-	 * 
-	 * @return the map if there is more than one image in the map created and an
-	 *         empty otherwise
-	 */
+	
 	public char[][] generateMap() {
 		if (this.savedEditMap.length != 0)
 			return savedEditMap;
@@ -135,6 +107,10 @@ public final class WindowController {
 					charMap[i][j] = 'k';
 				else if (imgMap[i][j] == imageLoader.getWallImg())
 					charMap[i][j] = 'X';
+				else if (imgMap[i][j] == imageLoader.getGuardImg()) 
+						charMap[i][j] = 'G';
+				else if (imgMap[i][j] == imageLoader.getOgreStunned()) 
+					charMap[i][j] = '8';
 				else if (imgMap[i][j] == imageLoader.getBlankSpaceImg()) {
 					charMap[i][j] = ' ';
 					counter++;
@@ -147,13 +123,7 @@ public final class WindowController {
 		return (counter == (imgMap.length * imgMap[0].length)) ? new char[0][0] : charMap;
 	}
 
-	/**
-	 * Creates the map with images from the multidimensional array
-	 * 
-	 * @param map
-	 *            to be created with images
-	 * @return multidimensional array of images that represents the map
-	 */
+	
 	private ImageIcon[][] createMap(char[][] map) {
 		ImageIcon[][] imgMap = new ImageIcon[map.length][map[0].length];
 
@@ -182,19 +152,16 @@ public final class WindowController {
 					imgMap[i][j] = imageLoader.getDoorOpenImg();
 				else if (map[i][j] == '*')
 					imgMap[i][j] = imageLoader.getClubImg();
+				else if (map[i][j] == 'G')
+					imgMap[i][j] = imageLoader.getGuardImg();
+				else if (map[i][j] == '8')
+					imgMap[i][j] = imageLoader.getOgreStunned();
 			}
 
 		return imgMap;
 	}
 
-	/**
-	 * Validates the map and gives a warning if some requirement is not fulfilled
-	 * 
-	 * @param guardPersonality
-	 *            string that represents the guard personality
-	 * @param gameAmbient
-	 * @return true if all requirement are fulfilled and false otherwise
-	 */
+	
 	private boolean checkNewGame(String guardPersonality, GameAmbient gameAmbient) {
 
 		String ogreNumber = gameStgWdw.getOgreNumber();
@@ -254,11 +221,7 @@ public final class WindowController {
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param charMap
-	 * @return
-	 */
+	
 	private boolean checkMap(char[][] charMap) {
 		if (!checkCharacter('A', 1, 1, charMap))
 			return false;
@@ -281,20 +244,7 @@ public final class WindowController {
 		return checkBorders(charMap);
 	}
 
-	/**
-	 * Check if a character is in the right amount on a map
-	 * 
-	 * @param character
-	 *            to be checked
-	 * @param numMin
-	 *            amount of times he is allowed
-	 * @param numMax
-	 *            amount of times he is allowed
-	 * @param map
-	 *            to be checked
-	 * @return true if the character is in the right amount of times and false
-	 *         otherwise
-	 */
+	
 	private boolean checkCharacter(char character, int numMin, int numMax, char[][] map) {
 		int counter = 0;
 
@@ -306,14 +256,7 @@ public final class WindowController {
 		return (counter >= numMin && counter <= numMax);
 	}
 
-	/**
-	 * Check if the borders are only walls 'X' or doors 'I'
-	 * 
-	 * @param map
-	 *            multidimensional array to be checked
-	 * @return false if there is anything different than a door or a wall in the
-	 *         edges and true otherwise
-	 */
+	
 	private boolean checkBorders(char[][] map) {
 
 		if (!(map[0][0] == 'X' && map[0][map[0].length - 1] == 'X' && map[map.length - 1][0] == 'X'
@@ -339,16 +282,7 @@ public final class WindowController {
 		return true;
 	}
 
-	/**
-	 * Checks if character is surrounded by another element
-	 * 
-	 * @param multidimensional
-	 *            array to be checked
-	 * @param character
-	 *            to be validated
-	 * 
-	 * @return true if it isn't and false otherwise
-	 */
+	
 	private boolean checkCharacterBlocked(char[][] map, char character) {
 
 		for (int i = 0; i < map.length; i++)
@@ -359,33 +293,14 @@ public final class WindowController {
 		return true;
 	}
 
-	/**
-	 * Checks if some element is surrounded by another
-	 * 
-	 * @param map
-	 * @param x
-	 *            position of the element in the x-axis
-	 * @param y
-	 *            position of the element in the y-axis
-	 * @param surround
-	 *            char to be checked around other char
-	 * @return false if it is blocked and false otherwise
-	 */
+	
 	private boolean checkSurroundings(char[][] map, int x, int y, char surround) {
 		return !(map[x - 1][y] == surround && map[x + 1][y] == surround && map[x][y - 1] == surround
 				&& map[x + 1][y + 1] == surround);
 
 	}
 
-	/**
-	 * Recursive function that finds the path between the points given and the goal
-	 * 
-	 * @param x
-	 *            position in the x-axis
-	 * @param y
-	 *            position in the y-axis
-	 * @return if the goal is reached and false otherwise
-	 */
+	
 	private boolean findGoal(int x, int y) {
 		// Check if this position is worth visiting (limits checking could
 		// be omitted because the labyrinth is surrounded by walls)
@@ -404,12 +319,7 @@ public final class WindowController {
 		// check if maze[x][y] is feasible to move
 	}
 
-	/**
-	 * Validates if the path between the char of origin and the one in the destiny
-	 * is reached
-	 * 
-	 * @return true if the path is valid and false otherwise
-	 */
+	
 	private boolean validatePath(char[][] map, char origin, char destiny) {
 		labirinth = new int[map.length][map.length];
 		int x = 0, y = 0;

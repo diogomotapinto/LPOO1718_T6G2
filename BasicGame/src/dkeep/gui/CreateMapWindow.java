@@ -110,12 +110,7 @@ class CreateMapWindow extends JFrame {
 		applyBtn.setBounds(433, 424, 104, 29);
 	}
 
-	/**
-	 * Initializes the hero image in the window
-	 * 
-	 * @param heroLbl
-	 * @param imageLoader
-	 */
+	
 	private void initializeHeroLbl(JLabel heroLbl, ImageLoader imageLoader) {
 		heroLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -128,12 +123,7 @@ class CreateMapWindow extends JFrame {
 		heroLbl.setIcon(imageLoader.getHeroImg());
 	}
 
-	/**
-	 * Initializes the ogre image used in the window
-	 * 
-	 * @param doorLbl
-	 * @param imageLoader
-	 */
+	
 	private void initializeOgreLbl(ImageLoader imageLoader) {
 		ogreLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -146,12 +136,7 @@ class CreateMapWindow extends JFrame {
 		ogreLbl.setIcon(imageLoader.getOgreImg());
 	}
 
-	/**
-	 * Initializes the door image used in the window
-	 * 
-	 * @param doorLbl
-	 * @param imageLoader
-	 */
+	
 	private void intializeDoorLbl(JLabel doorLbl, ImageLoader imageLoader) {
 		doorLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -164,12 +149,7 @@ class CreateMapWindow extends JFrame {
 		doorLbl.setIcon(imageLoader.getDoorImg());
 	}
 
-	/**
-	 * Initializes the key image used in the window
-	 * 
-	 * @param keyLbl
-	 * @param imageLoader
-	 */
+	
 	private void initializeKeylbl(JLabel keyLbl, ImageLoader imageLoader) {
 		keyLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -182,12 +162,7 @@ class CreateMapWindow extends JFrame {
 		keyLbl.setIcon(imageLoader.getKeyImg());
 	}
 
-	/**
-	 * Initializes the wall image used in the window
-	 * 
-	 * @param wallLbl
-	 * @param imageLoader
-	 */
+	
 	private void initializeWallLbl(JLabel wallLbl, ImageLoader imageLoader) {
 		wallLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -200,12 +175,7 @@ class CreateMapWindow extends JFrame {
 		wallLbl.setIcon(imageLoader.getWallImg());
 	}
 
-	/**
-	 * Initializes the blank space image used in the window
-	 * 
-	 * @param blankSpaceLbl
-	 * @param imageLoader
-	 */
+	
 	private void initializeJLabel(JLabel blankSpaceLbl, ImageLoader imageLoader) {
 		blankSpaceLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -219,12 +189,7 @@ class CreateMapWindow extends JFrame {
 		getContentPane().add(blankSpaceLbl);
 	}
 
-	/**
-	 * Initializes the slider used in the window
-	 * 
-	 * @param mapSizeSld
-	 *            size of the map created
-	 */
+	
 	private void initializeSlider(JSlider mapSizeSld) {
 		mapSizeSld.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -263,27 +228,16 @@ class CreateMapWindow extends JFrame {
 
 	}
 
-	/**
-	 * Method to get the map edited by the user
-	 * 
-	 * @return the edit map
-	 */
-	public ImageIcon[][] getEditMap() {
+		public ImageIcon[][] getEditMap() {
 		return editPanel.getEditMap();
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public final int getEditPanelSubSquareLength() {
 		return editPanel.getSubSquareLength();
 	}
 
-	/**
-	 * 
-	 * @return true if the map is created by the user and false otherwise
-	 */
+	
 	public final boolean isMapCreated() {
 		return mapCreated;
 	}
